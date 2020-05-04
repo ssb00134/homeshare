@@ -13,10 +13,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<property name="email" value="email" />
 		<property name="houseNo" value="houseNo" />
 		<property name="account" value="account" />
-		
-
 	</properties>
 
+
+    
 	<typeAliases>
 		<package name="edu.spring.homeshare.domain" />
 	</typeAliases>

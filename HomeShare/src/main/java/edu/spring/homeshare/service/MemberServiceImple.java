@@ -19,6 +19,10 @@ public class MemberServiceImple implements MemberDAO, MemberService {
 	public String findId(memberVO vo) {
 		return memberDao.findId(vo);
 	}
+	@Override
+	public int insert(memberVO vo) {
+		return memberDao.insert(vo);
+	}
 	
 
 }

@@ -36,18 +36,24 @@
 		base-package="edu.spring.homeshare" />
 
 	<!-- Interceptor 클래스의 인스턴스를 bean으로 관리 -->
-
+	<!-- 로그인 언터셉터 bean -->
 	<beans:bean id="loginInterceptor"
 		class="edu.spring.homeshare.interceptor.LoginInterceptor">
 	</beans:bean>
-
+	
+	<!-- 아이디찾기 bean -->
 	<beans:bean id="FindIdInterceptor"
 		class="edu.spring.homeshare.interceptor.FindIdInterceptor">
+	</beans:bean>
+	
+	<!-- 회원가입 bean -->
+	<beans:bean id="SignUpInterceptor"
+		class="edu.spring.homeshare.interceptor.SignUpInterceptor">
 	</beans:bean>
 
 
 	<!-- Interceptor가 가로챌 URL 매핑 설정 -->
-	<!-- 로그인 -->
+	<!-- 로그인 인터셉터 -->
 	<interceptors>
 		<interceptor>
 			<mapping path="/member/login-post" />
@@ -55,13 +61,23 @@
 		</interceptor>
 	</interceptors>
 	
-	<!-- 아이디 찾기 -->
+	<!-- 아이디 찾기 인터셉터-->
 	<interceptors>
 		<interceptor>
 			<mapping path="/member/find-id-post" />
 			<beans:ref bean="FindIdInterceptor" />
 		</interceptor>
 	</interceptors>
+	
+	<!-- 회원가입 인터셉터-->
+	<interceptors>
+		<interceptor>
+			<mapping path="/member/sign-up-post" />
+			<beans:ref bean="SignUpInterceptor" />
+		</interceptor>
+	</interceptors>
+	
+	
 
 </beans:beans>
 

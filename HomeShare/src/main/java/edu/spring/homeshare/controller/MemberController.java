@@ -81,6 +81,9 @@ public class MemberController {
 	public void SignUpPost(memberVO vo, Model model) {
 		logger.info("signPost() »£√‚");
 		logger.info(vo.toString());
+		int result = memberService.insert(vo);
+		model.addAttribute("sign_up_result",result);
+		
 		
 	}
 	

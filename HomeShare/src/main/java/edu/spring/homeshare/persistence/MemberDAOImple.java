@@ -29,6 +29,12 @@ public class MemberDAOImple implements MemberDAO {
 		logger.info("find id 실행");
 		return sqlSession.selectOne(NAMESPACE + ".findId",vo);
 	}
-
+	@Override
+	public int insert(memberVO vo) {
+		logger.info("insert 실행");
+		return sqlSession.insert(NAMESPACE + ".insert", vo);
+	
+		
+	}
 
 }

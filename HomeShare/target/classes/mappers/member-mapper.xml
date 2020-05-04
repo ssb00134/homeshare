@@ -13,8 +13,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="insert" parameterType="memberVO">
-		inset into ${house_member}
-		values(#{memId},#{password},#{account},#{MemName},#{email})
+		insert into house_member values(0,#{memId},#{password},#{houseNo,jdbcType=VARCHAR},#{account},#{memName},#{email})
+
 	</insert>
 	
 	
