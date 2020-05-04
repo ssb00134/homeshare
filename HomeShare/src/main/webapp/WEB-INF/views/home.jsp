@@ -24,7 +24,6 @@
 			<a href="member/sign-host">호스트 되기</a>
 		</div>
 		
-		
 		<div id="sign-up">
 			<a href="member/sign-up/">sign-up</a>
 		</div>

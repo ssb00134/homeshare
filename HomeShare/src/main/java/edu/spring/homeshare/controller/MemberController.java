@@ -62,11 +62,13 @@ public class MemberController {
 	
 	
 	@RequestMapping(value="find-id-post", method = RequestMethod.POST)
-	public String findIdPost(memberVO vo,Model model) {
-		logger.info("find id 호출");
+	public void findIdPost(memberVO vo,Model model) {
+		logger.info("find-id-post() 호출");
 		String result = memberService.findId(vo);
+		// 아이디가 있음 : result !=null
+		// 아이디가 없음 : result == null
 		logger.info("result : " + result);
-		return result;
+		model.addAttribute("find_id_result", result);
 	}
 	
 	@RequestMapping(value="/sign-up", method = RequestMethod.GET)
