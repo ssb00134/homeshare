@@ -24,8 +24,10 @@
 		<br>
 		<input type="hidden" name="targetUrl" value="${targetUrl }">
 		<input type="submit" value="로그인">
-		<c:if test="${not empty login_fail}">
-		<p>아이디 또는 비밀번호가 일치하지 않습니다.</p>
+		<c:if test="${login_fail eq 'login_fail'}">
+			<p>아이디 또는 비밀번호가 일치하지 않습니다.</p><br>
+			<p>아이디가 생각이 안나세요?</p>
+			<a href="find-id"><input type="button" value="아이디 찾기"></a>
 		</c:if>
 	</form>
 </body>

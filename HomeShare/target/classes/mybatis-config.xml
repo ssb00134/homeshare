@@ -9,8 +9,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<property name="memNo" value="memNo" />
 		<property name="memId" value="memId" />
 		<property name="password" value="password" />
-		<property name="memName" value="memName" />
-		<property name="phone" value="phone" />
+		<property name="memName" value="mem_Name" />
+		<property name="email" value="email" />
 		<property name="houseNo" value="houseNo" />
 		<property name="account" value="account" />
 		

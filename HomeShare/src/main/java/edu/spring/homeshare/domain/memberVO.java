@@ -1,26 +1,29 @@
 package edu.spring.homeshare.domain;
 
 public class memberVO {
-	public String memNo;
-	public String memId;
-	public String password;
-	public String phone;
-	public String houseNo;
-	public String account;
-	public String memName;
+	private String memNo;
+	private String memId;
+	private String password;
+	private String email;
+	private String houseNo;
+	private String account;
+	private String memName;
 	
 	public memberVO() {}
+
 	
-	public memberVO(String memNo, String memId, String password, String phone, String houseNo, String account, String memName) {
+	public memberVO(String memNo, String memId, String password, String email, String houseNo, String account,
+			String memName) {
 		super();
 		this.memNo = memNo;
 		this.memId = memId;
 		this.password = password;
-		this.phone = phone;
+		this.email = email;
 		this.houseNo = houseNo;
 		this.account = account;
 		this.memName = memName;
 	}
+
 
 	public String getMemNo() {
 		return memNo;
@@ -46,12 +49,12 @@ public class memberVO {
 		this.password = password;
 	}
 
-	public String getPhone() {
-		return phone;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getHouseNo() {
@@ -69,7 +72,7 @@ public class memberVO {
 	public void setAccount(String account) {
 		this.account = account;
 	}
-	
+
 	public String getMemName() {
 		return memName;
 	}
@@ -77,6 +80,17 @@ public class memberVO {
 	public void setMemName(String memName) {
 		this.memName = memName;
 	}
+
+
+	@Override
+	public String toString() {
+		return "memberVO [memNo=" + memNo + ", memId=" + memId + ", password=" + password + ", email=" + email
+				+ ", houseNo=" + houseNo + ", account=" + account + ", memName=" + memName + "]";
+	}
+	
+	
+	
+	
 	
 	
 	

@@ -1,0 +1,18 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<section>
+	<hr>
+	<h1>예약하기</h1>
+	<form>
+		<input type="text" placeholder="지역">
+		<input type="text" placeholder="체크인 시간">
+		<button class="_esmga25" aria-expanded="false" type="button">
+			<div class="_9bj9d5">인원</div>
+			<div class="_4poulv">게스트 추가</div>
+		</button>
+		<input type="text" placeholder="인원">
+		<input type="submit" value="검색하기">
+	</form>
+
+	<hr>
+</section>

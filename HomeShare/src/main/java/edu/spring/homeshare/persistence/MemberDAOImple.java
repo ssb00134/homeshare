@@ -21,8 +21,14 @@ public class MemberDAOImple implements MemberDAO {
 	
 	@Override
 	public memberVO loginCheck(memberVO vo) {
-		logger.info(vo.getMemId() + " " + vo.password);
+		logger.info(vo.getMemId() + " " + vo.getPassword());
 		return sqlSession.selectOne(NAMESPACE + ".login",vo);
 	}
+	@Override
+	public String findId(memberVO vo) {
+		logger.info("find id ½ÇÇà");
+		return sqlSession.selectOne(NAMESPACE + ".findId",vo);
+	}
+
 
 }

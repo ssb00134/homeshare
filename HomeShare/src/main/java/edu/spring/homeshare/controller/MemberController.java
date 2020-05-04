@@ -55,6 +55,34 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	@RequestMapping(value="find-id", method = RequestMethod.GET)
+	public void findId(memberVO vo,Model model) {
+		logger.info("find id get 호출");
+	}
+	
+	
+	@RequestMapping(value="find-id-post", method = RequestMethod.POST)
+	public String findIdPost(memberVO vo,Model model) {
+		logger.info("find id 호출");
+		String result = memberService.findId(vo);
+		logger.info("result : " + result);
+		return result;
+	}
+	
+	@RequestMapping(value="/sign-up", method = RequestMethod.GET)
+	public void SignUpGet(Model model,String url) {
+		logger.info("signUp() 호출");
+		logger.info("url : " + url); // 이전경로(로그인을 위해 왔던)의 값 출력
+		model.addAttribute("targetUrl", url);
+	}
+	@RequestMapping(value="/sign-up-post", method = RequestMethod.POST)
+	public void SignUpPost(memberVO vo, Model model) {
+		logger.info("signPost() 호출");
+		logger.info(vo.toString());
+		
+	}
+	
+	
 }
 
 
