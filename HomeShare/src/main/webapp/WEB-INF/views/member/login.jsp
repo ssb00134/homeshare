@@ -16,10 +16,10 @@
 	상대경로(패스)에서 .은 현재 폴더(위치)를 의미, ..은 상위 폴더를 의미
 	-->
 	<form action="login-post" method="post">
-		<input type="text" name="memId" placeholder="USER ID"
+		<input type="text" name="memId" id="memId" placeholder="USER ID"
 			required="required">
 		<br>
-		<input type="password" name="password" placeholder="PASSWORD"
+		<input type="password" id="password" name="password" placeholder="PASSWORD"
 			required="required">
 		<br>
 		<input type="hidden" name="targetUrl" value="${targetUrl }">
@@ -30,5 +30,13 @@
 			<a href="find-id"><input type="button" value="아이디 찾기"></a>
 		</c:if>
 	</form>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		var memId = $('#memId').val; // 아이디 값
+		var password = $('#password').val; // 비밀번호 값
+		ㅍㅁㄱ
+	});//end document
+	
+	</script>
 </body>
 </html>

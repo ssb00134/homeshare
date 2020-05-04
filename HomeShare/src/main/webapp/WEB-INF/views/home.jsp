@@ -20,28 +20,49 @@
 			<a href="/homeshare/">go main</a>
 		</div>
 		<div id="sign-host">
-			<a href="member/sign-host">호스트 되기</a>
+			<a href="member/became-a-host">호스트 되기</a>
 		</div>
-		
+
 		<div id="sign-up">
 			<a href="member/sign-up/">sign-up</a>
 		</div>
-	
 
-		<div id="login">
-			<c:if test="${empty memId }">
+
+
+		<c:if test="${empty memId }">
+			<div id="login">
 				<a href="member/login">
 					<input type="button" value="로그인">
 				</a>
-			</c:if>
-			<c:if test="${not empty memId }">
+			</div>
+		</c:if>
+		<c:if test="${not empty memId }">
+			<div id="myPageToggle">${memId }</div>
+			<div id="mypage">
+				<a href="member/myinfo">
+					<input type="button" value="계정">
+				</a>
+				<a href="member/alerm">
+					<input type="button" value="알람설정">
+				</a>
 				<a href="member/logout">
 					<input type="button" value="로그아웃">
 				</a>
-			</c:if>
-		</div>
+				<c:if test="${not empty houseNo }">
+				<a href="">
+					<input type="button" value="숙소관리하기">
+				</a>
+				</c:if>
+			</div>
+
+		</c:if>
 	</header>
-	<%@ include file="section.jspf" %>
+	<div><a href="house/house-list">숙소 검색하기</a></div>
+	
+	<%@ include file="section.jspf"%>
 
 </body>
+<script type="text/javascript">
+	/* 로그인 버튼을  */
+</script>
 </html>

@@ -50,8 +50,7 @@
 	<beans:bean id="SignUpInterceptor"
 		class="edu.spring.homeshare.interceptor.SignUpInterceptor">
 	</beans:bean>
-
-
+	
 	<!-- Interceptor가 가로챌 URL 매핑 설정 -->
 	<!-- 로그인 인터셉터 -->
 	<interceptors>

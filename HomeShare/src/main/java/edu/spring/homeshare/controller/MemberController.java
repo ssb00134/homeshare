@@ -97,6 +97,7 @@ public class MemberController {
 		model.addAttribute("targetUrl", url);	
 	}
 	
+
 }
 
 
