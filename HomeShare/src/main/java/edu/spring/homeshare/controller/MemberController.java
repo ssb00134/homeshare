@@ -27,12 +27,13 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	
+	/*로그인 매핑*/
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public void loginGet(String url, Model model) { // view 호출 (login.jsp)
 		logger.info("loginGet() 호출");
 		logger.info("url : " + url); // 이전경로(로그인을 위해 왔던)의 값 출력
-		model.addAttribute("targetUrl", url);
-		
+		model.addAttribute("targetUrl", url);	
 	}
 	
 	@RequestMapping(value = "/login-post", method=RequestMethod.POST)
@@ -55,11 +56,12 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	
+	/*아이디 찾기 매핑*/
 	@RequestMapping(value="find-id", method = RequestMethod.GET)
 	public void findId(memberVO vo,Model model) {
 		logger.info("find id get 호출");
-	}
-	
+	}	
 	
 	@RequestMapping(value="find-id-post", method = RequestMethod.POST)
 	public void findIdPost(memberVO vo,Model model) {
@@ -71,6 +73,8 @@ public class MemberController {
 		model.addAttribute("find_id_result", result);
 	}
 	
+	
+	/*회원가입 매핑*/
 	@RequestMapping(value="/sign-up", method = RequestMethod.GET)
 	public void SignUpGet(Model model,String url) {
 		logger.info("signUp() 호출");
@@ -83,10 +87,15 @@ public class MemberController {
 		logger.info(vo.toString());
 		int result = memberService.insert(vo);
 		model.addAttribute("sign_up_result",result);
-		
-		
 	}
 	
+	/*호스트 되기 메핑*/
+	@RequestMapping(value="/became-a-host", method = RequestMethod.GET)
+	public void registHost(String url, Model model) {
+		logger.info("registHost() 호출");
+		logger.info("url : " + url); // 이전경로(로그인을 위해 왔던)의 값 출력
+		model.addAttribute("targetUrl", url);	
+	}
 	
 }
 

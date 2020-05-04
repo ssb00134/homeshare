@@ -17,7 +17,6 @@
 	<header>
 
 		<div id="main-button">
-			ssb00134@naver.com
 			<a href="/homeshare/">go main</a>
 		</div>
 		<div id="sign-host">
