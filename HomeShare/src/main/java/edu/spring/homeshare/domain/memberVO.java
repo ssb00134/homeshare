@@ -1,7 +1,7 @@
 package edu.spring.homeshare.domain;
 
 public class memberVO {
-	private String memNo;
+	private int memNo;
 	private String memId;
 	private String password;
 	private String email;
@@ -12,7 +12,9 @@ public class memberVO {
 	public memberVO() {}
 
 	
-	public memberVO(String memNo, String memId, String password, String email, String houseNo, String account,
+	
+
+	public memberVO(int memNo, String memId, String password, String email, String houseNo, String account,
 			String memName) {
 		super();
 		this.memNo = memNo;
@@ -25,11 +27,13 @@ public class memberVO {
 	}
 
 
-	public String getMemNo() {
+
+
+	public int getMemNo() {
 		return memNo;
 	}
 
-	public void setMemNo(String memNo) {
+	public void setMemNo(int memNo) {
 		this.memNo = memNo;
 	}
 

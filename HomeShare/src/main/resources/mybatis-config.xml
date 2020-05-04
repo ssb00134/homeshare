@@ -5,6 +5,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 <configuration>
 	<!-- DB 테이블과 컬럼들을 mapper에 매핑하기 위한 변수 선언 -->
 	<properties>
+		<!-- house_member table 변수 설정 -->
 		<property name="house_member" value="house_member" />
 		<property name="memNo" value="memNo" />
 		<property name="memId" value="memId" />
@@ -13,6 +14,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<property name="email" value="email" />
 		<property name="houseNo" value="houseNo" />
 		<property name="account" value="account" />
+		
+		
+		
 	</properties>
 
 

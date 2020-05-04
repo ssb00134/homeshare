@@ -2,3 +2,11 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.spring.homeshare.HouseMapper">
+
+<!-- 기본규칙 value : '_' 사용 , name : 카멜케이스 -->
+<!-- 기본 select문 -->
+<!-- 하우스번호, 숙소타입, 제목, 내용 -->
+<select id="select_all" resultType="HouseVO"></select>
+</mapper>
