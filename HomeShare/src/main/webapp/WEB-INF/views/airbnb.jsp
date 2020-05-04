@@ -9,6 +9,7 @@
 <body
 	class="doz_sys  _body_menu_m20190923404f1ba08b9b9  new_header_overlay  shopping  new_header_site   new_fixed_header_disable fixed-menu-on"
 	style="" id="doz_body">
+	<!-- 회원가입 추가함 -->
 	<!--[if lt IE 9]>
 <div class="browsehappy">오래된 브라우저를 사용하고 있군요. 안전하고 편리한 인터넷을 위해 <a href="http://browsehappy.com/" target="_blank">브라우저를 업그레이드</a> 하세요.</div>
 <style>
