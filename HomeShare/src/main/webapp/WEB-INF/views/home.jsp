@@ -66,7 +66,7 @@ header {
 
 		</c:if>
 	</header>
-	<div><a href="house/house-list">숙소 검색하기</a></div>
+	<div><a href="house/house-list">숙소 테스트</a></div>
 	
 	<%@ include file="section.jspf"%>
 

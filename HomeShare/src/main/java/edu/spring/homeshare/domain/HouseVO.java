@@ -1,6 +1,7 @@
 package edu.spring.homeshare.domain;
 
 import java.sql.Date;
+import java.util.Arrays;
 
 public class HouseVO {
 	
@@ -243,10 +244,18 @@ public class HouseVO {
 	public void setRanking(int ranking) {
 		this.ranking = ranking;
 	}
-	
-	
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return "HouseVO [houseNo=" + houseNo + ", memNo=" + memNo + ", type=" + Arrays.toString(type) + ", maxCapacity="
+				+ maxCapacity + ", bedroom=" + bedroom + ", bathroom=" + bathroom + ", utilities="
+				+ Arrays.toString(utilities) + ", location=" + location + ", spaces=" + Arrays.toString(spaces)
+				+ ", info=" + info + ", rules=" + Arrays.toString(rules) + ", checkInInterval=" + checkInInterval
+				+ ", CheckInTime=" + CheckInTime + ", CheckOutTime=" + CheckOutTime + ", stayNight=" + stayNight
+				+ ", stayDay=" + stayDay + ", bookableDateBegin=" + bookableDateBegin + ", bookableDateEnd="
+				+ bookableDateEnd + ", price=" + price + ", photo=" + photo + ", thumbNailPhoto=" + thumbNailPhoto
+				+ ", title=" + title + ", ranking=" + ranking + "]";
+	}
+
 	
 }

@@ -5,11 +5,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="edu.spring.homeshare.HouseMapper">
 
-<!-- 기본규칙 value : '_' 사용 , name : 카멜케이스 -->
-<!-- 기본 select문 -->
-<!-- 하우스번호, 숙소타입, 제목, 내용 -->
-<select id="selectTest" resultType="HouseVO">
-select ${houseNO}, ${type},${title},${info} from ${house}
-</select>
+	<!-- 기본규칙 value : '_' 사용 , name : 카멜케이스 -->
+	<!-- 기본 select문 -->
+	<!-- 하우스번호, 숙소타입, 제목, 내용 -->
+	<select id="select_by_title" resultType="HouseVO">
+		select * from ${house} where ${title}= #{title}
+	</select>
+	<select id="select_all" resultType="HouseVO">
+		select * from ${house}
+	</select>
 
 </mapper>

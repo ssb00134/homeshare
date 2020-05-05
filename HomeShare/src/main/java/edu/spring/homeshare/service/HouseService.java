@@ -1,10 +1,10 @@
-package edu.spring.homeshare.persistence;
+package edu.spring.homeshare.service;
 
 import java.util.List;
 
 import edu.spring.homeshare.domain.HouseVO;
 
-public interface HouseDAO {
+public interface HouseService {
 	HouseVO selectByTitle(String title);
 	List<HouseVO> selectAll();
 }
