@@ -14,13 +14,36 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<property name="email" value="email" />
 		<property name="houseNo" value="houseNo" />
 		<property name="account" value="account" />
-		
-		
-		
+
+		<!-- house table 변수 설정 -->
+		<property name="houseNo" value="house_no" />
+		<property name="memNo" value="memNo" />
+		<property name="type" value="type" />
+		<property name="maxCapacity" value="max_Capacity" />
+		<property name="bedroom" value="bedroom" />
+		<property name="bathroom" value="bathroom" />
+		<property name="utilities" value="utilities" />
+		<property name="location" value="location" />
+		<property name="spaces" value="spaces" />
+		<property name="info" value="info" />
+		<property name="rules" value="rules" />
+		<property name="checkInInterval" value="check_In_Interval" />
+		<property name="CheckInTime" value="check_In_time" />
+		<property name="CheckOutTime" value="Check_Out_Time" />
+		<property name="stayNight" value="stay_Night" />
+		<property name="stayDay" value="stay_Day" />
+		<property name="bookableDateBegin"
+			value="bookable_Date_Begin" />
+		<property name="bookableDateEnd" value="bookable_Date_End" />
+		<property name="price" value="price" />
+		<property name="photo" value="photo" />
+		<property name="thumbNailPhoto" value="thumbNail_Photo" />
+		<property name="title" value="title" />
+		<property name="ranking" value="ranking" />
 	</properties>
 
 
-    
+
 	<typeAliases>
 		<package name="edu.spring.homeshare.domain" />
 	</typeAliases>

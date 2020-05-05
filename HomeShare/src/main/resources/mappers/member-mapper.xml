@@ -11,23 +11,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where ${memId} = #{memId} and
 		${password} = #{password}
 	</select>
-	
+
 	<insert id="insert" parameterType="memberVO">
-		insert into house_member values(0,#{memId},#{password},#{houseNo,jdbcType=VARCHAR},#{account},#{memName},#{email})
+		insert into house_member
+		values(0,#{memId},#{password},#{houseNo,jdbcType=VARCHAR},#{account},#{memName},#{email})
 
 	</insert>
-	
-	
+
+
 	<!-- 로그아웃 -->
 	<select id="">
 	</select>
 	<!-- 아이디 찾기 찾기 sql -->
 	<select id="findId" resultType="String">
-		select ${memId} from ${house_member}
+		select ${memId} from
+		${house_member}
 		where ${memName} = #{memName} and
 		${email} = #{email}
 	</select>
-	
+
+	<!-- 정보가져오기 (내정보수정시 사용) -->
+	<select id="select" resultType="memberVO">
+		select * from ${house_member} where ${memId}=#{memId}
+	</select>
 
 </mapper>
 

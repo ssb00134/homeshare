@@ -7,31 +7,31 @@ public class HouseVO {
 	private int houseNo;
 	private int memNo;
 	private String[] type;
-	private int maxCapacity;
+	private int maxCapacity; //최대수용인원
 	private int bedroom;
 	private int bathroom;
-	private String[] utilities;
-	private String location;
+	private String[] utilities; //편의시설
+	private String location; //위치
 	private String[] spaces;
-	private String memo;
+	private String info; //집정보
 	private String[] rules;
 	private int checkInInterval;
 	private String CheckInTime;
 	private String CheckOutTime;
-	private int stayNight;
-	private int stayDay;
-	private Date bookableDateBegin;
-	private Date bookableDateEnd;
+	private int stayNight; //x박
+	private int stayDay; //x일
+	private Date bookableDateBegin; //예약가능시간
+	private Date bookableDateEnd; // 예약가능시간
 	private int price;
-	private String photo;
-	private String thumbNailPhoto;
+	private String photo; //사진주소
+	private String thumbNailPhoto; //썸네일 사진 주소
 	private String title;
 	private int ranking;
 	
 	public HouseVO() {}
-	
+
 	public HouseVO(int houseNo, int memNo, String[] type, int maxCapacity, int bedroom, int bathroom,
-			String[] utilities, String location, String[] spaces, String memo, String[] rules, int checkInInterval,
+			String[] utilities, String location, String[] spaces, String info, String[] rules, int checkInInterval,
 			String checkInTime, String checkOutTime, int stayNight, int stayDay, Date bookableDateBegin,
 			Date bookableDateEnd, int price, String photo, String thumbNailPhoto, String title, int ranking) {
 		super();
@@ -44,7 +44,7 @@ public class HouseVO {
 		this.utilities = utilities;
 		this.location = location;
 		this.spaces = spaces;
-		this.memo = memo;
+		this.info = info;
 		this.rules = rules;
 		this.checkInInterval = checkInInterval;
 		CheckInTime = checkInTime;
@@ -132,12 +132,12 @@ public class HouseVO {
 		this.spaces = spaces;
 	}
 
-	public String getMemo() {
-		return memo;
+	public String getInfo() {
+		return info;
 	}
 
-	public void setMemo(String memo) {
-		this.memo = memo;
+	public void setInfo(String info) {
+		this.info = info;
 	}
 
 	public String[] getRules() {
@@ -243,6 +243,8 @@ public class HouseVO {
 	public void setRanking(int ranking) {
 		this.ranking = ranking;
 	}
+	
+	
 	
 	
 	

@@ -12,7 +12,8 @@
 	<form action="find-id-post" method="post">
 		<input type="text" name="MemName" placeholder="이름입력">
 		<input type="text" name="email" placeholder="이메일 입력">
-		<input type="submit" value="아이디찾기">
+		<input type="submit" value="아이디 찾기">
+		
 	</form>
 	<c:if test="${find_id_fail eq 'find_id_fail' }">
 	<p>아이디 찾기 실패</p>

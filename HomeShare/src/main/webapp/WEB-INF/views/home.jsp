@@ -5,6 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+header {
+	width:100%;
+	height:80px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+</style>
 </head>
 <body>
 
@@ -39,7 +48,7 @@
 		<c:if test="${not empty memId }">
 			<div id="myPageToggle">${memId }</div>
 			<div id="mypage">
-				<a href="member/myinfo">
+				<a href="member/account">
 					<input type="button" value="계정">
 				</a>
 				<a href="member/alerm">

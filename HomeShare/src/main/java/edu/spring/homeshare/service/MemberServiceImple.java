@@ -23,6 +23,10 @@ public class MemberServiceImple implements MemberDAO, MemberService {
 	public int insert(memberVO vo) {
 		return memberDao.insert(vo);
 	}
+	@Override
+	public memberVO select(String memId) {
+		return memberDao.select(memId);
+	}
 	
 
 }

@@ -6,5 +6,6 @@ public interface MemberService {
 	memberVO loginCheck(memberVO vo);
 	String findId(memberVO vo);
 	int insert(memberVO vo);
+	memberVO select(String memId);
 
 }

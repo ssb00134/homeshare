@@ -33,8 +33,11 @@ public class MemberDAOImple implements MemberDAO {
 	public int insert(memberVO vo) {
 		logger.info("insert 실행");
 		return sqlSession.insert(NAMESPACE + ".insert", vo);
-	
-		
+	}
+	@Override
+	public memberVO select(String memId) {
+		logger.info("select 실행");
+		return sqlSession.selectOne(NAMESPACE +".select", memId);
 	}
 
 }
