@@ -21,5 +21,13 @@ public class HouseServiceImple implements HouseService {
 	public List<HouseVO> selectAll() {
 		return HouseDao.selectAll();
 	}
+	@Override
+	public int insert(HouseVO vo) {
+		return HouseDao.insert(vo);
+	}
+	@Override
+	public HouseVO selectByHouseNo(int houseNo) {
+		return HouseDao.selectByHouseNo(houseNo);
+	}
 
 }

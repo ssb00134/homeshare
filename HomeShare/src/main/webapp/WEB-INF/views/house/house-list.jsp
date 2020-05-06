@@ -9,9 +9,9 @@
 </head>
 <body>
 	<h1>하우스 리스트</h1>
-
+	<hr>
 	<div>
-		<!-- 리플을 가져오는 곳 -->
+		<!-- 하우스 리스트를 가져오는 곳 -->
 		<div id="house-lists"></div>
 	</div>
 	<script type="text/javascript">
@@ -26,7 +26,8 @@
 					var list = '';
 					$(jsonData).each(
 							function(){
-							list += '<div class= "house_list_item"'
+							//list += '<div class= "house_list_item_'+ this.houseNo +'"'
+							list += '<div class= "house_list_item" id = "' + this.houseNo +'">'
 							+'<pre>'
 							+ '<div class="houseNo">번호 : '+ this.houseNo+'</div>'
 							+ '<div class="title">제목 :'+this.title+'</div>'
@@ -40,6 +41,11 @@
 							+'</div>';	
 							});//end each
 				$('#house-lists').html(list);
+				$('.house_list_item').click(function(){
+					//location.href='house-detail/' + ;
+					console.log('house-lists 클릭');
+					location.href='/house-detail/' + this.id;
+				});//end click
 				}// end callback();
 
 				);//end getJSON

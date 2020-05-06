@@ -32,5 +32,16 @@ public class HouseDAOImple implements HouseDAO {
 		logger.info("selectAll 실행");
 		return sqlSession.selectList(NAMESPACE + ".select_all");
 	}
+	@Override
+	public int insert(HouseVO vo) {
+		logger.info("insert 실행");
+		return sqlSession.insert(NAMESPACE+".insert", vo);
+	}
+	
+	@Override
+	public HouseVO selectByHouseNo(int houseNo) {
+		logger.info("selectByHouseNo 실행");
+		return sqlSession.selectOne(NAMESPACE + ".select_by_houseno", houseNo);
+	}
 
 }
