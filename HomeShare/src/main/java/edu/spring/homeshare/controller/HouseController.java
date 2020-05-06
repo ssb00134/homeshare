@@ -40,6 +40,7 @@ public class HouseController {
 			logger.info(list.get(i).toString());
 		}
 		return new ResponseEntity<List<HouseVO>>(list,HttpStatus.OK);
+		//¤µ»ý¤©¤¤¤©
 	}
 	
 	/*house-detail ¸ÞÇÎ*/
