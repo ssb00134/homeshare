@@ -6,21 +6,21 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<!-- DB 테이블과 컬럼들을 mapper에 매핑하기 위한 변수 선언 -->
 	<properties>
 		<!-- house_member table 변수 설정 -->
-		<property name="house_member" value="house_member" />
+		<property name="house_member" value="housemember" />
 		<property name="memNo" value="memNo" />
 		<property name="memId" value="memId" />
 		<property name="password" value="password" />
-		<property name="memName" value="mem_Name" />
+		<property name="memName" value="memName" />
 		<property name="email" value="email" />
 		<property name="houseNo" value="houseNo" />
 		<property name="account" value="account" />
 
 		<!-- house table 변수 설정 -->
 		<property name="house" value="house" />
-		<property name="houseNo" value="house_no" />
+		<property name="houseNo" value="houseno" />
 		<property name="memNo" value="memNo" />
 		<property name="type" value="type" />
-		<property name="maxCapacity" value="max_Capacity" />
+		<property name="maxCapacity" value="maxCapacity" />
 		<property name="bedroom" value="bedroom" />
 		<property name="bathroom" value="bathroom" />
 		<property name="utilities" value="utilities" />
@@ -28,17 +28,17 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<property name="spaces" value="spaces" />
 		<property name="info" value="info" />
 		<property name="rules" value="rules" />
-		<property name="checkInInterval" value="check_In_Interval" />
-		<property name="CheckInTime" value="check_In_time" />
-		<property name="CheckOutTime" value="Check_Out_Time" />
-		<property name="stayNight" value="stay_Night" />
-		<property name="stayDay" value="stay_Day" />
+		<property name="checkInInterval" value="checkInInterval" />
+		<property name="CheckInTime" value="checkIntime" />
+		<property name="CheckOutTime" value="CheckOutTime" />
+		<property name="stayNight" value="stayNight" />
+		<property name="stayDay" value="stayDay" />
 		<property name="bookableDateBegin"
-			value="bookable_Date_Begin" />
-		<property name="bookableDateEnd" value="bookable_Date_End" />
+			value="bookableDateBegin" />
+		<property name="bookableDateEnd" value="bookableDateEnd" />
 		<property name="price" value="price" />
 		<property name="photo" value="photo" />
-		<property name="thumbNailPhoto" value="thumbNail_Photo" />
+		<property name="thumbNailPhoto" value="thumbNailPhoto" />
 		<property name="title" value="title" />
 		<property name="ranking" value="ranking" />
 	</properties>

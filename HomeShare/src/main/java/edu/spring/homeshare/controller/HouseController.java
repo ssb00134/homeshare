@@ -25,16 +25,17 @@ public class HouseController {
 	private HouseService houseService;
 	
 	@RequestMapping(value = "/house-list", method = RequestMethod.GET)
+	public void houseLIst() {
+		logger.info("houselist get 실행");
+	}
+	
+	@RequestMapping(value = "/house-list/all", method = RequestMethod.GET)
 	public ResponseEntity<List<HouseVO>> HouseTest() {
 		logger.info("loginGet() 호출");
-//		String title="test";
-//		HouseVO vo = houseService.selectByTitle(title);
-//		logger.info(vo.toString());
 		List<HouseVO> list = houseService.selectAll();
 		for(int i=0; i<list.size(); i++) {
 			logger.info(list.get(i).toString());
 		}
-		
 		return new ResponseEntity<List<HouseVO>>(list,HttpStatus.OK);
 	}
 }
