@@ -15,6 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from ${house}
 		where ${title}= #{title}
 	</select>
+	
 	<select id="select_all" resultType="HouseVO">
 		select * from ${house}
 	</select>
@@ -22,7 +23,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="select_by_houseno" resultType="HouseVO">
 		select * from ${house} where ${houseNo} = #{houseNo}
 	</select>
-
+	
+	<!-- 페이지 가져오기 -->
+	<select id="select_"></select>
+	
+	<!-- 전체 하우스 개수 가져오기 -->
+	<select id="get_total_house_nums" resultType="int" >
+		select count(*)  from house;
+	</select>
+	
+	
+	
+	
+	
+	
 	<!-- insert문 -->
 	<insert id="insert" parameterType="houseVO">
 		insert into house values(
@@ -52,6 +66,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		);
 	</insert>
 
+	
 
 
 

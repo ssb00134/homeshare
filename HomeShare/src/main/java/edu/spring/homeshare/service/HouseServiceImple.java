@@ -29,5 +29,9 @@ public class HouseServiceImple implements HouseService {
 	public HouseVO selectByHouseNo(int houseNo) {
 		return HouseDao.selectByHouseNo(houseNo);
 	}
+	@Override
+	public int getTotalHouseNums() {
+		return HouseDao.getTotalHouseNums();
+	}
 
 }

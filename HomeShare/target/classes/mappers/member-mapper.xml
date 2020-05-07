@@ -4,7 +4,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="edu.spring.homeshare.MemberMapper">
-
+	
+	<!-- 회원가입 sql -->
+	<insert id="insert" parameterType="memberVO">
+		insert into house_member
+		values(0,#{memId},#{password},null,null,#{memName},#{email})
+	</insert>
+	
 	<!-- 로그인 Sql -->
 	<select id="login" resultType="MemberVO">
 		select * from ${house_member}
@@ -12,11 +18,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		${password} = #{password}
 	</select>
 
-	<insert id="insert" parameterType="memberVO">
-		insert into house_member
-		values(0,#{memId},#{password},#{houseNo,jdbcType=VARCHAR},#{account},#{memName},#{email})
-
-	</insert>
 
 
 	<!-- 로그아웃 -->

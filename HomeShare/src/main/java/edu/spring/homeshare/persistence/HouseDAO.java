@@ -9,4 +9,5 @@ public interface HouseDAO {
 	List<HouseVO> selectAll();
 	int insert(HouseVO vo);
 	HouseVO selectByHouseNo(int houseNo);
+	int getTotalHouseNums();
 }

@@ -113,7 +113,6 @@ public class MemberController {
 		memberVO vo = memberService.select(memId);
 		logger.info(vo.toString());
 		session.setAttribute("vo", vo);
-		
 	}
 }
 
