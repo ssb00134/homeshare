@@ -73,7 +73,7 @@
 				$('.house_list_item').click(function(){
 					//location.href='house-detail/' + ;
 					console.log('house-lists 클릭');
-					location.href='/homeshare/house/house-detail/' + this.id;
+					location.href='/homeshare/house/house-detail?houseNo=' + this.id;
 				});//end click
 				}// end callback();
 				);//end getJSON

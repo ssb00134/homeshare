@@ -7,6 +7,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>detail 페이지</h1>
+<h1>${houseVO.title }</h1>
+<hr>
+인원 ${houseVO.maxCapacity }명 · 침실 ${houseVO.bedroom }개 · 욕실 ${houseVO.bathroom }개
+<hr>
+houseVO.info
+<hr>
+<div dir="rtl">
+세로폼
+<form id= "reservationForm">
+</form>
+</div>
+
 </body>
 </html>
