@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import edu.spring.homeshare.domain.HouseVO;
+import edu.spring.homeshare.util.PageCriteria;
 
 @Repository
 public class HouseDAOImple implements HouseDAO {
@@ -48,6 +49,14 @@ public class HouseDAOImple implements HouseDAO {
 	public int getTotalHouseNums() {
 		logger.info("getTotalHouseNums 실행");
 		return  sqlSession.selectOne(NAMESPACE + ".get_total_house_nums");
+	}
+	
+	@Override
+	public List<HouseVO> select(PageCriteria c) {
+		logger.info("select(PageCriteria c) 실행");
+		logger.info("시작번호 : " +c.getStart());
+		logger.info("끝번호 : " +c.getEnd());
+		return sqlSession.selectOne(NAMESPACE + ".select_pagescope", c);
 	}
 
 }

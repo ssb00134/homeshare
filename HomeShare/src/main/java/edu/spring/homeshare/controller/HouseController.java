@@ -1,15 +1,14 @@
 package edu.spring.homeshare.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
-
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
+import org.springframework.cglib.proxy.Dispatcher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import edu.spring.homeshare.domain.HouseVO;
-import edu.spring.homeshare.domain.memberVO;
 import edu.spring.homeshare.service.HouseService;
-import edu.spring.homeshare.service.MemberService;
 import edu.spring.homeshare.util.PageCriteria;
 import edu.spring.homeshare.util.PageMaker;
 
@@ -33,21 +30,14 @@ public class HouseController {
 	private HouseService houseService;
 	
 	@RequestMapping(value = "/house-list", method = RequestMethod.GET)
-	public void houseLIst() {
+	public void houseLIst(HttpServletRequest request) {
 		logger.info("houselist get 실행");
-	}
-	
-	@RequestMapping(value = "/house-list/all", method = RequestMethod.GET)
-	public ResponseEntity<List<HouseVO>> HouseTest(HttpServletRequest request) {
-		logger.info("loginGet() 호출");
 		List<HouseVO> list = houseService.selectAll();
-		for(int i=0; i<list.size(); i++) {
-			logger.info(list.get(i).toString());
-		}
-		/*페이저 설정*/
+
+		/*페이징 처리*/
 		PageCriteria c = new PageCriteria();
 		String page = request.getParameter("page");
-		
+		logger.info("page : " + page);
 		if(page !=null) {
 			c.setPage(Integer.parseInt(page));
 		}
@@ -63,8 +53,22 @@ public class HouseController {
 		logger.info("한 페이지 당 게시글 수 : " + c.getNumsPerPage());
 		logger.info("시작 페이지 링크 번호 : " + m.getStartPageNo());
 		logger.info("끝 페이지 링크 번호 : " + m.getEndPageNo());
+		
+		request.setAttribute("startNum", m.getStartPageNo());
+		
 		request.setAttribute("pageMaker", m);
 		request.setAttribute("boardList", list);
+
+	}
+	
+	@RequestMapping(value = "/house-list/all", method = RequestMethod.GET)
+	public ResponseEntity<List<HouseVO>> HouseTest(HttpServletRequest request) {
+		logger.info("loginGet() 호출");
+		List<HouseVO> list = houseService.selectAll();
+		for(int i=0; i<list.size(); i++) {
+			logger.info(list.get(i).toString());
+		}
+		
 		
 		return new ResponseEntity<List<HouseVO>>(list,HttpStatus.OK);
 		

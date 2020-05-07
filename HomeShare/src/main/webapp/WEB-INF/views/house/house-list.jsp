@@ -19,8 +19,19 @@
 	<hr>
 	<!-- 페이저 영역 -->
 	<div>
+	페이지메이커 : ${startNum}
 		<ul class="pager">
-			<li><a href="${pageMaker.startPageNo -1 }">이전</a>
+			<c:if test="${pageMakger.hasPrev }">
+				<li><a href="${pageMaker.startPageNo -1 }">이전</a></li>
+			</c:if>
+			<c:forEach begin="${pageMaker.startPageNo }"
+			end="${pageMaker.endPageNo }" var="num">
+				<li><a href="${num }">${num }</a>
+			
+			</c:forEach>
+			<c:if test="${pageMakger.hasNext }">
+				<li><a href="${pageMaker.startPageNo +1 }">다음</a></li>
+			</c:if>
 		</ul>
 	</div>
 	<!-- page -->
@@ -68,13 +79,21 @@
 				);//end getJSON
 			}//end getAllHouseList
 			
-			$('.pager li a').click(function(){
-				event.preventDefault();
-				var targetPage = $(this).attr('href');
-				console.log(targetPage);
-				
-				
-			});//end click
+		  // 클릭한 a태그의 정보를 가져오는 코드
+	  	  $('.pager li a').click(function() { 
+	  	    // .pager 클래스의 하위 li 요소의 하위 a 요소를 찾아감
+	  	    event.preventDefault(); // a 태그의 기본 동작(페이지 이동)을 금지
+	  	    var targetPage = $(this).attr('href'); // a 태그 href 속성의 값을 저장
+	  	    console.log(targetPage);
+	  	    
+	  	    var frm = $('#pagingForm'); // form의 정보를 frm에 저장
+	  	    frm.find('[name="page"]').val(targetPage); // name="page"를 찾아서 value=targetPage를 저장
+	  	    frm.attr('action', 'house-list'); // form에 action 속성 추가
+	  	    frm.attr('method', 'get'); // form에 method 속성 추가
+	  	    frm.submit(); // form 데이터 전송
+	  	  }); // end click()
+		 
+		  
 		}); //end document
 	</script>
 </body>

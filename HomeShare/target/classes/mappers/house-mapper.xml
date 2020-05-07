@@ -24,13 +24,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from ${house} where ${houseNo} = #{houseNo}
 	</select>
 	
-	<!-- 페이지 가져오기 -->
-	<select id="select_"></select>
 	
-	<!-- 전체 하우스 개수 가져오기 -->
-	<select id="get_total_house_nums" resultType="int" >
-		select count(*)  from house;
-	</select>
+	
 	
 	
 	

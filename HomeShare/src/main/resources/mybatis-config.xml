@@ -41,6 +41,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<property name="thumbNailPhoto" value="thumbNailPhoto" />
 		<property name="title" value="title" />
 		<property name="ranking" value="ranking" />
+		
+		<!-- page criteria 파라미터 -->
+		<property name="PageCriteria" value="PageCriteria" />
+		
 	</properties>
 
 
