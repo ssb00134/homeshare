@@ -4,8 +4,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="edu.spring.homeshare.ReplyMapper">
-	<select id="select_all_by_houseno" resultType="replyVO" parameterType="int">
-	select * from ${reply} where ${houseNo} = #{houseNo}
+	
+	<!-- select -->
+	<select id="select_all_by_houseno" resultType="replyVO" >
+		select * from ${reply} where ${houseNo} = #{houseNo}
+	</select>
+	
+	<select id="select_count" resultType="int">
+		select count(*) from reply;
 	</select>
 </mapper>
 
