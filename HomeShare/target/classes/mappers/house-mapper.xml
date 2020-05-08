@@ -34,15 +34,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 페이징 처리 -->
 	<select id="paging" resultType="houseVO">
 		select
-		b.${houseNo}, b.${title}, b.${info}
+		b.${houseNo}, b.${title},
+		b.${info}
 		from (
 		select rownum rn, a.*
 		from (
-		select * from house order by ${houseNo} desc
+		select * from house order by
+		${houseNo} desc
 		) a
 		) b
 		where rn between #{start} and #{end}
-		
+	</select>
+
+	<select id="total_count" resultType="Integer">
+		select count(*) total_cnt from ${house}
 	</select>
 
 

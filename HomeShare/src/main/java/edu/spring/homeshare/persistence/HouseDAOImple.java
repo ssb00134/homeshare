@@ -45,11 +45,7 @@ public class HouseDAOImple implements HouseDAO {
 		return sqlSession.selectOne(NAMESPACE + ".select_by_houseno", houseNo);
 	}
 	
-	@Override
-	public int getTotalHouseNums() {
-		logger.info("getTotalHouseNums 실행");
-		return  sqlSession.selectOne(NAMESPACE + ".get_total_house_nums");
-	}
+
 	
 	@Override
 	public List<HouseVO> select(PageCriteria criteria) {
@@ -63,6 +59,11 @@ public class HouseDAOImple implements HouseDAO {
 	public List<HouseVO> selectAllByMemNo(int memNo) {
 		logger.info("selectAllByMemNo 실행");
 		return sqlSession.selectList(NAMESPACE+".select_all_by_memno",memNo);
+	}
+	@Override
+	public int getTotalNumsOfRecords() {
+		logger.info("getTotalNumsOfRecords 실행");
+		return sqlSession.selectOne(NAMESPACE + ".total_count");
 	}
 
 }

@@ -10,8 +10,8 @@ public interface HouseDAO {
 	List<HouseVO> selectAll();
 	int insert(HouseVO vo);
 	HouseVO selectByHouseNo(int houseNo);
-	int getTotalHouseNums();
 	List<HouseVO> select(PageCriteria c	);
 	List<HouseVO> selectAllByMemNo(int memNo);
+	int getTotalNumsOfRecords();
 
 }

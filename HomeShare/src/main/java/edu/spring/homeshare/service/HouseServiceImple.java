@@ -30,10 +30,7 @@ public class HouseServiceImple implements HouseService {
 	public HouseVO selectByHouseNo(int houseNo) {
 		return HouseDao.selectByHouseNo(houseNo);
 	}
-	@Override
-	public int getTotalHouseNums() {
-		return HouseDao.getTotalHouseNums();
-	}
+
 	@Override
 	public List<HouseVO> selectAllByMemNO(int memNo) {
 		return HouseDao.selectAllByMemNo(memNo);
@@ -41,6 +38,10 @@ public class HouseServiceImple implements HouseService {
 	@Override
 	public List<HouseVO> read(PageCriteria criteria) {
 		return HouseDao.select(criteria);
+	}
+	@Override
+	public int getToTotalNumsOfRecords() {
+		return HouseDao.getTotalNumsOfRecords();
 	}
 
 }

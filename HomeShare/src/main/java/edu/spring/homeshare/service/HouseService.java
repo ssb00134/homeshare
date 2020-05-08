@@ -10,7 +10,7 @@ public interface HouseService {
 	List<HouseVO> selectAll();
 	int insert(HouseVO vo);
 	HouseVO selectByHouseNo(int houseNo);
-	int getTotalHouseNums();
 	List<HouseVO> selectAllByMemNO(int memNo);
 	List<HouseVO> read(PageCriteria criteria);
+	int getToTotalNumsOfRecords();
 }

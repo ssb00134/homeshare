@@ -26,29 +26,19 @@ li {
 <title>게시판 메인 페이지</title>
 </head>
 <body>
-  <h1>마음의 소리 게시판</h1>
+  <h1>검색결과</h1>
   <hr>
-  <a href="register"><input type="button" value="글작성"></a>
   <br>
-  <br>
-  <table>
-    <thead>
-      <tr>
-        <th style="width: 60px;">숙소번호</th>
-        <th style="width: 700px;">제목</th>
-        <th style="width: 60px;">가격</th>
-      </tr>
-    </thead>
-    <tbody>
+  <div id="house-lists">
       <c:forEach var="vo" items="${houseList }">
-        <tr>
-          <td>${vo.houseNo }</td>
-          <td><a class="goToDetail" href="${vo.houseNo }">${vo.title }</a></td>
-          <td>${vo.price }</td>
-        </tr>
+        <div class = "house_list_item" id ="${vo.houseNo }">
+          <div>${vo.houseNo }</div>
+          <div><a class="goToDetail" href="${vo.houseNo }">${vo.title }</a></div>
+          <div>${vo.price }</div>
+          <hr>
+        </div>
       </c:forEach>
-    </tbody>
-  </table>
+ 	</div>
 
   <hr>
   <div>
@@ -84,19 +74,20 @@ li {
   	    
   	    var frm = $('#pagingForm'); // form의 정보를 frm에 저장
   	    frm.find('[name="page"]').val(targetPage); // name="page"를 찾아서 value=targetPage를 저장
-  	    frm.attr('action', 'list'); // form에 action 속성 추가
+  	    frm.attr('action', 'house-list'); // form에 action 속성 추가
   	    frm.attr('method', 'get'); // form에 method 속성 추가
-  	    frm.submit(); // form 데이터 전송
+  	    frm.submit(); // form 데이터 전송 
   	  }); // end click()
   	  
-  	  $('.goToDetail').click(function(){
+  	  $('.house_list_item').click(function(){
   	    event.preventDefault();
-  	    var bno = $(this).attr('href');
+  	    var houseNo = this.id;
+  	    console.log(houseNo);
   	    var frm = $('#pagingForm');
-  	    frm.attr('action', 'detail');
+  	    frm.attr('action', 'house-detail');
   	    frm.attr('method', 'get');
-  	    frm.find('[name="bno"]').val(bno);
-  	    frm.submit();
+  	    frm.find('[name="houseNo"]').val(houseNo);
+  	    frm.submit(); 
   	  }); // end click()
   	  
   	  // register에서 넘어온 insert_result 데이터를 바탕으로 alert 처리
@@ -106,6 +97,8 @@ li {
   	    alert('새 글 작성 실패');
   	  }
   	}); // end document
+  	
+
   </script>
   
 </body>
