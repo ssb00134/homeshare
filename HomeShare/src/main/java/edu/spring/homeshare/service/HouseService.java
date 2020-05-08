@@ -10,4 +10,5 @@ public interface HouseService {
 	int insert(HouseVO vo);
 	HouseVO selectByHouseNo(int houseNo);
 	int getTotalHouseNums();
+	List<HouseVO> selectAllByMemNO(int memNo);
 }

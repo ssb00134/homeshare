@@ -57,8 +57,8 @@ header {
 				<a href="member/logout">
 					<input type="button" value="로그아웃">
 				</a>
-				<c:if test="${not empty houseNo }">
-				<a href="">
+				<c:if test="${not empty memberVO.houseNo }">
+				<a href="host/hosting-list">
 					<input type="button" value="숙소관리하기">
 				</a>
 				</c:if>

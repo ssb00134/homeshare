@@ -33,5 +33,9 @@ public class HouseServiceImple implements HouseService {
 	public int getTotalHouseNums() {
 		return HouseDao.getTotalHouseNums();
 	}
+	@Override
+	public List<HouseVO> selectAllByMemNO(int memNo) {
+		return HouseDao.selectAllByMemNo(memNo);
+	}
 
 }

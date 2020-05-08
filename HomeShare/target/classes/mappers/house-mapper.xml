@@ -20,16 +20,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from ${house}
 	</select>
 	
-	<select id="select_by_houseno" resultType="HouseVO">
+	<select id="select_by_houseno" resultType="houseVO" parameterType="int">
 		select * from ${house} where ${houseNo} = #{houseNo}
 	</select>
 	
-	
-	
-	
-	
-	
-	
+	<!-- memno 기준으로 모든 하우스 정보를 가져오는 쿼리 -->
+	<select id="select_all_by_memno" resultType="houseVO" parameterType="int">
+		select * from ${house} where ${memNo} = #{memNo}
+	</select>
 	
 	
 	<!-- insert문 -->

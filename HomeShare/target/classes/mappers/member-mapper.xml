@@ -7,13 +7,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 회원가입 sql -->
 	<insert id="insert" parameterType="memberVO">
-		insert into house_member
+		insert into member
 		values(0,#{memId},#{password},null,null,#{memName},#{email})
 	</insert>
 	
 	<!-- 로그인 Sql -->
 	<select id="login" resultType="MemberVO">
-		select * from ${house_member}
+		select * from ${member}
 		where ${memId} = #{memId} and
 		${password} = #{password}
 	</select>
@@ -26,14 +26,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 아이디 찾기 찾기 sql -->
 	<select id="findId" resultType="String">
 		select ${memId} from
-		${house_member}
+		${member}
 		where ${memName} = #{memName} and
 		${email} = #{email}
 	</select>
 
 	<!-- 정보가져오기 (내정보수정시 사용) -->
 	<select id="select" resultType="memberVO">
-		select * from ${house_member} where ${memId}=#{memId}
+		select * from ${member} where ${memId}=#{memId}
 	</select>
 
 </mapper>

@@ -58,5 +58,11 @@ public class HouseDAOImple implements HouseDAO {
 		logger.info("끝번호 : " +c.getEnd());
 		return sqlSession.selectOne(NAMESPACE + ".select_pagescope", c);
 	}
+	
+	@Override
+	public List<HouseVO> selectAllByMemNo(int memNo) {
+		logger.info("selectAllByMemNo 실행");
+		return sqlSession.selectList(NAMESPACE+".select_all_by_memno",memNo);
+	}
 
 }

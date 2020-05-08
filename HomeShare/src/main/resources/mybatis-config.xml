@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<!-- DB 테이블과 컬럼들을 mapper에 매핑하기 위한 변수 선언 -->
 	<properties>
 		<!-- house_member table 변수 설정 -->
-		<property name="house_member" value="house_member" />
+		<property name="member" value="member" />
 		<property name="memNo" value="memNo" />
 		<property name="memId" value="memId" />
 		<property name="password" value="password" />
@@ -42,9 +42,18 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<property name="title" value="title" />
 		<property name="ranking" value="ranking" />
 		
-		<!-- page criteria 파라미터 -->
-		<property name="PageCriteria" value="PageCriteria" />
-		
+		<!-- 리플 테이블 파라미터 설정 -->
+		<property name="reply" value="reply" />
+		<property name="houseNo" value="houseNo" />
+		<property name="reply" value="reply" />
+		<property name="content" value="content" />
+		<property name="reply" value="reply" />
+		<property name="memId" value="memId" />
+		<property name="regdate" value="regdate" />
+		<property name="scope" value="scope" />
+		<property name="regdate" value="regdate" />
+		<property name="cleanessScope" value="cleanessScope" />
+		<property name="checkinScope" value="checkinScope" />
 	</properties>
 
 
