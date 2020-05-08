@@ -15,21 +15,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from ${house}
 		where ${title}= #{title}
 	</select>
-	
+
 	<select id="select_all" resultType="HouseVO">
 		select * from ${house}
 	</select>
-	
-	<select id="select_by_houseno" resultType="houseVO" parameterType="int">
+
+	<select id="select_by_houseno" resultType="houseVO"
+		parameterType="int">
 		select * from ${house} where ${houseNo} = #{houseNo}
 	</select>
-	
+
 	<!-- memno 기준으로 모든 하우스 정보를 가져오는 쿼리 -->
-	<select id="select_all_by_memno" resultType="houseVO" parameterType="int">
+	<select id="select_all_by_memno" resultType="houseVO"
+		parameterType="int">
 		select * from ${house} where ${memNo} = #{memNo}
 	</select>
-	
-	
+
+	<!-- 페이징 처리 -->
+	<select id="paging" resultType="BoardVO">
+		select
+		b.bno, b.title, b.content, b.userid, b.regdate
+		from (
+		select rownum rn, a.*
+		from (
+		select * from ${test_board} order by ${b_bno} desc
+		) a
+		) b
+		where rn between #{start} and #{end}
+	</select>
+
+
 	<!-- insert문 -->
 	<insert id="insert" parameterType="houseVO">
 		insert into house values(
@@ -59,7 +74,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		);
 	</insert>
 
-	
+
 
 
 

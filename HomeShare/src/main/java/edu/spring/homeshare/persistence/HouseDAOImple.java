@@ -52,11 +52,11 @@ public class HouseDAOImple implements HouseDAO {
 	}
 	
 	@Override
-	public List<HouseVO> select(PageCriteria c) {
+	public List<HouseVO> select(PageCriteria criteria) {
 		logger.info("select(PageCriteria c) 실행");
-		logger.info("시작번호 : " +c.getStart());
-		logger.info("끝번호 : " +c.getEnd());
-		return sqlSession.selectOne(NAMESPACE + ".select_pagescope", c);
+		logger.info("시작번호 : " +criteria.getStart());
+		logger.info("끝번호 : " +criteria.getEnd());
+		return sqlSession.selectOne(NAMESPACE + ".paging", criteria);
 	}
 	
 	@Override

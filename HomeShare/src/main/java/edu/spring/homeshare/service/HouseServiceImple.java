@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import edu.spring.homeshare.domain.HouseVO;
 import edu.spring.homeshare.persistence.HouseDAO;
+import edu.spring.homeshare.util.PageCriteria;
 @Service
 public class HouseServiceImple implements HouseService {
 
@@ -36,6 +37,10 @@ public class HouseServiceImple implements HouseService {
 	@Override
 	public List<HouseVO> selectAllByMemNO(int memNo) {
 		return HouseDao.selectAllByMemNo(memNo);
+	}
+	@Override
+	public List<HouseVO> read(PageCriteria criteria) {
+		return HouseDao.select(criteria);
 	}
 
 }
