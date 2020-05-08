@@ -28,35 +28,35 @@ public class HouseController {
 	private HouseService houseService;
 	
 	@RequestMapping(value = "/house-list", method = RequestMethod.GET)
-	public void houseLIst(HttpServletRequest request) {
+	public void houseLIst(Model model, Integer page, Integer prePage, HttpServletRequest request) {
 		logger.info("houselist get 실행");
-		List<HouseVO> list = houseService.selectAll();
 
 		/*페이징 처리*/
 		PageCriteria c = new PageCriteria();
-		String page = request.getParameter("page");
 		logger.info("page : " + page);
+
 		if(page !=null) {
-			c.setPage(Integer.parseInt(page));
+			c.setPage(page);
 		}
+		if(prePage != null) {
+			c.setNumsPerPage(prePage);
+		}
+		List<HouseVO> list = houseService.read(c);
+		model.addAttribute("houseList",list);
 		
-		PageMaker m = new PageMaker();
-		m.setCriteria(c);
+		PageMaker maker = new PageMaker();
+		maker.setCriteria(c);
 		int totalCount = list.size();
-		m.setTotalCount(totalCount);
-		m.setPageData();
+		maker.setTotalCount(totalCount);
+		maker.setPageData();
+		model.addAttribute("preMaker", maker);
 		
-		logger.info("전체 하우스 수 : " + m.getTotalCount());
+		logger.info("전체 하우스 수 : " + maker.getTotalCount());
 		logger.info("현재 선택된 페이지 : " + c.getPage());
 		logger.info("한 페이지 당 게시글 수 : " + c.getNumsPerPage());
-		logger.info("시작 페이지 링크 번호 : " + m.getStartPageNo());
-		logger.info("끝 페이지 링크 번호 : " + m.getEndPageNo());
+		logger.info("시작 페이지 링크 번호 : " + maker.getStartPageNo());
+		logger.info("끝 페이지 링크 번호 : " + maker.getEndPageNo());
 		
-		request.setAttribute("startNum", m.getStartPageNo());
-		
-		request.setAttribute("pageMaker", m);
-		request.setAttribute("boardList", list);
-
 	}
 	
 	@RequestMapping(value = "/house-list/all", method = RequestMethod.GET)

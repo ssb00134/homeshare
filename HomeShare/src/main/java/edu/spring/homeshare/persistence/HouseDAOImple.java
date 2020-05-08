@@ -56,7 +56,7 @@ public class HouseDAOImple implements HouseDAO {
 		logger.info("select(PageCriteria c) 실행");
 		logger.info("시작번호 : " +criteria.getStart());
 		logger.info("끝번호 : " +criteria.getEnd());
-		return sqlSession.selectOne(NAMESPACE + ".paging", criteria);
+		return sqlSession.selectList(NAMESPACE + ".paging", criteria);
 	}
 	
 	@Override

@@ -32,16 +32,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- 페이징 처리 -->
-	<select id="paging" resultType="BoardVO">
+	<select id="paging" resultType="houseVO">
 		select
-		b.bno, b.title, b.content, b.userid, b.regdate
+		b.${houseNo}, b.${title}, b.${info}
 		from (
 		select rownum rn, a.*
 		from (
-		select * from ${test_board} order by ${b_bno} desc
+		select * from house order by ${houseNo} desc
 		) a
 		) b
 		where rn between #{start} and #{end}
+		
 	</select>
 
 
