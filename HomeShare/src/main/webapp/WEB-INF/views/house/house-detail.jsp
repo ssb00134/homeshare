@@ -25,7 +25,7 @@
 	<!-- 리플 영역 -->
 	아이디 ${memId }
 	<div id="showReply">
-		리플 보이기
+		총 <div id ="countReply"></div>개의 후기가 있습니다.
 		<div id = "replies" style="display:none " />
 	</div>
 
@@ -47,6 +47,7 @@
 						$(jsonData).each(
 								function(){
 									console.log("댓글번호 : " + this.rno);
+									
 									var date = new Date(this.regdate);
 									console.log(date.getFullYear() +"년" + date.getMonth() + "월");		
 									console.log(this.memId);

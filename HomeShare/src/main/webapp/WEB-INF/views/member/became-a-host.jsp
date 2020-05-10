@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script
+  src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
 	<form>
@@ -72,10 +74,21 @@
 		<h1>2단계 상세 정보 입력하기</h1>
 		<p>사진을 입력해 주세요</p>
 		//TODO: 사진추가 작업하기(name=photo, name=thumbnamilPhoto)
+		<h1>파일 폼 업로드</h1>
+		<form action="upload" method="post"  enctype="multipart/form-data">
+			<input type="file" name="file">
+			<input type="submit" value="업로드">
+		</form>
+		
+		
 		<p>숙소의 제목을 입력해 주세요</p>
 		<input type="text" name="title">
 		<p>게스트에게 숙소에 대해 설명해 주세요</p>
 		<input type="text" name="memo">
+		<br>
+		<br>
+		<br>
+		
 		<hr>
 		<h1>3단계 게스트를 맞이할 준비를 해주세요</h1>
 		<p>게스트가 지켜야 할 규칙들</p>
@@ -106,9 +119,18 @@
 		<hr>
 		<p>숙소요금 설정하기</p>
 		<input type="text" name="price">
-		
+		<br>
 		<input type="submit" value="등록하기">
 
 	</form>
+	
+	<script type="text/javascript">
+	$(document).ready(function(){
+		if(${not empty savedFfile}){
+			alert('${savedFile}' 저장성공);
+		}
+	});//end document
+	
+	</script>
 </body>
 </html>

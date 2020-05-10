@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
@@ -45,13 +46,15 @@
 	</bean>
 
 	<!-- 트렌젝션 관리를 하는 Aspect를 annotation 기반으로 사용 -->
-	<tx:annotation-driven/>
+	<tx:annotation-driven />
 
 	<!-- base-package 밑의 클래스들 중에서 @Component로 등록된 클래스들을 bean으로 생성해서 관리 Persistence/Service 
 		Layer의 컴퍼넌트 클래스들을 bean으로 등록 -->
 	<context:component-scan
 		base-package="edu.spring.homeshare" />
 
+
+	
 </beans>
 
 
