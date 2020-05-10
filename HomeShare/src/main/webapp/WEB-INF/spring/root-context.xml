@@ -50,8 +50,7 @@
 
 	<!-- base-package 밑의 클래스들 중에서 @Component로 등록된 클래스들을 bean으로 생성해서 관리 Persistence/Service 
 		Layer의 컴퍼넌트 클래스들을 bean으로 등록 -->
-	<context:component-scan
-		base-package="edu.spring.homeshare" />
+	
 
 
 	

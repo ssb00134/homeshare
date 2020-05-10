@@ -29,11 +29,11 @@ header {
 			<a href="/homeshare/">go main</a>
 		</div>
 		<div id="sign-host">
-			<a href="member/became-a-host">호스트 되기</a>
+			<a href="/homeshare/member/became-a-host">호스트 되기</a>
 		</div>
 
 		<div id="sign-up">
-			<a href="member/sign-up/">sign-up</a>
+			<a href="/homeshare/member/sign-up/">sign-up</a>
 		</div>
 
 
@@ -48,17 +48,17 @@ header {
 		<c:if test="${not empty memId }">
 			<div id="myPageToggle">${memId }</div>
 			<div id="mypage">
-				<a href="member/account">
+				<a href="/homeshare/member/account">
 					<input type="button" value="계정">
 				</a>
-				<a href="member/alerm">
+				<a href="/homeshare/member/alerm">
 					<input type="button" value="알람설정">
 				</a>
-				<a href="member/logout">
+				<a href="/homeshare/member/logout">
 					<input type="button" value="로그아웃">
 				</a>
 				<c:if test="${not empty memberVO.houseNo }">
-				<a href="host/hosting-list">
+				<a href="/homeshare/host/hosting-list">
 					<input type="button" value="숙소관리하기">
 				</a>
 				</c:if>
@@ -67,7 +67,7 @@ header {
 		</c:if>
 	</header>
 	<div><a href="house/house-list">숙소 테스트</a></div>
-	
+	<div><a href="/homeshare/file-upload-test">파일 업로드 테스트</a></div>
 	<%@ include file="section.jspf"%>
 
 </body>
