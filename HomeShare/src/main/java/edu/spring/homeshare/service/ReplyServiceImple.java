@@ -22,5 +22,9 @@ public class ReplyServiceImple implements ReplyService {
 	public int readCount() {
 		return replyDao.selectCount();
 	}
+	@Override
+	public int update(ReplyVO vo) {
+		return replyDao.update(vo);
+	}
 
 }

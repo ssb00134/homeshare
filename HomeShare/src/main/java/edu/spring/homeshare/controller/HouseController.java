@@ -67,6 +67,7 @@ public class HouseController {
 			int houseNo,
 			Model model,
 			@ModelAttribute("criteria") PageCriteria criteria) {
+		logger.info("house-detail ½ÇÇà " + houseNo);
 		logger.info("houseno " + houseNo);
 		HouseVO vo = houseService.selectByHouseNo(houseNo);
 		logger.info(vo.toString());

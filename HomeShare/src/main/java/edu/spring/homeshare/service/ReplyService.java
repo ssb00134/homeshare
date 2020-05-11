@@ -7,4 +7,5 @@ import edu.spring.homeshare.domain.ReplyVO;
 public interface ReplyService {
 	List<ReplyVO> read(int houseNo);
 	int readCount();
+	int update(ReplyVO vo);
 }

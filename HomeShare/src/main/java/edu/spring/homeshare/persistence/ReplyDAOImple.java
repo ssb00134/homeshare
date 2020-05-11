@@ -27,6 +27,10 @@ public class ReplyDAOImple implements ReplyDAO {
 	public int selectCount() {
 		return sqlSession.selectOne(NAMESPACE+".select_count");
 	}
+	@Override
+	public int update(ReplyVO vo) {
+		return sqlSession.update(NAMESPACE + ".update", vo);
+	}
 }
 
 

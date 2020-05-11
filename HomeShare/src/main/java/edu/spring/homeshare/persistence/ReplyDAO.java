@@ -7,4 +7,5 @@ import edu.spring.homeshare.domain.ReplyVO;
 public interface ReplyDAO {
 	List<ReplyVO> select(int houseNo);
 	int selectCount();
+	int update(ReplyVO vo);
 }
