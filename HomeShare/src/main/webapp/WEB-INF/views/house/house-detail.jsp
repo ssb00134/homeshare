@@ -26,14 +26,57 @@
 	아이디 ${memId }
 	<div id="showReply">
 		총 <div id ="countReply"></div>개의 후기가 있습니다.
-		<div id = "replies" style="display:none " />
 	</div>
+	<div id = "replies" style="display:none " />
+	<hr>
+	TODO : 리플의 memid와 세션의 memid가 일치하는지 확인할것
+	->프론트엔드에서 막음 
+	->서버에서 막기
+	
 
 	
 	<script type="text/javascript">
 	$(document).ready(function(){
 		var houseNo = ${houseVO.houseNo};
 		getAllReplies();
+		
+		 // 댓글 입력 기능
+	  	  $('#btn_add').click(function(){
+	  	  	// 댓글 아이디, 댓글 내용의 값을 가져와서
+	  	  	// get 방식으로 전송
+	  	  	// url : 'localhost:8080/Web10_MVC/replies/add'
+	  	  	// data : 게시판 번호, 댓글 내용, 댓글 아이디
+	  	  	var content = $('#content').val(); // 댓글 내용 값
+	  	  	var replyid = $('#replyid').val(); // 댓글 아이디 값
+	  	  	var obj = {
+	  	  	    'bno' : bno,
+	  	  		'content' : content,
+	  	  		'replyid' : replyid
+	  	  	}; // end var obj
+	  	  	
+	  	  	// $.ajax로 송신
+	  	  	$.ajax({
+	  	  	  type : 'post',
+	  	  	  url : '/ex03/replies',
+	  	  	  headers : {
+	  	  	    'Content-Type' : 'application/json', 
+	  	  	    'X-HTTP-Method-Override' : 'POST'
+	  	  	  }, 
+	  	  	  data : JSON.stringify(obj),
+	  	  	  success : function(result, status){
+	  	  	    console.log(result);
+	  	  	    console.log(status);
+	  	  	    if (result == 1){
+	  	  	      alert('댓글 입력 성공');
+	  	  	      $('#content').val(''); // 성공메시지 이후 삽입했던 content 데이터 삭제
+	  	  	      $('#replyid').val(''); // 성공메시지 이후 삽입했던 replyid 데이터 삭제
+	  	  	      getAllReplies(); // 메소드 호출
+	  	  	    } // end if()
+	  	  	  } // end success
+	  	  	  
+	  	  	}); // end ajax()
+	  	  	
+	  	  }); // end btn_add.click()
 
 		function getAllReplies(){
 			var url = '/homeshare/replies/all/' + houseNo;
@@ -85,6 +128,66 @@
 					}//end callback
 					);// end getJSON
 		}//end getAllReplies
+		
+		  // 수정 버튼 클릭하면 선택된 댓글 수정
+	  	  $('#replies').on('click', '.reply_item .btn_update', function(){ // click는 메소드 기능. function은 눌렀을 때 뭘 할것인가
+	  	    // console.log(this);
+	  	    
+	  	    // 선택된 댓글 pre영역의 rno, content 값을 읽음
+	  	    var rno = $(this).prevAll('#rno').val(); // this에 update이전 것 중에 rno를 찾겠다
+	  	    var content = $(this).prevAll('#reply_content').val();
+	  	    console.log("선택된 댓글 번호 : " + rno + ", 댓글 내용 : " + content);
+	  	    
+	  	  // ajax 요청
+	  	    $.ajax({
+	  	      type : 'put',
+	  	      url : '/homeshare/replies/' + rno,
+	  	  	  headers : {
+	  	  	    'Content-Type' : 'application/json', 
+	  	  	    'X-HTTP-Method-Override' : 'PUT'
+	  	  	  }, 
+	  	      data : JSON.stringify({
+	  	        'content' : content
+	  	      }),
+	  	      success : function(result){
+	  	        if(result == 'success'){
+	  	          alert('댓글 수정성공');
+	  	          
+	  	          getAllReplies();
+	  	        } // end if()
+	  	      }// end success()
+	  	      
+	  	    }); // end ajax()
+	  	  }); // end btn_update.click()
+	  	  
+	  	 // 삭제 버튼을 클릭하면 선택된 댓글 삭제
+	  	  $('#replies').on('click', '.reply_item .btn_delete', function(){ // click는 메소드 기능. function은 눌렀을 때 뭘 할것인가
+	  	    // console.log(this);
+	  	    
+	  	    var rno = $(this).prevAll('#rno').val(); 
+	  	     var content = $(this).prevAll('#reply_content').val(); 
+	  	    console.log("선택된 댓글 번호 : " + rno + ", 댓글 내용 : " + content);
+	  	    
+	  	    // ajax 요청
+	  	    $.ajax({
+	  	      type : 'delete',
+	  	      url : '/homeshare/replies/' + rno,
+	  	  	  headers : {
+	  	  	    'Content-Type' : 'application/json', 
+	  	  	    'X-HTTP-Method-Override' : 'DELETE'
+	  	  	  }, 
+	  	      success : function(result){
+	  	        if(result == 'success'){
+	  	          alert('댓글 삭제성공')
+	  	          getAllReplies();
+	  	        } // end if()
+	  	      }// end success()
+	  	      
+	  	    }); // end ajax()
+	  	  }); // end btn_delte.click()
+	  	  
+	  	  
+	  	
 	});//end document
 	
 	</script>

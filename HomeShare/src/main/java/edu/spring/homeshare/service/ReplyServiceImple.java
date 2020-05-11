@@ -13,6 +13,10 @@ public class ReplyServiceImple implements ReplyService {
 	@Autowired
 	private ReplyDAO replyDao;
 	
+	@Override
+	public int create(ReplyVO vo) {
+		return replyDao.insert(vo);
+	}
 	
 	@Override
 	public List<ReplyVO> read(int houseNo) {
@@ -25,6 +29,10 @@ public class ReplyServiceImple implements ReplyService {
 	@Override
 	public int update(ReplyVO vo) {
 		return replyDao.update(vo);
+	}
+	@Override
+	public int delete(int rno) {
+		return replyDao.delete(rno);
 	}
 
 }

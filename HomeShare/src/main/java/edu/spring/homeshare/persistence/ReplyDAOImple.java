@@ -18,6 +18,11 @@ public class ReplyDAOImple implements ReplyDAO {
 	private static final String NAMESPACE = "edu.spring.homeshare.ReplyMapper";
 	
 	@Override
+	public int insert(ReplyVO vo) {
+		return sqlSession.insert(NAMESPACE + ".insert", vo);
+	}
+
+	@Override
 	public List<ReplyVO> select(int houseNo) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(NAMESPACE + ".select_all_by_houseno", houseNo);
@@ -30,6 +35,10 @@ public class ReplyDAOImple implements ReplyDAO {
 	@Override
 	public int update(ReplyVO vo) {
 		return sqlSession.update(NAMESPACE + ".update", vo);
+	}
+	@Override
+	public int delete(int rno) {
+		return sqlSession.delete(NAMESPACE + ".delete", rno);
 	}
 }
 

@@ -66,9 +66,14 @@ header {
 
 		</c:if>
 	</header>
+	
+	<%@ include file="section.jspf"%>
+	<div style=" border: 5px solid grey; ">
+	테스트영역
+	<hr>
 	<div><a href="house/house-list">숙소 테스트</a></div>
 	<div><a href="/homeshare/file-upload-test">파일 업로드 테스트</a></div>
-	<%@ include file="section.jspf"%>
+	</div>
 
 </body>
 <script type="text/javascript">

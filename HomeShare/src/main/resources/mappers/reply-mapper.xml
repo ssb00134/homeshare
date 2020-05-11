@@ -4,21 +4,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="edu.spring.homeshare.ReplyMapper">
+
+
+	<!-- insert -->
 	
+	<insert id="insert">
+		insert into ${reply}
+		values(0,#{houseNo},#{content},#{memId},0,#{cleannessScope},#{checkinScope})
+		<!-- 0,하우스번호,content,memid,scope,cleaness,checkin -->
+	</insert>
+
+
 	<!-- select -->
-	<select id="select_all_by_houseno" resultType="replyVO" >
-		select * from ${reply} where ${houseNo} = #{houseNo}
+	<select id="select_all_by_houseno" resultType="replyVO">
+		select *
+		from ${reply} where ${houseNo} = #{houseNo}
 	</select>
-	
+
 	<select id="select_count" resultType="int">
 		select count(*) from reply;
 	</select>
+
+
 	<!-- update -->
 	<update id="update">
 		update ${reply}
 		set ${content} = #{content}
-		where ${rno} = #{rno}
+		where
+		${rno} = #{rno}
 	</update>
+
+	<!-- delete -->
+	<delete id="delete">
+		delete from ${reply}
+		where ${rno} = #{rno}
+	</delete>
+
 </mapper>
 
 

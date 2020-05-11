@@ -44,6 +44,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		
 		<!-- 리플 테이블 파라미터 설정 -->
 		<property name="reply" value="reply" />
+		<property name="rno" value="rno" />
 		<property name="houseNo" value="houseNo" />
 		<property name="reply" value="reply" />
 		<property name="content" value="content" />
