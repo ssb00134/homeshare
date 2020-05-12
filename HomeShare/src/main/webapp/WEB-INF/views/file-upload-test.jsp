@@ -33,6 +33,10 @@
 	<h1>Ajax를 이용한 파일 업로드</h1>
 	<div class="file-drop"></div>
 	<div class="upload-list"></div>
+	<h1>사진주소</h1>
+	<div id = "file-path-area"></div><br>
+	
+	<div id = "file-path-area-seperate"></div>
 
 
 <script type="text/javascript">
@@ -83,12 +87,44 @@
           	    + data
           	    + '</div>';
           $('.upload-list').html(str);	    
-        }
-      });
-      
-      
-    });
-  });
+	      getAllgetPath();
+        } //end success;
+      }); //end ajax
+
+    }); //end file drop
+    
+    
+    function getAllgetPath(){
+        $.ajax({
+            type: 'get', 
+            url : '/homeshare/getpath', 
+            data : null,
+            processData : false,
+            contentType : false,
+            
+            success: function(data) {
+            	console.log(data);
+            	var strData = data.split(',');
+            	
+            	
+            	 //홀수만 출력
+         		console.log('중간값 이상만 출력하기');
+            	 var length = strData.length;
+            	 document.write( '중간값 이상만 출력결과' );
+         		 for ( var i in strData) {
+         			 if(i>=length/2){
+          	       	  	document.write( '<p>' + strData[i] + '</p>' );
+          	         	console.log(strData[i]);
+         			 }
+          	       }
+            	  	
+            	$('#file-path-area').html(data);
+            	
+            } //end success
+          }); //end ajax
+        }//end get all getPath
+    
+  });//end document
   </script>  
 	
 </body>
