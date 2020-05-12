@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -110,17 +111,23 @@
             	 //홀수만 출력
          		console.log('중간값 이상만 출력하기');
             	 var length = strData.length;
-            	 document.write( '중간값 이상만 출력결과' );
-         		 for ( var i in strData) {
+            	 
+            	 for ( var i in strData) {
          			 if(i>=length/2){
-          	       	  	document.write( '<p>' + strData[i] + '</p>' );
+          	       	  	//document.write( '<p>' + strData[i] + '</p>' );
           	         	console.log(strData[i]);
          			 }
           	       }
             	  	
             	$('#file-path-area').html(data);
             	
-            } //end success
+            }, //end success
+            error : function( fail ) {
+				alert('사진은 최대 3개만 가능합니다.');
+				console.log('사진은 최대 3개만 가능합니다.');
+            } // end fail
+            	
+            
           }); //end ajax
         }//end get all getPath
     
