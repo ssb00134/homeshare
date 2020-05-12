@@ -9,12 +9,12 @@ public class ReplyVO {
 	private String memId;
 	private Date regdate;
 	private int scope;
-	private int cleannessScope;
+	private int cleanScope;
 	private int checkinScope;
 	
 	public ReplyVO() {}
 
-	public ReplyVO(int rno, int houseNo, String content, String memId, Date regdate, int scope, int cleannessScope,
+	public ReplyVO(int rno, int houseNo, String content, String memId, Date regdate, int scope, int cleanScope,
 			int checkinScope) {
 		super();
 		this.rno = rno;
@@ -23,7 +23,7 @@ public class ReplyVO {
 		this.memId = memId;
 		this.regdate = regdate;
 		this.scope = scope;
-		this.cleannessScope = cleannessScope;
+		this.cleanScope = cleanScope;
 		this.checkinScope = checkinScope;
 	}
 
@@ -75,12 +75,12 @@ public class ReplyVO {
 		this.scope = scope;
 	}
 
-	public int getCleannessScope() {
-		return cleannessScope;
+	public int getcleanScope() {
+		return cleanScope;
 	}
 
-	public void setCleannessScope(int cleannessScope) {
-		this.cleannessScope = cleannessScope;
+	public void setcleanScope(int cleanScope) {
+		this.cleanScope = cleanScope;
 	}
 
 	public int getCheckinScope() {
@@ -94,7 +94,7 @@ public class ReplyVO {
 	@Override
 	public String toString() {
 		return "ReplyVO [rno=" + rno + ", houseNo=" + houseNo + ", content=" + content + ", memId=" + memId
-				+ ", regdate=" + regdate + ", scope=" + scope + ", cleannessScope=" + cleannessScope + ", checkinScope="
+				+ ", regdate=" + regdate + ", scope=" + scope + ", cleannessScope=" + cleanScope + ", checkinScope="
 				+ checkinScope + "]";
 	}
 	

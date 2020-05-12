@@ -24,14 +24,27 @@
 
 	<!-- 리플 영역 -->
 	아이디 ${memId }
+	
+	
+	
 	<div id="showReply">
 		총 <div id ="countReply"></div>개의 후기가 있습니다.
 	</div>
-	<div id = "replies" style="display:none " />
+	<div id = "replies" style="display:none " ></div>
+	<div>
+	<input type="text" id="memId" value="${memId }" >
+       <input type="text" id="content" placeholder="댓글 입력" >
+ 
+       <input type="number" min="0" max="5" id="cleanScope">
+       <input type="number" min="0" max="5" id="checkinScope">
+	 <button type="button" id="btn_add">작성</button>
+	</div>
 	<hr>
 	TODO : 리플의 memid와 세션의 memid가 일치하는지 확인할것
 	->프론트엔드에서 막음 
 	->서버에서 막기
+	<br>
+	TODO : 결제한 회원만 리플가능
 	
 
 	
@@ -42,22 +55,33 @@
 		
 		 // 댓글 입력 기능
 	  	  $('#btn_add').click(function(){
+	  		
 	  	  	// 댓글 아이디, 댓글 내용의 값을 가져와서
 	  	  	// get 방식으로 전송
 	  	  	// url : 'localhost:8080/Web10_MVC/replies/add'
 	  	  	// data : 게시판 번호, 댓글 내용, 댓글 아이디
 	  	  	var content = $('#content').val(); // 댓글 내용 값
-	  	  	var replyid = $('#replyid').val(); // 댓글 아이디 값
+	  	  	var memId ='${memId}'; // 댓글 아이디 값
+	  	  	var regdate =null;
+	  	  	var cleanScope = $('#cleanScope').val(); // 클린점수
+	  	  console.log('ceanScope : ' + cleanScope);
+	  	  	
+	  		var checkinScope = $('#checkinScope').val(); // 클린점수
 	  	  	var obj = {
-	  	  	    'bno' : bno,
+	  			'rno' : 0,
+	  	  	    'houseNo' : houseNo,
 	  	  		'content' : content,
-	  	  		'replyid' : replyid
+	  	  		'memId' : memId,
+	  	  		'regdate' : null,
+	  	  		'scope' : 0,
+	  	  		'cleanScope' : cleanScope,
+	  	  		'checkinScope' : checkinScope
 	  	  	}; // end var obj
 	  	  	
 	  	  	// $.ajax로 송신
 	  	  	$.ajax({
 	  	  	  type : 'post',
-	  	  	  url : '/ex03/replies',
+	  	  	  url : '/homeshare/replies',
 	  	  	  headers : {
 	  	  	    'Content-Type' : 'application/json', 
 	  	  	    'X-HTTP-Method-Override' : 'POST'
@@ -69,7 +93,9 @@
 	  	  	    if (result == 1){
 	  	  	      alert('댓글 입력 성공');
 	  	  	      $('#content').val(''); // 성공메시지 이후 삽입했던 content 데이터 삭제
-	  	  	      $('#replyid').val(''); // 성공메시지 이후 삽입했던 replyid 데이터 삭제
+	  	  	      $('#memId').val(''); // 성공메시지 이후 삽입했던 memid 데이터 삭제
+	  	  	      $('#cleanScope').val('');
+	  	  	      $('#checkinScope').val('');
 	  	  	      getAllReplies(); // 메소드 호출
 	  	  	    } // end if()
 	  	  	  } // end success
@@ -95,7 +121,7 @@
 									console.log(date.getFullYear() +"년" + date.getMonth() + "월");		
 									console.log(this.memId);
 									console.log('${memId}');
-									console.log(this.memId==='${memId}');
+									console.log(this.memId=='${memId}');
 							
 									list += '<div class="reply_item">'
 					  	  		  		+ '<pre>'
@@ -107,7 +133,18 @@
 					  	  		  		+ '&nbsp;&nbsp;' // 공백
 					  	  		  		+ date.getFullYear() +'년' + date.getMonth() + '월'
 					  	  		  		+ '&nbsp;&nbsp;' // 공백
-					  	  		  		if(this.memId==='${memId}'){					  	  		  			
+					  	  		  		+ '총별점 '
+				  	  		        	+ '<input type="number" min="0" max="5" id="reply_scope" readonly  value="' + this.scope + '" />'
+				  	  		        	+ "청결점수 "
+					  	  		  	 	+ '<input type="number" min="0" max="5" id="reply_cleanScope" value="' + this.cleanScope + '"/>'
+					  	  		  		+ '&nbsp;&nbsp;' // 공백
+					  	  		  		+ '체크인점수'
+					  	  		        + '<input type="number" min="0" max="5" id="reply_checkinScope" value="' + this.checkinScope + '" />'
+					  	  		  		
+					  	  		  		
+					  	  		  		
+					  	  		  		if(this.memId==='${memId}'){	
+					  	  		  		console.log('this.memid' + this.memId);
 					  	  		  		 list += '<button class="btn_update" type="button">수정</button>'	
 					  	  		  		+ '&nbsp;'
 					  	  		  		+ '<button class="btn_delete" type="button">삭제</button>'
@@ -137,7 +174,11 @@
 	  	    var rno = $(this).prevAll('#rno').val(); // this에 update이전 것 중에 rno를 찾겠다
 	  	    var content = $(this).prevAll('#reply_content').val();
 	  	    console.log("선택된 댓글 번호 : " + rno + ", 댓글 내용 : " + content);
-	  	    
+	  	    var cleanScope = $(this).prevAll('#reply_cleanScope').val();
+	  	    console.log('reply_cleanScope : ' + cleanScope);
+	  		var checkinScope = $(this).prevAll('#reply_checkinScope').val();
+	  		console.log('reply_checkinScope : ' + checkinScope);
+	  	    var regdate = null;
 	  	  // ajax 요청
 	  	    $.ajax({
 	  	      type : 'put',
@@ -146,8 +187,11 @@
 	  	  	    'Content-Type' : 'application/json', 
 	  	  	    'X-HTTP-Method-Override' : 'PUT'
 	  	  	  }, 
-	  	      data : JSON.stringify({
-	  	        'content' : content
+	  	      data : JSON.stringify({	  			
+	  	        'content' : content,
+	  	        'regdate' : 0,
+	  	  		'cleanScope' : cleanScope,
+	  	  		'checkinScope' : checkinScope
 	  	      }),
 	  	      success : function(result){
 	  	        if(result == 'success'){

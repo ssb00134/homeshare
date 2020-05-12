@@ -53,7 +53,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<property name="regdate" value="regdate" />
 		<property name="scope" value="scope" />
 		<property name="regdate" value="regdate" />
-		<property name="cleanessScope" value="cleanessScope" />
+		<property name="cleanScope" value="cleanScope" />
 		<property name="checkinScope" value="checkinScope" />
 	</properties>
 
