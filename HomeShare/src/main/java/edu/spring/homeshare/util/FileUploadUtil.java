@@ -21,21 +21,27 @@ public class FileUploadUtil {
 	private static final Logger logger =
 			LoggerFactory.getLogger(FileUploadUtil.class);
 	
-	public static String saveUploadedFile(String uploadPath, 
+	public static String saveUploadedFile(String uploadPath,
+			String memId,
 			String fileName, byte[] data) throws IOException {
 		
-		UUID uuid = UUID.randomUUID();
+		//파일의 갯수
+		int fileLength = countFile(uploadPath, memId);
 		
-		String saveName = uuid.toString() + "_" + fileName;
+		System.out.println("memId 폴더의 파일 개수 : " + countFile(uploadPath, memId));
 		
-		String savePath = getUploadPath(uploadPath);
+		String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
+		
+		String saveName = memId + "_" +fileLength + "." + extension;
+		
+		String savePath = getUploadPath(uploadPath,memId);
 		
 		File target = new File(uploadPath + File.separator + savePath,
 				saveName);
 		
 		FileCopyUtils.copy(data, target);
 		
-		String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
+		
 		
 		String result = null;
 		if (MediaUtil.geMediaType(extension) != null) {
@@ -51,32 +57,14 @@ public class FileUploadUtil {
 	// 상위 폴더가 생성되어 있지 않으면 하위 폴더를 생성할 수 없다
 	// -> 연도 폴더 생성 -> 달 폴더 생성 -> 날짜 폴더 생성
 	// 마지막 리턴은 yyyy/MM/dd 형식으로
-	private static String getUploadPath(String uploadPath) {
-		Calendar calendar = Calendar.getInstance();
-		
-		String yearPath = String.valueOf(calendar.get(Calendar.YEAR));
-		logger.info("yearPath: " + yearPath);
-		makeDir(uploadPath, yearPath);
-		
-		String monthPath = yearPath
-				+ File.separator
-				+ new DecimalFormat("00")
-					.format(calendar.get(Calendar.MONTH) + 1);
-		logger.info("monthPath: " + monthPath);
-		makeDir(uploadPath, monthPath);
-		
-		String datePath = monthPath
-				+ File.separator
-				+ new DecimalFormat("00")
-					.format(calendar.get(Calendar.DATE));
-		logger.info("datePath: " + datePath);
-		makeDir(uploadPath, datePath);
+	private static String getUploadPath(String uploadPath,String memId) {
+		makeDir(uploadPath, memId);
 
-		return datePath;
+		return memId;
 	}
 	
-	private static void makeDir(String uploadPath, String path) {
-		File dirPath = new File(uploadPath, path);
+	private static void makeDir(String uploadPath, String memId) {
+		File dirPath = new File(uploadPath, memId);
 		if (!dirPath.exists()) {
 			dirPath.mkdir();
 			logger.info(dirPath.getPath() + " successfully created.");
@@ -84,7 +72,21 @@ public class FileUploadUtil {
 			logger.info(dirPath.getPath() + " already exists.");
 		}
 	}
+	//파일의 개수를 구하는 함수
+	public static int countFile(String uploadPath, String memId) {
+		File dirPath = new File(uploadPath, memId);
+		
+		File[] files = dirPath.listFiles();
+		return files.length;
+	}
 	
+	//n번째 파일 가져오는 함수
+	public File getFile(String uploadPath, String memId,int i) {
+		File dirPath = new File(uploadPath, memId);
+		File[] files = dirPath.listFiles();
+		return files[i];
+	}
+
 	private static String createThumbnail(String uploadPath,
 			String savePath, String fileName) throws IOException {
 		

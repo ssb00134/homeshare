@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.util.UUID;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -67,22 +69,30 @@ public class FileUploadController {
 
 	@RequestMapping(value = "/upload-ajax", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<String> uploadAjaxPOST(MultipartFile[] files) throws IOException {
+	public ResponseEntity<String> uploadAjaxPOST(MultipartFile[] files, HttpServletRequest req) throws IOException {
 		logger.info("uploadAjaxPOST() 호출");
 		
+		//세션에서 아이디 가져오기
+		HttpSession session = req.getSession();
+		String memId = (String) session.getAttribute("memId");
 		
 		// 파일 하나만 저장
 		String result = null;
 		result = FileUploadUtil.saveUploadedFile(uploadPath,
+				memId,
 				files[0].getOriginalFilename(),
 				files[0].getBytes());
 		
 		logger.info("result : " + result);
-		return new ResponseEntity<String>(result,HttpStatus.OK);
-				
+		
+		File f = new FileUploadUtil().getFile(uploadPath, memId, 1);
+		logger.info("읽어온 파일 f : "); 
+		logger.info(f.toString());
+		
+		return new ResponseEntity<String>(result,HttpStatus.OK);		
 	}
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public void display(String fileName) throws IOException {
+	public ResponseEntity<byte[]> display(String fileName) throws IOException {
 		logger.info("display() 호출");
 		
 		ResponseEntity<byte[]> entity = null;
@@ -92,19 +102,23 @@ public class FileUploadController {
 		in = new FileInputStream(filePath);
 		logger.info("in : " + in);
 		
-		
 		// 파일 확장자
 		String extension = 
 				filePath.substring(filePath.lastIndexOf(".") + 1);
 		
 		logger.info("extension : " + extension);
 		
-		
-		
-		
-		logger.info("MediaUtil.geMediaType(extension) : " + MediaUtil.geMediaType(extension));
-		
-		
+		// 응답 헤더(response header)에 Content-Type 설정
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(MediaUtil.geMediaType(extension));
+				
+		// 데이터 전송
+		entity = new ResponseEntity<byte[]>(
+					IOUtils.toByteArray(in), // 파일에서 읽은 데이터
+					httpHeaders, // 응답 헤더
+					HttpStatus.OK // 응답 코드
+				);
+		return entity;
 	
 	}
 	
