@@ -73,4 +73,16 @@ public class HouseController {
 		logger.info(vo.toString());
 		model.addAttribute("houseVO", vo);
 	}
+	
+	/*insert 메핑 */
+	
+	//숙소등록
+	@RequestMapping(value="/house-insert",method = RequestMethod.GET)
+	public void houseInsertGet() {
+		logger.info("house-insert get 실행");
+	}
+	@RequestMapping(value="/house-insert-post",method = RequestMethod.POST)
+	public void houseInsertPost() {
+		logger.info("house-insert-post 실행");
+	}
 }

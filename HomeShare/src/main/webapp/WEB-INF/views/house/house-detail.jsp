@@ -14,6 +14,7 @@
 	<hr>
 	인원 ${houseVO.maxCapacity }명 · 침실 ${houseVO.bedroom }개 · 욕실
 	${houseVO.bathroom }개
+	가격 ${houseVO.price } $
 	<hr>
 	houseVO.info
 	<hr>

@@ -87,7 +87,7 @@ public class FileUploadController {
 		logger.info("파일 갯수 : " + filelength);
 		String fail = "not more 3 items";
 
-		if (filelength < 6) { // 파일이 3개 이하일때만 실행
+		if (filelength < 10) { // 파일이 5개 이하일때만 실행
 			// 파일 하나만 저장
 			String result = null;
 			result = FileUploadUtil.saveUploadedFile(uploadPath, memId, files[0].getOriginalFilename(),

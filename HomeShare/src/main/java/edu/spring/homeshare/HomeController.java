@@ -35,5 +35,10 @@ public class HomeController {
 		
 		return "home";
 	}
+	@RequestMapping(value = "/house-insert", method = RequestMethod.GET)
+	public void houseInsertTest() {
+		logger.info("house insert " );
+		}
+	
 	
 }

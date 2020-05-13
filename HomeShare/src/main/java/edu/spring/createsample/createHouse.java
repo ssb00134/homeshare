@@ -46,14 +46,14 @@ public class createHouse {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public void home(Locale locale, Model model) {
-		 logger.info("createSample 角青 10俺 积己");
-		 /*基敲内靛 持扁*/
-		 for(int i=0; i<=10; i++) {
-			 HouseVO vo = new HouseVO(0, memNo, type, maxCapacity, bedroom, bathroom, utilities, location, spaces, info+ i, rules, checkInInterval, checkInTime, checkOutTime, stayNight, stayDay, bookableDateBegin, bookableDateEnd, price, photo, thumbNailPhoto, title+i, ranking);
-			 houseService.insert(vo);
-		 }
-	}
+//	@RequestMapping(value = "/create", method = RequestMethod.GET)
+//	public void home(Locale locale, Model model) {
+//		 logger.info("createSample 角青 10俺 积己");
+//		 for(int i=0; i<=10; i++) {
+//			 HouseVO vo = new HouseVO(0, memNo, type, maxCapacity, bedroom, bathroom, utilities, location, spaces, info+ i, rules, checkInInterval, checkInTime, checkOutTime, stayNight, stayDay, bookableDateBegin, bookableDateEnd, price, photo, thumbNailPhoto, title+i, ranking);
+//			 houseService.insert(vo);
+//		 }	 /*基敲内靛 持扁*/
+//	
+//	}
 	
 }
