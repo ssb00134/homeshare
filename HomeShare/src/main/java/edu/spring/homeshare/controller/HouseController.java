@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.spring.homeshare.domain.HouseVO;
 import edu.spring.homeshare.service.HouseService;
@@ -82,7 +83,9 @@ public class HouseController {
 		logger.info("house-insert get 실행");
 	}
 	@RequestMapping(value="/house-insert-post",method = RequestMethod.POST)
-	public void houseInsertPost() {
+	public void houseInsertPost(HouseVO vo,
+			RedirectAttributes reAttr) {
 		logger.info("house-insert-post 실행");
+		logger.info(vo.toString());
 	}
 }

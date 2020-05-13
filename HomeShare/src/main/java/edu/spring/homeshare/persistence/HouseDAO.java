@@ -13,5 +13,6 @@ public interface HouseDAO {
 	List<HouseVO> select(PageCriteria c	);
 	List<HouseVO> selectAllByMemNo(int memNo);
 	int getTotalNumsOfRecords();
+	
 
 }

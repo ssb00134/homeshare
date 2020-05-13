@@ -2,14 +2,19 @@ package edu.spring.homeshare.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.spring.homeshare.domain.HouseVO;
 import edu.spring.homeshare.persistence.HouseDAO;
+import edu.spring.homeshare.persistence.HouseDAOImple;
 import edu.spring.homeshare.util.PageCriteria;
 @Service
 public class HouseServiceImple implements HouseService {
+	
+	Logger logger = LoggerFactory.getLogger(HouseDAOImple.class);
 
 	@Autowired
 	private HouseDAO HouseDao;
@@ -23,7 +28,8 @@ public class HouseServiceImple implements HouseService {
 		return HouseDao.selectAll();
 	}
 	@Override
-	public int insert(HouseVO vo) {
+	public int create(HouseVO vo) {
+		logger.info("create ½ÇÇà");
 		return HouseDao.insert(vo);
 	}
 	@Override

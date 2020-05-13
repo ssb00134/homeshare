@@ -47,40 +47,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="total_count" resultType="Integer">
-		select count(*) total_cnt from ${house}
+		select count(*) total_cnt
+		from ${house}
 	</select>
 
-
-	<!-- insert문 -->
-	<insert id="insert" parameterType="houseVO">
-		insert into house values(
-		#{HOUSENO},
-		#{MEMNO},
-		#{TYPE},
-		#{MAXCAPACITY},
-		#{BEDROOM},
-		#{BATHROOM},
-		#{LOCATION},
-		#{UTILITIES},
-		#{SPACES},
-		#{INFO},
-		#{RULES},
-		#{CHECKININTERVAL},
-		#{CHECKINTIME},
-		#{CHECKOUTTIME},
-		#{STAYNIGHT},
-		#{STAYDAY},
-		#{BOOKALBEDATEBEGIN},
-		#{BOOKABLEDATEEND},
-		#{PRICE},
-		#{TITLE},
-		#{RANKING},
-		#{PHOTO},
-		#{THUMNAILPHOTO}
-		);
+	<!-- 인서트 -->
+	<insert id="insert">
+		insert into ${house}
+		values(
+		,#{houseNo}
+		,#{type}
+		,#{scope}
+		,#{maxCapacity}
+		,#{bedroom}
+		,#{bed}
+		,#{bathroom} 
+		,#{utilities}
+		,#{spaces}
+		,#{title}
+		,#{info}
+		,#{rules}
+		,#{checkinTime} 
+		,#{checkoutTime} 
+		,#{stayNight}
+		,#{stayDay}
+		,#{bookableDateBegin}
+		,#{bookableDateEnd}
+		,#{price}
+		,#{memNo}
+		,#{replies} 
+		,#{image}
+		,#{checkinInterval}
+		,#{score}
+		)
 	</insert>
-
-	<!-- 파트1 삽입 -->
 
 
 

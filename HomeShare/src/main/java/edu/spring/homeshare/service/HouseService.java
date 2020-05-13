@@ -8,7 +8,7 @@ import edu.spring.homeshare.util.PageCriteria;
 public interface HouseService {
 	HouseVO selectByTitle(String title);
 	List<HouseVO> selectAll();
-	int insert(HouseVO vo);
+	int create(HouseVO vo);
 	HouseVO selectByHouseNo(int houseNo);
 	List<HouseVO> selectAllByMemNO(int memNo);
 	List<HouseVO> read(PageCriteria criteria);

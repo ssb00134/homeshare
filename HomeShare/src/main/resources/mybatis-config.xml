@@ -41,7 +41,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<property name="image" value="image"/>
 		<property name="score" value="score"/>
 		<property name="checkinInterval" value="checkinInterval"/>
-
+		<property name="loaction" value="location"/>
 
 
 
@@ -55,10 +55,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<property name="reply" value="reply" />
 		<property name="memId" value="memId" />
 		<property name="regdate" value="regdate" />
-		<property name="scope" value="scope" />
+		<property name="score" value="scope" />
 		<property name="regdate" value="regdate" />
-		<property name="cleanScope" value="cleanScope" />
-		<property name="checkinScope" value="checkinScope" />
+		<property name="cleanScore" value="cleanScore" />
+		<property name="checkinScore" value="checkinScore" />
 
 
 

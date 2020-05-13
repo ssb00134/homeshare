@@ -42,6 +42,8 @@ public class ReplyRestContrller {
 			@PathVariable("no") int houseNo){
 		logger.info("reply read ½ÇÇà ");
 		List<ReplyVO> list = replyService.read(houseNo);
+		logger.info("list : " + list.toString());
+		
 		return new ResponseEntity<List<ReplyVO>>(list,HttpStatus.OK);
 	};
 	

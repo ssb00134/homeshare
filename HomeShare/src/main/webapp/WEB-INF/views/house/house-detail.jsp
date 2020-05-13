@@ -33,11 +33,11 @@
 	</div>
 	<div id = "replies" style="display:none " ></div>
 	<div>
-	<input type="text" id="memId" value="${memId }" >
+	<input type="text" id="memId" value="${memId }" readonly >
        <input type="text" id="content" placeholder="댓글 입력" >
  
-       <input type="number" min="0" max="5" id="cleanScope">
-       <input type="number" min="0" max="5" id="checkinScope">
+       <input type="number" min="0" max="5" id="cleanScope" placeholder="청결도(5)">
+       <input type="number" min="0" max="5" id="checkinScope" placeholder="체크인점수">
 	 <button type="button" id="btn_add">작성</button>
 	</div>
 	<hr>
@@ -124,23 +124,22 @@
 									console.log('${memId}');
 									console.log(this.memId=='${memId}');
 							
-									list += '<div class="reply_item">'
+									list += '<div class="reply_item" readonly>'
 					  	  		  		+ '<pre>'
-					  	  		  		+ '<input type="hidden" id="rno" value="' + this.rno + '" /><br>'
-					  	  		  		+ '<input type="hidden" id="reply_memid" value="' + this.memId + '" /><br>'
-					  	  		  		+ this.memId
+					  	  		  		+ '<input type="hidden" id="rno" readonly value="' + this.rno + '" /><br>'
+					  	  		  		+ '<input type="text" id="reply_memid" readonly value="' + this.memId + '" />'
 					  	  		  		+ '&nbsp;&nbsp;' // 공백
 					  	  		  		+ '<input type="text" id="reply_content" value="' + this.content + '" />'
 					  	  		  		+ '&nbsp;&nbsp;' // 공백
 					  	  		  		+ date.getFullYear() +'년' + date.getMonth() + '월'
 					  	  		  		+ '&nbsp;&nbsp;' // 공백
 					  	  		  		+ '총별점 '
-				  	  		        	+ '<input type="number" min="0" max="5" id="reply_scope" readonly  value="' + this.scope + '" />'
+				  	  		        	+ '<input type="number" min="0" max="5" id="reply_score" readonly  value="' + this.score + '" />'
 				  	  		        	+ "청결점수 "
-					  	  		  	 	+ '<input type="number" min="0" max="5" id="reply_cleanScope" value="' + this.cleanScope + '"/>'
+					  	  		  	 	+ '<input type="number" min="0" max="5" id="reply_cleanScore" readonly value="' + this.cleanScore + '"/>'
 					  	  		  		+ '&nbsp;&nbsp;' // 공백
 					  	  		  		+ '체크인점수'
-					  	  		        + '<input type="number" min="0" max="5" id="reply_checkinScope" value="' + this.checkinScope + '" />'
+					  	  		        + '<input type="number" min="0" max="5" id="reply_checkinScore" readonly  value="' + this.checkinScore + '" />'
 					  	  		  		
 					  	  		  		
 					  	  		  		

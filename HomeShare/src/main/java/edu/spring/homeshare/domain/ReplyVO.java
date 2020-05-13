@@ -8,23 +8,23 @@ public class ReplyVO {
 	private String content;
 	private String memId;
 	private Date regdate;
-	private int scope;
-	private int cleanScope;
-	private int checkinScope;
+	private int score;
+	private int cleanScore;
+	private int checkinScore;
 	
 	public ReplyVO() {}
 
-	public ReplyVO(int rno, int houseNo, String content, String memId, Date regdate, int scope, int cleanScope,
-			int checkinScope) {
+	public ReplyVO(int rno, int houseNo, String content, String memId, Date regdate, int score, int cleanScore,
+			int checkinScore) {
 		super();
 		this.rno = rno;
 		this.houseNo = houseNo;
 		this.content = content;
 		this.memId = memId;
 		this.regdate = regdate;
-		this.scope = scope;
-		this.cleanScope = cleanScope;
-		this.checkinScope = checkinScope;
+		this.score = score;
+		this.cleanScore = cleanScore;
+		this.checkinScore = checkinScore;
 	}
 
 	public int getRno() {
@@ -67,35 +67,35 @@ public class ReplyVO {
 		this.regdate = regdate;
 	}
 
-	public int getScope() {
-		return scope;
+	public int getScore() {
+		return score;
 	}
 
-	public void setScope(int scope) {
-		this.scope = scope;
+	public void setScore(int score) {
+		this.score = score;
 	}
 
-	public int getcleanScope() {
-		return cleanScope;
+	public int getCleanScore() {
+		return cleanScore;
 	}
 
-	public void setcleanScope(int cleanScope) {
-		this.cleanScope = cleanScope;
+	public void setCleanScore(int cleanScore) {
+		this.cleanScore = cleanScore;
 	}
 
-	public int getCheckinScope() {
-		return checkinScope;
+	public int getCheckinScore() {
+		return checkinScore;
 	}
 
-	public void setCheckinScope(int checkinScope) {
-		this.checkinScope = checkinScope;
+	public void setCheckinScore(int checkinScore) {
+		this.checkinScore = checkinScore;
 	}
 
 	@Override
 	public String toString() {
 		return "ReplyVO [rno=" + rno + ", houseNo=" + houseNo + ", content=" + content + ", memId=" + memId
-				+ ", regdate=" + regdate + ", scope=" + scope + ", cleannessScope=" + cleanScope + ", checkinScope="
-				+ checkinScope + "]";
+				+ ", regdate=" + regdate + ", score=" + score + ", cleanScore=" + cleanScore + ", checkinScore="
+				+ checkinScore + "]";
 	}
 	
 	
