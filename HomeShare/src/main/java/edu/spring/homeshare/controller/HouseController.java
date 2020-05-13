@@ -83,9 +83,18 @@ public class HouseController {
 		logger.info("house-insert get 실행");
 	}
 	@RequestMapping(value="/house-insert-post",method = RequestMethod.POST)
-	public void houseInsertPost(HouseVO vo,
+	public String houseInsertPost(HouseVO vo,
 			RedirectAttributes reAttr) {
 		logger.info("house-insert-post 실행");
 		logger.info(vo.toString());
+		int result = houseService.create(vo);
+		if(result == 1) { // insert 성공
+			logger.info("insert 성공");
+			reAttr.addFlashAttribute("insert_result", "success");
+		}else {
+			logger.info("insert 실패");
+			reAttr.addFlashAttribute("insert_result", "fail");
+		}
+		return "redirect:/home";
 	}
 }

@@ -85,7 +85,7 @@
 		<p>숙소의 제목을 입력해 주세요</p>
 		<input type="text" name="title">
 		<p>게스트에게 숙소에 대해 설명해 주세요</p>
-		<input type="text" name="memo">
+		<input type="text" name="info">
 		<br> <br> <br> <br>
 		<hr>
 		<h1>3단계 게스트를 맞이할 준비를 해주세요</h1>
@@ -104,8 +104,8 @@
 		<input type="text" name="checkinInterval">
 		<hr>
 		체크인 가능 시간을 선택해 주세요
-		<input type="time" name="checkinTime " value="09:00">
-		<input type="time" name="checkoutTime " value="21:00">
+		<input type="text" name="checkinTime " >
+		<input type="text" name="checkoutTime " >
 		<hr>
 		<p>게스트가 얼마나 숙박할 수 있나요?</p>
 		<input type="text" name="stayNight">
@@ -130,7 +130,8 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-
+			var checkinTime  = $('input[name= checkinTime ]').val();
+			console.log(checkinTime);
 		});//end document
 	</script>
 </body>
