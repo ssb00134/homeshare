@@ -28,7 +28,7 @@ public class FileUploadUtil {
 		System.out.println("memId 폴더의 파일 개수 : " + countFile(uploadPath, memId));
 
 		String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
-		String saveName = memId + fileLength + "." + extension;
+		String saveName = memId  +  "_" + (fileLength/2+1) + "." + extension;
 		String savePath = getUploadPath(uploadPath, memId);
 
 		logger.info("uploadPath : " + uploadPath);
@@ -37,6 +37,7 @@ public class FileUploadUtil {
 		getPath(uploadPath, memId);
 
 		File target = new File(uploadPath + File.separator + savePath, saveName);
+		System.out.println("target : " + target);
 		FileCopyUtils.copy(data, target);
 
 		String result = null;

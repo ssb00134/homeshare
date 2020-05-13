@@ -33,13 +33,16 @@
 
 	<h1>Ajax를 이용한 파일 업로드</h1>
 	<div class="file-drop"></div>
+	
 	<div class="upload-list"></div>
 	<h1>사진주소</h1>
 	<div id = "file-path-area"></div><br>
 	
 	<div id = "file-path-area-seperate"></div>
 
+	<img src="display?fileName=/test/s_test_1.jpg"/>
 
+          	    
 <script type="text/javascript">
   $(document).ready(function(){
     // 파일을 끌어다 놓을 때(drag & drop)

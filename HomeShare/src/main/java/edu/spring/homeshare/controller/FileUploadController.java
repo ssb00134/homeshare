@@ -96,7 +96,8 @@ public class FileUploadController {
 			for (int i = 0; i < filelength; i++) {
 				logger.info("getpath2 : " + FileUploadUtil.getPath2(uploadPath, memId, i));
 			}
-
+			logger.info("result.tostring : " + result.toString() );
+			 
 			return new ResponseEntity<String>(result, HttpStatus.OK);
 		} else
 			return new ResponseEntity<String>(fail, HttpStatus.OK);
@@ -145,6 +146,7 @@ public class FileUploadController {
 					httpHeaders, // 응답 헤더
 					HttpStatus.OK // 응답 코드
 			);
+			logger.info("display entity : " + entity.toString());
 			return entity;
 
 		} catch (Exception e) {
