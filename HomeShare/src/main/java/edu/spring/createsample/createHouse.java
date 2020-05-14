@@ -19,7 +19,7 @@ public class createHouse {
 	@Autowired
 	private HouseService houseService;
 	private static final Logger logger = LoggerFactory.getLogger(createHouse.class);
-
+	selectAllByMemNo
 	int houseNo = 0;
 	String type = "아파트";
 	String scope = "개인실";

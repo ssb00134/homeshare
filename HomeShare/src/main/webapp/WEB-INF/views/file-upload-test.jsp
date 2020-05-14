@@ -17,20 +17,6 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-	<h1>file-upload-test</h1>
-	<h1>파일 업로드 폼</h1>
-	<h2>단일 파일 업로드</h2>
-	<form action="upload" method="post" enctype="multipart/form-data">
-		<input type="file" name="file">
-		<input type="submit" value="업로드">
-	</form>
-
-	<h2>다중 파일 업로드</h2>
-	<form action="upload2" method="post" enctype="multipart/form-data">
-		<input type="file" name="files" multiple>
-		<input type="submit" value="업로드">
-	</form>
-
 	<h1>Ajax를 이용한 파일 업로드</h1>
 	<div class="file-drop"></div>
 	
@@ -133,6 +119,7 @@
             
           }); //end ajax
         }//end get all getPath
+        
     
   });//end document
   </script>  

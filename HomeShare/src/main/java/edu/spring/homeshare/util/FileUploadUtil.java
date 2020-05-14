@@ -111,9 +111,9 @@ public class FileUploadUtil {
 	// 파일의 개수를 구하는 함수
 	public static int countFile(String uploadPath, String memId) {
 		File dirPath = new File(uploadPath, memId);
-
+		
 		File[] files = dirPath.listFiles();
-		return files.length;
+		return ( files == null ?  0 : files.length);
 	}
 
 	private static String createThumbnail(String uploadPath, String savePath, String fileName) throws IOException {
