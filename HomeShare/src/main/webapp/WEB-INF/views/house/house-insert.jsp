@@ -23,7 +23,7 @@
 		<input type="hidden" name="houseNo" value="0">
 		<input type="hidden" name="replies" value="0">
 		<input type="hidden" name="score" value="0">
-
+		<input type="hidden" name="memNo" value="${memberVO.memNo }">
 		<p>등록하시려는 숙소의 범위를 입력해 주세요</p>
 		<select name="scope">
 			<option value="">집전체</option>

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import edu.spring.homeshare.service.HouseService;
 import edu.spring.homeshare.util.FileUploadUtil;
 import edu.spring.homeshare.util.MediaUtil;
 
@@ -35,6 +37,10 @@ public class FileUploadController {
 	// servlet-context.xml 파일에 설정된 문자열 리소스를 주입(inject)
 	@Resource(name = "uploadPath")
 	private String uploadPath;
+	
+	@Autowired
+	private HouseService houseService;
+	
 
 	@RequestMapping(value = "/file-upload-test", method = RequestMethod.GET)
 	public void fileUploadTest() {
@@ -62,14 +68,18 @@ public class FileUploadController {
 		HttpSession session = req.getSession();
 		String memId = (String) session.getAttribute("memId"); // 세션에서 아이디 가져오기
 		logger.info("세션값 : " + memId);
-
+		
+		//세션 vo 가져오기
+		
+		
+		
+		
 		int filelength = FileUploadUtil.countFile(uploadPath, memId);
 		logger.info("파일 갯수 : " + filelength);
 		String fail = "not more 3 items";
 		
 		logger.info("파일 존재? : " +FileUploadUtil.isFile(uploadPath, memId));
-		
-		
+		//logger.info("등록된 memno의 갯수 : " + houseService.selectByHouseNo(houseNo));
 		
 		if (filelength < 10) { // 파일이 5개 이하일때만 실행
 			// 파일 하나만 저장
