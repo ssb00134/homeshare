@@ -13,8 +13,10 @@
 	
 	<hr>
 	인원 ${houseVO.maxCapacity }명 · 침실 ${houseVO.bedroom }개 · 욕실
-	${houseVO.bathroom }개
-	가격 ${houseVO.price } $
+	${houseVO.bathroom }개<br>
+	편의시설 ${houseVO.utilities }<br>
+	이용가능시설 ${houseVO.spaces }<br>
+	가격 ${houseVO.price } $<br>
 	<hr>
 	houseVO.info
 	<hr>

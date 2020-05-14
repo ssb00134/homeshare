@@ -126,8 +126,8 @@
             	
             }, //end success
             error : function( fail ) {
-				alert('사진은 최대 3개만 가능합니다.');
-				console.log('사진은 최대 3개만 가능합니다.');
+				alert('사진은 최대 5개만 가능합니다.');
+				console.log('사진은 최대 5개만 가능합니다.');
             } // end fail
             	
             

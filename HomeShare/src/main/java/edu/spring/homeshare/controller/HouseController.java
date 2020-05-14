@@ -45,6 +45,7 @@ public class HouseController {
 			c.setNumsPerPage(prePage);
 		}
 		List<HouseVO> list = houseService.read(c);
+		logger.info("list 정보 : " + list.toString());
 		model.addAttribute("houseList",list);
 		
 		PageMaker maker = new PageMaker();
@@ -95,6 +96,6 @@ public class HouseController {
 			logger.info("insert 실패");
 			reAttr.addFlashAttribute("insert_result", "fail");
 		}
-		return "redirect:/home";
+		return "redirect:/house/house-list";
 	}
 }

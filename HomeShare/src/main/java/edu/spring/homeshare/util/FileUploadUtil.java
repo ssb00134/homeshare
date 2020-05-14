@@ -22,13 +22,14 @@ public class FileUploadUtil {
 			throws IOException {
 
 		// 파일의 갯수
-		int fileLength=0;
-		fileLength= countFile(uploadPath, memId);
+		int fileLength = 0;
+		fileLength = countFile(uploadPath, memId);
 
-		System.out.println("memId 폴더의 파일 개수 : " + countFile(uploadPath, memId));
+		System.out.println("FileUploadUtil.saveuploadfile 실행 " + "\n"
+				+ "memId 폴더의 파일 개수 : " + countFile(uploadPath, memId));
 
 		String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
-		String saveName = memId  +  "_" + (fileLength/2+1) + "." + extension;
+		String saveName = memId + "_" + (fileLength / 2 + 1) + "." + extension;
 		String savePath = getUploadPath(uploadPath, memId);
 
 		logger.info("uploadPath : " + uploadPath);
@@ -64,17 +65,31 @@ public class FileUploadUtil {
 			}
 		}
 	}
-	//tostring
-	public static String getPath2(String uploadPath,String memId, int i) {
-		String savePath = getUploadPath(uploadPath,memId);
+
+	// 폴더안에 파일이 있는지 확인하는 함수
+	public static boolean isFile(String uploadPath, String memId) {
+		String savePath = getUploadPath(uploadPath, memId);
 		String path = uploadPath + "\\" + savePath;
-		
+		File f = new File(path);
+		if (f.exists()) {
+			System.out.println("파일 존재");
+			return true;
+		} else {
+			System.out.println("파일 없음");
+			return false;
+		}
+
+	}
+
+	// tostring
+	public static String getPath2(String uploadPath, String memId, int i) {
+		String savePath = getUploadPath(uploadPath, memId);
+		String path = uploadPath + "\\" + savePath;
+
 		File files = new File(path);
 		File[] fileList = files.listFiles();
-		
-	
-		return  fileList[i].toString() ;	  		
-		
+
+		return fileList[i].toString();
 	}
 
 	// 파일이 저장되는 폴더 이름을 날짜 형식(yyyy/MM/dd)으로 생성하기 위한 유틸

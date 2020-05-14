@@ -19,13 +19,13 @@ public class HouseVO {
 	private String rules ;
 	private String checkinTime ;
 	private String checkoutTime ;
-	private String stayNight ;
-	private String stayDay ;
+	private int stayNight ;
+	private int stayDay ;
 	private Date bookableDateBegin;
 	private Date bookableDateEnd;
 	private int price ;
 	private int memNo ;
-	private String repliies ;
+	private String replies ;
 	private String image ;
 	private int checkinInterval ;
 	private int score ;
@@ -37,8 +37,8 @@ public class HouseVO {
 
 	public HouseVO(int houseNo, String type, String scope, int maxCapacity, int bedroom, int bed, int bathroom,
 			String utilities, String spaces, String title, String info, String rules, String checkinTime,
-			String checkoutTime, String stayNight, String stayDay, Date bookableDateBegin, Date bookableDateEnd,
-			int price, int memNo, String repliies, String image, int checkinInterval, int score, String location) {
+			String checkoutTime, int stayNight, int stayDay, Date bookableDateBegin, Date bookableDateEnd, int price,
+			int memNo, String replies, String image, int checkinInterval, int score, String location) {
 		super();
 		this.houseNo = houseNo;
 		this.type = type;
@@ -60,7 +60,7 @@ public class HouseVO {
 		this.bookableDateEnd = bookableDateEnd;
 		this.price = price;
 		this.memNo = memNo;
-		this.repliies = repliies;
+		this.replies = replies;
 		this.image = image;
 		this.checkinInterval = checkinInterval;
 		this.score = score;
@@ -208,22 +208,22 @@ public class HouseVO {
 	}
 
 
-	public String getStayNight() {
+	public int getStayNight() {
 		return stayNight;
 	}
 
 
-	public void setStayNight(String stayNight) {
+	public void setStayNight(int stayNight) {
 		this.stayNight = stayNight;
 	}
 
 
-	public String getStayDay() {
+	public int getStayDay() {
 		return stayDay;
 	}
 
 
-	public void setStayDay(String stayDay) {
+	public void setStayDay(int stayDay) {
 		this.stayDay = stayDay;
 	}
 
@@ -268,13 +268,13 @@ public class HouseVO {
 	}
 
 
-	public String getRepliies() {
-		return repliies;
+	public String getReplies() {
+		return replies;
 	}
 
 
-	public void setRepliies(String repliies) {
-		this.repliies = repliies;
+	public void setReplies(String replies) {
+		this.replies = replies;
 	}
 
 
@@ -306,8 +306,7 @@ public class HouseVO {
 	public void setScore(int score) {
 		this.score = score;
 	}
-	
-	
+
 
 	public String getLocation() {
 		return location;
@@ -326,11 +325,10 @@ public class HouseVO {
 				+ ", spaces=" + spaces + ", title=" + title + ", info=" + info + ", rules=" + rules + ", checkinTime="
 				+ checkinTime + ", checkoutTime=" + checkoutTime + ", stayNight=" + stayNight + ", stayDay=" + stayDay
 				+ ", bookableDateBegin=" + bookableDateBegin + ", bookableDateEnd=" + bookableDateEnd + ", price="
-				+ price + ", memNo=" + memNo + ", repliies=" + repliies + ", image=" + image + ", checkinInterval="
+				+ price + ", memNo=" + memNo + ", replies=" + replies + ", image=" + image + ", checkinInterval="
 				+ checkinInterval + ", score=" + score + ", location=" + location + "]";
 	}
-
-
+	
 	
 	
 	

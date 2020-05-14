@@ -33,8 +33,10 @@ li {
       <c:forEach var="vo" items="${houseList }">
         <div class = "house_list_item" id ="${vo.houseNo }">
           <div>번호${vo.houseNo }</div>
-          <div><a class="goToDetail" href="${vo.houseNo }">title : ${vo.title }</a></div>
-          <div>${vo.price }$</div>
+          <div>title : ${vo.title}</div>
+          <div>${vo.price}$</div>
+          <div>${vo.scope}</div>
+          <div>${vo.location}</div>
           <hr>
         </div>
       </c:forEach>
