@@ -55,7 +55,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<property name="reply" value="reply" />
 		<property name="memId" value="memId" />
 		<property name="regdate" value="regdate" />
-		<property name="score" value="scope" />
+		<property name="score" value="score" />
 		<property name="regdate" value="regdate" />
 		<property name="cleanScore" value="cleanScore" />
 		<property name="checkinScore" value="checkinScore" />
