@@ -13,4 +13,5 @@ public interface HouseService {
 	List<HouseVO> selectAllByMemNO(int memNo);
 	List<HouseVO> read(PageCriteria criteria);
 	int getToTotalNumsOfRecords();
+	int getCountByMemNo(int memNo);
 }

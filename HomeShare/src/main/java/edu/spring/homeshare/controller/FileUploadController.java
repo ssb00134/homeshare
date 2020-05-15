@@ -26,6 +26,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import edu.spring.homeshare.domain.HouseVO;
+import edu.spring.homeshare.domain.memberVO;
 import edu.spring.homeshare.service.HouseService;
 import edu.spring.homeshare.util.FileUploadUtil;
 import edu.spring.homeshare.util.MediaUtil;
@@ -70,13 +72,15 @@ public class FileUploadController {
 		logger.info("세션값 : " + memId);
 		
 		//세션 vo 가져오기
-		
-		
+		int memNo = (int) session.getAttribute("memNo");
+		logger.info("memno 세션값 : " + memNo);
+		int memNoCount = houseService.getCountByMemNo(memNo);
+		logger.info("memNOcount : " + memNoCount);
 		
 		
 		int filelength = FileUploadUtil.countFile(uploadPath, memId);
 		logger.info("파일 갯수 : " + filelength);
-		String fail = "not more 3 items";
+		String fail = "not more 5 items";
 		
 		logger.info("파일 존재? : " +FileUploadUtil.isFile(uploadPath, memId));
 		//logger.info("등록된 memno의 갯수 : " + houseService.selectByHouseNo(houseNo));

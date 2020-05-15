@@ -26,15 +26,20 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 			logger.info("로그인 성공");
 			HttpSession session = request.getSession();
 			
+			//memvo 세션값 가져오기
+			session.setAttribute("memberVO",	vo);
+			logger.info("vo 세션값 : " + session.getAttribute("memberVO").toString());
 			//memId 세션값 가져오기
 			session.setAttribute("memId",	vo.getMemId());
 			logger.info("세션값 : " +(String) session.getAttribute("memId"));
 			
+			//memNo 세션값 가져오기
+			session.setAttribute("memNo",	vo.getMemNo());
+			int memNo = (int) session.getAttribute("memNo");
+			logger.info("memno 세션값 : " + memNo);
 			
-			//memvo 세션값 가져오기
-			session.setAttribute("memberVO",	vo);
-			logger.info("vo 세션값 : " + session.getAttribute("memberVO").toString());
-			response.sendRedirect("/homeshare");
+			response.sendRedirect("/homeshare");			
+			
 		} else {
 			logger.info("로그인 실패");
 			HttpSession session = request.getSession();

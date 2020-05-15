@@ -49,5 +49,9 @@ public class HouseServiceImple implements HouseService {
 	public int getToTotalNumsOfRecords() {
 		return HouseDao.getTotalNumsOfRecords();
 	}
+	@Override
+	public int getCountByMemNo(int memNo) {
+		return HouseDao.getCountHouseByMemNo(memNo);
+	}
 
 }

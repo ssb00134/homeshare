@@ -65,5 +65,11 @@ public class HouseDAOImple implements HouseDAO {
 		logger.info("getTotalNumsOfRecords 실행");
 		return sqlSession.selectOne(NAMESPACE + ".total_count");
 	}
+	
+	@Override
+	public int getCountHouseByMemNo(int memNo) {
+		logger.info("getCountHouseByMemNo 실행");
+		return sqlSession.selectOne(NAMESPACE + ".selectcount_house_by_memno_no",memNo);
+	}
 
 }
