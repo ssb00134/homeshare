@@ -6,28 +6,59 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script> 
 </head>
 <body>
-	<h1>${houseVO.title }</h1>
+
+<!-- 헤더정보 가져오기 -->
+<%@ include file="../header.jspf"%>
+	<h1><p>${houseVO.title }</p></h1>
 	
 	
 	<hr>
-	인원 ${houseVO.maxCapacity }명 · 침실 ${houseVO.bedroom }개 · 욕실
-	${houseVO.bathroom }개<br>
-	편의시설 ${houseVO.utilities }<br>
-	이용가능시설 ${houseVO.spaces }<br>
-	가격 ${houseVO.price } $<br>
+	<span>인원 ${houseVO.maxCapacity }명</span> 
+	<span> 침실 ${houseVO.bedroom }개 </span>
+	<span> 욕실${houseVO.bathroom }개</span><hr>
+	<span> ${houseVO.scope }</span><br>
+	<span>편의시설 ${houseVO.utilities }</span><br>
+	<span>이용가능시설 ${houseVO.spaces }</span><br>
+	<span>가격 ${houseVO.price } </span><br>
+	<input id = "imgSource" type="hidden" value="${houseVO.image }" /><br>
+	<div id="imgArea"></div>
 	<hr>
 	houseVO.info
 	<hr>
 	<div dir="rtl">
 		계산 폼
-		<form id="reservationForm"></form>
+		<form id="bookForm">
+		<div>
+		 <input type="text" class="testDatepicker" name="checkIn" value=""> 
+		</div>
+		 <-
+		 <div>
+		 <input type="text" class="testDatepicker" name="checkOut">  
+		</div>
+		<div id = "hidden">
+		<input type="text" name="houseNo" value ="${houseVO.houseNo }">
+		<input type="text" name="memNo" value ="${memberVO.memNo }">
+		</div>
+		<div>
+		<input type="number" readonly="readonly" name="price" value="${houseVO.price }">  
+		<div id="bookdate"></div>
+		<br><input type="submit" value="예약하기">
+		</div>
+		
+		</form>
 	</div>
 
 	<!-- 리플 영역 -->
 	아이디 ${memId }
-	
 	
 	
 	<div id="showReply">
@@ -38,8 +69,8 @@
 	<input type="text" id="memId" value="${memId }" readonly >
        <input type="text" id="content" placeholder="댓글 입력" >
  
-       <input type="number" min="0" max="5" id="cleanScope" placeholder="청결도(5)">
-       <input type="number" min="0" max="5" id="checkinScope" placeholder="체크인점수">
+       <input type="number" min="0" max="5" id="cleanScore" placeholder="청결도(5)">
+       <input type="number" min="0" max="5" id="checkinScore" placeholder="체크인점수">
 	 <button type="button" id="btn_add">작성</button>
 	</div>
 	<hr>
@@ -49,10 +80,56 @@
 	<br>
 	TODO : 결제한 회원만 리플가능
 	
-
+	'<img alt="" src=""><br>'
 	
 	<script type="text/javascript">
 	$(document).ready(function(){
+		
+		/* 달력영역 */
+		//달력
+		 $( ".testDatepicker" ).datepicker({
+			dateFormat: "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
+			changeMonth: true, 
+	         changeYear: true,
+	         nextText: '다음 달',
+	         prevText: '이전 달' 
+    	}); 
+		
+		
+		
+		
+		//달력에 날짜 넣기
+		var today = new Date().toISOString().split('T')[0];
+		var now = new Date();
+		var date = new Date();
+		var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+		var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+		var lastDayWithSlashes = (lastDay.getDate()) + '/' + (lastDay.getMonth() + 1) + '/' + lastDay.getFullYear();
+		
+		$('input[name=checkIn]').val(today);
+		$('input[name=checkOut]').val(lastDayWithSlashes);
+		//end 날짜
+		/* end 달력영역 */
+		$('.testDatepicker').on('input', function() { 
+	 		   $(this).val() ;
+	 		   console.log('on 실행 ');
+		});
+		//이미지 출력기능
+		var imgSource = $('#imgSource').val();
+		console.log('imgSource : ' + imgSource);
+		var imgsplit = imgSource.split(',');
+		console.log(imgsplit);
+		var list='';
+		imgsplit.forEach(function(element){
+			 if(imgsplit[imgsplit.length-1] != element){
+			    	console.log("element : " + element);
+				    list += '<img src="/homeshare/display?fileName=' + element + '"><br>';
+			    }
+		});
+		$('#imgArea').html(list);
+		//end img 출력기능
+		
+		
 		var houseNo = ${houseVO.houseNo};
 		getAllReplies();
 		
@@ -66,19 +143,19 @@
 	  	  	var content = $('#content').val(); // 댓글 내용 값
 	  	  	var memId ='${memId}'; // 댓글 아이디 값
 	  	  	var regdate =null;
-	  	  	var cleanScope = $('#cleanScope').val(); // 클린점수
-	  	  console.log('ceanScope : ' + cleanScope);
+	  	  	var cleanScore = $('#cleanScore').val(); // 클린점수
+	  	  console.log('ceanScope : ' + cleanScore);
 	  	  	
-	  		var checkinScope = $('#checkinScope').val(); // 클린점수
+	  		var checkinScore = $('#checkinScore').val(); // 클린점수
 	  	  	var obj = {
 	  			'rno' : 0,
 	  	  	    'houseNo' : houseNo,
 	  	  		'content' : content,
 	  	  		'memId' : memId,
 	  	  		'regdate' : null,
-	  	  		'scope' : 0,
-	  	  		'cleanScope' : cleanScope,
-	  	  		'checkinScope' : checkinScope
+	  	  		'score' : 0,
+	  	  		'cleanScore' : cleanScore,
+	  	  		'checkinScore' : checkinScore
 	  	  	}; // end var obj
 	  	  	
 	  	  	// $.ajax로 송신
@@ -97,8 +174,8 @@
 	  	  	      alert('댓글 입력 성공');
 	  	  	      $('#content').val(''); // 성공메시지 이후 삽입했던 content 데이터 삭제
 	  	  	      $('#memId').val(''); // 성공메시지 이후 삽입했던 memid 데이터 삭제
-	  	  	      $('#cleanScope').val('');
-	  	  	      $('#checkinScope').val('');
+	  	  	      $('#cleanScore').val('');
+	  	  	      $('#checkinScore').val('');
 	  	  	      getAllReplies(); // 메소드 호출
 	  	  	    } // end if()
 	  	  	  } // end success
@@ -176,10 +253,10 @@
 	  	    var rno = $(this).prevAll('#rno').val(); // this에 update이전 것 중에 rno를 찾겠다
 	  	    var content = $(this).prevAll('#reply_content').val();
 	  	    console.log("선택된 댓글 번호 : " + rno + ", 댓글 내용 : " + content);
-	  	    var cleanScope = $(this).prevAll('#reply_cleanScope').val();
-	  	    console.log('reply_cleanScope : ' + cleanScope);
-	  		var checkinScope = $(this).prevAll('#reply_checkinScope').val();
-	  		console.log('reply_checkinScope : ' + checkinScope);
+	  	    var cleanScore = $(this).prevAll('#reply_cleanScore').val();
+	  	    console.log('reply_cleanScore : ' + cleanScore);
+	  		var checkinScore = $(this).prevAll('#reply_checkinScore').val();
+	  		console.log('reply_checkinScore : ' + checkinScore);
 	  	    var regdate = null;
 	  	  // ajax 요청
 	  	    $.ajax({
@@ -192,8 +269,8 @@
 	  	      data : JSON.stringify({	  			
 	  	        'content' : content,
 	  	        'regdate' : 0,
-	  	  		'cleanScope' : cleanScope,
-	  	  		'checkinScope' : checkinScope
+	  	  		'cleanScore' : cleanScore,
+	  	  		'checkinScore' : checkinScore
 	  	      }),
 	  	      success : function(result){
 	  	        if(result == 'success'){

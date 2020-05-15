@@ -77,49 +77,11 @@
           	    + data
           	    + '</div>';
           $('.upload-list').html(str);	    
-	      getAllgetPath();
         } //end success;
       }); //end ajax
 
     }); //end file drop
     
-    
-    function getAllgetPath(){
-        $.ajax({
-            type: 'get', 
-            url : '/homeshare/getpath', 
-            data : null,
-            processData : false,
-            contentType : false,
-            
-            success: function(data) {
-            	console.log(data);
-            	var strData = data.split(',');
-            	
-            	
-            	 //홀수만 출력
-         		console.log('중간값 이상만 출력하기');
-            	 var length = strData.length;
-            	 
-            	 for ( var i in strData) {
-         			 if(i>=length/2){
-          	       	  	//document.write( '<p>' + strData[i] + '</p>' );
-          	         	console.log(strData[i]);
-         			 }
-          	       }
-            	  	
-            	$('#file-path-area').html(data);
-            	
-            }, //end success
-            error : function( fail ) {
-				alert('사진은 최대 5개만 가능합니다.');
-				console.log('사진은 최대 5개만 가능합니다.');
-            } // end fail
-            	
-            
-          }); //end ajax
-        }//end get all getPath
-        
     
   });//end document
   </script>  

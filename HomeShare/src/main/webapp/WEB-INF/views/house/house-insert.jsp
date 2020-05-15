@@ -25,13 +25,13 @@
 		<input type="hidden" name="score" value="0">
 		<input type="hidden" name="memNo" value="${memberVO.memNo }">
 		<p>등록하시려는 숙소의 범위를 입력해 주세요</p>
-		<select name="scope">
+		<select name="scope" required="required">
 			<option value="">집전체</option>
 			<option value="개인실">개인실</option>
 			<option value="다인실">다인실</option>
 		</select>
 		<p>등록하려는 숙소의 유형을 입력해 주세요</p>
-		<select name="type">
+		<select name="type" required="required">
 			<option value="">유형선택</option>
 			<option value="아파트">아파트</option>
 			<option value="주택">주택</option>
@@ -40,27 +40,27 @@
 		</select> <br> <br>
 		<p>최대 숙박 가능인원</p>
 		<br>
-		<input type="text" name="maxCapacity">
+		<input type="text" name="maxCapacity"required="required">
 		<br>
 		<p>사용할 수 있는 침실은 몇개인가요?</p>
 		<br>
-		<input type="text" name="badRoom">
+		<input type="text" name="badRoom" required="required">
 		<br>
 		<p>사용할 수 있는 침대는 몇개인가요?</p>
 		<br>
-		<input type="text" name="bed">
+		<input type="text" name="bed" required="required">
 		<br>
 		<p>사용할 수 있는 욕실은 몇개인가요?</p>
 		<br>
-		<input type="text" name="bathroom">
+		<input type="text" name="bathroom" required="required">
 		<br>
 		<hr>
 		<p>숙소의 위치를 알려주세요</p>
-		<input type="text" name="location">
+		<input type="text" name="location" required="required">
 		<br> //TODO : 네이버 api를 이용하여 지도 적용시키기
 		<hr>
 		<p>어떤 편의시설을 제공하나요?</p>
-		<input type="checkbox" name="utilities" value="필수품목">
+		<input type="checkbox" name="utilities" value="필수품목" required="required">
 		필수품목<br>수건, 침대 시트, 비누, 화장지, 베개<br>
 		<input type="checkbox" name="utilities" value="internet">
 		무선인터넷<br>
@@ -99,17 +99,13 @@
 		<div class="upload-list"></div>
 		<h1>사진주소</h1>
 		
-		<input type="text" name="image">
+		<input type="text" name="image" required="required">
 		<br>
-		
-
-
-
 
 		<p>숙소의 제목을 입력해 주세요</p>
-		<input type="text" name="title">
+		<input type="text" name="title" required="required">
 		<p>게스트에게 숙소에 대해 설명해 주세요</p>
-		<input type="text" name="info">
+		<input type="text" name="info" required="required">
 		<br> <br> <br> <br>
 		<hr>
 		<h1>3단계 게스트를 맞이할 준비를 해주세요</h1>
@@ -125,27 +121,27 @@
 		<hr>
 		<p>체크인까지 최소한 어느정도 시간이 필요하세요?</p>
 		<br>
-		<input type="text" name="checkinInterval">
+		<input type="text" name="checkinInterval" required="required">
 		<hr>
 		체크인 가능 시간을 선택해 주세요
-		<input type="text" name="checkinTime">
-		<input type="text" name="checkoutTime">
+		<input type="text" name="checkinTime"required="required">
+		<input type="text" name="checkoutTime"required="required">
 		<hr>
 		<p>게스트가 얼마나 숙박할 수 있나요?</p>
-		<input type="text" name="stayNight">
+		<input type="text" name="stayNight"required="required">
 		박<br>
-		<input type="text" name="stayDay">
+		<input type="text" name="stayDay"required="required">
 		일<br>
 		<hr>
 		<p>예약 가능한 시간 정하기</p>
 		최소
-		<input type="date" name="bookableDateBegin" min="sysdate">
+		<input type="date" name="bookableDateBegin" min="sysdate"required="required">
 		<br> 최대
-		<input type="date" name="bookableDateEnd" min="sysdate">
+		<input type="date" name="bookableDateEnd" min="sysdate"required="required">
 		<br>
 		<hr>
 		<p>숙소요금 설정하기</p>
-		<input type="text" name="price">
+		<input type="text" name="price"required="required">
 		<br>
 		<input type="submit" value="등록하기">
 		<br>

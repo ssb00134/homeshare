@@ -18,7 +18,7 @@ public class FileUploadUtil {
 
 	private static final Logger logger = LoggerFactory.getLogger(FileUploadUtil.class);
 
-	public static String saveUploadedFile(String uploadPath, String memId, String fileName, byte[] data)
+	public static String saveUploadedFile(String uploadPath, String memId, int memNoCount,String fileName, byte[] data)
 			throws IOException {
 
 		// 파일의 갯수
@@ -29,9 +29,9 @@ public class FileUploadUtil {
 				+ "memId 폴더의 파일 개수 : " + countFile(uploadPath, memId));
 
 		String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
-		String saveName = memId + "_" + (fileLength / 2 + 1) + "." + extension;
-		String savePath = getUploadPath(uploadPath, memId);
-
+		String saveName = memId  + (fileLength / 2 + 1) + "." + extension;
+		String savePath = getUploadPath(uploadPath, (memId+File.separator + (memNoCount+1)));
+		/**/
 		logger.info("uploadPath : " + uploadPath);
 		logger.info("saveName :" + saveName);
 		logger.info("savePath : " + savePath);
@@ -93,9 +93,9 @@ public class FileUploadUtil {
 	}
 
 	// 파일이 저장되는 폴더 이름을 날짜 형식(yyyy/MM/dd)으로 생성하기 위한 유틸
-	private static String getUploadPath(String uploadPath, String memId) {
-		makeDir(uploadPath, memId);
-		return memId;
+	private static String getUploadPath(String uploadPath, String path) {
+		makeDir(uploadPath, path);
+		return path;
 	}
 
 	private static void makeDir(String uploadPath, String memId) {

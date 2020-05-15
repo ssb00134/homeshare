@@ -10,8 +10,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<insert id="insert">
 		insert into ${reply}
-		values(0,#{houseNo},#{content},#{memId},null,0,#{cleanScope},#{checkinScope})
-		<!-- 0,하우스번호,content,memid,scope,cleaness,checkin -->
+		values(0,#{houseNo},#{content},#{memId},null,0,#{cleanScore},#{checkinScore})
+		<!-- 0,하우스번호,content,memid,Score,cleaness,checkin -->
 	</insert>
 
 
@@ -30,9 +30,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="update">
 		update ${reply}
 		set ${content} = #{content},
-		${cleanScope} = #{cleanScope},
+		${cleanScore} = #{cleanScore},
 		${regdate}=#{regdate},
-		${checkinScope} = #{checkinScope}
+		${checkinScore} = #{checkinScore}
 		where
 		${rno} = #{rno}
 	</update>

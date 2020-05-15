@@ -26,6 +26,9 @@ li {
 <title>게시판 메인 페이지</title>
 </head>
 <body>
+
+<!-- 헤더정보 가져오기 -->
+<%@ include file="../header.jspf"%>
   <h1>검색결과</h1>
   <hr>
   <br>
@@ -37,6 +40,8 @@ li {
           <div>${vo.price}$</div>
           <div>${vo.scope}</div>
           <div>${vo.location}</div>
+          <input id = "imgSource" type="hidden" value="${vo.image }" /><br>
+		  <div id="imgArea"></div>
           <hr>
         </div>
       </c:forEach>
@@ -67,6 +72,28 @@ li {
   
   <script type="text/javascript">
   	$(document).ready(function(){
+		//이미지 출력기능
+		var imgSource = $('#imgSource').val();
+		console.log('imgSource : ' + imgSource);
+		var imgsplit = imgSource.split(',');
+		console.log(imgsplit);
+		var list='';
+		imgsplit.forEach(function(element){
+		    if(imgsplit[imgsplit.length-1] != element){
+		    	console.log("element : " + element);
+			    list += '<img src="/homeshare/display?fileName=' + element + '"><br>';
+		    }
+		});
+		$('#imgArea').html(list);
+		//end img 출력기능
+  		
+  		
+  		
+  		
+  		
+  		
+  		
+  		
   	  // 클릭한 a태그의 정보를 가져오는 코드
   	  $('.pager li a').click(function() { 
   	    // .pager 클래스의 하위 li 요소의 하위 a 요소를 찾아감

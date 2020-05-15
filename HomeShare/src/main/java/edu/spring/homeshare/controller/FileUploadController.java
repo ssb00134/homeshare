@@ -75,7 +75,7 @@ public class FileUploadController {
 		int memNo = (int) session.getAttribute("memNo");
 		logger.info("memno 세션값 : " + memNo);
 		int memNoCount = houseService.getCountByMemNo(memNo);
-		logger.info("memNOcount : " + memNoCount);
+		logger.info("memno가 세션memno인 하우스 갯수 : " + memNoCount);
 		
 		
 		int filelength = FileUploadUtil.countFile(uploadPath, memId);
@@ -88,7 +88,7 @@ public class FileUploadController {
 		if (filelength < 10) { // 파일이 5개 이하일때만 실행
 			// 파일 하나만 저장
 			String result = null;
-			result = FileUploadUtil.saveUploadedFile(uploadPath, memId, files[0].getOriginalFilename(),
+			result = FileUploadUtil.saveUploadedFile(uploadPath, memId,memNoCount, files[0].getOriginalFilename(),
 					files[0].getBytes());
 			logger.info("result 값 : " + result.toString());
 			for (int i = 0; i < filelength; i++) {
@@ -102,24 +102,7 @@ public class FileUploadController {
 	}
 	// end upload ajax
 
-	@RequestMapping(value = "getpath", method = RequestMethod.GET)
-	public ResponseEntity<String> getPath(HttpServletRequest req) {
 
-		// 세션 아이디 가져오기
-		HttpSession session = req.getSession();
-		String memId = (String) session.getAttribute("memId"); // 세션에서 아이디 가져오기
-		logger.info("세션값 : " + memId);
-
-		// 파일길이
-		int filelength = FileUploadUtil.countFile(uploadPath, memId);
-
-		String strings = null;
-		for (int i = 0; i < filelength; i++) {
-			strings += FileUploadUtil.getPath2(uploadPath, memId, i) + ",";
-		}
-
-		return new ResponseEntity<String>(strings, HttpStatus.OK);
-	}
 	
 	
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
