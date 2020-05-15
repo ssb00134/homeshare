@@ -36,13 +36,13 @@
 	<hr>
 	<div dir="rtl">
 		계산 폼
-		<form id="bookForm">
+		<form id="bookForm" action="book">
 		<div>
-		 <input type="text" class="testDatepicker" name="checkIn" value=""> 
+		 <input type="text" class="testDatepicker" id="checkIn" name="checkIn" value=""> 
 		</div>
 		 <-
 		 <div>
-		 <input type="text" class="testDatepicker" name="checkOut">  
+		 <input type="text" class="testDatepicker" id="checkOUt" name="checkOut">  
 		</div>
 		<div id = "hidden">
 		<input type="text" name="houseNo" value ="${houseVO.houseNo }">
@@ -92,14 +92,20 @@
 			changeMonth: true, 
 	         changeYear: true,
 	         nextText: '다음 달',
-	         prevText: '이전 달' 
-    	}); 
-		
+	         prevText: '이전 달',
+        	 minDate: new Date('${houseVO.bookableDateBegin}'), //최소 예약가능 시간
+       	     maxDate: new Date('${houseVO.bookableDateEnd}')
+    	}).click(function(){
+    		console.log('on 실행' );
+    		$(this).change();
+    		console.log('this.val : ' +$(this).val());
+    	});
+
 		
 		
 		
 		//달력에 날짜 넣기
-		var today = new Date().toISOString().split('T')[0];
+/* 		var today = new Date().toISOString().split('T')[0];
 		var now = new Date();
 		var date = new Date();
 		var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
@@ -107,13 +113,16 @@
 		var lastDayWithSlashes = (lastDay.getDate()) + '/' + (lastDay.getMonth() + 1) + '/' + lastDay.getFullYear();
 		
 		$('input[name=checkIn]').val(today);
-		$('input[name=checkOut]').val(lastDayWithSlashes);
+		$('input[name=checkOut]').val(lastDayWithSlashes); */
 		//end 날짜
 		/* end 달력영역 */
-		$('.testDatepicker').on('input', function() { 
-	 		   $(this).val() ;
-	 		   console.log('on 실행 ');
-		});
+		
+		
+		
+		
+		
+	
+		
 		//이미지 출력기능
 		var imgSource = $('#imgSource').val();
 		console.log('imgSource : ' + imgSource);
@@ -123,7 +132,7 @@
 		imgsplit.forEach(function(element){
 			 if(imgsplit[imgsplit.length-1] != element){
 			    	console.log("element : " + element);
-				    list += '<img src="/homeshare/display?fileName=' + element + '"><br>';
+				    list += '<img src="/homeshare/display?fileName=' + element + '" size="100%"><br>';
 			    }
 		});
 		$('#imgArea').html(list);

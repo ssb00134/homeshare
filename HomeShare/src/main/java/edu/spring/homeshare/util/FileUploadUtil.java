@@ -30,7 +30,7 @@ public class FileUploadUtil {
 
 		String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
 		String saveName = memId  + (fileLength / 2 + 1) + "." + extension;
-		String savePath = getUploadPath(uploadPath, (memId+File.separator + (memNoCount+1)));
+		String savePath = getUploadPath(uploadPath, (memId+File.separator + memNoCount));
 		/**/
 		logger.info("uploadPath : " + uploadPath);
 		logger.info("saveName :" + saveName);

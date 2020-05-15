@@ -85,7 +85,7 @@ public class FileUploadController {
 		logger.info("파일 존재? : " +FileUploadUtil.isFile(uploadPath, memId));
 		//logger.info("등록된 memno의 갯수 : " + houseService.selectByHouseNo(houseNo));
 		
-		if (filelength < 10) { // 파일이 5개 이하일때만 실행
+		if (filelength < 20) { // 파일이 10개 이하일때만 실행
 			// 파일 하나만 저장
 			String result = null;
 			result = FileUploadUtil.saveUploadedFile(uploadPath, memId,memNoCount, files[0].getOriginalFilename(),
@@ -138,8 +138,8 @@ public class FileUploadController {
 			);
 			logger.info("display entity : " + entity.toString());
 			
-			//파일의 개수가 5개 이상이면 null을 출력함
-			return (filelength <=10 ? entity : null);
+			//파일의 개수가 10개 이상이면 null을 출력함
+			return (filelength <=20 ? entity : null);
 		} catch (Exception e) {
 			logger.info("filenotFound 발생");
 			return null;
