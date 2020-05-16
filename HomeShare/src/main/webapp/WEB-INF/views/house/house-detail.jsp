@@ -38,17 +38,23 @@
 		계산 폼
 		<form id="bookForm" action="book">
 		<div>
-		 <input type="text" class="testDatepicker" id="checkIn" name="checkIn" value=""> 
+		 <input type="text" class="testDatepicker" id="checkIn" name="checkIn" value=""> <br>
 		</div>
-		 <-
+		임시저장영역<input type="text" id="checkInDate"><br>
+
 		 <div>
-		 <input type="text" class="testDatepicker" id="checkOUt" name="checkOut">  
+		 <input type="text" class="testDatepicker" id="checkOut" name="checkOut">  <br>
+		 임시저장영역<input type="text" id="checkOutDate"><br>
 		</div>
+		날짜차이<input type="text" id="dateDiffer">
 		<div id = "hidden">
 		<input type="text" name="houseNo" value ="${houseVO.houseNo }">
 		<input type="text" name="memNo" value ="${memberVO.memNo }">
 		</div>
 		<div>
+		<div>
+		<input type="text" name="bookMem" placeholder="인원">
+		</div>
 		<input type="number" readonly="readonly" name="price" value="${houseVO.price }">  
 		<div id="bookdate"></div>
 		<br><input type="submit" value="예약하기">
@@ -86,7 +92,17 @@
 	$(document).ready(function(){
 		
 		/* 달력영역 */
-		//달력
+		var checkIn= $('#checkIn').val();
+		var checkOut= $('#checkOut').val();
+		console.log('checkIn : ' + checkOut);
+		console.log('checkOut : ' + checkOut);
+		var ar1=null;// checkIn 값을 담을 배열
+		var date1 = null;
+		console.log('date1 :' + date1);
+		//체크아웃
+		var ar2 = null;
+		var date2 = null;
+		
 		 $( ".testDatepicker" ).datepicker({
 			dateFormat: "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
 			changeMonth: true, 
@@ -94,28 +110,53 @@
 	         nextText: '다음 달',
 	         prevText: '이전 달',
         	 minDate: new Date('${houseVO.bookableDateBegin}'), //최소 예약가능 시간
+        	 
        	     maxDate: new Date('${houseVO.bookableDateEnd}')
-    	}).click(function(){
-    		console.log('on 실행' );
-    		$(this).change();
-    		console.log('this.val : ' +$(this).val());
     	});
+		 var date1Time = null;
+		$( "#checkIn" ).change('click',function(){
+	    		console.log('on 실행' );			
+	    		checkIn = $(this).val();
+		    	console.log('this vaule : ' + $(this).val());
+    		 	//string 타입임	    	
+		    	 console.log('checkIn : ' + checkIn);
+		    		 
+	    		 if(checkIn !=null || checkIn !='undefined' || checkIn !=''){
+		    		 ar1 = checkIn.toString().split('-');
+		    		 date1 = new Date(ar1[0],ar1[1],ar1[2]);
+		    		 console.log('date1 : ' + date1);
+		    		 $('#checkInDate').val(date1.getTime());
+		    		 date1Time =  date1.getTime();
+		    		 
+		    		 var dateDiffer =($('#checkOutDate').val() - $('#checkInDate').val()) / (86400*1000);
+		    			$('#dateDiffer').val(dateDiffer);
+	    		 }
+	    		
+	    });
+		var date2Time = null;
+		$( "#checkOut" ).change('click',function(){
+			console.log('on 실행' );
+			 var checkOut = $(this).val();
+	    		console.log('this vaule : ' + $(this).val());
+	    		 //string 타입임	    	
+	    		 console.log('checkOut : ' + checkOut);
+	    		 
+	    		 if(checkOut !=null || checkOut !='undefined'|| checkOut !=''){
+		    		 ar2 = checkOut.toString().split('-');
+		    		 date2 = new Date(ar2[0],ar2[1],ar2[2]);
+		    		 $('#checkOutDate').val(date2.getTime());
+		    		 console.log('date2 gettime : ' + date2.getTime());
+		    	
+		    		 date2Time =  date2.getTime();
+		    		 var dateDiffer =($('#checkOutDate').val() - $('#checkInDate').val()) / (86400*1000);
+		    			$('#dateDiffer').val(dateDiffer);
+	    		 }	 
+   		 });
+		
 
 		
 		
 		
-		//달력에 날짜 넣기
-/* 		var today = new Date().toISOString().split('T')[0];
-		var now = new Date();
-		var date = new Date();
-		var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-		var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-		var lastDayWithSlashes = (lastDay.getDate()) + '/' + (lastDay.getMonth() + 1) + '/' + lastDay.getFullYear();
-		
-		$('input[name=checkIn]').val(today);
-		$('input[name=checkOut]').val(lastDayWithSlashes); */
-		//end 날짜
-		/* end 달력영역 */
 		
 		
 		

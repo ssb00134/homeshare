@@ -18,19 +18,19 @@ public class FileUploadUtil {
 
 	private static final Logger logger = LoggerFactory.getLogger(FileUploadUtil.class);
 
-	public static String saveUploadedFile(String uploadPath, String memId, int memNoCount,String fileName, byte[] data)
+	public static String saveUploadedFile(String uploadPath, String memId, int memNoCount, String fileName, byte[] data)
 			throws IOException {
 
 		// 파일의 갯수
 		int fileLength = 0;
 		fileLength = countFile(uploadPath, memId);
 
-		System.out.println("FileUploadUtil.saveuploadfile 실행 " + "\n"
-				+ "memId 폴더의 파일 개수 : " + countFile(uploadPath, memId));
+		System.out.println(
+				"FileUploadUtil.saveuploadfile 실행 " + "\n" + "memId 폴더의 파일 개수 : " + countFile(uploadPath, memId));
 
 		String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
-		String saveName = memId  + (fileLength / 2 + 1) + "." + extension;
-		String savePath = getUploadPath(uploadPath, (memId+File.separator + memNoCount));
+		String saveName = memId + (fileLength / 2 + 1) + "." + extension;
+		String savePath = getUploadPath(uploadPath, (memId + File.separator + memNoCount));
 		/**/
 		logger.info("uploadPath : " + uploadPath);
 		logger.info("saveName :" + saveName);
@@ -93,13 +93,13 @@ public class FileUploadUtil {
 	}
 
 	// 파일이 저장되는 폴더 이름을 날짜 형식(yyyy/MM/dd)으로 생성하기 위한 유틸
-	private static String getUploadPath(String uploadPath, String path) {
+	private static String getUploadPath(String uploadPath, String path) { // path =memId+File.separator + memNoCount)
 		makeDir(uploadPath, path);
 		return path;
 	}
 
-	private static void makeDir(String uploadPath, String memId) {
-		File dirPath = new File(uploadPath, memId);
+	private static void makeDir(String uploadPath, String path) { // path = memId+File.separator + memNoCount)
+		File dirPath = new File(uploadPath, path);
 		if (!dirPath.exists()) {
 			dirPath.mkdir();
 			logger.info(dirPath.getPath() + " successfully created.");
@@ -108,12 +108,33 @@ public class FileUploadUtil {
 		}
 	}
 
+	// 디렉토리를 삭제하는 함수
+	private static void deleteDir(String uploadPath, String path) { // path = memId+File.separator + memNoCount)
+		File folder = new File(uploadPath + File.separator + path);
+		try {
+			while (folder.exists()) {
+				File[] folder_list = folder.listFiles(); // 파일리스트 얻어오기
+
+				for (int j = 0; j < folder_list.length; j++) {
+					folder_list[j].delete(); // 파일 삭제
+					System.out.println("파일이 삭제되었습니다.");
+				}
+				if (folder_list.length == 0 && folder.isDirectory()) {
+					folder.delete(); // 대상폴더 삭제
+					System.out.println("폴더가 삭제되었습니다.");
+				}
+			}
+		} catch (Exception e) {
+			e.getStackTrace();
+		}
+	}
+
 	// 파일의 개수를 구하는 함수
 	public static int countFile(String uploadPath, String memId) {
 		File dirPath = new File(uploadPath, memId);
-		
+
 		File[] files = dirPath.listFiles();
-		return ( files == null ?  0 : files.length);
+		return (files == null ? 0 : files.length);
 	}
 
 	private static String createThumbnail(String uploadPath, String savePath, String fileName) throws IOException {
