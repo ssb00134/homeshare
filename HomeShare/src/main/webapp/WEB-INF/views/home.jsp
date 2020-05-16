@@ -72,9 +72,10 @@ header {
 	테스트영역
 	<hr>
 	<div><a href="house/house-list">숙소 테스트</a></div>
-	<div><a href="/homeshare/file-upload-test">파일 업로드 테스트</a></div>
-	<div><a href="/homeshare/house/house-insert">등록테스트</a></div>
-	<div><a href="/homeshare/test/scroll-test">스크롤테스트</a></div>
+	<div><a href="/homeshare/file-upload-test">파일 업로드 테스트</a></div><br>
+	<div><a href="/homeshare/house/house-insert">등록테스트</a></div><br>
+	<div><a href="/homeshare/test/scroll-test">스크롤테스트</a></div><br>
+	<div><a href="/homeshare/mail">메일테스트</a></div><br>
 	</div>
 
 </body>

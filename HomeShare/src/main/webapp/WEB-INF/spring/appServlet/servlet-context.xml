@@ -23,8 +23,7 @@
 		up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 	
-	<!-- 이미지폴더 설정 -->
-	<resources mapping="/img/**" location="file:///C:/study/FileUploadTest" />
+
 	
 	
 	

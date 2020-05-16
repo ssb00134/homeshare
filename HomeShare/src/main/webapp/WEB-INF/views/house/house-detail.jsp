@@ -55,7 +55,8 @@
 		<div>
 		<input type="text" name="bookMem" placeholder="인원">
 		</div>
-		<input type="number" readonly="readonly" name="price" value="${houseVO.price }">  
+		<input type="number" readonly="readonly" name="price" value="${houseVO.price }">   <br>
+		총 합계<input type="number" readonly="readonly" name="totalPrice">  <br>
 		<div id="bookdate"></div>
 		<br><input type="submit" value="예약하기">
 		</div>
@@ -102,16 +103,23 @@
 		//체크아웃
 		var ar2 = null;
 		var date2 = null;
-		
+		 var num1 =new Date('${houseVO.bookableDateBegin}');
+		 var num2 = new Date();
+		 var num3 = new Date('$(checkOutDate)');
+		 
 		 $( ".testDatepicker" ).datepicker({
+			
 			dateFormat: "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
 			changeMonth: true, 
 	         changeYear: true,
 	         nextText: '다음 달',
 	         prevText: '이전 달',
-        	 minDate: new Date('${houseVO.bookableDateBegin}'), //최소 예약가능 시간
+        	 minDate : (num2>num1)&&(num3>num1)?num1:(num2>num3?num3:num2),
+
+        	 //최소 예약가능 시간
         	 
-       	     maxDate: new Date('${houseVO.bookableDateEnd}')
+       	     maxDate: (new Date('${houseVO.bookableDateEnd}') > $('#checkIn').val() ?
+       	    		 new Date('${houseVO.bookableDateEnd}') :  new Date($('#checkIn').val()))
     	});
 		 var date1Time = null;
 		$( "#checkIn" ).change('click',function(){
@@ -153,8 +161,12 @@
 	    		 }	 
    		 });
 		
-
-		
+		//totalprice
+		//가격 = 인원 * 날짜 * 기본가격
+		$('#totalPrice').val($('#price') * $('#dateDiffer') * $('#bookMem'));
+		if($('#dateDiffer').val()*1 <0 ){
+		alsert('불가');
+		}
 		
 		
 		
