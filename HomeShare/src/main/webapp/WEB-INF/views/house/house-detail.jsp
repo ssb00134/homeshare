@@ -62,8 +62,27 @@
 		</div>
 		
 		</form>
-	</div>
+		</div>
 
+		
+		
+		<!-- Trigger/Open The Modal -->
+		<input type="button" id="button" value="신고하기" />
+	   <div id="dialog">
+	   <form action="report" method="post">
+	   	<p>신고하기</p>
+	   	<p>이 숙소를 신고하시는 이유를 알려주세요.
+		내용은 호스트에게 공개되지 않습니다.
+		</p>
+		<input type="text" name = "memNo" value="${memberVO.memNo}">
+		<input type="text" name = "houseNo" value="${houseVO.houseNo}"><br>
+		<input type="checkbox" name="reason" value="부정확하거나 틀린 정보가 있어요"> 부정확하거나 틀린 정보가 있어요<br>
+		<input type="checkbox" name="reason" value="실제 숙소가 아닙니다">실제 숙소가 아닙니다<br>
+		<input type="checkbox" name="reason" value="사기입니다">사기입니다<br>
+		<input type="checkbox" name="reason" value="불쾌합니다">불쾌합니다<br>
+		<input type="checkbox" id="ect" value="기타" onclick="">기타<br>
+		</form>
+	   </div>
 	<!-- 리플 영역 -->
 	아이디 ${memId }
 	
@@ -91,6 +110,40 @@
 	
 	<script type="text/javascript">
 	$(document).ready(function(){
+		
+		$("#button").click(function(){
+			$( "#dialog" ).dialog( "open" ); 
+		});
+
+		//모달영역
+		$( "#dialog" ).dialog({ 
+			//이벤트 발생했을때 보여주려면 autoOpen : false로 지정해줘야 한다.
+			autoOpen: false, 
+			//레이어팝업 넓이 
+			width: 400, 
+			//뒷배경을 disable 시키고싶다면 true 
+			modal: true, 
+			//버튼종류 
+			buttons: [ 
+			{ //버튼텍스트 
+				text: "Ok", //클릭이벤트발생시 동작 
+				click: function() { 
+					$( this ).dialog( "close" ); 
+				} 
+			}, 
+			{ //버튼텍스트 
+				text: "Cancel", //클릭이벤트발생시 동작 
+				click: function() { 
+					$( this ).dialog( "close" ); 
+				} 
+			} 
+			] 
+		}); //end modal
+		
+		$("#button").click(function(){ 
+			$( "#dialog" ).dialog( "open" ); 
+		});
+
 		
 		/* 달력영역 */
 		var checkIn= $('#checkIn').val();
