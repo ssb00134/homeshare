@@ -23,10 +23,10 @@ public class FileUploadUtil {
 
 		// 파일의 갯수
 		int fileLength = 0;
-		fileLength = countFile(uploadPath, memId);
+		fileLength = countFile(uploadPath, memId+File.separator + memNoCount);////path : memId+File.separator + memNoCount
 
 		System.out.println(
-				"FileUploadUtil.saveuploadfile 실행 " + "\n" + "memId 폴더의 파일 개수 : " + countFile(uploadPath, memId));
+				"FileUploadUtil.saveuploadfile 실행 " + "\n" + "memId 폴더의 파일 개수 : " + countFile(uploadPath, memId+File.separator + memNoCount));
 
 		String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
 		String saveName = memId + (fileLength / 2 + 1) + "." + extension;
@@ -81,16 +81,6 @@ public class FileUploadUtil {
 
 	}
 
-	// tostring
-	public static String getPath2(String uploadPath, String memId, int i) {
-		String savePath = getUploadPath(uploadPath, memId);
-		String path = uploadPath + "\\" + savePath;
-
-		File files = new File(path);
-		File[] fileList = files.listFiles();
-
-		return fileList[i].toString();
-	}
 
 	// 파일이 저장되는 폴더 이름을 날짜 형식(yyyy/MM/dd)으로 생성하기 위한 유틸
 	private static String getUploadPath(String uploadPath, String path) { // path =memId+File.separator + memNoCount)
@@ -130,8 +120,8 @@ public class FileUploadUtil {
 	}
 
 	// 파일의 개수를 구하는 함수
-	public static int countFile(String uploadPath, String memId) {
-		File dirPath = new File(uploadPath, memId);
+	public static int countFile(String uploadPath, String path){ //path : memId+File.separator + memNoCount
+		File dirPath = new File(uploadPath, path);
 
 		File[] files = dirPath.listFiles();
 		return (files == null ? 0 : files.length);

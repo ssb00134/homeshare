@@ -78,7 +78,7 @@ public class FileUploadController {
 		logger.info("memno가 세션memno인 하우스 갯수 : " + memNoCount);
 		
 		
-		int filelength = FileUploadUtil.countFile(uploadPath, memId);
+		int filelength = FileUploadUtil.countFile(uploadPath, memId+File.separator + memNoCount);//path = memId+File.separator + memNoCount
 		logger.info("파일 갯수 : " + filelength);
 		String fail = "not more 5 items";
 		
@@ -88,13 +88,11 @@ public class FileUploadController {
 		if (filelength < 20) { // 파일이 10개 이하일때만 실행
 			// 파일 하나만 저장
 			String result = null;
+			logger.info("filelength : " + filelength);
 			result = FileUploadUtil.saveUploadedFile(uploadPath, memId,memNoCount, files[0].getOriginalFilename(),
 					files[0].getBytes());
 			logger.info("result 값 : " + result.toString());
-			for (int i = 0; i < filelength; i++) {
-				logger.info("getpath2 : " + FileUploadUtil.getPath2(uploadPath, memId, i));
-			}
-			logger.info("result.tostring : " + result.toString() );
+
 			 
 			return new ResponseEntity<String>(result, HttpStatus.OK);
 		} else
