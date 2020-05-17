@@ -2,17 +2,17 @@ package edu.spring.homeshare.domain;
 
 public class ReportVO {
 	private int reportNo;
-	private int memNo;
-	private int houseNo;
-	private int reason;
+	private int reportMemNo;
+	private int reportHouseNo;
+	private String reason;
 	
-	public ReportVO() {};
-	
-	public ReportVO(int reportNo, int memNo, int houseNo, int reason) {
+	public ReportVO() {}
+
+	public ReportVO(int reportNo, int reportMemNo, int reportHouseNo, String reason) {
 		super();
 		this.reportNo = reportNo;
-		this.memNo = memNo;
-		this.houseNo = houseNo;
+		this.reportMemNo = reportMemNo;
+		this.reportHouseNo = reportHouseNo;
 		this.reason = reason;
 	}
 
@@ -24,31 +24,36 @@ public class ReportVO {
 		this.reportNo = reportNo;
 	}
 
-	public int getMemNo() {
-		return memNo;
+	public int getReportMemNo() {
+		return reportMemNo;
 	}
 
-	public void setMemNo(int memNo) {
-		this.memNo = memNo;
+	public void setReportMemNo(int reportMemNo) {
+		this.reportMemNo = reportMemNo;
 	}
 
-	public int getHouseNo() {
-		return houseNo;
+	public int getReportHouseNo() {
+		return reportHouseNo;
 	}
 
-	public void setHouseNo(int houseNo) {
-		this.houseNo = houseNo;
+	public void setReportHouseNo(int reportHouseNo) {
+		this.reportHouseNo = reportHouseNo;
 	}
 
-	public int getReason() {
+	public String getReason() {
 		return reason;
 	}
 
-	public void setReason(int reason) {
+	public void setReason(String reason) {
 		this.reason = reason;
 	}
+
+	@Override
+	public String toString() {
+		return "ReportVO [reportNo=" + reportNo + ", reportMemNo=" + reportMemNo + ", reportHouseNo=" + reportHouseNo
+				+ ", reason=" + reason + "]";
+	};
 	
-	
-	
+
 	
 }

@@ -69,13 +69,14 @@
 		<!-- Trigger/Open The Modal -->
 	   <input type="button" id="button" value="신고하기" />
 	   <div id="dialog">
-	   <form action="report" id ="report" method="post">
+	   <form action="report" id="report">
 	   	<p>신고하기</p>
 	   	<p>이 숙소를 신고하시는 이유를 알려주세요.
 		내용은 호스트에게 공개되지 않습니다.
 		</p>
-		<input type="text" name = "memNo" value="${memberVO.memNo}">
-		<input type="text" name = "houseNo" value="${houseVO.houseNo}"><br>
+		<input type="number" name = "reportNo" value="0">
+		<input type="number" name = "reportMemNo" value="${memberVO.memNo}">
+		<input type="number" name = "reportHouseNo" value="${houseVO.houseNo}"><br>
 		<input type="radio" name="reason" value="부정확하거나 틀린 정보가 있어요"> 부정확하거나 틀린 정보가 있어요<br>
 		<input type="radio" name="reason" value="실제 숙소가 아닙니다">실제 숙소가 아닙니다<br>
 		<input type="radio" name="reason" value="사기입니다">사기입니다<br>
@@ -128,14 +129,15 @@
 			{ //버튼텍스트 
 				text: "신고하기", //클릭이벤트발생시 동작 
 				click: function() { 
-					memId = $('#memId').val();
-					houseNo = $('#password').val();
-					reason = $('#rason').val();
+					reportMemNo = $('[name="reportMemNo"]').val();
+					reportHouseNo = $('[name="reportHouseNo"]').val();
+					reason = $('[name="reason"]').val();
 					 var frm = $('#report');
 				  	    frm.attr('action', '/homeshare/report');
 				  	    frm.attr('method', 'post');
-				  	    frm.find('[name="memId"]').val(memId);
-				  	    frm.find('[name="houseNo"]').val(houseNo);
+				  	    frm.find('[name="reportNo"]').val(0);
+				  	    frm.find('[name="reportMemNo"]').val(reportMemNo);
+				  	    frm.find('[name="reportHouseNo"]').val(reportHouseNo);
 				  	    frm.find('[name="reason"]').val(reason);
 				  	    frm.submit(); 
 					$(this).dialog("close");

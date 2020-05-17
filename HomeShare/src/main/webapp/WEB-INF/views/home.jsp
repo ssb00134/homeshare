@@ -55,7 +55,7 @@ header {
 		<!-- end 모달버튼 -->
 			<!-- 모달영역 -->
 			<div id="login_dialog">
-				<form id ="loginForm" action="/homeshare/member/login-post" method="post">
+				<form id ="loginForm">
 					<input type="text" name="memId" id="memId" placeholder="USER ID"
 						required="required">
 					<br>

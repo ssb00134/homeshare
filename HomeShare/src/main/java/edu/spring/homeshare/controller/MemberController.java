@@ -39,6 +39,7 @@ public class MemberController {
 	@RequestMapping(value = "/login-post", method=RequestMethod.POST)
 	public void loginPost(memberVO vo, Model model) { // DB에 vo 전송
 		logger.info("loginPost() 호출");
+		logger.info("loginPost() vo 정보 : " + vo.toString());
 		memberVO result = memberService.loginCheck(vo);
 		// 아이디 비밀번호가 일치 : result !=null
 		// 아이디 비밀번호가 일치하지 않음 : result == null

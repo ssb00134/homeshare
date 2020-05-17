@@ -3,19 +3,19 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="edu.spring.homeshare.ReprotMapper">
+<mapper namespace="edu.spring.homeshare.ReportMapper">
 
 
 <!-- insert -->
 	
 	<insert id="insert">
 		insert into ${reply}
-		values(0,#{memNo},#{houseNo},#{reason})
+		values(0,#{reportMemNo},#{reportHouseNo},#{reason})
 	</insert>
 	
 	<select id="select_all_by_houseNo" resultType="reportVO">
 		select *
-		from ${report} where ${houseNo} = #{houseNo}
+		from ${report} where ${reportHouseNo} = #{reportHouseNo}
 	</select>
 	
 	
