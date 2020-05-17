@@ -6,22 +6,13 @@
 <html>
 <head>
 <style type="text/css">
-table, th, td {
-  border-style: solid;
-  border-width: 1px;
-  text-align: center;
-}
 
-ul {
-  list-style-type: none;
-}
-
-li {
-  display: inline-block;
-}
 </style>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<!-- bxslider -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css"/> 
+<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 <meta charset="UTF-8">
 <title>게시판 메인 페이지</title>
 </head>
@@ -41,9 +32,13 @@ li {
           <div>${vo.scope}</div>
           <div>${vo.location}</div>
           <input id = "imgSource" type="hidden" value="${vo.image }" /><br>
-		  <div id="imgArea"></div>
+		  </div>
+		  <!-- 이미지슬라이더 -->
+		  <div class="home__slider">
+			<ul class="bxslider"></ul>
+		 </div>
           <hr>
-        </div>
+        
       </c:forEach>
  	</div>
 
@@ -72,6 +67,42 @@ li {
   
   <script type="text/javascript">
   	$(document).ready(function(){
+  		
+  		$('.bxslider').bxSlider({
+  			mode: 'fade',
+  			auto: true,		//자동으로 슬라이드
+  			controls : true,	//좌우 화살표	
+  			autoControls: true,	//stop,play
+  			pager:true,	//페이징
+  			pause: 3000,
+  			autoDelay: 0,	
+  			slideWidth: 800,
+  			speed: 1,
+  			stopAutoOnclick:true,
+  			minSlides: 1,
+  		    maxSlides: 1,
+
+  		    slideMargin: 10
+  			});
+  		
+  		
+  		$(".bx-stop").click(function(){	// 중지버튼 눌렀을때	
+  			$('.bxslider').stopAuto();
+  			$(".bx-stop").hide();
+  			$(".bx-start").show();
+  			return false;
+  		});
+  		
+
+  		$(".bx-start").click(function(){	//시작버튼 눌렀을때
+  			$('.bxslider').startAuto();
+  			$(".bx-start").hide();
+  			$(".bx-stop").show();
+  			return false;
+  		});
+
+  		
+  		
 		//이미지 출력기능
 		var imgSource = $('#imgSource').val();
 		console.log('imgSource : ' + imgSource);
@@ -81,10 +112,10 @@ li {
 		imgsplit.forEach(function(element){
 		    if(imgsplit[imgsplit.length-1] != element){
 		    	console.log("element : " + element);
-			    list += '<img src="/homeshare/display?fileName=' + element + '"><br>';
+			    list += '<li><img src="/homeshare/display?fileName=' + element + '" alt="' + element.length + '"></li>';
 		    }
 		});
-		$('#imgArea').html(list);
+		$('.bxslider').html(list);
 		//end img 출력기능
   		
   		
