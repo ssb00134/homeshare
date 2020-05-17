@@ -59,7 +59,13 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<property name="regdate" value="regdate" />
 		<property name="cleanScore" value="cleanScore" />
 		<property name="checkinScore" value="checkinScore" />
-
+		
+		<!-- report 테이블 파라미터 설정 -->
+		<property name="report" value="report" />
+		<property name="reprotNo" value="reprotNo" />
+		<property name="memNo" value="memNo" />
+		<property name="houseNo" value="houseNo" />
+		<property name="reason" value="reason" />
 
 
 
