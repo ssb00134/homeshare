@@ -116,14 +116,6 @@ public class FileUploadController {
 			String filePath = uploadPath + fileName;
 			in = new FileInputStream(filePath);
 			
-			
-			// 세션 아이디 가져오기
-			HttpSession session = req.getSession();
-			String memId = (String) session.getAttribute("memId"); // 세션에서 아이디 가져오기
-			logger.info("세션값 : " + memId);
-			//파일 갯수 
-			int filelength = FileUploadUtil.countFile(uploadPath, memId);
-			
 			// 파일 확장자
 			String extension = filePath.substring(filePath.lastIndexOf(".") + 1);
 
@@ -138,8 +130,8 @@ public class FileUploadController {
 			);
 			logger.info("display entity : " + entity.toString());
 			
-			//파일의 개수가 10개 이상이면 null을 출력함
-			return (filelength <=20 ? entity : null);
+			
+			return entity ;
 		} catch (Exception e) {
 			logger.info("filenotFound 발생");
 			return null;

@@ -34,7 +34,7 @@
 	$(document).ready(function(){
 		var memId = $('#memId').val; // 아이디 값
 		var password = $('#password').val; // 비밀번호 값
-		ㅍㅁㄱ
+
 	});//end document
 	
 	</script>

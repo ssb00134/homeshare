@@ -67,7 +67,7 @@
 		
 		
 		<!-- Trigger/Open The Modal -->
-		<input type="button" id="button" value="신고하기" />
+	   <input type="button" id="button" value="신고하기" />
 	   <div id="dialog">
 	   <form action="report" method="post">
 	   	<p>신고하기</p>
@@ -76,11 +76,11 @@
 		</p>
 		<input type="text" name = "memNo" value="${memberVO.memNo}">
 		<input type="text" name = "houseNo" value="${houseVO.houseNo}"><br>
-		<input type="checkbox" name="reason" value="부정확하거나 틀린 정보가 있어요"> 부정확하거나 틀린 정보가 있어요<br>
-		<input type="checkbox" name="reason" value="실제 숙소가 아닙니다">실제 숙소가 아닙니다<br>
-		<input type="checkbox" name="reason" value="사기입니다">사기입니다<br>
-		<input type="checkbox" name="reason" value="불쾌합니다">불쾌합니다<br>
-		<input type="checkbox" id="ect" value="기타" onclick="">기타<br>
+		<input type="radio" name="reason" value="부정확하거나 틀린 정보가 있어요"> 부정확하거나 틀린 정보가 있어요<br>
+		<input type="radio" name="reason" value="실제 숙소가 아닙니다">실제 숙소가 아닙니다<br>
+		<input type="radio" name="reason" value="사기입니다">사기입니다<br>
+		<input type="radio" name="reason" value="불쾌합니다">불쾌합니다<br>
+		<input type="radio" id="reason" value="기타" onclick="">기타<br>
 		</form>
 	   </div>
 	<!-- 리플 영역 -->
