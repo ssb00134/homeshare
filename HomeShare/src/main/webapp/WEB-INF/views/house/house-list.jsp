@@ -31,12 +31,12 @@
           <div>${vo.price}$</div>
           <div>${vo.scope}</div>
           <div>${vo.location}</div>
-          <input id = "imgSource" type="hidden" value="${vo.image }" /><br>
-		  </div>
+          <input class = "imgSource" id="items" type="hidden" value="${vo.image }" /><br>
 		  <!-- 이미지슬라이더 -->
 		  <div class="home__slider">
 			<ul class="bxslider"></ul>
 		 </div>
+		  </div>
           <hr>
         
       </c:forEach>
@@ -69,20 +69,14 @@
   	$(document).ready(function(){
   		
   		$('.bxslider').bxSlider({
-  			mode: 'fade',
-  			auto: true,		//자동으로 슬라이드
-  			controls : true,	//좌우 화살표	
-  			autoControls: true,	//stop,play
-  			pager:true,	//페이징
-  			pause: 3000,
-  			autoDelay: 0,	
-  			slideWidth: 800,
-  			speed: 1,
-  			stopAutoOnclick:true,
-  			minSlides: 1,
-  		    maxSlides: 1,
-
-  		    slideMargin: 10
+  		   autoplay:true, //자동실행
+  		    arrows:true, //좌우화살표끄기
+  		    dots:true, //페이지버튼나오기
+  		    swipe:false, //마우스드래그 이동 끄기
+  		    pauseOnHover:false, //마우스올렸을때 멈춤기능 끄기
+  		    slidesToShow:1, //보여질 썸네일 갯수,한번에 보여줄 슬라이드 개수
+  		    slidesToScroll:1, // 스크롤되는 썸네일 갯수,2는 2개씩 1은 1개씩
+  		    autoplaySpeed:2000 //자동으로 실행되어지느 시간
   			});
   		
   		
@@ -102,9 +96,14 @@
   		});
 
   		
+  		$('.house-house_list_item').each(function () { 
+  			console.log("each 값 : " + $(this));
+  		});
+
   		
 		//이미지 출력기능
-		var imgSource = $('#imgSource').val();
+		var imgSource = $('.imgSource').val();
+		
 		console.log('imgSource : ' + imgSource);
 		var imgsplit = imgSource.split(',');
 		console.log(imgsplit);
