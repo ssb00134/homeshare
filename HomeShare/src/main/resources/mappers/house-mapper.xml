@@ -31,6 +31,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from ${house} where ${memNo} = #{memNo}
 	</select>
 
+	<!-- 검색 쿼리 영역  기본값 location -->
+	<!-- location -->
+	<select id="select_by_location" resultType="houseVO">
+		<!-- SELECT * FROM house WHERE location LIKE '%수원%'; -->
+		SELECT * FROM ${house WHERE ${location} LIKE '%#{location}%'
+	</select>
+	
+
+
+
+
+
 	<!-- 페이징 처리 -->
 	<select id="paging" resultType="houseVO">
 		select

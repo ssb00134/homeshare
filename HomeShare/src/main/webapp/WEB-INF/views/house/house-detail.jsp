@@ -53,12 +53,13 @@
 		</div>
 		<div>
 		<div>
-		<input type="text" name="bookMem" placeholder="인원">
+		
+		<input type="number"  name="bookMem" id="bookMem" numberOnly value="1">   <br>
 		</div>
-		<input type="number" readonly="readonly" name="price" value="${houseVO.price }">   <br>
-		총 합계<input type="number" readonly="readonly" name="totalPrice">  <br>
+		<input type="number" readonly="readonly" name="price" id="price" value="${houseVO.price }">   <br>
+		총 합계<input type="number" readonly="readonly" name="totalPrice" id="totalPrice">  <br>
 		<div id="bookdate"></div>
-		<br><input type="submit" value="예약하기">
+		
 		</div>
 		
 		</form>
@@ -87,10 +88,11 @@
 	<!-- 리플 영역 -->
 	아이디 ${memId }
 	
-	
+	<hr>
 	<div id="showReply">
 		총 <div id ="countReply"></div>개의 후기가 있습니다.
 	</div>
+	<hr>
 	<div id = "replies" style="display:none " ></div>
 	<div>
 	<input type="text" id="memId" value="${memId }" readonly >
@@ -228,11 +230,30 @@
 		
 		//totalprice
 		//가격 = 인원 * 날짜 * 기본가격
-		$('#totalPrice').val($('#price') * $('#dateDiffer') * $('#bookMem'));
-		if($('#dateDiffer').val()*1 <0 ){
-		alsert('불가');
-		}
-		
+
+		$('#bookMem').focus(function(){
+			console.log('focus');
+			var bookMem = $('#bookMem').val();
+			var price = $('#price').val();
+			var dateDiffer = $('#dateDiffer').val();
+			$('#totalPrice').val(bookMem* price * dateDiffer);
+			
+			console.log("bookmem : " + bookMem)
+			console.log($('#price').val());
+			console.log($('#dateDiffer').val());
+		});
+		$('#bookMem').blur(function(){
+			console.log('blur');
+			var bookMem = $('#bookMem').val();
+			var price = $('#price').val();
+			var dateDiffer = $('#dateDiffer').val();
+			$('#totalPrice').val(bookMem* price * dateDiffer);
+			
+			console.log("bookmem : " + bookMem)
+			console.log($('#price').val());
+			console.log($('#dateDiffer').val());
+			
+		});
 		
 		
 		

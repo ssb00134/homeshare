@@ -14,6 +14,7 @@ public interface HouseDAO {
 	List<HouseVO> selectAllByMemNo(int memNo);
 	int getTotalNumsOfRecords();
 	int getCountHouseByMemNo(int memNo);
-	
+	//주소검색
+	List<HouseVO> select(String location);
 
 }

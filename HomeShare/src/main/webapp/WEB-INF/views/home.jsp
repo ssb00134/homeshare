@@ -33,7 +33,7 @@ header {
 	</c:if>
 	<!-- 헤더바 -->
 	<header>
-
+		${roadFullAddr}roadFullAddr
 		<div id="main-button">
 			<a href="/homeshare/">go main</a>
 		</div>
@@ -45,7 +45,7 @@ header {
 			<a href="/homeshare/member/sign-up/">sign-up</a>
 		</div>
 
-
+	
 
 		<c:if test="${empty memId }">
 		<!-- 모달버튼 -->
@@ -120,6 +120,10 @@ header {
 		<br>
 		<div>
 			<a href="/homeshare/mail">메일테스트</a>
+		</div>
+		<br>
+		<div>
+			<a href="/homeshare/jusoPopup"><input type="text">주소테스트</a>
 		</div>
 		<br>
 	</div>

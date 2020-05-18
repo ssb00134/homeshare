@@ -71,5 +71,10 @@ public class HouseDAOImple implements HouseDAO {
 		logger.info("getCountHouseByMemNo 실행");
 		return sqlSession.selectOne(NAMESPACE + ".selectcount_house_by_memno_no",memNo);
 	}
+	@Override
+	public List<HouseVO> select(String location) {
+		logger.info("select location 실행");
+		return sqlSession.selectList(NAMESPACE + ".select_by_location",location);
+	}
 
 }

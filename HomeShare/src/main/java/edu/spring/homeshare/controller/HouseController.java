@@ -59,8 +59,9 @@ public class HouseController {
 		logger.info("한 페이지 당 게시글 수 : " + c.getNumsPerPage());
 		logger.info("시작 페이지 링크 번호(startPageNO) : " + maker.getStartPageNo());
 		logger.info("끝 페이지 링크 번호(endPageNo) : " + maker.getEndPageNo());
-		
 	}
+	
+	/* location 검색 실행 */
 	
 
 	/*house-detail 메핑*/

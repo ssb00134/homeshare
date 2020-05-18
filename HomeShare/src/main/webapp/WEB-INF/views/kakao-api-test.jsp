@@ -12,17 +12,12 @@
     <em class="link">
         <a href="javascript:void(0);" onclick="window.open('http://fiy.daum.net/fiy/map/CsGeneral.daum', '_blank', 'width=981, height=650')">
             혹시 주소 결과가 잘못 나오는 경우에는 여기에 제보해주세요.
-          
         </a>
     </em>
 </p>
-  
 <div id="map" style="width:100%;height:350px;"></div>
-
-<input type="text" id= "search" placeholder="장소 입력">
-<input type="button" id="exeSearch" placeholder="검색" onclick="exeSearch()">
-
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b76b064de112b5b283e72470515766f4&libraries=services"></script>
+<div id="searchArea"><input type="text" id="search"></div>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	b76b064de112b5b283e72470515766f4&libraries=services"></script>
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
@@ -36,18 +31,9 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 // 주소-좌표 변환 객체를 생성합니다
 var geocoder = new kakao.maps.services.Geocoder();
 
-//검색값 읽어오기
-var search = document.getElementById('search');
-console.log('search : ' + search.innerHTML);
-
-var searchValue = document.getElementById('search').innerHTML;
-console.log('searchValue : ' + searchValue);
-
-function exeSearch(){
-	console.log('search : ' + search.innerHTML);
-}
 // 주소로 좌표를 검색합니다
-geocoder.addressSearch('제주특별자치도 제주시 첨단로 242', function(result, status) {
+var search = document.getElementById('search').value;
+geocoder.addressSearch(search, function(result, status) {
 
     // 정상적으로 검색이 완료됐으면 
      if (status === kakao.maps.services.Status.OK) {

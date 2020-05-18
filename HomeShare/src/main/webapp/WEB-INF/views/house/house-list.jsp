@@ -103,7 +103,7 @@
   		
 		//이미지 출력기능
 		var imgSource = $('.imgSource').val();
-		
+
 		console.log('imgSource : ' + imgSource);
 		var imgsplit = imgSource.split(',');
 		console.log(imgsplit);

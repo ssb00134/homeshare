@@ -56,8 +56,8 @@
 		<br>
 		<hr>
 		<p>숙소의 위치를 알려주세요</p>
+		<a href="/homeshare/jusoPopup" onclick="window.open(this.href, '_blanck', 'width=600, height=400'); return false">주소입력</a>
 		<input type="text" name="location" required="required">
-		<br> //TODO : 네이버 api를 이용하여 지도 적용시키기
 		<hr>
 		<p>어떤 편의시설을 제공하나요?</p>
 		<input type="checkbox" name="utilities" value="필수품목" required="required">
