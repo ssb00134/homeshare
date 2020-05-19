@@ -1,5 +1,6 @@
 package edu.spring.homeshare.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,9 +32,8 @@ public class HouseController {
 	private HouseService houseService;
 	
 	@RequestMapping(value = "/house-list", method = RequestMethod.GET)
-	public void houseLIst(Model model, Integer page, Integer prePage) {
+	public void houseLIst(Model model, Integer page, Integer prePage, HttpServletRequest req) {
 		logger.info("houselist get 실행");
-		
 		
 		/*페이징 처리*/
 		PageCriteria c = new PageCriteria();
@@ -45,7 +45,29 @@ public class HouseController {
 		if(prePage != null) {
 			c.setNumsPerPage(prePage);
 		}
-		List<HouseVO> list = houseService.read(c);
+		
+		/*파라미터 지정*/
+		String location = req.getParameter("location");
+		logger.info("location : " + location);
+		String bookableDateBegin = req.getParameter("checkIn");
+		logger.info("bookableDateBegin : " + bookableDateBegin);
+		String bookableDateEnd = req.getParameter("checkOut");
+		logger.info("bookableDateEnd : " + bookableDateEnd);
+		int maxCapacity = Integer.parseInt(req.getParameter("maxCapacity"));
+		logger.info("maxCapacity : " + maxCapacity);
+		
+		/*hash맵에 정보 넣기*/
+		HashMap<String, Object>map = new HashMap<String, Object>();
+		map.put("location", location); 
+		map.put("bookableDateBegin", bookableDateBegin);
+		map.put("bookableDateEnd", bookableDateEnd);
+		map.put("maxCapacity", maxCapacity);
+		map.put("start",c.getStart());
+		map.put("end",c.getEnd());
+		logger.info("maptostring : " +map.toString());
+		
+		
+		List<HouseVO> list = houseService.multySelect(map);
 		logger.info("list 정보 : " + list.toString());
 		model.addAttribute("houseList",list);
 		

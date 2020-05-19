@@ -23,47 +23,45 @@ import edu.spring.homeshare.util.PageCriteria;
 @Controller
 public class SearchController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
+
 	@Autowired
 	private HouseService houseService;
-	
+
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public void search(
-			HttpServletRequest req,
-			Model model, Integer page, Integer prePage) {	
-		
-		/*페이징 처리*/
+	public void search(HttpServletRequest req, Model model, Integer page, Integer prePage) {
+
+		/* 페이징 처리 */
 		PageCriteria c = new PageCriteria();
 		logger.info("page : " + page);
-		if(page !=null) {
+		if (page != null) {
 			c.setPage(page);
 		}
-		if(prePage != null) {
+		if (prePage != null) {
 			c.setNumsPerPage(prePage);
 		}
-		
-		
-		/*파라미터 지정*/
+
+		/* 파라미터 지정 */
 		String location = req.getParameter("location");
 		logger.info("location : " + location);
 		String bookableDateBegin = req.getParameter("checkIn");
 		logger.info("bookableDateBegin : " + bookableDateBegin);
 		String bookableDateEnd = req.getParameter("checkOut");
 		logger.info("bookableDateEnd : " + bookableDateEnd);
-		int maxCapacity = Integer.parseInt(req.getParameter("maxCapacity"));
+		String maxCapacity = req.getParameter("maxCapacity");
 		logger.info("maxCapacity : " + maxCapacity);
-		
-		/*hash맵에 정보 넣기*/
-		HashMap<String, Object>map = new HashMap<String, Object>();
-		map.put("location", location); 
+
+		/* hash맵에 정보 넣기 */
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("location", location);
 		map.put("bookableDateBegin", bookableDateBegin);
 		map.put("bookableDateEnd", bookableDateEnd);
 		map.put("maxCapacity", maxCapacity);
-		map.put("start",c.getStart());
-		map.put("end",c.getEnd());
-		logger.info("maptostring : " +map.toString());
-		
+	
+		logger.info("maptostring : " + map.toString());
+
 		List<HouseVO> list = houseService.multySelect(map);
-		logger.info(list.toString());
+		logger.info("list 정보 : " + list.toString());
+		logger.info("list 갯수 : " + list.size());
+
 	}
 }
