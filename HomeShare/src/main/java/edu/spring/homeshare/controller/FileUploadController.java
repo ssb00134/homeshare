@@ -120,7 +120,7 @@ public class FileUploadController {
 		/* 폴더 초기화
 		 * memid내에 모든 폴더를 삭제한다.
 		 * */
-		FileUploadUtil.deleteDir( MockUploadPath,  memId);
+		FileUploadUtil.deleteDir( MockUploadPath + File.separator + memId);
 		
 		int filelength = FileUploadUtil.countFile(MockUploadPath, memId+File.separator + memNoCount);//path = memId+File.separator + memNoCount
 		logger.info("파일 갯수 : " + filelength);

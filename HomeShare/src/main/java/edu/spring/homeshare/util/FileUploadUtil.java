@@ -98,28 +98,29 @@ public class FileUploadUtil {
 	}
 
 	// 디렉토리를 삭제하는 함수
-	public static void deleteDir(String uploadPath, String path) { // path = memId+File.separator + memNoCount)
+	public static void deleteDir(String path) { // path = memId+File.separator + memNoCount)
 
-		String deletePath = uploadPath + File.separator + path;
-		File folder = new File(deletePath);
+		
+		File folder = new File(path);
 		try {
-		    while(folder.exists()) {
-			File[] folder_list = folder.listFiles(); //파일리스트 얻어오기
-					
-			for (int j = 0; j < folder_list.length; j++) {
-				folder_list[j].delete(); //파일 삭제 
-				System.out.println("파일이 삭제되었습니다.");
-						
+			if (folder.exists()) {
+				File[] folder_list = folder.listFiles(); // 파일리스트 얻어오기
+
+				for (int i = 0; i < folder_list.length; i++) {
+					if (folder_list[i].isFile()) {
+						folder_list[i].delete();
+						System.out.println("파일이 삭제되었습니다.");
+					} else {
+						deleteDir(folder_list[i].getPath()); // 재귀함수호출
+						System.out.println("폴더가 삭제되었습니다.");
+					}
+					folder_list[i].delete();
+				}
+				folder.delete(); // 폴더 삭제
 			}
-					
-			if(folder_list.length == 0 && folder.isDirectory()){ 
-				folder.delete(); //대상폴더 삭제
-				System.out.println("폴더가 삭제되었습니다.");
-			}
-	            }
-		 } catch (Exception e) {
+		} catch (Exception e) {
 			e.getStackTrace();
-		 }
+		}
 	}
 
 	// 파일의 개수를 구하는 함수
