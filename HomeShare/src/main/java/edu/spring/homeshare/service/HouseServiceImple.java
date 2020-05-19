@@ -1,6 +1,8 @@
 package edu.spring.homeshare.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +17,7 @@ import edu.spring.homeshare.util.PageCriteria;
 public class HouseServiceImple implements HouseService {
 	
 	Logger logger = LoggerFactory.getLogger(HouseDAOImple.class);
-
+	
 	@Autowired
 	private HouseDAO HouseDao;
 	
@@ -53,5 +55,9 @@ public class HouseServiceImple implements HouseService {
 	public int getCountByMemNo(int memNo) {
 		return HouseDao.getCountHouseByMemNo(memNo);
 	}
-
+	
+	@Override
+	public List<HouseVO> multySelect(HashMap<String, Object> map ) {
+		return HouseDao.select(map);
+	}
 }

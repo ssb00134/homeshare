@@ -1,5 +1,6 @@
 package edu.spring.homeshare.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import edu.spring.homeshare.domain.HouseVO;
@@ -14,4 +15,5 @@ public interface HouseService {
 	List<HouseVO> read(PageCriteria criteria);
 	int getToTotalNumsOfRecords();
 	int getCountByMemNo(int memNo);
+	List<HouseVO> multySelect(HashMap<String, Object> map );
 }

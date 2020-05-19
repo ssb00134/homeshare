@@ -1,6 +1,8 @@
 package edu.spring.homeshare.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -20,6 +22,10 @@ public class HouseDAOImple implements HouseDAO {
 	private SqlSession sqlSession;
 	
 	Logger logger = LoggerFactory.getLogger(HouseDAOImple.class);
+	
+	
+
+
 	
 	
 
@@ -75,6 +81,11 @@ public class HouseDAOImple implements HouseDAO {
 	public List<HouseVO> select(String location) {
 		logger.info("select location 실행");
 		return sqlSession.selectList(NAMESPACE + ".select_by_location",location);
+	}
+	@Override
+	public List<HouseVO> select(HashMap<String, Object> map ) {
+		logger.info("multy select 실행");
+		return sqlSession.selectList(NAMESPACE + ".multy_select",map);
 	}
 
 }

@@ -43,6 +43,13 @@ public class HomeController {
 		
 		return "home";
 	}
+	@RequestMapping(value = "/house-insert-sample", method = RequestMethod.GET)
+	public void houseInsertTestsample() {
+		logger.info("house insert " );
+		
+		}
+	
+	
 	@RequestMapping(value = "/house-insert", method = RequestMethod.GET)
 	public void houseInsertTest() {
 		logger.info("house insert " );

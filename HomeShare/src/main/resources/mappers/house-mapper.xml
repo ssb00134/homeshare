@@ -31,15 +31,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from ${house} where ${memNo} = #{memNo}
 	</select>
 
-	<!-- 검색 쿼리 영역  기본값 location -->
+	<!-- 검색 쿼리 영역 기본값 location -->
 	<!-- location -->
 	<select id="select_by_location" resultType="houseVO">
 		<!-- SELECT * FROM house WHERE location LIKE '%수원%'; -->
-		SELECT * FROM ${house WHERE ${location} LIKE '%#{location}%'
+		SELECT * FROM ${house} WHERE ${location} LIKE '%#{location}%'
 	</select>
-	
 
-
+	<!-- 다중쿼리문 -->
+	<select id="multy_select" parameterType="java.util.HashMap"
+		resultType="houseVO">
+		SELECT * FROM ${house}
+		<where>
+				location like '%' || #{location} || '%' 
+			
+			<if test="checkIn != null">
+				AND ${bookableDateBegin} <![CDATA[>=]]> #{bookableDateBegin}
+			</if>
+			<if test="checkOut != null">
+				AND ${bookableDateEnd} <![CDATA[<=]]> #{bookableDateEnd}
+			</if>
+			<if test="maxCapacity != null">
+				AND ${maxCapacity} <![CDATA[<=]]> #{maxCapacity}
+			</if>
+		</where>
+	</select>
 
 
 
