@@ -143,7 +143,7 @@
 		<p>숙소요금 설정하기</p>
 		<input type="text" name="price"required="required">
 		<br>
-		<input type="submit" value="등록하기">
+		<input type="submit" id="submit" value="등록하기">
 		<br>
 
 	</form>
@@ -215,13 +215,45 @@
     //1. 파일을 올려놓을시 가짜 ajax에 전송한다.
     //2. 가짜 ajax에 파일을 올려넣을 경우 fileuploadcontroller에서 자동 삭제한다.
     //3. submit을 넣을시 진짜 ajax에 전송한다.
-    var frm = $('#house-insert-form');
-    if(frm.submit){
+    $('#submit').click(function() {
     	console.log('전송');
-    }
-    
-    
-
+    	var formData = new FormData();
+    	$.ajax({
+            type: 'post', 
+            url : '/homeshare/upload-ajax', 
+            data : formData,
+            processData : false,
+            contentType : false,
+            /*
+            	form의 enctype 속성을 
+            	기본값인 "application/x-www-form-urlencoded"을 사용하지 않고
+            	"multipart/form-data"를 사용하기 위해 (contentType : false)를 지정
+            */
+            success: function(data) {
+              alert(data);
+              var str = $('.upload-list').html();
+              str += '<div class ="img_items">'
+              		+ '<img src="/homeshare/display?fileName='
+              	    + data
+              	    + '" />'
+              	    + data
+              	    + '</div>';
+              $('.upload-list').html(str);
+      			
+              var sum = '';
+              console.log('img items : ' + $('.img_items').html());
+              $('.img_items').each(function(){
+                  sum += $(this).text() +','; 
+                  console.log('sum : ' + sum);
+              });
+               console.log('sum : ' + sum);
+               
+               $('input[name=image]').val(sum);
+               console.log('name image :'+$('input[name=image]').val());
+            } //end success;
+          }); //end ajax
+    	
+    	});
     
   });//end document
   </script>  

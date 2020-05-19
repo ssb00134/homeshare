@@ -92,7 +92,7 @@
 	<!-- String mockUploadPath = new String("경로"); -->
 	<beans:bean id="MockUploadPath" class="java.lang.String">
 		<beans:constructor-arg
-			value="C:\\study\\]MockUploadPath">
+			value="C:\\study\\MockUploadPath">
 		</beans:constructor-arg>
 	</beans:bean>
 
