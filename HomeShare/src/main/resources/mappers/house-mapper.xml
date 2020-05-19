@@ -89,17 +89,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM ${house}
 		<where>
 			location like '%' || #{location} || '%'
-			<if test="checkIn != null">
+			<if test='bookableDateBegin != null and bookableDateBegin != ""'>
 				AND ${bookableDateBegin} <![CDATA[>=]]>
 				#{bookableDateBegin}
 			</if>
-			<if test="#{bookableDateEnd} != null">
+			<if test='bookableDateEnd != null and bookableDateEnd != ""'>
+
 				AND ${bookableDateEnd} <![CDATA[<=]]>
 				#{bookableDateEnd}
 			</if>
 			<if test="#{maxCapacity} != null">
 				AND ${maxCapacity} <![CDATA[<=]]>
-				#{maxCapacity}
+				maxCapacity
 			</if>
 		</where>
 		<!-- 다중검색 end -->
@@ -115,6 +116,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) total_cnt
 		from ${house}
 	</select>
+
+
+	<select id="total_count_multy_select" resultType="Integer">
+		select count(*) total_cnt
+		from ${house}
+		<where>
+			location like '%' || #{location} || '%'
+			<if test='bookableDateBegin != null and bookableDateBegin != ""'>
+				AND ${bookableDateBegin} <![CDATA[>=]]>
+				#{bookableDateBegin}
+			</if>
+			<if test='bookableDateEnd != null and bookableDateEnd != ""'>
+
+				AND ${bookableDateEnd} <![CDATA[<=]]>
+				#{bookableDateEnd}
+			</if>
+			<if test="#{maxCapacity} != null">
+				AND ${maxCapacity} <![CDATA[<=]]>
+				maxCapacity
+			</if>
+		</where>
+	</select>
+
+
+
+
+
+
 
 	<!-- select count house의 memno 구하기 -->
 	<select id="selectcount_house_by_memno_no" resultType="Integer">

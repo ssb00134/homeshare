@@ -19,6 +19,7 @@ import edu.spring.homeshare.HomeController;
 import edu.spring.homeshare.domain.HouseVO;
 import edu.spring.homeshare.service.HouseService;
 import edu.spring.homeshare.util.PageCriteria;
+import edu.spring.homeshare.util.PageMaker;
 
 @Controller
 public class SearchController {
@@ -56,12 +57,27 @@ public class SearchController {
 		map.put("bookableDateBegin", bookableDateBegin);
 		map.put("bookableDateEnd", bookableDateEnd);
 		map.put("maxCapacity", maxCapacity);
-	
+		map.put("start",c.getStart());
+		map.put("end",c.getEnd());
 		logger.info("maptostring : " + map.toString());
 
 		List<HouseVO> list = houseService.multySelect(map);
 		logger.info("list 정보 : " + list.toString());
 		logger.info("list 갯수 : " + list.size());
+		model.addAttribute("houseList",list);
+		
+		PageMaker maker = new PageMaker();
+		maker.setCriteria(c);
+		maker.setTotalCount(houseService.getToTotalNumsOfRecords(map));
+		maker.setPageData();
+		model.addAttribute("pageMaker", maker);
+		
+		logger.info("전체 하우스 수 : " + maker.getTotalCount());
+		logger.info("현재 선택된 페이지 : " + c.getPage());
+		logger.info("한 페이지 당 게시글 수 : " + c.getNumsPerPage());
+		logger.info("시작 페이지 링크 번호(startPageNO) : " + maker.getStartPageNo());
+		logger.info("끝 페이지 링크 번호(endPageNo) : " + maker.getEndPageNo());
+
 
 	}
 }

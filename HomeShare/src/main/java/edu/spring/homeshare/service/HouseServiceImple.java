@@ -60,4 +60,9 @@ public class HouseServiceImple implements HouseService {
 	public List<HouseVO> multySelect(HashMap<String, Object> map ) {
 		return HouseDao.select(map);
 	}
+	
+	@Override
+	public int getToTotalNumsOfRecords(Map<String, Object> map) {
+		return HouseDao.getTotalNumsOfRecords(map);
+	}
 }

@@ -79,9 +79,12 @@ public class HouseDAOImple implements HouseDAO {
 	}
 	@Override
 	public List<HouseVO> select(HashMap<String, Object> map ) {
-		logger.info("multy select 실행");
-		return sqlSession.selectList(NAMESPACE + ".multy_select",map);
+		logger.info("paging_multy_select 실행");
+		return sqlSession.selectList(NAMESPACE + ".paging_multy_select",map);
 	}
-	
+	@Override
+	public int getTotalNumsOfRecords(Map<String, Object> map) {
+		return sqlSession.selectOne(NAMESPACE + ".total_count_multy_select", map);
+	}
 
 }

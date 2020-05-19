@@ -23,5 +23,8 @@ public interface HouseDAO {
 	List<HouseVO> select(String location);
 	List<HouseVO> select(HashMap<String, Object> map );
 	//List<HouseVO> select(PageCriteria c,HashMap<String, Object> map );
+	
+	int getTotalNumsOfRecords(Map<String, Object> map);
+	
 
 }
