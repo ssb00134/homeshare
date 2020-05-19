@@ -35,7 +35,7 @@
           <input class = "imgSource"  type="hidden" value="${vo.image }" /><br>
 		  <!-- 이미지슬라이더 -->
 		  <div class="home__slider">
-			<ul class="bxslider"></ul>
+			<ul class="bxslider" ></ul>
 		 </div>
 		  </div>
           <hr>
@@ -70,6 +70,20 @@
   	$(document).ready(function(){
   		
   		
+		//클릭시 detail로 전송
+		var bxslider =  $('.house_list_item').find('ul');
+    	  $('.house_list_item').not( bxslider ).click(function(){
+    	    //event.preventDefault();
+    	    var houseNo = this.id;
+    	    console.log(houseNo);
+    	    var frm = $('#pagingForm');
+    	    frm.attr('action', '/homeshare/house/house-detail');
+    	    frm.attr('method', 'get');
+    	    frm.find('[name="houseNo"]').val(houseNo);
+    	    frm.submit(); 
+    	  }); // end click()
+  		
+
   		$('.house_list_item').each(function (index, element) { 
   			$(element).find('ul').attr('id',index);
   		
@@ -90,7 +104,15 @@
   		});
 
   	//bxslider	
-  	 $('.bxslider').bxSlider();
+  	$('.bxslider').bxSlider({ 
+  		auto: true, 
+  		speed: 5000, 
+  		pause: 4000, 
+  		mode:'fade', 
+  		autoControls: true, 
+  		pager:true, 
+  		});
+
 
   		
   	  // 클릭한 a태그의 정보를 가져오는 코드
@@ -107,16 +129,6 @@
   	    frm.submit(); // form 데이터 전송 
   	  }); // end click()
   	  
-  	  $('.house_list_item').click(function(){
-  	    event.preventDefault();
-  	    var houseNo = this.id;
-  	    console.log(houseNo);
-  	    var frm = $('#pagingForm');
-  	    frm.attr('action', 'house-detail');
-  	    frm.attr('method', 'get');
-  	    frm.find('[name="houseNo"]').val(houseNo);
-  	    frm.submit(); 
-  	  }); // end click()
   	  
   	  // register에서 넘어온 insert_result 데이터를 바탕으로 alert 처리
   	  if ('${insert_result}' === 'success') {

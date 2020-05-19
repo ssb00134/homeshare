@@ -40,6 +40,9 @@ public class FileUploadController {
 	@Resource(name = "uploadPath")
 	private String uploadPath;
 	
+	@Resource(name="MockUploadPath")
+	private String MockUploadPath;
+	
 	@Autowired
 	private HouseService houseService;
 	
@@ -49,10 +52,6 @@ public class FileUploadController {
 		logger.info("/homeshare/file-upload-test 호출");
 	}
 
-	@RequestMapping(value = "/upload", method = RequestMethod.GET)
-	public void uploadGet() {
-		logger.info("uploadGet() 호출" + uploadPath);
-	}
 
 
 
@@ -90,6 +89,51 @@ public class FileUploadController {
 			String result = null;
 			logger.info("filelength : " + filelength);
 			result = FileUploadUtil.saveUploadedFile(uploadPath, memId,memNoCount, files[0].getOriginalFilename(),
+					files[0].getBytes());
+			logger.info("result 값 : " + result.toString());
+
+			 
+			return new ResponseEntity<String>(result, HttpStatus.OK);
+		} else
+			return new ResponseEntity<String>(fail, HttpStatus.OK);
+	}
+	// end upload ajax
+	
+	/* 가짜 MockUploadPath */
+	@RequestMapping(value = "/mock-upload-ajax", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<String> MockuploadAjaxPOST(MultipartFile[] files, HttpServletRequest req) throws Exception {
+		logger.info("Mock uploadAjaxPOST() 호출");
+
+		// 세션 아이디 가져오기
+		HttpSession session = req.getSession();
+		String memId = (String) session.getAttribute("memId"); // 세션에서 아이디 가져오기
+		logger.info("세션값 : " + memId);
+		
+		//세션 vo 가져오기
+		int memNo = (int) session.getAttribute("memNo");
+		logger.info("memno 세션값 : " + memNo);
+		//memnocount : 등록된 번호
+		int memNoCount = houseService.getCountByMemNo(memNo);
+		logger.info("memno가 세션memno인 하우스 갯수 : " + memNoCount);
+		
+		/* 폴더 초기화
+		 * memid내에 모든 폴더를 삭제한다.
+		 * */
+		FileUploadUtil.deleteDir( MockUploadPath,  memId);
+		
+		int filelength = FileUploadUtil.countFile(MockUploadPath, memId+File.separator + memNoCount);//path = memId+File.separator + memNoCount
+		logger.info("파일 갯수 : " + filelength);
+		String fail = "not more 5 items";
+		
+		logger.info("파일 존재? : " +FileUploadUtil.isFile(MockUploadPath, memId));
+		//logger.info("등록된 memno의 갯수 : " + houseService.selectByHouseNo(houseNo));
+		
+		if (filelength < 20) { // 파일이 10개 이하일때만 실행
+			// 파일 하나만 저장
+			String result = null;
+			logger.info("filelength : " + filelength);
+			result = FileUploadUtil.saveUploadedFile(MockUploadPath, memId,memNoCount, files[0].getOriginalFilename(),
 					files[0].getBytes());
 			logger.info("result 값 : " + result.toString());
 

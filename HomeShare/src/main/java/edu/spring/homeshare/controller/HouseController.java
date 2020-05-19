@@ -120,6 +120,7 @@ public class HouseController {
 			logger.info("insert ½ÇÆĞ");
 			reAttr.addFlashAttribute("insert_result", "fail");
 		}
-		return "redirect:/house/house-list";
+		//return "redirect:/house/house-list";
+		return "/";
 	}
 }

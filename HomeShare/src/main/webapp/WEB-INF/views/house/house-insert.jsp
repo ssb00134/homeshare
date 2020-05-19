@@ -16,7 +16,8 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-	<form action="/homeshare/house/house-insert-post" method="post">
+<!-- action="/homeshare/house/house-insert-post" method="post" -->
+	<form  id="house-insert-form" action="/homeshare/house/house-insert-post" method="post" >
 		<h1>하우스 등록하기</h1>
 		<hr>
 		<p>1단계 기본 사항 입력</p>
@@ -56,8 +57,7 @@
 		<br>
 		<hr>
 		<p>숙소의 위치를 알려주세요</p>
-		<a href="/homeshare/jusoPopup" onclick="window.open(this.href, '_blanck', 'width=600, height=400'); return false">주소입력</a>
-		<input type="text" name="location" required="required">
+		<input type="text" name="location" id="location" required="required">
 		<hr>
 		<p>어떤 편의시설을 제공하나요?</p>
 		<input type="checkbox" name="utilities" value="필수품목" required="required">
@@ -176,7 +176,7 @@
       
       $.ajax({
         type: 'post', 
-        url : '/homeshare/upload-ajax', 
+        url : '/homeshare/mock-upload-ajax', 
         data : formData,
         processData : false,
         contentType : false,
@@ -206,11 +206,19 @@
            
            $('input[name=image]').val(sum);
            console.log('name image :'+$('input[name=image]').val());
-          
-
         } //end success;
       }); //end ajax
     }); //end file drop
+    
+    
+    //만약 등록을 안했으면 파일 자동으로 삭제해야함
+    //1. 파일을 올려놓을시 가짜 ajax에 전송한다.
+    //2. 가짜 ajax에 파일을 올려넣을 경우 fileuploadcontroller에서 자동 삭제한다.
+    //3. submit을 넣을시 진짜 ajax에 전송한다.
+    var frm = $('#house-insert-form');
+    if(frm.submit){
+    	console.log('전송');
+    }
     
     
 

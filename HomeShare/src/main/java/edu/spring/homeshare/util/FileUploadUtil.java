@@ -99,7 +99,7 @@ public class FileUploadUtil {
 	}
 
 	// 디렉토리를 삭제하는 함수
-	private static void deleteDir(String uploadPath, String path) { // path = memId+File.separator + memNoCount)
+	public static void deleteDir(String uploadPath, String path) { // path = memId+File.separator + memNoCount)
 		File folder = new File(uploadPath + File.separator + path);
 		try {
 			while (folder.exists()) {
