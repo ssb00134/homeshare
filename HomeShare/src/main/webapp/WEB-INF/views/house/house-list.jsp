@@ -116,13 +116,7 @@
 		});
 		$('.bxslider').html(list);
 		//end img 출력기능
-  		
-  		
-  		
-  		
-  		
-  		
-  		
+
   		
   	  // 클릭한 a태그의 정보를 가져오는 코드
   	  $('.pager li a').click(function() { 
@@ -156,8 +150,6 @@
   	    alert('새 글 작성 실패');
   	  }
   	}); // end document
-  	
-
   </script>
   
 </body>

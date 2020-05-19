@@ -22,5 +22,6 @@ public interface HouseDAO {
 	//주소검색
 	List<HouseVO> select(String location);
 	List<HouseVO> select(HashMap<String, Object> map );
+	//List<HouseVO> select(PageCriteria c,HashMap<String, Object> map );
 
 }

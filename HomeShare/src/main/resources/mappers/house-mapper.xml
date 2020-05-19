@@ -43,21 +43,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resultType="houseVO">
 		SELECT * FROM ${house}
 		<where>
-				location like '%' || #{location} || '%' 
-			
+			location like '%' || #{location} || '%'
 			<if test="checkIn != null">
-				AND ${bookableDateBegin} <![CDATA[>=]]> #{bookableDateBegin}
+				AND ${bookableDateBegin} <![CDATA[>=]]>
+				#{bookableDateBegin}
 			</if>
-			<if test="checkOut != null">
-				AND ${bookableDateEnd} <![CDATA[<=]]> #{bookableDateEnd}
+			<if test="#{bookableDateEnd} != null">
+				AND ${bookableDateEnd} <![CDATA[<=]]>
+				#{bookableDateEnd}
 			</if>
-			<if test="maxCapacity != null">
-				AND ${maxCapacity} <![CDATA[<=]]> #{maxCapacity}
+			<if test="#{maxCapacity} != null">
+				AND ${maxCapacity} <![CDATA[<=]]>
+				#{maxCapacity}
 			</if>
 		</where>
 	</select>
-
-
 
 	<!-- 페이징 처리 -->
 	<select id="paging" resultType="houseVO">
@@ -74,6 +74,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where rn
 		between #{start} and #{end}
 	</select>
+
+	<!-- 페이지 처리 + 다중검색 -->
+	<select id="paging_multy_select" resultType="houseVO"
+		parameterType="java.util.HashMap">
+		select
+		*
+		from (
+		select rownum rn,
+		a.*
+		from (
+		<!-- 다중검색 start -->
+		SELECT * FROM ${house}
+		<where>
+			location like '%' || #{location} || '%'
+			<if test="checkIn != null">
+				AND ${bookableDateBegin} <![CDATA[>=]]>
+				#{bookableDateBegin}
+			</if>
+			<if test="#{bookableDateEnd} != null">
+				AND ${bookableDateEnd} <![CDATA[<=]]>
+				#{bookableDateEnd}
+			</if>
+			<if test="#{maxCapacity} != null">
+				AND ${maxCapacity} <![CDATA[<=]]>
+				#{maxCapacity}
+			</if>
+		</where>
+		<!-- 다중검색 end -->
+		) a
+		) b
+		where rn
+		between #{start} and #{end}
+	</select>
+
+
 
 	<select id="total_count" resultType="Integer">
 		select count(*) total_cnt

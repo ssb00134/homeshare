@@ -33,7 +33,8 @@ public class HouseController {
 	@RequestMapping(value = "/house-list", method = RequestMethod.GET)
 	public void houseLIst(Model model, Integer page, Integer prePage) {
 		logger.info("houselist get 角青");
-
+		
+		
 		/*其捞隆 贸府*/
 		PageCriteria c = new PageCriteria();
 		logger.info("page : " + page);

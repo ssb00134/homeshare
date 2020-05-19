@@ -33,7 +33,6 @@ header {
 	</c:if>
 	<!-- 헤더바 -->
 	<header>
-		${roadFullAddr}roadFullAddr
 		<div id="main-button">
 			<a href="/homeshare/">go main</a>
 		</div>
