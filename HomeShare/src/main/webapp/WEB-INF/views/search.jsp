@@ -7,6 +7,7 @@
 <head>
 <style type="text/css">
 
+
 </style>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -68,33 +69,6 @@
   <script type="text/javascript">
   	$(document).ready(function(){
   		
-  		$('.bxslider').bxSlider({
-  		   autoplay:true, //자동실행
-  		    arrows:true, //좌우화살표끄기
-  		    dots:true, //페이지버튼나오기
-  		    swipe:false, //마우스드래그 이동 끄기
-  		    pauseOnHover:false, //마우스올렸을때 멈춤기능 끄기
-  		    slidesToShow:1, //보여질 썸네일 갯수,한번에 보여줄 슬라이드 개수
-  		    slidesToScroll:1, // 스크롤되는 썸네일 갯수,2는 2개씩 1은 1개씩
-  		    autoplaySpeed:2000 //자동으로 실행되어지느 시간
-  			});
-  		
-  		
-  		$(".bx-stop").click(function(){	// 중지버튼 눌렀을때	
-  			$('.bxslider').stopAuto();
-  			$(".bx-stop").hide();
-  			$(".bx-start").show();
-  			return false;
-  		});
-  		
-
-  		$(".bx-start").click(function(){	//시작버튼 눌렀을때
-  			$('.bxslider').startAuto();
-  			$(".bx-start").hide();
-  			$(".bx-stop").show();
-  			return false;
-  		});
-
   		
   		$('.house_list_item').each(function (index, element) { 
   			$(element).find('ul').attr('id',index);
@@ -109,14 +83,14 @@
   			imgsplit.forEach(function(index){
   			    if(imgsplit[imgsplit.length-1] != index){
   			    	console.log("index : " + index);
-  				    list += '<li><img src="/homeshare/display?fileName=' + index + '" alt="' + index.length + '"></li>';
+  				    list += '<li><img width="100" height="100" src="/homeshare/display?fileName=' + index + '" alt="' + index.length + '"></li>';
   			    }
   			});
   			$(element).find('ul').html(list);
   		});
 
-  		
-		
+  	//bxslider	
+  	 $('.bxslider').bxSlider();
 
   		
   	  // 클릭한 a태그의 정보를 가져오는 코드

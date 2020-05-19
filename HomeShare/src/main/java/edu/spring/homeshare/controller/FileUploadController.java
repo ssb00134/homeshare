@@ -121,6 +121,8 @@ public class FileUploadController {
 			HttpHeaders httpHeaders = new HttpHeaders();
 			httpHeaders.setContentType(MediaUtil.geMediaType(extension));
 
+		
+			
 			// 데이터 전송
 			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), // 파일에서 읽은 데이터
 					httpHeaders, // 응답 헤더
