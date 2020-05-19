@@ -53,7 +53,7 @@ public class HouseController {
 		logger.info("bookableDateBegin : " + bookableDateBegin);
 		String bookableDateEnd = req.getParameter("checkOut");
 		logger.info("bookableDateEnd : " + bookableDateEnd);
-		int maxCapacity = Integer.parseInt(req.getParameter("maxCapacity"));
+		String maxCapacity = req.getParameter("maxCapacity");
 		logger.info("maxCapacity : " + maxCapacity);
 		
 		/*hash맵에 정보 넣기*/
