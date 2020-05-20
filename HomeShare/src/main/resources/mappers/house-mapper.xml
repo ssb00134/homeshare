@@ -120,7 +120,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="select_seq" resultType="int">
 		SELECT ${houseNo} FROM ${house}
 		WHERE ${houseNo} = (SELECT max(${houseNo}) FROM ${house})
-	</select>
+	</select> 
+
 
 
 
@@ -162,7 +163,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- 입력 -->
-	<insert id="insert">
+	<insert id="insert" >
 		insert into ${house}
 		values(
 		#{houseNo},
@@ -192,9 +193,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{location}
 		)
 	</insert>
-
 	<update id="update">
-
 	</update>
 
 	<delete id="delete">

@@ -42,11 +42,11 @@
 		<div>
 		 <input type="text" class="testDatepicker" id="checkIn" name="checkIn" value=""> <br>
 		</div>
-		임시저장영역<input type="text" id="checkInDate"><br>
+		<input type="hidden" id="checkInDate"><br>
 
 		 <div>
 		 <input type="text" class="testDatepicker" id="checkOut" name="checkOut">  <br>
-		 임시저장영역<input type="text" id="checkOutDate"><br>
+		<input type="hidden" id="checkOutDate"><br>
 		</div>
 		날짜차이<input type="text" id="dateDiffer">
 		<div id = "hidden">
@@ -271,20 +271,36 @@
 		 var num2 = new Date();
 		 var num3 = new Date('$(checkOutDate)');
 		 
-		 $( ".testDatepicker" ).datepicker({
-			
-			dateFormat: "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
-			changeMonth: true, 
-	         changeYear: true,
-	         nextText: '다음 달',
-	         prevText: '이전 달',
-        	 minDate : (num2>num1)&&(num3>num1)?num1:(num2>num3?num3:num2),
+		
+		 
+		 $( "#checkIn" ).datepicker({
+				
+				dateFormat: "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
+				changeMonth: true, 
+		         changeYear: true,
+		         nextText: '다음 달',
+		         prevText: '이전 달',
+	        	 minDate : (num2>num1)&&(num3>num1)?num1:(num2>num3?num3:num2),
 
-        	 //최소 예약가능 시간
-        	 
-       	     maxDate: (new Date('${houseVO.bookableDateEnd}') > $('#checkIn').val() ?
-       	    		 new Date('${houseVO.bookableDateEnd}') :  new Date($('#checkIn').val()))
-    	});
+	        	 //최소 예약가능 시간
+	        	 
+	       	     maxDate:$('#checkOut').val()
+	    	});
+		 
+		 $( "#checkOut" ).datepicker({
+				
+				dateFormat: "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
+				changeMonth: true, 
+		         changeYear: true,
+		         nextText: '다음 달',
+		         prevText: '이전 달',
+	        	 minDate : (num2>num1)&&(num3>num1)?num1:(num2>num3?num3:num2),
+
+	        	 //최소 예약가능 시간
+	        	 
+	       	     maxDate: $( "#checkIn" ).val()
+	    	});
+		 
 		 var date1Time = null;
 		$( "#checkIn" ).change('click',function(){
 	    		console.log('on 실행' );			
@@ -303,6 +319,7 @@
 		    		 var dateDiffer =($('#checkOutDate').val() - $('#checkInDate').val()) / (86400*1000);
 		    			$('#dateDiffer').val(dateDiffer);
 	    		 }
+	    		 console.log('체크아웃 : ' + $('#checkOut').val());
 	    		
 	    });
 		var date2Time = null;
