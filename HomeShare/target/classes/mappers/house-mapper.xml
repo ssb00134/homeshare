@@ -184,7 +184,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{location}
 		)
 	</insert>
-
-
+	
+	<update id="update">
+		
+	</update>
+	
+	<delete id="delete">
+		delete from ${house}
+		where ${memNo} = ${memNo}
+	</delete>
 
 </mapper>

@@ -26,5 +26,7 @@ public interface HouseDAO {
 	
 	int getTotalNumsOfRecords(Map<String, Object> map);
 	
+	int update(int houseNo);
+	int delte(int houseNo);
 
 }

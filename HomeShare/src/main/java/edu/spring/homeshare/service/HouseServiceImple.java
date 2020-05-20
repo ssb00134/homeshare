@@ -65,4 +65,13 @@ public class HouseServiceImple implements HouseService {
 	public int getToTotalNumsOfRecords(Map<String, Object> map) {
 		return HouseDao.getTotalNumsOfRecords(map);
 	}
+	@Override
+	public int delete(int houseNo) {
+		return HouseDao.delte(houseNo);
+	}
+	@Override
+	public int update(int houseNo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
