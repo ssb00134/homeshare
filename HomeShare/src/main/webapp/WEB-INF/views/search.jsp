@@ -32,6 +32,10 @@
           <div>${vo.price}$</div>
           <div>${vo.scope}</div>
           <div>${vo.location}</div>
+          <div class="update"></div>
+          <div class="delete"></div>
+          <div class = "memNo" id="${vo.memNo }">${vo.memNo }</div>
+          <button type="button" value="house">버튼</button>
           <input class = "imgSource"  type="hidden" value="${vo.image }" /><br>
 		  <!-- 이미지슬라이더 -->
 		  <div class="home__slider">
@@ -87,6 +91,16 @@
   		$('.house_list_item').each(function (index, element) { 
   			$(element).find('ul').attr('id',index);
   		
+  			//세션 일치하는지 확인
+  			var sessionMemNo = '${memberVO.memNo}';
+  			console.log('sessionmemNo : '+sessionMemNo);
+  			var itemsMemNo = $(element).find('.memNo').attr('id');
+  			console.log('items memNo : ' +  $(element).find('.memNo').attr('id') );
+  			var deleteBtn = '<button type="button" value="/homeshare/house/house-update">수정</button>';
+  			if(itemsMemNo ===  sessionMemNo){
+  				console.log('세션No itemsno 일치');
+  				$(element).find('.delete').html(deleteBtn);
+  			}
   		//이미지 출력기능
   			var imgSource = $(this).children('input').val();
 
