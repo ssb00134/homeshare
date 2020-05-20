@@ -64,12 +64,24 @@
 		
 		</form>
 		</div>
-
 		
+		<!-- 리플 모달 -->
+		<input type="button" id="reply_btn" value="댓글 입력하기" />
+		
+		<div id="reply_dialog">
+		<form action="/homeshare/replies" id="reply">
+			<input type="text" id="memId" value="${memId }" readonly >
+       <input type="text" id="content" placeholder="댓글 입력" >
+ 
+       <input type="number" min="0" max="5" id="cleanScore" placeholder="청결도(5)">
+       <input type="number" min="0" max="5" id="checkinScore" placeholder="체크인점수">
+	 <button type="button" id="btn_add">작성</button>
+		</form>
+		</div>
 		
 		<!-- Trigger/Open The Modal -->
-	   <input type="button" id="button" value="신고하기" />
-	   <div id="dialog">
+	   <input type="button" id="report_btn" value="신고하기" />
+	   <div id="report_dialog">
 	   <form action="report" id="report">
 	   	<p>신고하기</p>
 	   	<p>이 숙소를 신고하시는 이유를 알려주세요.
@@ -94,14 +106,7 @@
 	</div>
 	<hr>
 	<div id = "replies" style="display:none " ></div>
-	<div>
-	<input type="text" id="memId" value="${memId }" readonly >
-       <input type="text" id="content" placeholder="댓글 입력" >
- 
-       <input type="number" min="0" max="5" id="cleanScore" placeholder="청결도(5)">
-       <input type="number" min="0" max="5" id="checkinScore" placeholder="체크인점수">
-	 <button type="button" id="btn_add">작성</button>
-	</div>
+	
 	<hr>
 	TODO : 리플의 memid와 세션의 memid가 일치하는지 확인할것
 	->프론트엔드에서 막음 
@@ -109,17 +114,83 @@
 	<br>
 	TODO : 결제한 회원만 리플가능
 	
-	'<img alt="" src=""><br>'
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	
 	<script type="text/javascript">
 	$(document).ready(function(){
+
+		//댓글 모달 영역
+		$("#reply_btn").click(function(){
+			$( "#reply_dialog" ).dialog( "open" ); 
+		});
 		
-		$("#button").click(function(){
-			$( "#dialog" ).dialog( "open" ); 
+		$( "#reply_dialog" ).dialog({ 
+			autoOpen: false, 
+			//레이어팝업 넓이 
+			width: 400, 
+			//뒷배경을 disable 시키고싶다면 true 
+			modal: true, 
+			buttons: [ 
+				{ //버튼텍스트 
+					text: "후기 작성", //클릭이벤트발생시 동작 
+					click: function() { 
+						var content = $('#content').val();
+						var memId ='${memId}';
+						var regdate =null;
+				  	  	var cleanScore = $('#cleanScore').val(); // 클린점수
+				  	  	var checkinScore = $('#checkinScore').val(); // 클린점수
+				  		var obj = {
+					  			'rno' : 0,
+					  	  	    'houseNo' : houseNo,
+					  	  		'content' : content,
+					  	  		'memId' : memId,
+					  	  		'regdate' : null,
+					  	  		'score' : 0,
+					  	  		'cleanScore' : cleanScore,
+					  	  		'checkinScore' : checkinScore
+				  	  	}; // end var obj
+				  	  	
+				  	  $.ajax({
+				  	  	  type : 'post',
+				  	  	  url : '/homeshare/replies',
+				  	  	  headers : {
+				  	  	    'Content-Type' : 'application/json', 
+				  	  	    'X-HTTP-Method-Override' : 'POST'
+				  	  	  }, 
+				  	  	  data : JSON.stringify(obj),
+				  	  	  success : function(result, status){
+				  	  	    console.log(result);
+				  	  	    console.log(status);
+				  	  	    if (result == 1){
+				  	  	      alert('댓글 입력 성공');
+				  	  	      $('#content').val(''); // 성공메시지 이후 삽입했던 content 데이터 삭제
+				  	  	      $('#memId').val(''); // 성공메시지 이후 삽입했던 memid 데이터 삭제
+				  	  	      $('#cleanScore').val('');
+				  	  	      $('#checkinScore').val('');
+				  	  	      getAllReplies(); // 메소드 호출
+				  	  	    } // end if()
+				  	  	  } // end success
+				  	  	  
+				  	  	}); // end ajax()
+				  	$( this ).dialog( "close" ); 
+					} 
+				}, 
+				{ //버튼텍스트 
+					text: "취소", //클릭이벤트발생시 동작 
+					click: function() { 
+						$( this ).dialog( "close" ); 
+					} 
+				} 
+				] 
+			
+		});
+		
+		$("#report_btn").click(function(){
+			$( "#report_dialog" ).dialog( "open" ); 
 		});
 
-		//모달영역
-		$( "#dialog" ).dialog({ 
+		//리포트 모달영역
+		$( "#report_dialog" ).dialog({ 
 			//이벤트 발생했을때 보여주려면 autoOpen : false로 지정해줘야 한다.
 			autoOpen: false, 
 			//레이어팝업 넓이 
@@ -154,9 +225,7 @@
 			] 
 		}); //end modal
 		
-		$("#button").click(function(){ 
-			$( "#dialog" ).dialog( "open" ); 
-		});
+
 
 		
 		/* 달력영역 */

@@ -26,15 +26,18 @@
   <br>
   <div id="house-lists">
       <c:forEach var="vo" items="${houseList }">
-        <div class = "house_list_item" id ="${vo.houseNo }">
+        <div class = "house_list_item" >
+        <div class = "house_list_item_click"id ="${vo.houseNo }">
           <div>번호${vo.houseNo }</div>
           <div>title : ${vo.title}</div>
           <div>${vo.price}$</div>
           <div>${vo.scope}</div>
           <div>${vo.location}</div>
-          <div class="update"></div>
-         <button type="button" value="/homeshare/house/house-update">수정</button>
-         <button type="button" id = "delete" value="/homeshare/house/house-update">삭제</button>
+          </div>
+          <div class="sessionchk" >
+	         <button type="submit" id="btn_update">수정</button>
+    	     <button type="submit" id="btn_delete">삭제</button>
+          </div>
          <!-- 삭제시, 하우스번호, memid전송할것 -->
           <div class = "memNo" id="${vo.memNo }">${vo.memNo }</div>
           <input class = "imgSource"  type="hidden" value="${vo.image }" /><br>
@@ -71,13 +74,21 @@
     </form>
   </div>
   
+    <div>
+  </div>
+  
   <script type="text/javascript">
   	$(document).ready(function(){
-  		
+  		//업데이트시 동작설정
+  		$('#btn_delete').click(function(){
+  			var frm = $('#pagingForm');
+  			frm.attr('action', '/homeshare/house/house-delete');
+    	    frm.attr('method', 'post');
+    	    frm.submit(); 
+  		});
   		
 		//클릭시 detail로 전송
-		var bxslider =  $('.house_list_item').find('ul');
-    	  $('.house_list_item').not( bxslider ).click(function(){
+    	  $('.house_list_item_click').click(function(){
     	    //event.preventDefault();
     	    var houseNo = this.id;
     	    console.log(houseNo);
@@ -91,15 +102,18 @@
 
   		$('.house_list_item').each(function (index, element) { 
   			$(element).find('ul').attr('id',index);
-  			//세션 일치하는지 확인
+  			
+  			//세션 일치하는지 확인해서 수정/삭제버튼 보이기
   			var sessionMemNo = '${memberVO.memNo}';
-  			console.log('sessionmemNo : '+sessionMemNo);
   			var itemsMemNo = $(element).find('.memNo').attr('id');
-  			console.log('items memNo : ' +  $(element).find('.memNo').attr('id') );
+  			console.log('sessionmemNo : '+sessionMemNo);
+  			console.log('items memNo : ' +  itemsMemNo );
   
   			if(itemsMemNo ===  sessionMemNo){
   				console.log('세션No itemsno 일치');
-  				
+  				$('.sessionchk').show();
+  			}else{
+  				$('.sessionchk').hide();
   			}
   		//이미지 출력기능
   			var imgSource = $(this).children('input').val();
