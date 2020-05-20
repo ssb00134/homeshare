@@ -28,5 +28,7 @@ public interface HouseDAO {
 	
 	int update(int houseNo);
 	int delte(int houseNo);
+	
+	int selectSeqence();
 
 }

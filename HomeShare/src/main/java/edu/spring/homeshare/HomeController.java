@@ -50,38 +50,10 @@ public class HomeController {
 		}
 	
 	
-	@RequestMapping(value = "/house-insert", method = RequestMethod.GET)
+	@RequestMapping(value = "/googlemap", method = RequestMethod.GET)
 	public void houseInsertTest() {
 		logger.info("house insert " );
 		}
-	
-	@RequestMapping(value = "/juso", method = RequestMethod.GET)
-	public void juso() {
-		logger.info("juso " );
-	}
-	@RequestMapping(value = "/jusoPopup", method = RequestMethod.GET)
-	public void jusoPopup() {
-		logger.info("jusopopup " );
-	}
-	@RequestMapping(value = "/jusoPopup", method = RequestMethod.POST)
-	public void jusoPopupPost(
-			HttpServletRequest request,
-			Model model,
-			RedirectAttributes reAttr) {
-//		String roadFullAddr = request.getParameter("roadFullAddr");
-//		model.addAttribute("roadFullAddr", roadFullAddr);
-//		logger .info("jusopopup post½ÇÇà" );
-//        logger.info("roadFullAddr : " + roadFullAddr);
-//    	return "jusoPopup";
-	}
-	@RequestMapping(value = "/jusoresult", method = RequestMethod.GET)
-	public String jusoresult(HttpServletRequest request,
-			ModelAndView model) {
-		String roadFullAddr = (String) request.getAttribute("roadFullAddr");
-		
-		logger.info(roadFullAddr);
-		logger.info("jusoresult" );
-		return "jusoPopup";
-	}
+
 	
 }

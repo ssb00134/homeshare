@@ -8,7 +8,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 기본규칙 value : '_' 사용 , name : 카멜케이스 -->
 
 
-
 	<!-- 기본 select문 -->
 	<!-- 하우스번호, 숙소타입, 제목, 내용 -->
 	<select id="select_by_title" resultType="HouseVO">
@@ -117,6 +116,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from ${house}
 	</select>
 
+	<!-- houseno의 최대값 -> 시퀸스 값을 리턴하는 sql -->
+	<select id="select_seq" resultType="int">
+		SELECT ${houseNo} FROM ${house}
+		WHERE ${houseNo} = (SELECT max(${houseNo}) FROM ${house})
+	</select>
+
+
+
+
 
 	<select id="total_count_multy_select" resultType="Integer">
 		select count(*) total_cnt
@@ -153,7 +161,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where ${memNo} = #{memNo}
 	</select>
 
-	<!-- 인서트 -->
+	<!-- 입력 -->
 	<insert id="insert">
 		insert into ${house}
 		values(
@@ -184,11 +192,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{location}
 		)
 	</insert>
-	
+
 	<update id="update">
-		
+
 	</update>
-	
+
 	<delete id="delete">
 		delete from ${house}
 		where ${memNo} = ${memNo}

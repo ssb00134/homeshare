@@ -74,4 +74,9 @@ public class HouseServiceImple implements HouseService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	@Override
+	public int seqence() {
+		// TODO Auto-generated method stub
+		return HouseDao.selectSeqence();
+	}
 }

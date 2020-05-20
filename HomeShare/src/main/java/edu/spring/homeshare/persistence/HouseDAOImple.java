@@ -101,5 +101,11 @@ public class HouseDAOImple implements HouseDAO {
 		logger.info("delete 실행");
 		return sqlSession.update(NAMESPACE + ".delete", houseNo);
 	}
+	@Override
+	public int selectSeqence() {
+		logger.info("selectSeqence 실행");
+		return sqlSession.selectOne(NAMESPACE + ".select_seq");
+
+	}
 
 }

@@ -115,6 +115,9 @@ public class FileUploadController {
 		logger.info("memno 세션값 : " + memNo);
 		//memnocount : 등록된 번호
 		int memNoCount = houseService.getCountByMemNo(memNo);
+		//memno로 하우스no 가져오기
+		
+		//int houseNo = houseService.sele;
 		logger.info("memno가 세션memno인 하우스 갯수 : " + memNoCount);
 		
 		/* 폴더 초기화
@@ -180,6 +183,13 @@ public class FileUploadController {
 			logger.info("filenotFound 발생");
 			return null;
 		}
+	}
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public void delete(
+			String path) { // 경로를 매개변수로 받는다
+		logger.info("delete 실행 ");
+		FileUploadUtil.deleteDir(path);
+		
 	}
 
 

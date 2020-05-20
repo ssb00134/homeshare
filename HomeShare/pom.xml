@@ -201,12 +201,7 @@
 			<version>1.4.7</version>
 		</dependency>
 
-		<!-- 알람설정 -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-websocket</artifactId>
-			<version>5.0.2.RELEASE</version>
-		</dependency>
+	
 
 
 	</dependencies>

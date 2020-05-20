@@ -24,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.spring.homeshare.domain.HouseVO;
 import edu.spring.homeshare.service.HouseService;
+import edu.spring.homeshare.util.FileUploadUtil;
 import edu.spring.homeshare.util.PageCriteria;
 import edu.spring.homeshare.util.PageMaker;
 
@@ -79,6 +80,10 @@ public class HouseController {
 		maker.setTotalCount(houseService.getToTotalNumsOfRecords());
 		maker.setPageData();
 		model.addAttribute("pageMaker", maker);
+		
+		/* 현재 시퀀스 보기*/
+		int seqence = houseService.seqence();
+		logger.info("현재 시퀀스 : "  +seqence);
 
 		logger.info("전체 하우스 수 : " + maker.getTotalCount());
 		logger.info("현재 선택된 페이지 : " + c.getPage());
@@ -114,17 +119,27 @@ public class HouseController {
 		int result = houseService.create(vo);
 		if (result == 1) { // insert 성공
 			logger.info("insert 성공");
+			//TODO : 다음시퀀스 폴더를 생성한다.
+			int sequence = houseService.seqence() + 1;//다음시퀀스 : 현재 houseno + 1;
+			String uploadResult = null;
+			logger.info("다음 시퀀스 : " + sequence + " 폴더를 생성함");
+			//uploadResult = FileUploadUtil.saveUploadedFile(uploadPath, memId,memNoCount, files[0].getOriginalFilename(),
+			//	files[0].getBytes());
+			
+			
+			
+			
 			reAttr.addFlashAttribute("insert_result", "success");
 		} else {
 			logger.info("insert 실패");
 			reAttr.addFlashAttribute("insert_result", "fail");
 		}
-		// return "redirect:/house/house-list";
-		return "/";
+		 return "redirect:/";
+
 	}
 
 	/* 삭제 메핑 */
-	@RequestMapping(value = "/house-insert-delete", method = RequestMethod.POST)
+	@RequestMapping(value = "/house-delete", method = RequestMethod.POST)
 	public String delete(int houseNo, int memNo, HttpServletRequest req, HttpServletResponse res) throws IOException {
 
 		// 세션 설정
@@ -138,18 +153,13 @@ public class HouseController {
 			logger.info("삭제 실행");
 			int result = houseService.delete(houseNo);
 			if (result == 1) {
-				out.print("<head>" + "<meta charset='UTF-8'>" + "</head>");
-				out.print("<script>alert('게시글 삭제 성공');</script>");			
 				logger.info("삭제성공");
 			} else {
-				out.print("<head>" + "<meta charset='UTF-8'>" + "</head>");
-				out.print("<script>alert('게시글 삭제 실패');</script>");		
 				logger.info("삭제실패");
 			}
 			return "/";
 		} else {
-			out.print("<head>" + "<meta charset='UTF-8'>" + "</head>");
-			out.print("<script>alert('세션이 해제되었습니다.');</script>");	
+			logger.info("세션이 일치하지 않습니다.");
 			return "/";
 		}
 	}

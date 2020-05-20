@@ -18,19 +18,21 @@
 
 <!-- 헤더정보 가져오기 -->
 <%@ include file="../header.jspf"%>
+	<form id="frm">
 	<h1><p>${houseVO.title }</p></h1>
-	
-	
-	<hr>
-	<span>인원 ${houseVO.maxCapacity }명</span> 
-	<span> 침실 ${houseVO.bedroom }개 </span>
-	<span> 욕실${houseVO.bathroom }개</span><hr>
-	<span> ${houseVO.scope }</span><br>
-	<span>편의시설 ${houseVO.utilities }</span><br>
-	<span>이용가능시설 ${houseVO.spaces }</span><br>
-	<span>가격 ${houseVO.price } </span><br>
+	<div>인원 ${houseVO.maxCapacity }명</div> 
+	<div>인원 ${houseVO.maxCapacity }명</div> 
+	<div> 침실 ${houseVO.bedroom }개 </div>
+	<div> 욕실${houseVO.bathroom }개</div><hr>
+	<div> ${houseVO.scope }</div><br>
+	<div>편의시설 ${houseVO.utilities }</div><br>
+	<div>이용가능시설 ${houseVO.spaces }</div><br>
+	<div>가격 ${houseVO.price } </span><br>
 	<input id = "imgSource" type="hidden" value="${houseVO.image }" /><br>
 	<div id="imgArea"></div>
+	<input type="text" name="houseNo" value="${houseVO.houseNo }">
+	<input type="text" name="memNo" value="${houseVO.memNo }">
+	</form>
 	<hr>
 	houseVO.info
 	<hr>
@@ -108,6 +110,10 @@
 	<div id = "replies" style="display:none " ></div>
 	
 	<hr>
+	<div class="sessionchk" >
+	         <button type="submit" id="btn_update" >수정</button>
+    	     <button type="submit" id="btn_delete" >삭제</button>
+    </div>
 	TODO : 리플의 memid와 세션의 memid가 일치하는지 확인할것
 	->프론트엔드에서 막음 
 	->서버에서 막기
@@ -118,7 +124,29 @@
 	
 	<script type="text/javascript">
 	$(document).ready(function(){
+		//세션체크
+		var sessionMemNo = '${memberVO.memNo}';
+		var itemsMemNo = '${houseVO.memNo}';
+		console.log('sessionmemNo : '+sessionMemNo);
+		console.log('items memNo : ' + itemsMemNo);
 
+		if(itemsMemNo ===  sessionMemNo){
+			console.log('세션No itemsno 일치');
+			$('.sessionchk').show();
+		}else{
+			$('.sessionchk').hide();
+		}
+		
+		//삭제 버튼
+		var frm = $('#frm');
+		$('#btn_delete').click(function(){
+			frm.attr('action','house-delete');
+			frm.attr('method','post');
+			frm.submit();
+		});
+		
+		
+		
 		//댓글 모달 영역
 		$("#reply_btn").click(function(){
 			$( "#reply_dialog" ).dialog( "open" ); 

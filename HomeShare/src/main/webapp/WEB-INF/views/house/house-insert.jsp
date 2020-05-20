@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -16,8 +17,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-<!-- action="/homeshare/house/house-insert-post" method="post" -->
-	<form  id="house-insert-form" action="/homeshare/house/house-insert-post" method="post" >
+	<form action="/homeshare/house/house-insert-post" method="post">
 		<h1>하우스 등록하기</h1>
 		<hr>
 		<p>1단계 기본 사항 입력</p>
@@ -57,7 +57,8 @@
 		<br>
 		<hr>
 		<p>숙소의 위치를 알려주세요</p>
-		<input type="text" name="location" id="location" required="required">
+		<a href="/homeshare/jusoPopup" onclick="window.open(this.href, '_blanck', 'width=600, height=400'); return false">주소입력</a>
+		<input type="text" name="location" required="required">
 		<hr>
 		<p>어떤 편의시설을 제공하나요?</p>
 		<input type="checkbox" name="utilities" value="필수품목" required="required">
@@ -143,7 +144,7 @@
 		<p>숙소요금 설정하기</p>
 		<input type="text" name="price"required="required">
 		<br>
-		<input type="submit" id="submit" value="등록하기">
+		<input type="submit" value="등록하기">
 		<br>
 
 	</form>
@@ -176,7 +177,7 @@
       
       $.ajax({
         type: 'post', 
-        url : '/homeshare/mock-upload-ajax', 
+        url : '/homeshare/upload-ajax', 
         data : formData,
         processData : false,
         contentType : false,
@@ -206,54 +207,12 @@
            
            $('input[name=image]').val(sum);
            console.log('name image :'+$('input[name=image]').val());
+          
         } //end success;
       }); //end ajax
     }); //end file drop
     
     
-    //만약 등록을 안했으면 파일 자동으로 삭제해야함
-    //1. 파일을 올려놓을시 가짜 ajax에 전송한다.
-    //2. 가짜 ajax에 파일을 올려넣을 경우 fileuploadcontroller에서 자동 삭제한다.
-    //3. submit을 넣을시 진짜 ajax에 전송한다.
-    $('#submit').click(function() {
-    	console.log('전송');
-    	var formData = new FormData();
-    	$.ajax({
-            type: 'post', 
-            url : '/homeshare/upload-ajax', 
-            data : formData,
-            processData : false,
-            contentType : false,
-            /*
-            	form의 enctype 속성을 
-            	기본값인 "application/x-www-form-urlencoded"을 사용하지 않고
-            	"multipart/form-data"를 사용하기 위해 (contentType : false)를 지정
-            */
-            success: function(data) {
-              alert(data);
-              var str = $('.upload-list').html();
-              str += '<div class ="img_items">'
-              		+ '<img src="/homeshare/display?fileName='
-              	    + data
-              	    + '" />'
-              	    + data
-              	    + '</div>';
-              $('.upload-list').html(str);
-      			
-              var sum = '';
-              console.log('img items : ' + $('.img_items').html());
-              $('.img_items').each(function(){
-                  sum += $(this).text() +','; 
-                  console.log('sum : ' + sum);
-              });
-               console.log('sum : ' + sum);
-               
-               $('input[name=image]').val(sum);
-               console.log('name image :'+$('input[name=image]').val());
-            } //end success;
-          }); //end ajax
-    	
-    	});
     
   });//end document
   </script>  

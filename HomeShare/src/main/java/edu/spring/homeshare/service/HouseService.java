@@ -21,4 +21,5 @@ public interface HouseService {
 	int getToTotalNumsOfRecords(Map<String, Object> map);
 	int update(int houseNo);
 	int delete(int houseNo);
+	int seqence();
 }
