@@ -68,7 +68,15 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<property name="reportMemNo" value="reportMemNo" />
 		<property name="reportHouseNo" value="reportHouseNo" />
 		<property name="reason" value="reason" />
-
+		
+		
+		<!-- book 테이블 설정 -->
+		<property name="bookNo" value="bookno" />
+		<property name="bookMemNo" value="bookMemNo" />
+		<property name="bookHouseNo" value="bookHouseNo" />
+		<property name="checkin" value="checkin" />
+		<property name="checkout" value="checkout" />
+		<property name="hostCheck" value="hostCheck" />
 
 
 
