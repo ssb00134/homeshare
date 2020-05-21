@@ -71,6 +71,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		
 		
 		<!-- book 테이블 설정 -->
+		<property name="book" value="book" />
 		<property name="bookNo" value="bookno" />
 		<property name="bookMemNo" value="bookMemNo" />
 		<property name="bookHouseNo" value="bookHouseNo" />

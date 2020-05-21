@@ -18,7 +18,7 @@
 
 <!-- 헤더정보 가져오기 -->
 <%@ include file="../header.jspf"%>
-<%@ include file="../reply.jspf"%>
+
 	<form id="frm">
 	<h1><p>${houseVO.title }</p></h1>
 	<div>인원 ${houseVO.maxCapacity }명</div> 
@@ -38,34 +38,33 @@
 	houseVO.info
 	<hr>
 	<div dir="rtl">
-		계산 폼
-		<form id="bookForm" action="book" method="post">
+		계산 영역
 		<div>
-		 <input type="text" class="testDatepicker" id="checkIn" name="checkIn" value=""> <br>
+		 <input type="text" class="testDatepicker" id="checkIn" name="checkin" value=""> <br>
 		</div>
 		<input type="hidden" id="checkInDate"><br>
 
 		 <div>
-		 <input type="text" class="testDatepicker" id="checkOut" name="checkOut">  <br>
+		 <input type="text" class="testDatepicker" id="checkOut" name="checkout">  <br>
 		<input type="hidden" id="checkOutDate"><br>
 		</div>
 		날짜차이<input type="text" id="dateDiffer">
 		<div id = "hidden">
-		<input type="text" name="houseNo" value ="${houseVO.houseNo }">
-		<input type="text" name="memNo" value ="${memberVO.memNo }">
+		<input type="text" name="bookhouseNo" value ="${houseVO.houseNo }">
+		<input type="text" name="bookMemNo" value ="${memberVO.memNo }">
 		</div>
 		<div>
 		<div>
-		
 		<input type="number"  name="bookMem" id="bookMem" numberOnly value="1">   <br>
 		</div>
 		<input type="number" readonly="readonly" name="price" id="price" value="${houseVO.price }">   <br>
-		총 합계<input type="number" readonly="readonly" name="totalPrice" min="1" max = "${houseVO.maxCapacity }" id="totalPrice">  <br>
+		총 합계
+		<input type="number" readonly="readonly" name="totalPrice" min="1" max = "${houseVO.maxCapacity }" id="totalPrice"
+		value="${houseVO.price }">  <br>
 		<div id="bookdate"></div>
-		<input type="submit" value="예약하기" >
+		<input type="submit" id="bookbtn" value="예약하기" >
+		<div id = "bookResult"></div>
 		</div>
-		
-		</form>
 		</div>
 		
 		<!-- 리플 모달 -->
@@ -345,6 +344,7 @@
 		
 		//totalprice
 		//가격 = 인원 * 날짜 * 기본가격
+		
 
 		$('#bookMem').focus(function(){
 			console.log('focus');
@@ -371,9 +371,60 @@
 		});
 		
 		//bookForm ajax 작성
+		$('#bookbtn').click(function(){ // 예약하기 버튼을 누르면 ajax로 bookcontroller 전송
+			var bookNo = 0;
+			var bookHouseNo = $('#bookHouseNo').val();
+			var checkin = $('#checkIn').val();
+			var checkout = $('#checkOut').val();
+			var hostCheck = 0;
+			var bookMem = $('#bookMem').val();
+			var totalPrice = $('#totalPrice').val();
+			console.log('bookmemono : '+ bookMemNo);
+			if(sessionMemNo===null || sessionMemNo=== undefined  || sessionMemNo===''){ //세션이 없을때,
+				//onbeforeunload 
+				alert('로그인을 먼저 해주세요');
+				preventDefault();
+			}
+			var obj = {
+					'bookNo' : bookNo,
+					'bookMemNo': sessionMemNo,
+					'bookHouseNo': bookHouseNo,
+					'checkin': checkin,
+					'checkout': checkout,
+					'hostCheck': hostCheck,
+					'bookMem': bookMem,
+					'totalPrice': totalPrice
+					
+			};
+			console.log('obj : ' + obj.toString);
+			$.ajax({
+				type : 'post',
+				url : '/homeshare/book-insert',
+				 headers : {
+			  	  	    'Content-Type' : 'application/json', 
+			  	  	    'X-HTTP-Method-Override' : 'POST'
+			  	  	  }, 
+	  	  	    data : JSON.stringify(obj),
+				
+				success : function(data){
+					alert('예약성공');
+					$('#checkIn').val('');
+					$('#checkOut').val('');
+					$('#bookMem').val(0);
+					$('#totalPrice').val(0);	
+					console.log('data : ' + data);
+					$('#bookResult').html('<button type="button">승인대기중</button><br>'
+					+ '<button type="button" id="book_cancel">취소하기</button>');
+				} //end sucess
+			});//end ajax
+			debugger;
+			return false; // 새로고침 없이
+		});//end click;
 		
+		//end book ajax
 		
-		
+		//getBookReusult 모든 결과 가져오기 
+	
 		
 	
 		

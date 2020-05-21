@@ -6,8 +6,8 @@ public class BookVO {
 	private int bookNo;
 	private int bookMemNo;
 	private int bookHouseNo;
-	private Date checkin;
-	private Date checkout;
+	private String checkin;
+	private String checkout;
 	private int hostCheck;
 	private int bookMem;
 	private int totalPrice;
@@ -16,7 +16,7 @@ public class BookVO {
 	
 	
 
-	public BookVO(int bookNo, int bookMemNo, int bookHouseNo, Date checkin, Date checkout, int hostCheck, int bookMem,
+	public BookVO(int bookNo, int bookMemNo, int bookHouseNo, String checkin, String checkout, int hostCheck, int bookMem,
 			int totalPrice) {
 		super();
 		this.bookNo = bookNo;
@@ -55,19 +55,19 @@ public class BookVO {
 		this.bookHouseNo = bookHouseNo;
 	}
 
-	public Date getCheckin() {
+	public String getCheckin() {
 		return checkin;
 	}
 
-	public void setCheckin(Date checkin) {
+	public void setCheckin(String checkin) {
 		this.checkin = checkin;
 	}
 
-	public Date getCheckout() {
+	public String getCheckout() {
 		return checkout;
 	}
 
-	public void setCheckout(Date checkout) {
+	public void setCheckout(String checkout) {
 		this.checkout = checkout;
 	}
 
