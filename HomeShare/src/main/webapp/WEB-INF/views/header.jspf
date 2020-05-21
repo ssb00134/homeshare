@@ -11,6 +11,8 @@ header {
 }
 </style>
 <!-- 헤더바 -->
+<!-- 헤더바 -->
+"이곳은 Header영역입니다."
 <header>
 	<div id="main-button">
 		<a href="/homeshare/">go main</a>

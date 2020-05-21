@@ -31,71 +31,8 @@ header {
 	${memId }님, 환영합니다. <br>
 		<button id="btn_logout" type="button" method="post"></button>
 	</c:if>
-	<!-- 헤더바 -->
-	<header>
-		<div id="main-button">
-			<a href="/homeshare/">go main</a>
-		</div>
-		<div id="sign-host">
-			<a href="/homeshare/member/became-a-host">호스트 되기</a>
-		</div>
-
-		<div id="sign-up">
-			<a href="/homeshare/member/sign-up/">sign-up</a>
-		</div>
-
 	
-
-		<c:if test="${empty memId }">
-		<!-- 모달버튼 -->
-			<div id="login">			
-				<input type="button" id="login_button" value="로그인 모달" />
-			</div>
-		<!-- end 모달버튼 -->
-			<!-- 모달영역 -->
-			<div id="login_dialog">
-				<form id ="loginForm">
-					<input type="text" name="memId" id="memId" placeholder="USER ID"
-						required="required">
-					<br>
-					<input type="password" id="password" name="password"
-						placeholder="PASSWORD" required="required">
-					<br>
-					<input type="hidden" name="targetUrl" value="${targetUrl }">
-					<c:if test="${login_fail eq 'login_fail'}">
-						<p>아이디 또는 비밀번호가 일치하지 않습니다.</p>
-						<br>
-						<p>아이디가 생각이 안나세요?</p>
-						<a href="find-id">
-							<input type="button" value="아이디 찾기">
-						</a>
-					</c:if>
-				</form>
-			</div>
-			<!-- end modal영역 -->
-			
-		</c:if>
-		<c:if test="${not empty memId }">
-			<div id="myPageToggle">${memId }</div>
-			<div id="mypage">
-				<a href="/homeshare/member/account">
-					<input type="button" value="계정">
-				</a>
-				<a href="/homeshare/member/alerm">
-					<input type="button" value="알람설정">
-				</a>
-				<a href="/homeshare/member/logout">
-					<input type="button" value="로그아웃">
-				</a>
-				<c:if test="${not empty memberVO.houseNo }">
-					<a href="/homeshare/host/hosting-list">
-						<input type="button" value="숙소관리하기">
-					</a>
-				</c:if>
-			</div>
-
-		</c:if>
-	</header>
+	<%@ include file="header.jspf"%>
 
 	<%@ include file="section.jspf"%>
 	<div style="border: 5px solid grey;">

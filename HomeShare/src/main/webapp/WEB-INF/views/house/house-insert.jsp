@@ -17,6 +17,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
+	<%@ include file="../header.jspf"%>
 	<form action="/homeshare/house/house-insert-post" method="post">
 		<h1>하우스 등록하기</h1>
 		<hr>
@@ -148,6 +149,7 @@
 		<br>
 
 	</form>
+	<%@ include file="../footer.jspf"%>
 <script type="text/javascript">
   $(document).ready(function(){
     // 파일을 끌어다 놓을 때(drag & drop)

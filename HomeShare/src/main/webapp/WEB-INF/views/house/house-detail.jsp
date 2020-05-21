@@ -119,7 +119,7 @@
 	<br>
 	TODO : 결제한 회원만 리플가능
 	
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<%@ include file="../footer.jspf"%>
 	
 	<script type="text/javascript">
 	$(document).ready(function(){
