@@ -32,5 +32,13 @@ public class BookRestController {
 		return new ResponseEntity<Integer>(result,HttpStatus.OK);
 	}
 	
+	@RequestMapping(value="book-delete", method = RequestMethod.POST)
+	public ResponseEntity<Integer>  BookDelete(
+			@RequestBody BookVO vo) {
+		logger.info("book-insert ½ÇÇà");
+		int result = bookService.create(vo);
+		return new ResponseEntity<Integer>(result,HttpStatus.OK);
+	}
+	
 	
 }

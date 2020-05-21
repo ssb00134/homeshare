@@ -49,10 +49,9 @@
 		<input type="hidden" id="checkOutDate"><br>
 		</div>
 		날짜차이<input type="text" id="dateDiffer">
-		<div id = "hidden">
-		<input type="text" name="bookhouseNo" value ="${houseVO.houseNo }">
-		<input type="text" name="bookMemNo" value ="${memberVO.memNo }">
-		</div>
+		<input type="hidden" name="bookhouseNo" value ="${houseVO.houseNo }">
+		<input type="hidden" name="bookMemNo" value ="${memberVO.memNo }">
+
 		<div>
 		<div>
 		<input type="number"  name="bookMem" id="bookMem" numberOnly value="1">   <br>
@@ -373,8 +372,8 @@
 		//bookForm ajax 작성
 		$('#bookbtn').click(function(){ // 예약하기 버튼을 누르면 ajax로 bookcontroller 전송
 			var bookNo = 0;
-			var bookMemNo = $('#bookMemNo').val();
-			var bookHouseNo = $('#bookHouseNo').val();
+			var bookMemNo = '${memberVO.memNo}';
+			var bookHouseNo = '${houseVO.houseNo}';
 			var checkin = $('#checkIn').val();
 			var checkout = $('#checkOut').val();
 			var hostCheck = 0;
@@ -397,10 +396,14 @@
 					'totalPrice': totalPrice
 					
 			};
-			console.log('obj : ' + obj.toString);
+			$.each(obj, function (index, item){
+				console.log('item : ' + index + " value : " + item);
+			});
+
+	
 			$.ajax({
 				type : 'post',
-				url : '/homeshare/book-insert',
+				 url : '/homeshare/book-insert',
 				 headers : {
 			  	  	    'Content-Type' : 'application/json', 
 			  	  	    'X-HTTP-Method-Override' : 'POST'
@@ -415,18 +418,16 @@
 					$('#bookMem').val(0);
 					$('#totalPrice').val(0);	
 					console.log('data : ' + data);
-					$('#bookResult').html('<button type="button">승인대기중</button><br>'
+					$('#bookResult').html('<button type="button">승인대기중</button>'
 					+ '<button type="button" id="book_cancel">취소하기</button>');
 				} //end sucess
 			});//end ajax
 			return false; // 새로고침 없이
 		});//end click;
-		
 		//end book ajax
-		
 		//getBookReusult 모든 결과 가져오기 
 	
-		
+		//예약 취소하기 구현
 	
 		
 		//이미지 출력기능

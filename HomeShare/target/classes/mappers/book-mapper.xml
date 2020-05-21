@@ -5,8 +5,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="edu.spring.homeshare.BookMapper">
 
-<insert id="insert">
-	insert into ${book}
-	values(0, #{bookMemNo},#{bookHouseNo}, #{checkin}, #{checkout} , #{hostCheck}, #{bookMem}, #{totalPrice})
-</insert>
+	<!-- 집번호로 찾기 -->
+	<!-- 호스트가  예약 확인하기-->
+	<select id="select_by_houseNo">
+		select * from ${book} where ${bookHouseNo} =#{bookHouseNo}
+	</select>
+	
+	<!-- 유저번호로 찾기 -->
+	<!-- 유저가 예약 검색 -->
+	<select id="select_by_MemNo">
+		select * from ${book} where ${bookMemNo} =#{bookMemNo}
+	</select>
+
+	<insert id="insert">
+		<selectKey keyProperty="bookMemNo" resultType="int"
+			order="BEFORE">
+			select book_pk.nextval FROM DUAL
+		</selectKey>
+		insert into ${book}
+		values(0, #{bookMemNo},#{bookHouseNo}, #{checkin},
+		#{checkout} , #{hostCheck},
+		#{bookMem}, #{totalPrice})
+	</insert>
+
+
+
 </mapper>

@@ -30,9 +30,9 @@ public class MemberController {
 	
 	/*로그인 매핑*/
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public void loginGet(String url, Model model) { // view 호출 (login.jsp)
+	public void loginGet(HttpServletRequest req, Model model) { // view 호출 (login.jsp)
 		logger.info("loginGet() 호출");
-		logger.info("url : " + url); // 이전경로(로그인을 위해 왔던)의 값 출력
+		String url = req.getContextPath(); // 이전경로
 		model.addAttribute("targetUrl", url);	
 	}
 	
@@ -48,13 +48,15 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="logout")
-	public String logout(HttpServletRequest req) {
+	public String logout(String url, HttpServletRequest req) {
 		logger.info("logout 호출 ");
 		HttpSession session = req.getSession();
 		session.removeAttribute("memId");
 		session.invalidate();
 		
-		return "redirect:/";
+		String path = req.getContextPath();
+		logger.info("path : " + path);
+		return "redirect:" + path;
 	}
 	
 	

@@ -126,7 +126,7 @@ header {
 		</div>
 		<br>
 	</div>
-
+	<%@ include file="footer.jspf"%>
 </body>
 <script type="text/javascript">
 	$(document).ready(function() {

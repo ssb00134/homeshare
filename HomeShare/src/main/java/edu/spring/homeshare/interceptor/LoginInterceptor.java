@@ -38,7 +38,10 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 			int memNo = (int) session.getAttribute("memNo");
 			logger.info("memno 세션값 : " + memNo);
 			
-			response.sendRedirect("/homeshare");			
+			
+			String url = request.getRequestURI(); // 이전경로
+			logger.info("url : " + url);
+			response.sendRedirect( url);			
 			
 		} else {
 			logger.info("로그인 실패");
