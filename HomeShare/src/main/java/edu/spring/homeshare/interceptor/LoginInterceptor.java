@@ -39,9 +39,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 			logger.info("memno 세션값 : " + memNo);
 			
 			
-			String url = request.getRequestURI(); // 이전경로
-			logger.info("url : " + url);
-			response.sendRedirect( url);			
+			String referer = (String)request.getHeader("REFERER");
+			response.sendRedirect(referer);			
 			
 		} else {
 			logger.info("로그인 실패");

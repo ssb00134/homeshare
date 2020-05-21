@@ -48,15 +48,15 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="logout")
-	public String logout(String url, HttpServletRequest req) {
+	public String logout( HttpServletRequest req) {
 		logger.info("logout »£√‚ ");
 		HttpSession session = req.getSession();
 		session.removeAttribute("memId");
 		session.invalidate();
 		
-		String path = req.getContextPath();
-		logger.info("path : " + path);
-		return "redirect:" + path;
+		String referer = (String)req.getHeader("REFERER");
+
+		return "redirect:" + referer;
 	}
 	
 	
