@@ -54,6 +54,11 @@ public class HomeController {
 	public void houseInsertTest() {
 		logger.info("house insert " );
 		}
+	
+	@RequestMapping(value = "/jusopopup", method = RequestMethod.GET)
+	public void jusopopup() {
+		logger.info(" jusopopup " );
+		}
 
 	
 }
