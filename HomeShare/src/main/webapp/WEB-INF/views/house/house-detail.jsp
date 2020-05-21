@@ -18,6 +18,7 @@
 
 <!-- 헤더정보 가져오기 -->
 <%@ include file="../header.jspf"%>
+<%@ include file="../reply.jspf"%>
 	<form id="frm">
 	<h1><p>${houseVO.title }</p></h1>
 	<div>인원 ${houseVO.maxCapacity }명</div> 
@@ -38,7 +39,7 @@
 	<hr>
 	<div dir="rtl">
 		계산 폼
-		<form id="bookForm" action="book">
+		<form id="bookForm" action="book" method="post">
 		<div>
 		 <input type="text" class="testDatepicker" id="checkIn" name="checkIn" value=""> <br>
 		</div>
@@ -59,9 +60,9 @@
 		<input type="number"  name="bookMem" id="bookMem" numberOnly value="1">   <br>
 		</div>
 		<input type="number" readonly="readonly" name="price" id="price" value="${houseVO.price }">   <br>
-		총 합계<input type="number" readonly="readonly" name="totalPrice" id="totalPrice">  <br>
+		총 합계<input type="number" readonly="readonly" name="totalPrice" min="1" max = "${houseVO.maxCapacity }" id="totalPrice">  <br>
 		<div id="bookdate"></div>
-		
+		<input type="submit" value="예약하기" >
 		</div>
 		
 		</form>
@@ -129,7 +130,7 @@
 		var itemsMemNo = '${houseVO.memNo}';
 		console.log('sessionmemNo : '+sessionMemNo);
 		console.log('items memNo : ' + itemsMemNo);
-
+		//sessionchk
 		if(itemsMemNo ===  sessionMemNo){
 			console.log('세션No itemsno 일치');
 			$('.sessionchk').show();
@@ -369,7 +370,7 @@
 			
 		});
 		
-		
+		//bookForm ajax 작성
 		
 		
 		

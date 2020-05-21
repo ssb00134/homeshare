@@ -77,6 +77,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<property name="checkin" value="checkin" />
 		<property name="checkout" value="checkout" />
 		<property name="hostCheck" value="hostCheck" />
+		<property name="bookMem" value="bookMem" />
+		<property name="totalPrice" value="totalPrice" />
 
 
 
