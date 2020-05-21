@@ -373,6 +373,7 @@
 		//bookForm ajax 작성
 		$('#bookbtn').click(function(){ // 예약하기 버튼을 누르면 ajax로 bookcontroller 전송
 			var bookNo = 0;
+			var bookMemNo = $('#bookMemNo').val();
 			var bookHouseNo = $('#bookHouseNo').val();
 			var checkin = $('#checkIn').val();
 			var checkout = $('#checkOut').val();
@@ -380,14 +381,14 @@
 			var bookMem = $('#bookMem').val();
 			var totalPrice = $('#totalPrice').val();
 			console.log('bookmemono : '+ bookMemNo);
-			if(sessionMemNo===null || sessionMemNo=== undefined  || sessionMemNo===''){ //세션이 없을때,
+			if(bookMemNo===null || bookMemNo==='undefined' || bookMemNo===''){ //세션이 없을때,
 				//onbeforeunload 
 				alert('로그인을 먼저 해주세요');
 				preventDefault();
 			}
 			var obj = {
 					'bookNo' : bookNo,
-					'bookMemNo': sessionMemNo,
+					'bookMemNo': bookMemNo,
 					'bookHouseNo': bookHouseNo,
 					'checkin': checkin,
 					'checkout': checkout,
@@ -408,6 +409,7 @@
 				
 				success : function(data){
 					alert('예약성공');
+					alert('data :' + data);
 					$('#checkIn').val('');
 					$('#checkOut').val('');
 					$('#bookMem').val(0);
@@ -417,7 +419,6 @@
 					+ '<button type="button" id="book_cancel">취소하기</button>');
 				} //end sucess
 			});//end ajax
-			debugger;
 			return false; // 새로고침 없이
 		});//end click;
 		
