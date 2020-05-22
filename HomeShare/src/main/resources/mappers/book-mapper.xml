@@ -17,11 +17,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from ${book} where ${bookMemNo} =#{bookMemNo}
 	</select>
 
+	
+
+
+
 	<insert id="insert">
-		<selectKey keyProperty="bookMemNo" resultType="int"
-			order="BEFORE">
-			select book_pk.nextval FROM DUAL
-		</selectKey>
+
 		insert into ${book}
 		values(0, #{bookMemNo},#{bookHouseNo}, #{checkin},
 		#{checkout} , #{hostCheck},

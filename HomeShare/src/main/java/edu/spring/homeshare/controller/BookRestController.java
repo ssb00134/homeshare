@@ -28,6 +28,7 @@ public class BookRestController {
 	public ResponseEntity<Integer>  BookInsertPost(
 			@RequestBody BookVO vo) {
 		logger.info("book-insert 실행");
+		logger.info("bookVo 정보 : " + vo.toString());
 		int result = bookService.create(vo);
 		return new ResponseEntity<Integer>(result,HttpStatus.OK);
 	}

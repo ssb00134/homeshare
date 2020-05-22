@@ -37,7 +37,7 @@
 	<hr>
 	houseVO.info
 	<hr>
-	<div dir="rtl">
+	<div dir="rtl"  style="height: 100%; width: 50%; border:1px solid grey; ">
 		계산 영역
 		<div>
 		 <input type="text" class="testDatepicker" id="checkIn" name="checkin" value=""> <br>
@@ -387,7 +387,7 @@
 			}
 			var obj = {
 					'bookNo' : bookNo,
-					'bookMemNo': bookMemNo,
+					'bookMemNo': sessionMemNo,
 					'bookHouseNo': bookHouseNo,
 					'checkin': checkin,
 					'checkout': checkout,
