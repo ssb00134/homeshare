@@ -147,7 +147,7 @@
 		<br>
 		<input type="submit" value="등록하기">
 		<br>
-
+	
 	</form>
 	<%@ include file="../footer.jspf"%>
 <script type="text/javascript">

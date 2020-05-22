@@ -18,7 +18,7 @@ header {
 		<a href="/homeshare/">go main</a>
 	</div>
 	<div id="sign-host">
-		<a href="/homeshare/member/became-a-host">호스트 되기</a>
+		<a href="/homeshare/house/house-insert">호스트 되기</a>
 	</div>
 
 	<div id="sign-up">
@@ -72,11 +72,15 @@ header {
 				<a href="/homeshare/host/hosting-list">
 					<input type="button" value="숙소관리하기">
 				</a>
+				<a href="/homeshare/member-booklist">
+					<input type="button" value="내가 예약한 숙소">
+				</a>
 			</c:if>
 		</div>
 
 	</c:if>
 </header>
+<hr>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#login_button").click(function() {

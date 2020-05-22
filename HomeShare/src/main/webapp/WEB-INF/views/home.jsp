@@ -65,43 +65,5 @@ header {
 	</div>
 	<%@ include file="footer.jspf"%>
 </body>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("#login_button").click(function() {
-			$("#login_dialog").dialog("open");
-		});
 
-		//모달영역
-
-		$("#login_dialog").dialog({
-			//이벤트 발생했을때 보여주려면 autoOpen : false로 지정해줘야 한다.
-			autoOpen : false,
-			//레이어팝업 넓이 
-			width : 400,
-			//뒷배경을 disable 시키고싶다면 true 
-			modal : true,
-			//버튼종류 
-			 buttons : [ { //버튼텍스트 
-				text : "로그인", //클릭이벤트발생시 동작 
-				click : function() {
-					memId = $('#memId').val();
-					password = $('#password').val();
-					 var frm = $('#loginForm');
-				  	    frm.attr('action', '/homeshare/member/login-post');
-				  	    frm.attr('method', 'post');
-				  	    frm.find('[name="memId"]').val(memId);
-				  	    frm.find('[name="password"]').val(password);
-				  	    frm.submit(); 
-					$(this).dialog("close");
-				}
-			}, { //버튼텍스트 
-				text : "닫기", //클릭이벤트발생시 동작 
-				click : function() {
-					$(this).dialog("close");
-				}
-			} ] 
-		}); //end modal
-
-	});//end document
-</script>
 </html>

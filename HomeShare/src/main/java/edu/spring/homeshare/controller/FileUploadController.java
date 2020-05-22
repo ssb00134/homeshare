@@ -79,7 +79,7 @@ public class FileUploadController {
 		
 		int filelength = FileUploadUtil.countFile(uploadPath, memId+File.separator + memNoCount);//path = memId+File.separator + memNoCount
 		logger.info("파일 갯수 : " + filelength);
-		String fail = "not more 5 items";
+		String fail = "not more 10 items";
 		
 		logger.info("파일 존재? : " +FileUploadUtil.isFile(uploadPath, memId));
 		//logger.info("등록된 memno의 갯수 : " + houseService.selectByHouseNo(houseNo));

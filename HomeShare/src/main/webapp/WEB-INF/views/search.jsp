@@ -76,7 +76,7 @@
   
     <div>
   </div>
-  
+  <%@ include file="footer.jspf"%>
   <script type="text/javascript">
   	$(document).ready(function(){
   		//업데이트시 동작설정

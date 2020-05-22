@@ -64,7 +64,7 @@
       <input type="text" name="houseNo">
     </form>
   </div>
-  
+  <%@ include file="../footer.jspf"%>
   <script type="text/javascript">
   	$(document).ready(function(){
   		
