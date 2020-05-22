@@ -1,13 +1,13 @@
 package edu.spring.homeshare.service;
 
 import edu.spring.homeshare.domain.HouseVO;
-import edu.spring.homeshare.domain.memberVO;
+import edu.spring.homeshare.domain.MemberVO;
 
 public interface MemberService {
-	memberVO loginCheck(memberVO vo);
-	String findId(memberVO vo);
-	int insert(memberVO vo);
-	memberVO select(String memId);
+	MemberVO loginCheck(MemberVO vo);
+	String findId(MemberVO vo);
+	int insert(MemberVO vo);
+	MemberVO select(String memId);
 
 
 }

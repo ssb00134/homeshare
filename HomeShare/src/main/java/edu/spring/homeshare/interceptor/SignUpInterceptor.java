@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import edu.spring.homeshare.domain.memberVO;
+import edu.spring.homeshare.domain.MemberVO;
 
 public class SignUpInterceptor extends HandlerInterceptorAdapter{
 	private static final Logger logger = 

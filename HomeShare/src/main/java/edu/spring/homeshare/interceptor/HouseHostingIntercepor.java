@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import edu.spring.homeshare.domain.memberVO;
+import edu.spring.homeshare.domain.MemberVO;
 
 public class HouseHostingIntercepor extends HandlerInterceptorAdapter{
 	private static final Logger logger = 
@@ -17,7 +17,7 @@ public class HouseHostingIntercepor extends HandlerInterceptorAdapter{
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		memberVO vo = (memberVO) modelAndView.getModel().get("");
+		MemberVO vo = (MemberVO) modelAndView.getModel().get("");
 		
 	}
 }

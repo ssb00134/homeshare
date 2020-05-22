@@ -43,7 +43,7 @@ header {
 		</div>
 		<br>
 		<div>
-			<a href="/homeshare/file-upload-test">파일 업로드 테스트</a>
+			<a href="/homeshare/upload">파일 업로드 테스트</a>
 		</div>
 		<br>
 		<div>

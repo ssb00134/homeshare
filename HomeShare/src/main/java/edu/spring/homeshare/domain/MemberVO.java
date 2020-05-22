@@ -1,6 +1,6 @@
 package edu.spring.homeshare.domain;
 
-public class memberVO {
+public class MemberVO {
 	private int memNo;
 	private String memId;
 	private String password;
@@ -9,12 +9,12 @@ public class memberVO {
 	private String account;
 	private String memName;
 	
-	public memberVO() {}
+	public MemberVO() {}
 
 	
 	
 
-	public memberVO(int memNo, String memId, String password, String email, String houseNo, String account,
+	public MemberVO(int memNo, String memId, String password, String email, String houseNo, String account,
 			String memName) {
 		super();
 		this.memNo = memNo;

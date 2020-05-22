@@ -53,8 +53,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				#{bookableDateEnd}
 			</if>
 			<if test="#{maxCapacity} != null">
-				AND ${maxCapacity} <![CDATA[<=]]>
-				maxCapacity
+				AND ${maxCapacity} <![CDATA[>=]]>
+				#{maxCapacity}
 			</if>
 		</where>
 	</select>
@@ -117,7 +117,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- houseno의 최대값 -> 시퀸스 값을 리턴하는 sql -->
-	<select id="select_seq" resultType="int">
+	<select id="select_max_houseNo" resultType="Integer">
 		SELECT ${houseNo} FROM ${house}
 		WHERE ${houseNo} = (SELECT max(${houseNo}) FROM ${house})
 	</select> 

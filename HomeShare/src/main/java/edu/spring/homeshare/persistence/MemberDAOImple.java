@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 
-import edu.spring.homeshare.domain.memberVO;
+import edu.spring.homeshare.domain.MemberVO;
 
 @Repository
 public class MemberDAOImple implements MemberDAO {
@@ -20,22 +20,22 @@ public class MemberDAOImple implements MemberDAO {
 	private SqlSession sqlSession;
 	
 	@Override
-	public memberVO loginCheck(memberVO vo) {
+	public MemberVO loginCheck(MemberVO vo) {
 		logger.info(vo.getMemId() + " " + vo.getPassword());
 		return sqlSession.selectOne(NAMESPACE + ".login",vo);
 	}
 	@Override
-	public String findId(memberVO vo) {
+	public String findId(MemberVO vo) {
 		logger.info("find id 실행");
 		return sqlSession.selectOne(NAMESPACE + ".findId",vo);
 	}
 	@Override
-	public int insert(memberVO vo) {
+	public int insert(MemberVO vo) {
 		logger.info("insert 실행");
 		return sqlSession.insert(NAMESPACE + ".insert", vo);
 	}
 	@Override
-	public memberVO select(String memId) {
+	public MemberVO select(String memId) {
 		logger.info("select 실행");
 		return sqlSession.selectOne(NAMESPACE +".select", memId);
 	}

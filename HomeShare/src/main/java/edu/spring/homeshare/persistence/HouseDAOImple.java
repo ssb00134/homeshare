@@ -103,8 +103,8 @@ public class HouseDAOImple implements HouseDAO {
 	}
 	@Override
 	public int selectSeqence() {
-		logger.info("selectSeqence 실행");
-		return sqlSession.selectOne(NAMESPACE + ".select_seq");
+		logger.info("select_max_houseNo 실행");
+		return sqlSession.selectOne(NAMESPACE + ".select_max_houseNo");
 
 	}
 

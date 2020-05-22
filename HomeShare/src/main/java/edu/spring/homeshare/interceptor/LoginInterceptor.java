@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import edu.spring.homeshare.domain.memberVO;
+import edu.spring.homeshare.domain.MemberVO;
 
 
 
@@ -21,7 +21,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		logger.info("===== postHandle 호출");
-		memberVO vo = (memberVO) modelAndView.getModel().get("login_result");
+		MemberVO vo = (MemberVO) modelAndView.getModel().get("login_result");
 		if (vo != null) {
 			logger.info("로그인 성공");
 			HttpSession session = request.getSession();

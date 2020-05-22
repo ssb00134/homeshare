@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 
-import edu.spring.homeshare.domain.memberVO;
+import edu.spring.homeshare.domain.MemberVO;
 import edu.spring.homeshare.service.MemberService;
 
 
@@ -37,10 +37,10 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/login-post", method=RequestMethod.POST)
-	public void loginPost(memberVO vo, Model model) { // DB에 vo 전송
+	public void loginPost(MemberVO vo, Model model) { // DB에 vo 전송
 		logger.info("loginPost() 호출");
 		logger.info("loginPost() vo 정보 : " + vo.toString());
-		memberVO result = memberService.loginCheck(vo);
+		MemberVO result = memberService.loginCheck(vo);
 		// 아이디 비밀번호가 일치 : result !=null
 		// 아이디 비밀번호가 일치하지 않음 : result == null
 		logger.info("result : " + result);
@@ -62,12 +62,12 @@ public class MemberController {
 	
 	/*아이디 찾기 매핑*/
 	@RequestMapping(value="find-id", method = RequestMethod.GET)
-	public void findId(memberVO vo,Model model) {
+	public void findId(MemberVO vo,Model model) {
 		logger.info("find id get 호출");
 	}	
 	
 	@RequestMapping(value="find-id-post", method = RequestMethod.POST)
-	public void findIdPost(memberVO vo,Model model) {
+	public void findIdPost(MemberVO vo,Model model) {
 		logger.info("find-id-post() 호출");
 		String result = memberService.findId(vo);
 		// 아이디가 있음 : result !=null
@@ -85,7 +85,7 @@ public class MemberController {
 		model.addAttribute("targetUrl", url);
 	}
 	@RequestMapping(value="/sign-up-post", method = RequestMethod.POST)
-	public void SignUpPost(memberVO vo, Model model) {
+	public void SignUpPost(MemberVO vo, Model model) {
 		logger.info("signPost() 호출");
 		logger.info(vo.toString());
 		int result = memberService.insert(vo);
@@ -113,7 +113,7 @@ public class MemberController {
 		HttpSession session = req.getSession();
 		String memId = (String) session.getAttribute("memId"); //세션에서 아이디 가져오기
 		logger.info("세션값 : " +memId);
-		memberVO vo = memberService.select(memId);
+		MemberVO vo = memberService.select(memId);
 		logger.info(vo.toString());
 		session.setAttribute("vo", vo);
 	}

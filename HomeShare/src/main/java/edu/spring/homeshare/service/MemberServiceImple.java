@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import edu.spring.homeshare.domain.memberVO;
+import edu.spring.homeshare.domain.MemberVO;
 import edu.spring.homeshare.persistence.HouseDAOImple;
 import edu.spring.homeshare.persistence.MemberDAO;
 
@@ -17,19 +17,19 @@ public class MemberServiceImple implements MemberDAO, MemberService {
 	@Autowired
 	private MemberDAO memberDao;
 	@Override
-	public memberVO loginCheck(memberVO vo) {
+	public MemberVO loginCheck(MemberVO vo) {
 		return memberDao.loginCheck(vo);
 	}
 	@Override
-	public String findId(memberVO vo) {
+	public String findId(MemberVO vo) {
 		return memberDao.findId(vo);
 	}
 	@Override
-	public int insert(memberVO vo) {
+	public int insert(MemberVO vo) {
 		return memberDao.insert(vo);
 	}
 	@Override
-	public memberVO select(String memId) {
+	public MemberVO select(String memId) {
 		return memberDao.select(memId);
 	}
 	
