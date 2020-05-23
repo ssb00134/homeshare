@@ -122,43 +122,52 @@ public class HouseController {
 		logger.info("house-insert-post 실행");
 		logger.info(vo.toString());
 		
-		int result=0; // 업로드 실행 결과 초기값 실패
+		String result= null; // 업로드 실행 결과 초기값 실패
 		
-		//파일 업로드
-		String fileResult=null;	
-		String NextHouseNo = Integer.toString(houseService.seqence()+1); //houseNo의 최대값 -> 시퀸스
-		logger.info("다음 시퀀스 : " + NextHouseNo);
-		for (MultipartFile f : files) {
-			fileResult =  FileUploadUtil.saveUploadedFile(
-					uploadPath, "houseno" + NextHouseNo,
-					f.getOriginalFilename(), 
-					f.getBytes());
-			logger.info("fileResult : " + fileResult);
-		}
+		result = Integer.toString(houseService.create(vo));
+		//시퀀스 테스트
+		logger.info("result : " + result);
+		return result;
 		
-		if(FileUploadUtil.countFile(uploadPath, "houseno" + NextHouseNo)<20) {
-			//만약 저장된 파일의 갯수가 10개 이하일 경우 create실행
-			result = houseService.create(vo);
-		}
 		
-		//end 파일업로드
 		
-		if(files.length==0) {
-			logger.info("전송된 파일이 없습니다.");
-			result =0;
-		}
 		
-		if (result == 1) { // insert 성공
-			logger.info("insert 성공");
-			//TODO : 다음시퀀스 폴더를 생성한다.
-			reAttr.addFlashAttribute("insert_result", "success");
-			return "/";
-		} else {
-			logger.info("insert 실패");
-			reAttr.addFlashAttribute("insert_result", "fail");
-			//TODO : 실패시 폴더 지워야함
-			return "/mail";
-		}
+		
+//		//파일 업로드
+//		String fileResult=null;	
+//		String NextHouseNo = Integer.toString(houseService.seqence()+1); //houseNo의 최대값 -> 시퀸스
+//		logger.info("다음 시퀀스 : " + NextHouseNo);
+//		for (MultipartFile f : files) {
+//			fileResult =  FileUploadUtil.saveUploadedFile(
+//					uploadPath, "houseno" + NextHouseNo,
+//					f.getOriginalFilename(), 
+//					f.getBytes());
+//			logger.info("fileResult : " + fileResult);
+//		}
+//		
+//		if(FileUploadUtil.countFile(uploadPath, "houseno" + NextHouseNo)<20) {
+//			//만약 저장된 파일의 갯수가 10개 이하일 경우 create실행
+//			result = houseService.create(vo);
+//		}
+//		
+//		//end 파일업로드
+//		
+//		if(files.length==0) {
+//			logger.info("전송된 파일이 없습니다.");
+//			result =0;
+//		}
+//		
+//		if (result == 1) { // insert 성공
+//			logger.info("insert 성공");
+//			//TODO : 다음시퀀스 폴더를 생성한다.
+//			reAttr.addFlashAttribute("insert_result", "success");
+//			return "/";
+//		} else {
+//			logger.info("insert 실패");
+//			reAttr.addFlashAttribute("insert_result", "fail");
+//			//TODO : 실패시 폴더 지워야함
+//			return "/mail";
+//		}
 	}
 	
 	

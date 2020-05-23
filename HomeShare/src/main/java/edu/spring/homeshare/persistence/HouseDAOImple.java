@@ -38,9 +38,19 @@ public class HouseDAOImple implements HouseDAO {
 	@Override
 	public int insert(HouseVO vo) {
 		logger.info("insert 실행");
-		return sqlSession.insert(NAMESPACE + ".insert", vo);
+		sqlSession.insert(NAMESPACE + ".insert", vo);
+		int houseNo = vo.getHouseNo();
+		return houseNo;
 	}
 
+//	@Override
+//	 public int insertBoard(NewBoardDTO newBoardDTO) throws Exception {
+//	     getSqlSession().insert("newboard.insertBoard", newBoardDTO);
+//	     int b_no = newBoardDTO.getB_no();
+//	     return b_no;
+//	 } 
+	
+	
 	@Override
 	public HouseVO selectByHouseNo(int houseNo) {
 		logger.info("selectByHouseNo 실행");

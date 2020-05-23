@@ -193,16 +193,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{score},
 		#{location}
 		)
+		<selectKey keyProperty="houseNo" resultType="Integer"
+			order="BEFORE">
+			SELECT house_pk.nextval FROM dual
+		</selectKey>
 	</insert>
 
 
 
 	<update id="update">
 		UPDATE 테이블명 SET 필드명='변경할값' WHERE 필드명=해당값;
-		update ${house} set
+		update
+		${house} set
 		${houseNo} = #{houseNo},
 		${type} = #{type},
-		${scope} = #{scope},
+		${scope} =
+		#{scope},
 		${maxCapacity} = #{maxCapacity},
 		${bedroom} = #{bedroom},
 		${bed} = #{bed},
@@ -211,18 +217,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		${spaces} = #{spaces},
 		${title} = #{title},
 		${info} = #{info},
-		${rules} = #{rules},
+		${rules} =
+		#{rules},
 		${checkinTime} = #{checkinTime},
-		${checkoutTime} = #{checkoutTime},
+		${checkoutTime} =
+		#{checkoutTime},
 		${stayNight} = #{stayNight},
 		${stayDay} = #{stayDay},
 		${bookableDateBegin} = #{bookableDateBegin},
-		${bookableDateEnd} = #{bookableDateEnd},
+		${bookableDateEnd} =
+		#{bookableDateEnd},
 		${price} = #{price},
 		${memNo} = #{memNo},
-		${replies} = #{replies},
+		${replies}
+		= #{replies},
 		${image} = #{image},
-		${checkinInterval} = #{checkinInterval},
+		${checkinInterval} =
+		#{checkinInterval},
 		${score} = #{score},
 		${location} = #{location}
 		where
