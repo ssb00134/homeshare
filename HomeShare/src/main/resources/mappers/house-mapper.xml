@@ -118,9 +118,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- houseno의 최대값 -> 시퀸스 값을 리턴하는 sql -->
 	<select id="select_max_houseNo" resultType="Integer">
-		SELECT ${houseNo} FROM ${house}
+		SELECT ${houseNo}
+		FROM ${house}
 		WHERE ${houseNo} = (SELECT max(${houseNo}) FROM ${house})
-	</select> 
+	</select>
 
 
 
@@ -163,7 +164,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- 입력 -->
-	<insert id="insert" >
+	<insert id="insert">
 		insert into ${house}
 		values(
 		#{houseNo},
@@ -193,7 +194,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{location}
 		)
 	</insert>
+
+
+
 	<update id="update">
+		UPDATE 테이블명 SET 필드명='변경할값' WHERE 필드명=해당값;
+		update ${house} set
+		${houseNo} = #{houseNo},
+		${type} = #{type},
+		${scope} = #{scope},
+		${maxCapacity} = #{maxCapacity},
+		${bedroom} = #{bedroom},
+		${bed} = #{bed},
+		${bathroom} = #{bathroom},
+		${utilities} = #{utilities},
+		${spaces} = #{spaces},
+		${title} = #{title},
+		${info} = #{info},
+		${rules} = #{rules},
+		${checkinTime} = #{checkinTime},
+		${checkoutTime} = #{checkoutTime},
+		${stayNight} = #{stayNight},
+		${stayDay} = #{stayDay},
+		${bookableDateBegin} = #{bookableDateBegin},
+		${bookableDateEnd} = #{bookableDateEnd},
+		${price} = #{price},
+		${memNo} = #{memNo},
+		${replies} = #{replies},
+		${image} = #{image},
+		${checkinInterval} = #{checkinInterval},
+		${score} = #{score},
+		${location} = #{location}
+		where
+		${houseNo} = #{houseNo}
 	</update>
 
 	<delete id="delete">

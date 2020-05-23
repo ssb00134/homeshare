@@ -70,9 +70,9 @@ public class HouseServiceImple implements HouseService {
 		return HouseDao.delte(houseNo);
 	}
 	@Override
-	public int update(int houseNo) {
+	public int update(HouseVO vo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return HouseDao.update(vo);
 	}
 	@Override
 	public int seqence() {

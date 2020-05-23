@@ -126,8 +126,7 @@ public class HouseController {
 		
 		//파일 업로드
 		String fileResult=null;	
-		String NextHouseNo = Integer.toString(houseService.seqence()+1);
-		String uploadResult = null;
+		String NextHouseNo = Integer.toString(houseService.seqence()+1); //houseNo의 최대값 -> 시퀸스
 		logger.info("다음 시퀀스 : " + NextHouseNo);
 		for (MultipartFile f : files) {
 			fileResult =  FileUploadUtil.saveUploadedFile(
@@ -160,9 +159,10 @@ public class HouseController {
 			//TODO : 실패시 폴더 지워야함
 			return "/mail";
 		}
-		
-
 	}
+	
+	
+	
 
 	/* 삭제 메핑 */
 	@RequestMapping(value = "/house-delete", method = RequestMethod.POST)

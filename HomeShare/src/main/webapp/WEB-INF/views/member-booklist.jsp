@@ -11,7 +11,7 @@
 	<h1>memberbooklist</h1>
 	예약된 리스트
 	<div id="book-lists">
-		<c:forEach var="vo" items="${booklist }">
+		<c:forEach var="vo" items="${booklist }" varStatus="status">
 			<hr>
 			<div class="book_list_item" id="${vo.bookNo }">
 				<div>번호${vo.bookNo }</div>
@@ -22,24 +22,18 @@
 				<div>${vo.hostCheck}</div>
 				<div>${vo.bookMem}</div>
 				<div>${vo.totalPrice}</div>
+				<div>지역 : ${houseList[status.index].location}</div>
 			</div>
 			<hr>
 		</c:forEach>
 
 	</div>
-
-	예약된 하우스 번호
-	<div id="house-lists">
-		<c:forEach var="vo" items="${houseList }">
-			<hr>
-			<div class="house_list_item" id="${vo.houseNo }">
-				<div>번호${vo.houseNo }</div>
-				<div>title : ${vo.title}</div>
-				<div>location : ${vo.location}</div>
-			</div>
-			<hr>
-		</c:forEach>
-	</div>
-
+	<script type="text/javascript">
+	var sessionId = '${memberVO.memId}';
+	console.log('sessionId : ' +sessionId);
+	if(sessionId ===null || sessionId='' || sessionId=undefined){
+		location.href='/homeshare/';
+	}
+	</script>
 </body>
 </html>

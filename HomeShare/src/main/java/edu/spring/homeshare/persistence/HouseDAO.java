@@ -29,6 +29,7 @@ public interface HouseDAO {
 	int update(int houseNo);
 	int delte(int houseNo);
 	
-	int selectSeqence();
+	int selectSeqence(); //houseNo 가장 높은 것을 리턴
+	int update(HouseVO vo);
 
 }

@@ -19,7 +19,7 @@ public interface HouseService {
 	List<HouseVO> multySelect(HashMap<String, Object> map );
 	
 	int getToTotalNumsOfRecords(Map<String, Object> map);
-	int update(int houseNo);
+	int update(HouseVO vo);
 	int delete(int houseNo);
 	int seqence();
 }

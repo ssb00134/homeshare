@@ -105,7 +105,11 @@ public class HouseDAOImple implements HouseDAO {
 	public int selectSeqence() {
 		logger.info("select_max_houseNo 실행");
 		return sqlSession.selectOne(NAMESPACE + ".select_max_houseNo");
-
+	}
+	@Override
+	public int update(HouseVO vo) {
+		logger.info("update 실행");
+		return sqlSession.selectOne(NAMESPACE + ".update");
 	}
 
 }
