@@ -37,7 +37,7 @@ public class HouseController {
 
 	@Autowired
 	private HouseService houseService;
-	
+
 	@Resource(name = "uploadPath")
 	private String uploadPath;
 
@@ -85,10 +85,10 @@ public class HouseController {
 		maker.setTotalCount(houseService.getToTotalNumsOfRecords());
 		maker.setPageData();
 		model.addAttribute("pageMaker", maker);
-		
-		/* 현재 시퀀스 보기*/
+
+		/* 현재 시퀀스 보기 */
 		int seqence = houseService.seqence();
-		logger.info("현재 시퀀스 : "  +seqence);
+		logger.info("현재 시퀀스 : " + seqence);
 
 		logger.info("전체 하우스 수 : " + maker.getTotalCount());
 		logger.info("현재 선택된 페이지 : " + c.getPage());
@@ -118,62 +118,42 @@ public class HouseController {
 	}
 
 	@RequestMapping(value = "/house-insert-post", method = RequestMethod.POST)
-	public String houseInsertPost(HouseVO vo,MultipartFile[] files, RedirectAttributes reAttr) throws IOException {
+	public String houseInsertPost(HouseVO vo, MultipartFile[] files, RedirectAttributes reAttr) throws IOException {
 		logger.info("house-insert-post 실행");
 		logger.info(vo.toString());
-		
-		String result= null; // 업로드 실행 결과 초기값 실패
-		
-		result = Integer.toString(houseService.create(vo));
-		//시퀀스 테스트
-		logger.info("result : " + result); //오류 
-		return result;
-		
-		
-		
-		
-		
-//		//파일 업로드
-//		String fileResult=null;	
-//		String NextHouseNo = Integer.toString(houseService.seqence()+1); //houseNo의 최대값 -> 시퀸스
-//		logger.info("다음 시퀀스 : " + NextHouseNo);
-//		for (MultipartFile f : files) {
-//			fileResult =  FileUploadUtil.saveUploadedFile(
-//					uploadPath, "houseno" + NextHouseNo,
-//					f.getOriginalFilename(), 
-//					f.getBytes());
-//			logger.info("fileResult : " + fileResult);
-//		}
-//		
-//		if(FileUploadUtil.countFile(uploadPath, "houseno" + NextHouseNo)<20) {
-//			//만약 저장된 파일의 갯수가 10개 이하일 경우 create실행
-//			result = houseService.create(vo);
-//		}
-//		
-//		//end 파일업로드
-//		
-//		if(files.length==0) {
-//			logger.info("전송된 파일이 없습니다.");
-//			result =0;
-//		}
-//		
-//		if (result == 1) { // insert 성공
-//			logger.info("insert 성공");
-//			//TODO : 다음시퀀스 폴더를 생성한다.
-//			reAttr.addFlashAttribute("insert_result", "success");
-//			return "/";
-//		} else {
-//			logger.info("insert 실패");
-//			reAttr.addFlashAttribute("insert_result", "fail");
-//			//TODO : 실패시 폴더 지워야함
-//			return "/mail";
-//		}
+
+		if (files.length > 0 || files.length < 11) {
+			logger.info("inset 실행");
+			int result = 0;
+			result = houseService.create(vo);
+			if (result == 0) {
+				logger.info("insert 실패");
+				return "/";
+			} else {
+				//TODO : 시퀸스가 같은 폴더가 있을때 예외처리 할것
+				logger.info("insert 성공");
+				logger.info("insert 결과 houseNo : " + result);
+				String fileResult = null;
+				logger.info("파일업로드 시작");
+				for (MultipartFile f : files) {
+					fileResult = FileUploadUtil.saveUploadedFile(uploadPath, "houseno" + result,
+							f.getOriginalFilename(), f.getBytes());
+					logger.info("업로드 결과 fileResult : " + fileResult);
+					return "/";
+				}
+				return "/";
+			}
+		} else if (files.length == 0) {
+			logger.info("전송된 파일이 없습니다. insert 실패");
+			return "/";
+		} else {
+			logger.info("최대 10개 파일. insert 실패");
+			return "/";
+		}
 	}
-	
-	
-	
 
 	/* 삭제 메핑 */
+	// TODO : 삭제시 해당 아이디의 모든 데이터가 삭제됨
 	@RequestMapping(value = "/house-delete", method = RequestMethod.POST)
 	public String delete(int houseNo, int memNo, HttpServletRequest req, HttpServletResponse res) throws IOException {
 
@@ -181,9 +161,9 @@ public class HouseController {
 		HttpSession session = req.getSession();
 		int sessionMemNo = (int) session.getAttribute("memNo"); // 세션에서 아이디 가져오기
 		logger.info("세션값 : " + sessionMemNo);
-		
+
 		PrintWriter out = res.getWriter();
-		
+
 		if (sessionMemNo == memNo) {// 세션이 일치하면
 			logger.info("삭제 실행");
 			int result = houseService.delete(houseNo);
