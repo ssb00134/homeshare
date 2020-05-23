@@ -126,7 +126,7 @@ public class HouseController {
 		
 		result = Integer.toString(houseService.create(vo));
 		//시퀀스 테스트
-		logger.info("result : " + result);
+		logger.info("result : " + result); //오류 
 		return result;
 		
 		
