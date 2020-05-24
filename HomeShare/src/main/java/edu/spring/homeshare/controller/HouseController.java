@@ -1,5 +1,6 @@
 package edu.spring.homeshare.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -129,6 +130,15 @@ public class HouseController {
 		}
 	}
 	
+	/* list all 모든 정보 보기*/
+	@RequestMapping(value="/listall",method = RequestMethod.GET)
+	public void listAll(Model model) {
+		List<HouseVO> list = houseService.selectAll();
+		model.addAttribute("list", list);
+		logger.info("list : " + list.toString());
+	}
+	
+	
 
 	/* insert 메핑 */
 	// 숙소등록
@@ -192,8 +202,16 @@ public class HouseController {
 			int result = houseService.delete(houseNo);
 			if (result == 1) {
 				logger.info("삭제성공");
+				//TODO : 폴더 삭제
+				try {
+					String path = uploadPath + File.separator + "houseno" + houseNo;
+					FileUploadUtil.delete(path);					
+				} catch (Exception e) {
+					e.printStackTrace();
+					logger.info("mybatis 삭제 성공했으나, 폴더 삭제엔 실패하였습니다.");
+				}
 			} else {
-				logger.info("삭제실패");
+				logger.info("mybatis 삭제실패");
 			}
 			return "/";
 		} else {

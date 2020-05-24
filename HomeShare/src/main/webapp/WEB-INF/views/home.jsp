@@ -62,6 +62,10 @@ header {
 			<a href="/homeshare/jusoPopup"><input type="text">주소테스트</a>
 		</div>
 		<br>
+			<div>
+			<a href="/homeshare/house/listall"><input type="text">모든 데이터 보기</a>
+		</div>
+		<br>
 	</div>
 	<%@ include file="footer.jspf"%>
 </body>
