@@ -26,6 +26,9 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+		
+		<!-- 웹소켓 추가영역 -->
+		<async-supported>true</async-supported>
 	</servlet>
 
 	<servlet-mapping>

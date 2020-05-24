@@ -18,11 +18,14 @@ header {
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css"
+	type="text/css" />
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script> 
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 </head>
 <body>
 
@@ -31,7 +34,7 @@ header {
 	${memId }님, 환영합니다. <br>
 		<button id="btn_logout" type="button" method="post"></button>
 	</c:if>
-	
+
 	<%@ include file="header.jspf"%>
 
 	<%@ include file="section.jspf"%>
@@ -59,11 +62,24 @@ header {
 		</div>
 		<br>
 		<div>
-			<a href="/homeshare/jusoPopup"><input type="text">주소테스트</a>
+			<a href="/homeshare/jusoPopup">
+				<input type="text">
+				주소테스트
+			</a>
 		</div>
 		<br>
-			<div>
-			<a href="/homeshare/house/listall"><input type="text">모든 데이터 보기</a>
+		<div>
+			<a href="/homeshare/house/listall">
+				<input type="text">
+				모든 데이터 보기
+			</a>
+		</div>
+		<br> <br>
+		<div>
+			<a href="/homeshare/test/websocket">
+				<input type="text">
+				웹소켓 테스트
+			</a>
 		</div>
 		<br>
 	</div>

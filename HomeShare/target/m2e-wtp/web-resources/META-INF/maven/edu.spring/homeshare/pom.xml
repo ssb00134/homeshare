@@ -201,7 +201,14 @@
 			<version>1.4.7</version>
 		</dependency>
 
-	
+		<!-- 스프링 웹소켓 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+			<version>5.0.2.RELEASE</version>
+		</dependency>
+
+
 
 
 	</dependencies>
