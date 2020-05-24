@@ -51,11 +51,6 @@ public class BookController {
 			logger.info("houseList : " + houseList.get(i).toString() );
 		}
 		model.addAttribute("houseList", houseList);
-		
-
-
-		
-
 	}
 
 }

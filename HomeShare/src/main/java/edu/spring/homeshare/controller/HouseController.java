@@ -108,9 +108,28 @@ public class HouseController {
 		logger.info(vo.toString());
 		model.addAttribute("houseVO", vo);
 	}
+	
+	/* 호스팅 메핑 */
+	@RequestMapping(value = "/hosting", method = RequestMethod.GET)
+	public void Housting(Model model, HttpServletRequest req, HttpServletResponse res) {
+		logger.info("hosting 실행 " );
+		
+		//세션에서 아이디, memNo 가져오기
+		HttpSession session = req.getSession();
+		String sessionMemId = (String) session.getAttribute("memId"); // 세션에서 아이디 가져오기
+		if(sessionMemId != null) {
+			int memNo = (int) session.getAttribute("memNo");
+			List<HouseVO> list = houseService.selectAllByMemNO(memNo);
+			logger.info("list : " + list.toString());
+			model.addAttribute("list", list);
+		}else {
+			logger.info("세션이 없습니다. 로그인 해주세요");
+		}
+	}
+	
+
 
 	/* insert 메핑 */
-
 	// 숙소등록
 	@RequestMapping(value = "/house-insert", method = RequestMethod.GET)
 	public void houseInsertGet() {
@@ -164,7 +183,7 @@ public class HouseController {
 
 		PrintWriter out = res.getWriter();
 
-		if (sessionMemNo == memNo) {// 세션이 일치하면
+		if (sessionMemNo == memNo) {// 전송받은 memno와 세션에서의 memno가 일치하면 delete를 실행한다. 
 			logger.info("삭제 실행");
 			int result = houseService.delete(houseNo);
 			if (result == 1) {
@@ -178,5 +197,8 @@ public class HouseController {
 			return "/";
 		}
 	}
+	
+	
+	
 
 }

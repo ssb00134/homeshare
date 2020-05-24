@@ -69,15 +69,16 @@ header {
 				<input type="button" value="로그아웃">
 			</a>
 			<c:if test="${not empty memberVO.houseNo }">
-				<a href="/homeshare/host/hosting-list">
-					<input type="button" value="숙소관리하기">
+				
+				<a href="/homeshare/house/hosting">
+					<input type="submit" value="숙소관리하기">
 				</a>
+
 				<a href="/homeshare/member-booklist">
 					<input type="button" value="내가 예약한 숙소">
 				</a>
 			</c:if>
 		</div>
-
 	</c:if>
 </header>
 <hr>
