@@ -141,6 +141,8 @@
 		$('#btn_delete').click(function(){
 			frm.attr('action','house-delete');
 			frm.attr('method','post');
+			frm.find('[name="houseNo"]').val('${houseVO.houseNo}');
+			frm.find('[name="memNo"]').val('${houseVO.memNo}');
 			frm.submit();
 		});
 		

@@ -110,9 +110,12 @@ public class MemberController {
 		logger.info("account 실행");
 		logger.info("url : " + url); // 이전경로(로그인을 위해 왔던)의 값 출력
 		model.addAttribute("targetUrl", url);	
+		
 		HttpSession session = req.getSession();
 		String memId = (String) session.getAttribute("memId"); //세션에서 아이디 가져오기
 		logger.info("세션값 : " +memId);
+		
+		
 		MemberVO vo = memberService.select(memId);
 		logger.info(vo.toString());
 		session.setAttribute("vo", vo);

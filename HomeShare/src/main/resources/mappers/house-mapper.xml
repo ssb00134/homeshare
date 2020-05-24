@@ -19,8 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from ${house}
 	</select>
 
-	<select id="select_by_houseno" resultType="houseVO"
-		parameterType="int">
+	<select id="select_by_houseno" resultType="houseVO">
 		select * from ${house} where ${houseNo} = #{houseNo}
 	</select>
 
@@ -242,7 +241,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<delete id="delete">
 		delete from ${house}
-		where ${houseNo} = ${houseNo}
+		where ${houseNo} = #{houseNo}
 		
 	</delete>
 

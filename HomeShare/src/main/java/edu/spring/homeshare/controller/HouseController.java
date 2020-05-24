@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.spring.homeshare.domain.HouseVO;
+import edu.spring.homeshare.domain.MemberVO;
 import edu.spring.homeshare.service.HouseService;
 import edu.spring.homeshare.util.FileUploadUtil;
 import edu.spring.homeshare.util.PageCriteria;
@@ -41,6 +42,7 @@ public class HouseController {
 	@Resource(name = "uploadPath")
 	private String uploadPath;
 
+	//TODO : 삭제된 값이 리스트에 남아있음
 	@RequestMapping(value = "/house-list", method = RequestMethod.GET)
 	public void houseLIst(Model model, Integer page, Integer prePage, HttpServletRequest req) {
 		logger.info("houselist get 실행");
@@ -110,8 +112,8 @@ public class HouseController {
 	}
 	
 	/* 호스팅 메핑 */
-	@RequestMapping(value = "/hosting", method = RequestMethod.GET)
-	public void Housting(Model model, HttpServletRequest req, HttpServletResponse res) {
+	@RequestMapping(value="/host",method = RequestMethod.POST)
+	public void Housting(Model model, HttpServletRequest req) {
 		logger.info("hosting 실행 " );
 		
 		//세션에서 아이디, memNo 가져오기
@@ -127,7 +129,6 @@ public class HouseController {
 		}
 	}
 	
-
 
 	/* insert 메핑 */
 	// 숙소등록
@@ -175,7 +176,10 @@ public class HouseController {
 	// TODO : 삭제시 해당 아이디의 모든 데이터가 삭제됨
 	@RequestMapping(value = "/house-delete", method = RequestMethod.POST)
 	public String delete(int houseNo, int memNo, HttpServletRequest req, HttpServletResponse res) throws IOException {
-
+		
+		logger.info("전송받은 houseNo : " + houseNo);
+		logger.info("전송받은 memNo : " + memNo);
+		
 		// 세션 설정
 		HttpSession session = req.getSession();
 		int sessionMemNo = (int) session.getAttribute("memNo"); // 세션에서 아이디 가져오기
@@ -184,7 +188,7 @@ public class HouseController {
 		PrintWriter out = res.getWriter();
 
 		if (sessionMemNo == memNo) {// 전송받은 memno와 세션에서의 memno가 일치하면 delete를 실행한다. 
-			logger.info("삭제 실행");
+			logger.info("세션 일치 삭제 실행");
 			int result = houseService.delete(houseNo);
 			if (result == 1) {
 				logger.info("삭제성공");

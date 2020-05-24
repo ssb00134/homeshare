@@ -11,7 +11,6 @@ header {
 }
 </style>
 <!-- 헤더바 -->
-<!-- 헤더바 -->
 "이곳은 Header영역입니다."
 <header>
 	<div id="main-button">
@@ -69,14 +68,14 @@ header {
 				<input type="button" value="로그아웃">
 			</a>
 			<c:if test="${not empty memberVO.houseNo }">
-				
-				<a href="/homeshare/house/hosting">
-					<input type="submit" value="숙소관리하기">
-				</a>
 
-				<a href="/homeshare/member-booklist">
+				<form action="/homeshare/house/host" method="post">
+					<input type="submit" value="숙소관리하기">
+				</form>
+
+				<form action="/homeshare/member-booklist" method="post">
 					<input type="button" value="내가 예약한 숙소">
-				</a>
+				</form>
 			</c:if>
 		</div>
 	</c:if>
