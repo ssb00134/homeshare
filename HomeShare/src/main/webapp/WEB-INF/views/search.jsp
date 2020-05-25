@@ -33,6 +33,7 @@
           <div>${vo.price}$</div>
           <div>${vo.scope}</div>
           <div>${vo.location}</div>
+          <div>별점 ${vo.score}</div>
           </div>
           <div class="sessionchk" >
 	         <button type="submit" id="btn_update">수정</button>

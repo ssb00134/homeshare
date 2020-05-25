@@ -40,6 +40,10 @@ public class ReplyDAOImple implements ReplyDAO {
 	public int delete(int rno) {
 		return sqlSession.delete(NAMESPACE + ".delete", rno);
 	}
+	@Override
+	public int selectAvgScore(int houseNo) {
+		return sqlSession.selectOne(NAMESPACE + ".select_avg_score", houseNo);
+	}
 }
 
 

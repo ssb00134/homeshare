@@ -10,4 +10,5 @@ public interface ReplyService {
 	int readCount();
 	int update(ReplyVO vo);
 	int delete(int rno);
+	int readAvgScore(int houseNo);
 }

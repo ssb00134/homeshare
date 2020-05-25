@@ -8,13 +8,13 @@ public class ReplyVO {
 	private String content;
 	private String memId;
 	private Date regdate;
-	private int score;
+	private int replyScore;
 	private int cleanScore;
 	private int checkinScore;
 	
 	public ReplyVO() {}
 
-	public ReplyVO(int rno, int houseNo, String content, String memId, Date regdate, int score, int cleanScore,
+	public ReplyVO(int rno, int houseNo, String content, String memId, Date regdate, int replyScore, int cleanScore,
 			int checkinScore) {
 		super();
 		this.rno = rno;
@@ -22,7 +22,7 @@ public class ReplyVO {
 		this.content = content;
 		this.memId = memId;
 		this.regdate = regdate;
-		this.score = score;
+		this.replyScore = replyScore;
 		this.cleanScore = cleanScore;
 		this.checkinScore = checkinScore;
 	}
@@ -67,12 +67,12 @@ public class ReplyVO {
 		this.regdate = regdate;
 	}
 
-	public int getScore() {
-		return score;
+	public int getReplyScore() {
+		return replyScore;
 	}
 
-	public void setScore(int score) {
-		this.score = score;
+	public void setReplyScore(int replyScore) {
+		this.replyScore = replyScore;
 	}
 
 	public int getCleanScore() {
@@ -94,7 +94,7 @@ public class ReplyVO {
 	@Override
 	public String toString() {
 		return "ReplyVO [rno=" + rno + ", houseNo=" + houseNo + ", content=" + content + ", memId=" + memId
-				+ ", regdate=" + regdate + ", score=" + score + ", cleanScore=" + cleanScore + ", checkinScore="
+				+ ", regdate=" + regdate + ", score=" + replyScore + ", cleanScore=" + cleanScore + ", checkinScore="
 				+ checkinScore + "]";
 	}
 	

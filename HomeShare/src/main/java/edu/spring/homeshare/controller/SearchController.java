@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import edu.spring.homeshare.HomeController;
 import edu.spring.homeshare.domain.HouseVO;
 import edu.spring.homeshare.service.HouseService;
+import edu.spring.homeshare.service.ReplyService;
 import edu.spring.homeshare.util.PageCriteria;
 import edu.spring.homeshare.util.PageMaker;
 
@@ -27,6 +28,9 @@ public class SearchController {
 
 	@Autowired
 	private HouseService houseService;
+	
+	@Autowired
+	private ReplyService replyService;
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public void search(HttpServletRequest req, Model model, Integer page, Integer prePage) {
@@ -61,7 +65,26 @@ public class SearchController {
 		map.put("end",c.getEnd());
 		logger.info("maptostring : " + map.toString());
 
+	
+		
 		List<HouseVO> list = houseService.multySelect(map);
+		
+		/* score에 리플 병균값 넣기*/
+		//test
+		logger.info("list 0 의 houseno : " + list.get(0).getHouseNo());
+		int score2 = replyService.readAvgScore(list.get(0).getHouseNo());
+		logger.info("test score : " + score2);
+		
+		int[] score =  new int[list.size()];
+		for(int i=0; i<list.size(); i++) {
+			logger.info("list에서 받은 houseNo : " + list.get(i).getHouseNo());
+			score[i] = replyService.readAvgScore(list.get(i).getHouseNo());
+			logger.info("score  : " + (Integer)score[i]);
+			list.get(i).setScore(score[i]);
+			logger.info("list : " + list.toString());
+		}
+		
+		
 		logger.info("list 정보 : " + list.toString());
 		logger.info("list 갯수 : " + list.size());
 		model.addAttribute("houseList",list);

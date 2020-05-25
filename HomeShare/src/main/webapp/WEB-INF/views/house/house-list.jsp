@@ -31,6 +31,7 @@
           <div>${vo.price}$</div>
           <div>${vo.scope}</div>
           <div>${vo.location}</div>
+          <div>별점 : ${vo.score}</div>
           <input class = "imgSource" id="items" type="hidden" value="${vo.image }" /><br>
 		  <!-- 이미지슬라이더 -->
 		  <div class="home__slider">

@@ -34,5 +34,9 @@ public class ReplyServiceImple implements ReplyService {
 	public int delete(int rno) {
 		return replyDao.delete(rno);
 	}
+	@Override
+	public int readAvgScore(int houseNo) {
+		return replyDao.selectAvgScore(houseNo);
+	}
 
 }

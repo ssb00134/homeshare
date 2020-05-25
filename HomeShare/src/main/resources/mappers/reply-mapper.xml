@@ -42,6 +42,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from ${reply}
 		where ${rno} = #{rno}
 	</delete>
+	
+	<!-- 리플 후기 평균 구하기 -->
+	<select id="select_avg_score" resultType="Integer">
+		select avg(${replyScore}) from ${reply} where ${reply}.${houseNo} = #{houseNo}
+	</select>
 
 </mapper>
 

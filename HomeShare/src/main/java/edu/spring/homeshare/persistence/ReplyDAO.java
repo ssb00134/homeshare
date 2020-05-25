@@ -11,4 +11,6 @@ public interface ReplyDAO {
 	int update(ReplyVO vo);
 	int delete(int rno);
 	
+	int selectAvgScore(int houseNo);
+	
 }
