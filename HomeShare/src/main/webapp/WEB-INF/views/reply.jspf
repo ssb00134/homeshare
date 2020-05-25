@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <!-- 리플 모달 -->
 <input type="button" id="reply_btn" value="댓글 입력하기" />
 
@@ -8,6 +7,7 @@
 	<form action="/homeshare/replies" id="reply">
 		<input type="text" id="memId" value="${memId }" readonly>
 		<input type="text" id="content" placeholder="댓글 입력">
+
 		<input type="number" min="0" max="5" id="cleanScore"
 			placeholder="청결도(5)">
 		<input type="number" min="0" max="5" id="checkinScore"
@@ -15,6 +15,9 @@
 		<button type="button" id="btn_add">작성</button>
 	</form>
 </div>
+
+<!-- 리플 영역 -->
+아이디 ${memId }
 
 <hr>
 <div id="showReply">
@@ -26,80 +29,135 @@
 <div id="replies" style="display: none"></div>
 
 <hr>
+<div class="sessionchk">
+	<button type="submit" id="btn_update">수정</button>
+	<button type="submit" id="btn_delete">삭제</button>
+</div>
 
-TODO : 리플의 memid와 세션의 memid가 일치하는지 확인할것 ->프론트엔드에서 막음 ->서버에서 막기
-<br>
-TODO : 결제한 회원만 리플가능
 <script type="text/javascript">
-	$(document).ready(function(){
-//댓글 모달 영역
-		$("#reply_btn").click(function(){
-			$( "#reply_dialog" ).dialog( "open" ); 
-		});
+	$(document).ready(function() {
 		
-		$( "#reply_dialog" ).dialog({ 
-			autoOpen: false, 
+		var houseNo = '${houseVO.houseNo}';
+		//댓글 모달 영역
+		$("#reply_btn").click(function() {
+			$("#reply_dialog").dialog("open");
+		});
+
+		$("#reply_dialog").dialog({
+			autoOpen : false,
 			//레이어팝업 넓이 
-			width: 400, 
+			width : 400,
 			//뒷배경을 disable 시키고싶다면 true 
-			modal: true, 
-			buttons: [ 
-				{ //버튼텍스트 
-					text: "후기 작성", //클릭이벤트발생시 동작 
-					click: function() { 
-						var content = $('#content').val();
-						var memId ='${memId}';
-						var regdate =null;
-						var houseNo = '${houseVO.houseNo}';
-				  	  	var cleanScore = $('#cleanScore').val(); // 클린점수
-				  	  	var checkinScore = $('#checkinScore').val(); // 클린점수
-				  		var obj = {
-					  			'rno' : 0,
-					  	  	    'houseNo' : houseNo,
-					  	  		'content' : content,
-					  	  		'memId' : memId,
-					  	  		'regdate' : null,
-					  	  		'score' : 0,
-					  	  		'cleanScore' : cleanScore,
-					  	  		'checkinScore' : checkinScore
-				  	  	}; // end var obj
-				  	  	
-				  	  $.ajax({
-				  	  	  type : 'post',
-				  	  	  url : '/homeshare/replies',
-				  	  	  headers : {
-				  	  	    'Content-Type' : 'application/json', 
-				  	  	    'X-HTTP-Method-Override' : 'POST'
-				  	  	  }, 
-				  	  	  data : JSON.stringify(obj),
-				  	  	  success : function(result, status){
-				  	  	    console.log(result);
-				  	  	    console.log(status);
-				  	  	    if (result == 1){
-				  	  	      alert('댓글 입력 성공');
-				  	  	      $('#content').val(''); // 성공메시지 이후 삽입했던 content 데이터 삭제
-				  	  	      $('#memId').val(''); // 성공메시지 이후 삽입했던 memid 데이터 삭제
-				  	  	      $('#cleanScore').val('');
-				  	  	      $('#checkinScore').val('');
-				  	  	      getAllReplies(); // 메소드 호출
-				  	  	    } // end if()
-				  	  	  } // end success
-				  	  	  
-				  	  	}); // end ajax()
-				  	$( this ).dialog( "close" ); 
-					} 
-				}, 
-				{ //버튼텍스트 
-					text: "취소", //클릭이벤트발생시 동작 
-					click: function() { 
-						$( this ).dialog( "close" ); 
-					} 
-				} 
-				] 
-			
+			modal : true,
+			buttons : [ { //버튼텍스트 
+				text : "후기 작성", //클릭이벤트발생시 동작 
+				click : function() {
+					var content = $('#content').val();
+					var memId = '${memId}';
+					var regdate = null;
+					var cleanScore = $('#cleanScore').val(); // 클린점수
+					var checkinScore = $('#checkinScore').val(); // 클린점수
+					var obj = {
+						'rno' : 0,
+						'houseNo' : houseNo,
+						'content' : content,
+						'memId' : memId,
+						'regdate' : null,
+						'score' : 0,
+						'cleanScore' : cleanScore,
+						'checkinScore' : checkinScore
+					}; // end var obj
+
+					$.ajax({
+						type : 'post',
+						url : '/homeshare/replies',
+						headers : {
+							'Content-Type' : 'application/json',
+							'X-HTTP-Method-Override' : 'POST'
+						},
+						data : JSON.stringify(obj),
+						success : function(result, status) {
+							console.log(result);
+							console.log(status);
+							if (result == 1) {
+								alert('댓글 입력 성공');
+								$('#content').val(''); // 성공메시지 이후 삽입했던 content 데이터 삭제
+								$('#memId').val(''); // 성공메시지 이후 삽입했던 memid 데이터 삭제
+								$('#cleanScore').val('');
+								$('#checkinScore').val('');
+								getAllReplies(); // 메소드 호출
+							} // end if()
+						} // end success
+
+					}); // end ajax()
+					$(this).dialog("close");
+				}
+			}, { //버튼텍스트 
+				text : "취소", //클릭이벤트발생시 동작 
+				click : function() {
+					$(this).dialog("close");
+				}
+			} ]
+
 		});
+
+
 		
-		function getAllReplies(){
+		
+		getAllReplies();
+		// 댓글 입력 기능
+	  	  $('#btn_add').click(function(){
+	  		
+	  	  	// 댓글 아이디, 댓글 내용의 값을 가져와서
+	  	  	// get 방식으로 전송
+	  	  	// url : 'localhost:8080/Web10_MVC/replies/add'
+	  	  	// data : 게시판 번호, 댓글 내용, 댓글 아이디
+	  	  	var content = $('#content').val(); // 댓글 내용 값
+	  	  	var memId ='${memId}'; // 댓글 아이디 값
+	  	  	var regdate =null;
+	  	  	var cleanScore = $('#cleanScore').val(); // 클린점수
+	  	  console.log('ceanScope : ' + cleanScore);
+	  	  	
+	  		var checkinScore = $('#checkinScore').val(); // 클린점수
+	  	  	var obj = {
+	  			'rno' : 0,
+	  	  	    'houseNo' : houseNo,
+	  	  		'content' : content,
+	  	  		'memId' : memId,
+	  	  		'regdate' : null,
+	  	  		'score' : 0,
+	  	  		'cleanScore' : cleanScore,
+	  	  		'checkinScore' : checkinScore
+	  	  	}; // end var obj
+	  	  	
+	  	  	// $.ajax로 송신
+	  	  	$.ajax({
+	  	  	  type : 'post',
+	  	  	  url : '/homeshare/replies',
+	  	  	  headers : {
+	  	  	    'Content-Type' : 'application/json', 
+	  	  	    'X-HTTP-Method-Override' : 'POST'
+	  	  	  }, 
+	  	  	  data : JSON.stringify(obj),
+	  	  	  success : function(result, status){
+	  	  	    console.log(result);
+	  	  	    console.log(status);
+	  	  	    if (result == 1){
+	  	  	      alert('댓글 입력 성공');
+	  	  	      $('#content').val(''); // 성공메시지 이후 삽입했던 content 데이터 삭제
+	  	  	      $('#memId').val(''); // 성공메시지 이후 삽입했던 memid 데이터 삭제
+	  	  	      $('#cleanScore').val('');
+	  	  	      $('#checkinScore').val('');
+	  	  	      getAllReplies(); // 메소드 호출
+	  	  	    } // end if()
+	  	  	  } // end success
+	  	  	  
+	  	  	}); // end ajax()
+	  	  	
+	  	  }); // end btn_add.click()
+	  	  
+	  	  
+	  	function getAllReplies(){
 			var url = '/homeshare/replies/all/' + houseNo;
 			console.log(url);
 			$.getJSON(
@@ -128,7 +186,7 @@ TODO : 결제한 회원만 리플가능
 					  	  		  		+ date.getFullYear() +'년' + date.getMonth() + '월'
 					  	  		  		+ '&nbsp;&nbsp;' // 공백
 					  	  		  		+ '총별점 '
-				  	  		        	+ '<input type="number" min="0" max="5" id="reply_score" readonly  value="' + this.score + '" />'
+				  	  		        	+ '<input type="number" min="0" max="5" id="reply_score" readonly  value="' + this.replyScore + '" />'
 				  	  		        	+ "청결점수 "
 					  	  		  	 	+ '<input type="number" min="0" max="5" id="reply_cleanScore" readonly value="' + this.cleanScore + '"/>'
 					  	  		  		+ '&nbsp;&nbsp;' // 공백
@@ -223,10 +281,10 @@ TODO : 결제한 회원만 리플가능
 	  	      
 	  	    }); // end ajax()
 	  	  }); // end btn_delte.click()
-	});//end document;
+		
+		
+	  	  
+	  	  
+	//end 댓글모달 영역
+	});//end function
 </script>
-
-
-
-
-
