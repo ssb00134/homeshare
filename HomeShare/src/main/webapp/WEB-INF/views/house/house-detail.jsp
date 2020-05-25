@@ -66,6 +66,12 @@
 		</div>
 		</div>
 		
+		------------------------------- 예약불가 영역
+		<div id="books"></div>
+		
+		
+		-------------------------------end test area
+		
 		<!-- 리플 모달 -->
 		<input type="button" id="reply_btn" value="댓글 입력하기" />
 		
@@ -346,6 +352,9 @@
 		//totalprice
 		//가격 = 인원 * 날짜 * 기본가격
 		
+		
+		
+		
 
 		$('#bookMem').focus(function(){
 			console.log('focus');
@@ -431,6 +440,52 @@
 	
 		//예약 취소하기 구현
 	
+		
+		//예약 불러오기 구현
+		
+		function getAllBooks(){
+			var houseNo = '${houseVO.houseNo}'
+			console.log('getAllBooks 실행');
+			var url = '/homeshare/book/all/' + houseNo;
+			console.log(url);
+			$.getJSON(
+					url,
+					function(jsonData){
+						var list='';
+						$(jsonData).each(function(){
+									console.log("에약번호 : " + this.bookNo);
+									console.log("체크인 : " + this.checkin);
+									console.log("체크아웃 : " + this.checkout);
+									list += '<div class="book_item" readonly>'
+										+ '<pre>'
+					  	  		  		+ '<input type="text" id="bookNo" readonly value="' + this.bookNo + '" />'
+					  	  		  		+ '<input type="text" id="booklistcheckin" readonly value="' + this.checkin + '" />'
+					  	  		  		+ '&nbsp;&nbsp;' // 공백
+					  	  		  		+ '<input type="text" id="booklistcheckout" value="' + this.checkout + '" />'
+					 					+ '</pre>'
+					 					+ '<hr>'
+					 					+ '</div>';
+								});// end each
+								$('#books').html(list);
+								
+					} //end callback
+			)//end getJSON
+		}//end getAllbooks
+		
+		
+		getAllBooks();
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		//이미지 출력기능
 		var imgSource = $('#imgSource').val();

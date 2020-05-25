@@ -1,5 +1,6 @@
 package edu.spring.homeshare.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -32,6 +33,16 @@ public class BookRestController {
 		int result = bookService.create(vo);
 		return new ResponseEntity<Integer>(result,HttpStatus.OK);
 	}
+	@RequestMapping(value="/book/all/{no}", method = RequestMethod.GET )
+	public ResponseEntity<List<BookVO>>  bookList(
+			@PathVariable("no") int houseNo ) {
+		logger.info("book-insert ½ÇÇà");
+		logger.info("houseNo : " +houseNo);
+		List<BookVO> list = bookService.selectHouseNo(houseNo);
+		return new ResponseEntity<List<BookVO>>(list,HttpStatus.OK);
+	}
+	
+	
 	
 	@RequestMapping(value = "/bookmember/{no}", 
 			method = RequestMethod.GET)

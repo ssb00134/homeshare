@@ -28,7 +28,7 @@ public class BookController {
 	@Autowired
 	private HouseService houseService;
 	
-	@RequestMapping(value = "/member-booklist", method = RequestMethod.GET)
+	@RequestMapping(value = "/member-booklist", method = RequestMethod.POST)
 	public void list(Model model, HttpServletRequest request) {
 
 		HttpSession session = request.getSession();
@@ -40,7 +40,7 @@ public class BookController {
 		
 		List<BookVO> bookList = bookService.selectMemNo(bookMemNo);
 		logger.info("list : " + bookList.toString());
-		model.addAttribute("booklist", bookList);
+		model.addAttribute("bookList", bookList);
 		
 		
 		//예약된 내용을 가져오고 해당 list의 housevo 정보 가져오기

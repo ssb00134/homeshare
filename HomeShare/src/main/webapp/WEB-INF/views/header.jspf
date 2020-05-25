@@ -55,6 +55,7 @@ header {
 		<!-- end modal영역 -->
 
 	</c:if>
+
 	<c:if test="${not empty memId }">
 		<div id="myPageToggle">${memId }</div>
 		<div id="mypage">
@@ -67,14 +68,12 @@ header {
 			<a href="/homeshare/member/logout">
 				<input type="button" value="로그아웃">
 			</a>
+			<form action="/homeshare/member-booklist" method="post">
+				<input type="submit" value="내가 예약한 숙소">
+			</form>
 			<c:if test="${not empty memberVO.houseNo }">
-
 				<form action="/homeshare/house/host" method="post">
 					<input type="submit" value="숙소관리하기">
-				</form>
-
-				<form action="/homeshare/member-booklist" method="post">
-					<input type="button" value="내가 예약한 숙소">
 				</form>
 			</c:if>
 		</div>
