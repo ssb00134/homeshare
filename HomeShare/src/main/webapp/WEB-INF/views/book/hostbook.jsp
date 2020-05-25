@@ -34,21 +34,20 @@
 				<div>${vo.bookHouseNo}$</div>
 				<div>${vo.checkin}</div>
 				<div>${vo.checkout}</div>
-				<div>${vo.hostCheck}</div>
-				<div>${vo.bookMem}</div>
+				<p>${vo.hostCheck }</p>
+				<div>${vo.bookMem}명</div>
 				<div>${vo.totalPrice}</div>
 				<div>지역 : ${houseList[status.index].location}</div>
-
 				 <form action="/homeshare/book-insert" method="post" id="bookForm">
 					<input type="hidden"  id="bookNo" name="bookNo" value="${vo.bookNo }">
 					<input type="hidden"  id="bookMemNo" name="bookMemNo" value="${vo.bookMemNo }">
 					<input type="hidden"  id="bookHouseNo" name="bookHouseNo" value="${vo.bookHouseNo }">
 					<input type="hidden"  id="checkin" name="checkin" value="${vo.checkin }">
-					<input type="hidden"  id="ceckout" name="ceckout" value="${vo.checkout }">
-					<input type="text"  id="hostCheck" name="hostCheck" value="${vo.hostCheck }">
+					<input type="hidden"  id="checkout" name="checkout" value="${vo.checkout }">
+					<input type="hidden"  id="hostCheck" name="hostCheck" value="${vo.hostCheck }">
+					<p>"${vo.hostCheck }"</p>
 					<input type="hidden"  id="bookMem" name="bookMem" value="${vo.bookMem }">
 					<input type="hidden"  id="totalPrice" name="totalPrice" value="${vo.totalPrice }">
-					
 				</form> 
 			</div>
 			<hr>
@@ -70,11 +69,11 @@
 					
 					
 					$('.book_list_item').each(function(index,element){
-					
-						console.log('index : ' + index + ' element find : ' + $(element).find( '#hostcheck').val());
-						if($(element).children( '#hostcheck').val() === "0"){
-							$('#hostCheck').text('예약 대기중') ;
-							$('#bookForm').html('<input type="submit" id="bookbtn" value="예약 수락하기">');
+						console.log('index : ' + hostCheck + ' element children : ' + $(element).children( 'p').text());
+						if($(element).children( 'p').text()=== "0"){
+							console.log('if문 실행중 ');
+							$('#hostCheck').append('예약 대기중') ;
+							$(element).children( 'form').append('<input type="submit" id="bookbtn" value="예약 수락하기">');
 						}
 					});//end each
 					
@@ -88,7 +87,7 @@
 
 				var obj = {
 					'bookNo' :  $('#bookNo').val(),
-					'bookMemNo': $('#bookNo').val(),
+					'bookMemNo': $('#bookMemNo').val(),
 					'bookHouseNo':$('#bookHouseNo').val(),
 					'checkin': $('#checkin').val(),
 					'checkout': $('#checkout').val(),

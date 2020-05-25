@@ -25,7 +25,7 @@ public class BookRestController {
 	@Autowired
 	private BookService bookService;
 	
-	@RequestMapping(value="/homeshare/book-insert", method = RequestMethod.POST)
+	@RequestMapping(value="/book-insert", method = RequestMethod.POST)
 	public ResponseEntity<Integer>  BookInsertPost(
 			@RequestBody BookVO vo) {
 		logger.info("book-insert ½ÇÇà");
