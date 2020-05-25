@@ -1,5 +1,7 @@
 package edu.spring.homeshare.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -25,8 +27,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import edu.spring.homeshare.domain.BookVO;
 import edu.spring.homeshare.domain.HouseVO;
 import edu.spring.homeshare.domain.MemberVO;
+import edu.spring.homeshare.service.BookService;
 import edu.spring.homeshare.service.HouseService;
 import edu.spring.homeshare.util.FileUploadUtil;
 import edu.spring.homeshare.util.PageCriteria;
@@ -39,6 +43,9 @@ public class HouseController {
 
 	@Autowired
 	private HouseService houseService;
+	
+	@Autowired
+	private BookService bookService;
 
 	@Resource(name = "uploadPath")
 	private String uploadPath;
@@ -125,6 +132,10 @@ public class HouseController {
 			List<HouseVO> list = houseService.selectAllByMemNO(memNo);
 			logger.info("list : " + list.toString());
 			model.addAttribute("list", list);
+			
+			
+			
+			
 		}else {
 			logger.info("세션이 없습니다. 로그인 해주세요");
 		}

@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%@ include file="header.jspf"%>
+	<%@ include file="../header.jspf"%>
 	<h1>memberbooklist</h1>
 
 	<div id="book-lists">

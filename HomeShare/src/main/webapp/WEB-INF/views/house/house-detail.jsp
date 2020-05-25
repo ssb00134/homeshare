@@ -68,10 +68,10 @@
 		<%@ include file="../reply.jspf"%>
 		------------------------------- 예약불가 영역
 		<div id="books"></div>
-		
+		<div id="disableList" class ="datePicker"></div>
 		
 		-------------------------------end test area
-		
+		<br>
 		
 		
 		<!-- Trigger/Open The Modal -->
@@ -198,7 +198,8 @@
 
 	        	 //최소 예약가능 시간
 	        	 
-	       	     maxDate:$('#checkOut').val()
+	       	     maxDate:$('#checkOut').val(),
+	       	  	beforeShowDay: noBefore
 	    	});
 		 
 		 $( "#checkOut" ).datepicker({
@@ -259,7 +260,12 @@
 		//totalprice
 		//가격 = 인원 * 날짜 * 기본가격
 		
-		
+		// 이전 날짜들은 선택막기 
+		function noBefore(date){ 
+		   if (date < new Date()) 
+		       return [false]; 
+		   return [true]; 
+		}
 		
 		
 
@@ -341,14 +347,18 @@
 				} //end sucess
 			});//end ajax
 			return false; // 새로고침 없이
+			getAllBooks(); // 예약후 예약 불러오기
 		});//end click;
 		//end book ajax
 		//getBookReusult 모든 결과 가져오기 
 	
+		
+		
 		//예약 취소하기 구현
 	
+
 		
-		//예약 불러오기 구현
+		
 		
 		function getAllBooks(){
 			var houseNo = '${houseVO.houseNo}'
@@ -359,6 +369,7 @@
 					url,
 					function(jsonData){
 						var list='';
+						var disableList =[];
 						$(jsonData).each(function(){
 									console.log("에약번호 : " + this.bookNo);
 									console.log("체크인 : " + this.checkin);
@@ -366,12 +377,26 @@
 									list += '<div class="book_item" readonly>'
 										+ '<pre>'
 					  	  		  		+ '<input type="text" id="bookNo" readonly value="' + this.bookNo + '" />'
-					  	  		  		+ '<input type="text" id="booklistcheckin" readonly value="' + this.checkin + '" />'
+					  	  		  		+ '<input type="text" id="booklistcheckin" readonly value="' + this.checkin.split(' ')[0] + '" />'
 					  	  		  		+ '&nbsp;&nbsp;' // 공백
-					  	  		  		+ '<input type="text" id="booklistcheckout" value="' + this.checkout + '" />'
+					  	  		  		+ '<input type="text" id="booklistcheckout" value="' + this.checkout.split(' ')[0] + '" />'
 					 					+ '</pre>'
 					 					+ '<hr>'
 					 					+ '</div>';
+					 					
+					 					
+					 					var checkin = this.checkin.split(' ')[0];
+					 					
+					 					
+					 					
+					 					
+					 					console.log('checkin datepicker:' +checkin);
+					 			/* 		$('#disableList').datepicker({
+					 						beforeShowDay : function(checkin){
+					 					        var string = jQuery.datepicker.formatDate('yy-mm-dd', checkin);
+					 					        return [ array.indexOf(string) == -1 ]
+					 					    }
+					 						}); //end datepicker */
 								});// end each
 								$('#books').html(list);
 								
@@ -379,12 +404,7 @@
 			)//end getJSON
 		}//end getAllbooks
 		
-		
 		getAllBooks();
-		
-		
-		
-		
 		
 		
 		

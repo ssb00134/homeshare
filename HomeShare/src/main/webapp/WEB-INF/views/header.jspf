@@ -12,6 +12,13 @@ header {
 </style>
 <!-- 헤더바 -->
 "이곳은 Header영역입니다."
+알람설정 방법
+1. 로그인시 호스트인지 확인한다.
+2. 만약 호스트이면 ajax로 호스트-예약이 있는지 확인한다.
+3. 만약 호스트-예약이 있으면 세션에 예약 내용을 저장한다.
+4. 세션에 호스트-예약이 있으면 뷰에서 호스트-예약을 호출한다.
+
+
 <header>
 	<div id="main-button">
 		<a href="/homeshare/">go main</a>
@@ -68,12 +75,15 @@ header {
 			<a href="/homeshare/member/logout">
 				<input type="button" value="로그아웃">
 			</a>
-			<form action="/homeshare/member-booklist" method="post">
+			<form action="/homeshare/book/booking" method="post">
 				<input type="submit" value="내가 예약한 숙소">
 			</form>
 			<c:if test="${not empty memberVO.houseNo }">
 				<form action="/homeshare/house/host" method="post">
 					<input type="submit" value="숙소관리하기">
+				</form>
+				<form action="/homeshare/book/hostbook" method="post">
+					<input type="submit" value="내 host로 들어온 예약">
 				</form>
 			</c:if>
 		</div>
