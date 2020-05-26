@@ -6,15 +6,35 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-header {
-	width: 100%;
-	height: 80px;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	height: 80px;
-}
 </style>
+
+<!-- 모바일 디바이스에서 터치 줌/ 등을 지원하기위한 meta 태그 -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Bootstrap 최신 버전의 css 파일들을 링크 -->
+<link rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+>
+
+<!-- jQuery 최신 버전의 js 파일들을 링크 -->
+<script
+  src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+></script>
+
+<!-- Popper 최신 버전 링크 -->
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"
+></script>
+
+<!-- Bootstrap을 이용하기 위한 최신 버전 링크 -->
+<script
+  src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+></script>
+</head>
+
+
+
+
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 
@@ -28,13 +48,11 @@ header {
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 </head>
 <body>
-
-	<br>
 	<c:if test="${not empty mem_id }">
 	${memId }님, 환영합니다. <br>
 		<button id="btn_logout" type="button" method="post"></button>
 	</c:if>
-
+	<%@ include file="navheader.jspf"%>
 	<%@ include file="header.jspf"%>
 
 	<%@ include file="section.jspf"%>
