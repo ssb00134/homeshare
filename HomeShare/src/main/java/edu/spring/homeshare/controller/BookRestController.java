@@ -57,19 +57,21 @@ public class BookRestController {
 	@RequestMapping(value = "/{no}", 
 			method = RequestMethod.PUT)
 	public ResponseEntity<String> updateBook(
-			@PathVariable("no") int houseNo,
+			@PathVariable("no") int bookNo,
 			@RequestBody BookVO vo){
-		vo.setBookHouseNo(houseNo);
+		logger.info("put 실행");
+		vo.setBookNo(bookNo);
 		logger.info("vo " + vo.toString());
 		int result = bookService.update(vo);
 		ResponseEntity<String> entity = null;
 		if(result == 1) {
+			logger.info("업데이트 성공");
 			entity = new ResponseEntity<String>("success", HttpStatus.OK);
 		}else {
+			logger.info("업데이트 실패");
 			entity = new ResponseEntity<String>("fail", HttpStatus.OK);
 		}
 		return entity;
-		
 	}
 	
 	

@@ -33,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="update">
 		update ${book}
 		set ${hostCheck} = #{hostCheck}
-		where ${bookNo} = ${bookNo}
+		where ${bookNo} = #{bookNo}
 	</update>
 	
 	<delete id="delete">
