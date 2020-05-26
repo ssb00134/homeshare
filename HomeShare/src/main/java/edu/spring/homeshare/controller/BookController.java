@@ -51,7 +51,10 @@ public class BookController {
 		}
 		model.addAttribute("houseList", houseList);
 	}
-
+	
+	
+	
+	// 호스트에 예약된 리스트
 	@RequestMapping(value = "/hostbook", method = RequestMethod.POST)
 	public void hostbook(Model model, HttpServletRequest request) { // 호스트에 예약된 리스트
 

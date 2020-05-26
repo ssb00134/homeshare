@@ -54,6 +54,26 @@ public class BookRestController {
 		return new ResponseEntity<List<BookVO>>(list, HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/{no}", 
+			method = RequestMethod.PUT)
+	public ResponseEntity<String> updateBook(
+			@PathVariable("no") int houseNo,
+			@RequestBody BookVO vo){
+		vo.setBookHouseNo(houseNo);
+		logger.info("vo " + vo.toString());
+		int result = bookService.update(vo);
+		ResponseEntity<String> entity = null;
+		if(result == 1) {
+			entity = new ResponseEntity<String>("success", HttpStatus.OK);
+		}else {
+			entity = new ResponseEntity<String>("fail", HttpStatus.OK);
+		}
+		return entity;
+		
+	}
+	
+	
+	
 	
 	@RequestMapping(value="book-delete", method = RequestMethod.POST)
 	public ResponseEntity<Integer>  BookDelete(

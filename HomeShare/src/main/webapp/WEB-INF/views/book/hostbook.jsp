@@ -21,7 +21,7 @@
 </head>
 <body>
 	<%@ include file="../header.jspf"%>
-	<h1>예약 리스트</h1>
+	<h1>내 house로 들어온 예약</h1>
 
 	<div id="book-lists">
 		<%-- <c:if test="${fn:length(bookList) > 0} "> --%>
@@ -34,25 +34,14 @@
 				<div>${vo.bookHouseNo}$</div>
 				<div>${vo.checkin}</div>
 				<div>${vo.checkout}</div>
-				<p>${vo.hostCheck }</p>
+				<input type="hidden" id = "hostCheck" value=${vo.hostCheck }>
 				<div>${vo.bookMem}명</div>
 				<div>${vo.totalPrice}</div>
 				<div>지역 : ${houseList[status.index].location}</div>
-				 <form action="/homeshare/book-insert" method="post" id="bookForm">
-					<input type="hidden"  id="bookNo" name="bookNo" value="${vo.bookNo }">
-					<input type="hidden"  id="bookMemNo" name="bookMemNo" value="${vo.bookMemNo }">
-					<input type="hidden"  id="bookHouseNo" name="bookHouseNo" value="${vo.bookHouseNo }">
-					<input type="hidden"  id="checkin" name="checkin" value="${vo.checkin }">
-					<input type="hidden"  id="checkout" name="checkout" value="${vo.checkout }">
-					<input type="hidden"  id="hostCheck" name="hostCheck" value="${vo.hostCheck }">
-					<p>"${vo.hostCheck }"</p>
-					<input type="hidden"  id="bookMem" name="bookMem" value="${vo.bookMem }">
-					<input type="hidden"  id="totalPrice" name="totalPrice" value="${vo.totalPrice }">
-				</form> 
 			</div>
 			<hr>
 		</c:forEach>
-		<%-- </c:if> --%>
+		
 		예약이 없습니다.
 	</div>
 	<script type="text/javascript">
@@ -69,11 +58,15 @@
 					
 					
 					$('.book_list_item').each(function(index,element){
-						console.log('index : ' + hostCheck + ' element children : ' + $(element).children( 'p').text());
-						if($(element).children( 'p').text()=== "0"){
-							console.log('if문 실행중 ');
-							$('#hostCheck').append('예약 대기중') ;
-							$(element).children( 'form').append('<input type="submit" id="bookbtn" value="예약 수락하기">');
+						var hostCheck = $(element).find('#hostCheck').val();
+						if(hostCheck=== "0"){
+							console.log('hostCheck === "0" ');
+							$(this).append('<div>예약 대기중</div>') ;
+							$(this).append('<input type="button" id="btn_update" value="예약 수락하기">');
+						}else{
+							$(this).append('<div>예약수락됨</div>') ;
+							$(this).append('<input type="button" class="btn_update" value="예약수락됨">');
+							
 						}
 					});//end each
 					
@@ -83,37 +76,32 @@
 					
 
 				//bookForm ajax 작성
-				 $('#bookbtn').click(function(){
-
-				var obj = {
-					'bookNo' :  $('#bookNo').val(),
-					'bookMemNo': $('#bookMemNo').val(),
-					'bookHouseNo':$('#bookHouseNo').val(),
-					'checkin': $('#checkin').val(),
-					'checkout': $('#checkout').val(),
-					'hostCheck': 1,
-					'bookMem': $('#bookMem').val(),
-					'totalPrice': $('#totalPrice').val()
-					};//end obj
-				$.each(obj, function (index, item){
-					console.log('item : ' + index + " value : " + item);
-				});
-				$.ajax({
-					type : 'post',
-					 url : '/homeshare/book-insert',
-					 headers : {
+				$('.book_list_item').on('click', '.book_list_item .btn_update', function(){
+					console.log('btnupdate 클릭');
+					var houseNo = $(this).prevAll('#houseNo').val();
+					var hostCheck = $(this).prevAll('#hostCheck').val();
+					console.log('하우스 이름 : ' + houseNo + ' 호스트여부 : ' + hostCheck);
+					
+					//ajax 요청
+					$.ajax({
+						type : 'put',
+						url : '/homeshare/book/all/' + houseNo,
+					 	headers : {
 				  	  	    'Content-Type' : 'application/json', 
-				  	  	    'X-HTTP-Method-Override' : 'POST'
-				  	  	  }, 
-		  	  	    data : JSON.stringify(obj),
-					
-					success : function(data){
-						alert('전송성공');
-					}//end success
-				});//end ajax
-				return false;// 새로고침 없이
-				}); //end click; 
-					
+				  	  	    'X-HTTP-Method-Override' : 'PUT'
+				  	  	}, 
+				  	  	data : JSON.stringify({
+				  	  		'hostCheck' : 1
+				  	  	}),
+				  	  	success : function(result){
+				  	  		if(result=='success'){
+				  	  			alert('수정 성공');
+				  	  		}
+				  	  	}//end success
+					});//end ajax
+				});
+				
+				
 				});//end document
 	</script>
 </body>
