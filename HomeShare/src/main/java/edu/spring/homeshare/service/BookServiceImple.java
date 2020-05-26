@@ -33,4 +33,14 @@ public class BookServiceImple implements BookService {
 	public List<BookVO> selectMemNo(int memNo) {
 		return BookDao.selectMemNo(memNo);
 	}
+	
+	@Override
+	public int delete(int bookNo) {
+		// TODO Auto-generated method stub
+		return BookDao.delete(bookNo);
+	}
+	@Override
+	public int update(BookVO vo) {
+		return BookDao.update(vo);
+	}
 }

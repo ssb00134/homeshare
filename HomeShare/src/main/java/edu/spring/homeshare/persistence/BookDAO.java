@@ -9,4 +9,7 @@ public interface BookDAO {
 	List<BookVO> selectHouseNo(int houseNo);
 	List<BookVO> selectMemNo(int memNo);
 	int insert(BookVO vo);
+	int update(BookVO vo);
+	int delete(int bookNo);
+	
 }

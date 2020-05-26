@@ -29,6 +29,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{checkout} , #{hostCheck},
 		#{bookMem}, #{totalPrice})
 	</insert>
+	
+	<update id="update">
+		update ${book}
+		set ${hostCheck} = #{hostCheck}
+		where ${bookNo} = ${bookNo}
+	</update>
+	
+	<delete id="delete">
+		delete from ${hostCheck}
+		where ${bookNo} = #{bookNo}
+	</delete>
 
 
 

@@ -327,7 +327,7 @@
 	
 			$.ajax({
 				type : 'post',
-				 url : '/homeshare/book-insert',
+				 url : '/homeshare/book',
 				 headers : {
 			  	  	    'Content-Type' : 'application/json', 
 			  	  	    'X-HTTP-Method-Override' : 'POST'

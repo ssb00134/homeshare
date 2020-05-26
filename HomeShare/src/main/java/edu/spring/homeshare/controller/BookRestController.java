@@ -18,6 +18,7 @@ import edu.spring.homeshare.domain.BookVO;
 import edu.spring.homeshare.service.BookService;
 
 @RestController
+@RequestMapping(value = "/book")
 public class BookRestController {
 
 	private static final Logger logger = LoggerFactory.getLogger(HouseController.class);
@@ -25,8 +26,8 @@ public class BookRestController {
 	@Autowired
 	private BookService bookService;
 	
-	@RequestMapping(value="/book-insert", method = RequestMethod.POST)
-	public ResponseEntity<Integer>  BookInsertPost(
+	@RequestMapping(method = RequestMethod.POST)
+	public ResponseEntity<Integer>  creatBook(
 			@RequestBody BookVO vo) {
 		logger.info("book-insert 실행");
 		logger.info("bookVo 정보 : " + vo.toString());
@@ -34,7 +35,7 @@ public class BookRestController {
 		return new ResponseEntity<Integer>(result,HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/book/all/{no}", method = RequestMethod.GET )
+	@RequestMapping(value="/all/{no}", method = RequestMethod.GET )
 	public ResponseEntity<List<BookVO>>  bookList(
 			@PathVariable("no") int houseNo ) {
 		logger.info("book-insert 실행");

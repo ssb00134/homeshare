@@ -28,5 +28,14 @@ public class BookDAOImple implements BookDAO {
 	public List<BookVO> selectMemNo(int memNo) {
 		return sqlSession.selectList(NAMESPACE + ".select_by_MemNo", memNo);
 	}
+	@Override
+	public int delete(int bookNo) {
+		return sqlSession.delete(NAMESPACE +".delete" + bookNo);
+	}
+	
+	@Override
+	public int update(BookVO vo) {
+		return sqlSession.update(NAMESPACE + ".update",vo); 
+	}
 
 }

@@ -11,4 +11,6 @@ public interface BookService {
 	int create(BookVO vo); 
 	List<BookVO> selectHouseNo(int houseNo);
 	List<BookVO> selectMemNo(int memNo);
+	int update(BookVO vo);
+	int delete(int bookNo);
 }
