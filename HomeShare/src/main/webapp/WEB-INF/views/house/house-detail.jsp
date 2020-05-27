@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
-
+<%@ include file="../cdn.jspf"%>
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css"
 	type="text/css" />
@@ -26,10 +26,11 @@
 		<h1>
 			<p>${houseVO.title }</p>
 		</h1>
-		<div>인원 ${houseVO.maxCapacity }명</div>
-		<div>인원 ${houseVO.maxCapacity }명</div>
-		<div>침실 ${houseVO.bedroom }개</div>
-		<div>욕실${houseVO.bathroom }개</div>
+		<div class="row">
+		<div class="col-md-2">인원 ${houseVO.maxCapacity }명</div>
+		<div class="col-md-2">침실 ${houseVO.bedroom }개</div>
+		<div class="col-md-2">욕실${houseVO.bathroom }개</div>
+		</div>
 		<hr>
 		<div>${houseVO.scope }</div>
 		<br>

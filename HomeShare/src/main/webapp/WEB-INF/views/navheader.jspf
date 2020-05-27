@@ -75,6 +75,8 @@
 								method="post">
 								<input type="submit" value="내가 예약한 숙소">
 							</form>
+							
+							<!-- 호스트인지 확인 -->
 							<c:if test="${not empty memberVO.houseNo }">
 							<div class="dropdown-divider"></div>
 								<form class="dropdown-item" action="/homeshare/house/host" method="post">
