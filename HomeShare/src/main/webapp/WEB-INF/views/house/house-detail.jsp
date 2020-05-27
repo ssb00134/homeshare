@@ -212,40 +212,7 @@
 		//체크아웃
 		var ar2 = null;
 		var date2 = null;
-		 var num1 =new Date('${houseVO.bookableDateBegin}');
-		 var num2 = new Date();
-		 var num3 = new Date('$(checkOutDate)');
-		 
 		
-		 
-		 $( "#checkIn" ).datepicker({
-				
-				 dateFormat: "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
-				 changeMonth: true, 
-		         changeYear: true,
-		         nextText: '다음 달',
-		         prevText: '이전 달',
-	        	 minDate : (num2>num1)&&(num3>num1)?num1:(num2>num3?num3:num2),
-
-	        	 //최소 예약가능 시간
-	        	 
-	       	     maxDate:$('#checkOut').val(),
-	       	  	beforeShowDay: noBefore
-	    	});
-		 
-		 $( "#checkOut" ).datepicker({
-				
-				dateFormat: "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
-				changeMonth: true, 
-		         changeYear: true,
-		         nextText: '다음 달',
-		         prevText: '이전 달',
-	        	 minDate : (num2>num1)&&(num3>num1)?num1:(num2>num3?num3:num2),
-
-	        	 //최소 예약가능 시간
-	        	 
-	       	     maxDate: $( "#checkIn" ).val()
-	    	});
 		 
 		 var date1Time = null;
 		$( "#checkIn" ).change('click',function(){
@@ -460,13 +427,22 @@
 								
 								// 특정일 선택막기
 								function disableAllTheseDays(date) {
+								console.log('bdate : '  + date);
 							    var date2 = date.toISOString().slice(0,10);
 
 							    console.log('date2 :' + date2);
 							    for (i = 0; i < split.length; i++) {
 							        console.log("split[" + i + "] " + split[i] + " date2 : " + date2);
+							    	var newDate = new Date(split[i]);
+							    	newDate.setDate(newDate.getDate());
 							    	
-							        if(date2 == split[i] ) { // 일치하면 제외한다.
+							    	
+							    	var minerdate = newDate.toString().slice(0,10);
+							    	console.log('minerdate : ' +minerdate);
+							    	console.log('newDate :' + newDate + ' split[] :' + split[i]);
+							        
+							        
+							        if(date.toString().slice(0,10) == minerdate ) { // 일치하면 제외한다.
 							        	 console.log('제거할 date : ' + date2);
 							            return [false];
 							        }
@@ -483,6 +459,41 @@
 			 			        	 minDate : (new Date() ),
 			 			        	beforeShowDay: disableAllTheseDays,
 			 			 		}); //end datepicker  
+			 			 		
+			 			 		 var num1 =new Date('${houseVO.bookableDateBegin}');
+			 					 var num2 = new Date();
+			 					 var num3 = new Date('$(checkOutDate)');
+			 					 
+			 					
+			 					 
+			 					 $( "#checkIn" ).datepicker({
+			 							
+			 							 dateFormat: "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
+			 							 changeMonth: true, 
+			 					         changeYear: true,
+			 					         nextText: '다음 달',
+			 					         prevText: '이전 달',
+			 				        	 minDate : (num2>num1)&&(num3>num1)?num1:(num2>num3?num3:num2),
+
+			 				        	 //최소 예약가능 시간
+			 				        	 
+			 				       	     maxDate:$('#checkOut').val(),
+			 				       	  	beforeShowDay: noBefore
+			 				    	});
+			 					 
+			 					 $( "#checkOut" ).datepicker({
+			 							
+			 							dateFormat: "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
+			 							changeMonth: true, 
+			 					         changeYear: true,
+			 					         nextText: '다음 달',
+			 					         prevText: '이전 달',
+			 				        	 minDate : (num2>num1)&&(num3>num1)?num1:(num2>num3?num3:num2),
+
+			 				        	 //최소 예약가능 시간
+			 				        	 
+			 				       	     maxDate: $( "#checkIn" ).val()
+			 				    	});
 	-
 								$('#books').html(list);
 					} //end callback

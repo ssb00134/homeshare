@@ -8,8 +8,9 @@
 <style type="text/css">
 
 </style>
+<%@ include file="../cdn.jspf"%>
 
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
 <!-- bxslider -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css"/> 
 <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>

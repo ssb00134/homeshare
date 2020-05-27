@@ -7,45 +7,11 @@
 <title>Insert title here</title>
 <style type="text/css">
 </style>
-
-<!-- 모바일 디바이스에서 터치 줌/ 등을 지원하기위한 meta 태그 -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<!-- Bootstrap 최신 버전의 css 파일들을 링크 -->
-<link rel="stylesheet"
-  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
->
-
-<!-- jQuery 최신 버전의 js 파일들을 링크 -->
-<script
-  src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
-></script>
-
-<!-- Popper 최신 버전 링크 -->
-<script
-  src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"
-></script>
-
-<!-- Bootstrap을 이용하기 위한 최신 버전 링크 -->
-<script
-  src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-></script>
-</head>
+<%@ include file="cdn.jspf"%>
 
 
 
 
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
-
-<link rel="stylesheet"
-	href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css"
-	type="text/css" />
-
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 </head>
 <body>
 	<c:if test="${not empty mem_id }">
@@ -60,23 +26,14 @@
 		테스트영역
 		<hr>
 		<div>
-			<a href="house/house-list">숙소 테스트</a>
-		</div>
-		<br>
-		<div>
-			<a href="/homeshare/upload">파일 업로드 테스트</a>
-		</div>
-		<br>
-		<div>
-			<a href="/homeshare/house/house-insert">등록테스트</a>
-		</div>
-		<br>
-		<div>
-			<a href="/homeshare/test/scroll-test">스크롤테스트</a>
-		</div>
-		<br>
-		<div>
-			<a href="/homeshare/mail">메일테스트</a>
+			TODO : 1. main에서 ajax로 host정보 받기 2. 만약 호스트 숙소에 예약이 들어오면, 호스트 알람을 띄울것
+
+			3. 리플에 별점 부여하기 4. boot
+			<div class="input-group">
+				<span class="input-group-addon" id="basic-addon1">@</span>
+				<input type="text" class="form-control" placeholder="Username"
+					aria-describedby="basic-addon1">
+			</div>
 		</div>
 		<br>
 		<div>
