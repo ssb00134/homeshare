@@ -8,10 +8,6 @@
 <style type="text/css">
 </style>
 <%@ include file="cdn.jspf"%>
-
-
-
-
 </head>
 <body>
 	<c:if test="${not empty mem_id }">

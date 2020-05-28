@@ -20,7 +20,7 @@
 <body>
 
 	<!-- 헤더정보 가져오기 -->
-	<%@ include file="header.jspf"%>
+	<%@ include file="navheader.jspf"%>
 	<h1>검색결과</h1>
 	
 	<div class="inner-addon left-addon">
@@ -218,12 +218,6 @@
 								frm.submit(); // form 데이터 전송 
 							}); // end click()
 
-							// register에서 넘어온 insert_result 데이터를 바탕으로 alert 처리
-							if ('${insert_result}' === 'success') {
-								alert('새 글 작성 성공');
-							} else if ('${insert_result}' === 'fail') {
-								alert('새 글 작성 실패');
-							}
 						}); // end document
 	</script>
 

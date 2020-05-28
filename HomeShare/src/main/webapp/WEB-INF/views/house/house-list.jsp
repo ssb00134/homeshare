@@ -20,7 +20,7 @@
 <body>
 
 <!-- 헤더정보 가져오기 -->
-<%@ include file="../header.jspf"%>
+<%@ include file="../navheader.jspf"%>
   <h1>검색결과</h1>
   <hr>
   <br>
