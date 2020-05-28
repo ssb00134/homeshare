@@ -18,6 +18,16 @@
 	${memId }님, 환영합니다. <br>
 		<button id="btn_logout" type="button" method="post"></button>
 	</c:if>
+
+	<button type="button" class="btn btn-default" data-toggle="tooltip" 
+	data-placement="left" title="Tooltip on left" id="bookcount">
+	</button>
+	
+	
+	
+	
+	
+	
 	<%@ include file="navheader.jspf"%>
 	<%@ include file="header.jspf"%>
 
@@ -61,17 +71,66 @@
 	<%@ include file="footer.jspf"%>
 	<script type="text/javascript">
 		$(document).ready(function() {
+			//예약 획수 가져오기
+		
+			//툴팁초기화
+			
+
+			
+			
+			
+			
 			var session = '${memId}';
 			console.log('session : ' + session);
 			if (session != '') {
 				console.log('getAllHostBook 실행');
-				getAllHostBook();
+				//getAllHostBook();
+				getsHouseNoByMemNo(); //houseno 정보 가져오기
 			}
+			
+			function getsHouseNoByMemNo() {
+				var url = '/homeshare/house/ishost/' + '${memberVO.memNo }';
+				console.log('url : ' + url);
+					$.getJSON(url, function(jsonData) {
+						console.log(JSON.stringify(jsonData));
+						var parse = [];
+						parse = JSON.stringify(jsonData).replace('[','').replace(']','').split(',');
+						console.log(parse[0]); //가져온 houseno 정보		
+						
+						if(parse.length > 0){ //만약 1개 이상의 house가 있으면 - host이면
+							$(parse).each(function(index, element){
+								console.log(index  + ' : ' + element);
+								var url = '/homeshare/book/all/' + element;
+								console.log('url : ' + url);
+								var count =0;
+								$.getJSON(url,function(jsonData){
+									console.log(jsonData);
+									var hostcheck = 0;
+									$(jsonData).each(function(){
+										if(this.hostCheck=== 0){
+											hostcheck++;
+										};
+										
+										console.log(this.bookNo + "hostcheck : " +this.hostCheck);
+									});// end jsonEach
+									console.log('hostcheck : ' + hostcheck );
+									if(hostcheck > 0){
+										$('#bookcount').append('새로운 예약이 있습니다');	
+									}
+								});//end getJSON
+							});// end each
+						}//end if parse>0
+						
+						
+					});//end getJSON
+				}; //end getallhostbook
+
+			
 			//todo : ajax로 리스트 받기
 			//ajax로 받기
-			var url = '/homeshare/booking/all/' + '${memberVO.houseNo }';
-			console.log('url : ' + url);
 			function getAllHostBook() {
+			var url = '/homeshare/book/all/' + '${memberVO.houseNo }';
+			console.log('url : ' + url);
 				$.getJSON(url, function(jsonData) {
 					// console.log(jsonData);
 					var count = 0;
@@ -84,9 +143,8 @@
 					$('#ishostbook').html(count);
 				}//end callback
 				);//end getJSON
-			}
-			;
-
+			}; //end getallhostbook
+			
 		}); //end document
 	</script>
 </body>
