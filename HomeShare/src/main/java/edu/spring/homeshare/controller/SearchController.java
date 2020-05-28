@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import edu.spring.homeshare.HomeController;
 import edu.spring.homeshare.domain.HouseVO;
+import edu.spring.homeshare.domain.ReplyVO;
 import edu.spring.homeshare.service.HouseService;
 import edu.spring.homeshare.service.ReplyService;
 import edu.spring.homeshare.util.PageCriteria;
@@ -69,25 +70,34 @@ public class SearchController {
 		
 		List<HouseVO> list = houseService.multySelect(map);
 		
-		/* score에 리플 병균값 넣기*/
-		//test
-		logger.info("list 0 의 houseno : " + list.get(0).getHouseNo());
-		int score2 = replyService.readAvgScore(list.get(0).getHouseNo());
-		logger.info("test score : " + score2);
-		
+		/* score에 리플 평균값 넣기*/
 		int[] score =  new int[list.size()];
+		
+		//test
+		logger.info("list 1번재 값 : " + list.get(0).getHouseNo());
+		
 		for(int i=0; i<list.size(); i++) {
 			logger.info("list에서 받은 houseNo : " + list.get(i).getHouseNo());
-			score[i] = replyService.readAvgScore(list.get(i).getHouseNo());
-			logger.info("score  : " + (Integer)score[i]);
-			list.get(i).setScore(score[i]);
+			
+			//후기가 있으면 실행할것
+			int replycount =  replyService.readCountHouseNo(list.get(i).getHouseNo());
+			if(replycount>0) { // 만약 후기가 있으면 실행할것
+				score[i] = replyService.readAvgScore(list.get(i).getHouseNo());
+				logger.info("score  : " + (Integer)score[i]);
+				list.get(i).setScore(score[i]);
+			}
+			
+			logger.info("replycount : " + replycount);
+			
+			
+			
+			
 			logger.info("list : " + list.toString());
 		}
-		
-		
 		logger.info("list 정보 : " + list.toString());
 		logger.info("list 갯수 : " + list.size());
 		model.addAttribute("houseList",list);
+		
 		
 		PageMaker maker = new PageMaker();
 		maker.setCriteria(c);

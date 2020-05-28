@@ -38,5 +38,10 @@ public class ReplyServiceImple implements ReplyService {
 	public int readAvgScore(int houseNo) {
 		return replyDao.selectAvgScore(houseNo);
 	}
+	
+	@Override
+	public int readCountHouseNo(int houseNo) {
+		return replyDao.selectCountByHouseNo(houseNo);
+	}
 
 }

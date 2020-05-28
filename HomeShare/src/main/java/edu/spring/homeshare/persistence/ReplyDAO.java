@@ -11,6 +11,8 @@ public interface ReplyDAO {
 	int update(ReplyVO vo);
 	int delete(int rno);
 	
+	int selectCountByHouseNo(int houseNo); //houseno를 기준으로 일치하는 갯수 리턴
+	
 	int selectAvgScore(int houseNo);
 	
 }

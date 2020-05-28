@@ -3,17 +3,19 @@
 <section>
 	<hr>
 	<h1>예약하기</h1>
-	<form action="search" method="get">
-		<input type="text" placeholder="지역" name="location">
-		<input type="text" placeholder="체크인 시간"name="checkIn">
-		<input type="text" placeholder="체크아웃 시간"name="checkOut">
-		<input type="text" placeholder="인원"name="maxCapacity">
+	<form action="search" method="get" class="form-inline">
+	<div class="form-group">
+		<input type="text" class="form-control" placeholder="지역" name="location">
+		<input type="text" class="form-control" placeholder="체크인 시간"name="checkIn">
+		<input type="text" class="form-control" placeholder="체크아웃 시간"name="checkOut">
+		<input type="text" class="form-control" placeholder="인원"name="maxCapacity">
 		<input type="hidden" name="houseNo" value="0">
 		<input type="hidden" name="type" value="">
 		<input type="hidden" name="scope" value="">
 		<input type="hidden" name="bedroom" value="">
 		
-		<input type="submit" value="검색하기">
+		<input type="submit" value="검색하기" class="btn btn-default">
+		</div>
 	</form>
 
 	<hr>

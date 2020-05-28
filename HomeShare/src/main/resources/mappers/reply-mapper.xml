@@ -14,17 +14,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<!-- 0,하우스번호,content,memid,Score,cleaness,checkin -->
 	</insert>
 
-
 	<!-- select -->
 	<select id="select_all_by_houseno" resultType="replyVO">
 		select *
-		from ${reply} where ${houseNo} = #{houseNo}
+		from ${reply} where ${reply}.${houseNo} = #{houseNo}
 	</select>
 
 	<select id="select_count" resultType="int">
-		select count(*) from reply;
+		select count(*) from ${reply};
 	</select>
-
+	
+	<select id="select_count_by_houseno" resultType="Integer">
+		select count(*) from ${reply} where ${reply}.${houseNo} = #{houseNo}
+	</select>
 
 	<!-- update -->
 	<update id="update">

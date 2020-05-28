@@ -29,7 +29,7 @@
 	
 	
 	<%@ include file="navheader.jspf"%>
-	<%@ include file="header.jspf"%>
+	
 
 	<%@ include file="section.jspf"%>
 	<div style="border: 5px solid grey;">

@@ -44,6 +44,11 @@ public class ReplyDAOImple implements ReplyDAO {
 	public int selectAvgScore(int houseNo) {
 		return sqlSession.selectOne(NAMESPACE + ".select_avg_score", houseNo);
 	}
+	
+	@Override
+	public int selectCountByHouseNo(int houseNo) {
+		return sqlSession.selectOne(NAMESPACE + ".select_count_by_houseno", houseNo);
+	}
 }
 
 
