@@ -7,22 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
-
-<link rel="stylesheet"
-	href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css"
-	type="text/css" />
-
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<%@ include file="../cdn.jspf"%>
 </head>
 <body>
-	<%@ include file="../header.jspf"%>
+	<%@ include file="../navheader.jspf"%>
 	<h1>내 house로 들어온 예약</h1>
-
+	<div id="hostbook"></div>
 	<div id="book-lists">
 		<%-- <c:if test="${fn:length(bookList) > 0} "> --%>
 		<c:forEach var="vo" items="${bookList }" varStatus="status">
@@ -49,12 +39,76 @@
 	<script type="text/javascript">
 		$(document).ready(
 				function() {
-					var sessionId = '${memberVO.memId}';
-					console.log('sessionId : ' + sessionId);
-					if (sessionId === null || sessionId === ''
-							|| sessionId === undefined) {
-						location.href = '/homeshare/';
-					}
+					
+				
+					
+					getsHouseNoByMemNo();
+					
+				function getsHouseNoByMemNo() {
+					var url = '/homeshare/house/ishost/' + '${memberVO.memNo }';
+					console.log('url : ' + url);
+						$.getJSON(url, function(jsonData) {
+							console.log(JSON.stringify(jsonData));
+							var parse = [];
+							parse = JSON.stringify(jsonData).replace('[','').replace(']','').split(',');
+							console.log(parse[0]); //가져온 houseno 정보		
+							
+							if(parse.length > 0){ //만약 1개 이상의 house가 있으면 - host이면
+								$(parse).each(function(index, element){
+									console.log(index  + ' : ' + element);
+									var url = '/homeshare/book/all/' + element;
+									console.log('url : ' + url);
+									var count =0;
+									$.getJSON(url,function(jsonData){
+										
+										var list='';
+										$(jsonData).each(function(){
+											console.log('this.bookno : ' + this.bookNo);
+											list += '<div class="book_item">'
+							  	  		  		+ '<pre>'
+							  	  		  		+ '<input type="hidden" id="rno" value="' + this.bookNo + '" /><br>'
+							  	  		  		+ '<input type="hidden" id="bookHouseNo" value="' + this.bookHouseNo + '" /><br>'
+							  	  		  		+ this.bookHouseNo
+							  	  		  		+ '&nbsp;&nbsp;' // 공백
+							  	  		  		+ '<input type="text" id="bookMemNo" value="' + this.bookMemNo + '" />'
+							  	  		  		+ '&nbsp;&nbsp;' // 공백
+							  	  		  		+ this.bookMemNo
+								  	  		  	+ '<input type="text" id="checkin" value="' + this.checkin.split(' ')[0] + '" />'
+							  	  		  		+ '&nbsp;&nbsp;' // 공백
+							  	 
+							  	  		  		+ '&nbsp;&nbsp;' // 공백
+								  	  		  	+ '<input type="text" id="checkout" value="' + this.checkout.split(' ')[0] + '" />'
+							  	  		  		+ '&nbsp;&nbsp;' // 공백
+							  	  		  		
+							  	  		  		+ '&nbsp;&nbsp;' // 공백
+								  	  		  	+ '<input type="text" id="hostCheck" value="' + this.hostCheck + '" />'
+							  	  		  		+ '&nbsp;&nbsp;' // 공백
+							  	  		  		+ this.hostCheck
+							  	  		  		+ '&nbsp;&nbsp;' // 공백
+							  	  	  		  	+ '<input type="text" id="totalPrice" value="' + this.totalPrice + '" />'
+							  	  		  		+ '&nbsp;&nbsp;' // 공백
+							  	  		  		+ this.totalPrice
+							  	  		  		+ '&nbsp;&nbsp;' // 공백
+							  	  		  		
+							  	  		  		+ '<button class="btn_update" type="button">수락</button>'
+							  	  		  		+ '&nbsp;'
+							  	  		  		+ '<button class="btn_delete" type="button">거절</button>'
+							  	  		  		+ '</pre>' + '</div>' +'<hr>';
+							  	  		  		console.log('list : ' +list );
+							  	  		  	$('#hostbook').html(list);	
+										});// end jsonEach
+										
+										
+									}//end callback
+									);//end getJSON
+								});// end each
+							}//end if parse>0
+							
+							
+						});//end getJSON
+					}; //end getallhostbook 
+				
+
 
 					
 					//시작할때 자동 실행
@@ -105,6 +159,8 @@
 				  	  	}//end success
 					});//end ajax
 				});
+				
+				
 				
 				
 				});//end document

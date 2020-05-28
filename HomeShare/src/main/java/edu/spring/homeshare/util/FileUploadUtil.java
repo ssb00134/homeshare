@@ -88,19 +88,34 @@ public class FileUploadUtil {
 	public static void delete(String path) {
 		System.out.println("삭제할 폴더 경로 : " + path);
 		File deleteFolder = new File(path);
-		if(deleteFolder.exists()){
+		if (deleteFolder.exists()) {
 			File[] deleteFolderList = deleteFolder.listFiles();
-			
+
 			for (int i = 0; i < deleteFolderList.length; i++) {
-				if(deleteFolderList[i].isFile()) {
+				if (deleteFolderList[i].isFile()) {
 					deleteFolderList[i].delete();
-				}else {
+				} else {
 					delete(deleteFolderList[i].getPath());
 				}
-				deleteFolderList[i].delete(); 
+				deleteFolderList[i].delete();
 			}
 			deleteFolder.delete();
 		}
+	}
+
+	public static String readDirectory(String path) {
+		System.out.println("읽어올 파일 경로 : " + path);
+		File dir = new File(path);
+		File[] fileList = dir.listFiles();
+
+		String filelist = "";
+		for (File file : fileList) {
+			if (file.isFile()) {
+				String fileName = file.getName();
+				filelist += fileName + ",";
+			}
+		}
+		return filelist;
 	}
 
 	private static String createIcon(String uploadPath, String savePath, String fileName) {

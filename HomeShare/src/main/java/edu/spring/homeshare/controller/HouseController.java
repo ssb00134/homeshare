@@ -165,7 +165,11 @@ public class HouseController {
 
 		if (files.length > 0 || files.length < 11) {
 			logger.info("inset 실행");
+			logger.info("파일 갯수 : " + files.length);
 			int result = 0;
+			//이미지에 파일 개수를 넣는다.
+			vo.setImage(Integer.toString(files.length));
+			
 			result = houseService.create(vo);
 			if (result == 0) {
 				logger.info("insert 실패");
@@ -177,9 +181,17 @@ public class HouseController {
 				String fileResult = null;
 				logger.info("파일업로드 시작");
 				for (MultipartFile f : files) {
+					//업로드하기 
 					fileResult = FileUploadUtil.saveUploadedFile(uploadPath, "houseno" + result,
 							f.getOriginalFilename(), f.getBytes());
 					logger.info("업로드 결과 fileResult : " + fileResult);
+					
+					//디렉토리 읽어오기
+					String path = uploadPath + File.separator + "houseno" + result;
+					String filePath = FileUploadUtil.readDirectory(path);
+					logger.info("filePath" + filePath);
+					
+					
 					return "/";
 				}
 				return "/";

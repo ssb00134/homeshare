@@ -6,15 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-.file-drop {
-	width: 100%;
-	height: 100px;
-	border: 1px solid grey;
-}
-</style>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<%@ include file="../cdn.jspf"%>
+
 </head>
 <body>
 	<%@ include file="../navheader.jspf"%>
@@ -28,12 +21,14 @@
 		<input type="hidden" name="replies" value="0">
 		<input type="hidden" name="score" value="0">
 		<input type="hidden" name="memNo" value="${memberVO.memNo }">
-		<p>등록하시려는 숙소의 범위를 입력해 주세요</p>
-		<select name="scope" required="required">
+		
+		<h4>등록하시려는 숙소의 범위를 입력해 주세요</h4>
+		<select name="scope" required="required" class="form-control col-md-4">
 			<option value="">집전체</option>
 			<option value="개인실">개인실</option>
 			<option value="다인실">다인실</option>
 		</select>
+		</div>
 		<p>등록하려는 숙소의 유형을 입력해 주세요</p>
 		<select name="type" required="required">
 			<option value="">유형선택</option>
