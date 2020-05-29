@@ -8,14 +8,6 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <%@ include file="../cdn.jspf"%>
-<link rel="stylesheet"
-	href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css"
-	type="text/css" />
-
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 </head>
 <body>
 
@@ -24,7 +16,7 @@
 
 	<form id="frm">
 		<h1>
-			<p>${houseVO.title }</p>
+			${houseVO.title }
 		</h1>
 		<div class="row">
 		<div class="col-md-2">인원 ${houseVO.maxCapacity }명</div>
@@ -38,9 +30,7 @@
 		<br>
 		<div>이용가능시설 ${houseVO.spaces }</div>
 		<br>
-		<div>
-			가격 ${houseVO.price }
-			</span>
+		<div>가격 ${houseVO.price }</div>
 			<br>
 			<input id="imgSource" type="hidden" value="${houseVO.image }" />
 			<br>
@@ -49,7 +39,7 @@
 			<input type="text" name="memNo" value="${houseVO.memNo }">
 	</form>
 	<hr>
-	houseVO.info
+	${ houseVO.info}
 	<hr>
 	<div dir="rtl"
 		style="height: 100%; width: 50%; border: 1px solid grey;">
@@ -102,27 +92,7 @@
 
 
 	<!-- Trigger/Open The Modal -->
-	<input type="button" id="report_btn" value="신고하기" />
-	<div id="report_dialog">
-		<form action="report" id="report">
-			<p>신고하기</p>
-			<p>이 숙소를 신고하시는 이유를 알려주세요. 내용은 호스트에게 공개되지 않습니다.</p>
-			<input type="number" name="reportNo" value="0">
-			<input type="number" name="reportMemNo" value="${memberVO.memNo}">
-			<input type="number" name="reportHouseNo" value="${houseVO.houseNo}">
-			<br>
-			<input type="radio" name="reason" value="부정확하거나 틀린 정보가 있어요">
-			부정확하거나 틀린 정보가 있어요<br>
-			<input type="radio" name="reason" value="실제 숙소가 아닙니다">
-			실제 숙소가 아닙니다<br>
-			<input type="radio" name="reason" value="사기입니다">
-			사기입니다<br>
-			<input type="radio" name="reason" value="불쾌합니다">
-			불쾌합니다<br>
-			<input type="radio" id="reason" value="기타" onclick="">
-			기타<br>
-		</form>
-	</div>
+	<%@ include file="../report.jspf"%>
 
 	TODO : 리플의 memid와 세션의 memid가 일치하는지 확인할것 ->프론트엔드에서 막음 ->서버에서 막기
 	<br> TODO : 결제한 회원만 리플가능
@@ -159,45 +129,7 @@
 		});
 		
 		
-		$("#report_btn").click(function() {
-			$("#report_dialog").dialog("open");
-		});
-
-		//리포트 모달영역
-		$( "#report_dialog" ).dialog({ 
-			//이벤트 발생했을때 보여주려면 autoOpen : false로 지정해줘야 한다.
-			autoOpen: false, 
-			//레이어팝업 넓이 
-			width: 400, 
-			//뒷배경을 disable 시키고싶다면 true 
-			modal: true, 
-			//버튼종류 
-			buttons: [ 
-			{ //버튼텍스트 
-				text: "신고하기", //클릭이벤트발생시 동작 
-				click: function() { 
-					reportMemNo = $('[name="reportMemNo"]').val();
-					reportHouseNo = $('[name="reportHouseNo"]').val();
-					reason = $('[name="reason"]').val();
-					 var frm = $('#report');
-				  	    frm.attr('action', '/homeshare/report');
-				  	    frm.attr('method', 'post');
-				  	    frm.find('[name="reportNo"]').val(0);
-				  	    frm.find('[name="reportMemNo"]').val(reportMemNo);
-				  	    frm.find('[name="reportHouseNo"]').val(reportHouseNo);
-				  	    frm.find('[name="reason"]').val(reason);
-				  	    frm.submit(); 
-					$(this).dialog("close");
-				} 
-			}, 
-			{ //버튼텍스트 
-				text: "닫기", //클릭이벤트발생시 동작 
-				click: function() { 
-					$( this ).dialog( "close" ); 
-				} 
-			} 
-			] 
-		}); //end modal
+	
 		
 
 
