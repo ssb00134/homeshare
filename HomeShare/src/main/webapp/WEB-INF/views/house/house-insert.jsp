@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -6,14 +5,60 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%@ include file="../cdn.jspf"%>
+<style type="text/css">
 
+ </style>
+<%@ include file="../cdn.jspf"%>
 </head>
 <body>
 	<%@ include file="../navheader.jspf"%>
-	<form action="/homeshare/house/house-insert-post" 
-	enctype="multipart/form-data"
-	method="post">
+	<form action="/homeshare/house/house-insert-post"
+		enctype="multipart/form-data" method="post">
+
+
+		<header class="floating-header">
+			<a href="#" class="site-logo"
+				style="font-size: 30px; color: #5bc0de; font-weight: bold">
+				Bootdey.com </a>
+
+			<div class="floating-menu-btn">
+				<div class="floating-menu-toggle-wrap">
+					<div class="floating-menu-toggle">
+						<span class="bar"></span>
+						<span class="bar"></span>
+						<span class="bar"></span>
+					</div>
+				</div>
+			</div>
+
+			<div class="main-navigation-wrap">
+				<nav class="main-navigation" data-back-btn-text="Back">
+					<ul class="menu">
+						<li class="menu-item-has-children current-menu-item delay-0">
+							<a href="#">
+								<i class="fa fa-arrow-right" aria-hidden="true"></i>More Options
+							</a>
+							<ul class="sub-menu">
+
+								<li class="current-menu-item"><a href="#">Home Design
+										Agency</a></li>
+								<li><a href="#">Home Architecture</a></li>
+								<li><a href="#">Home Photographer</a></li>
+							</ul>
+						</li>
+						<li class="delay-1"><a href="#">Portfolio</a></li>
+						<li class="delay-2"><a href="#">Blog</a></li>
+						<li class="delay-3"><a href="#">About Us</a></li>
+						<li class="delay-4"><a href="#">Contacts</a></li>
+						<li class="delay-5"><a href="#">Elements</a></li>
+					</ul>
+					<!-- .menu -->
+				</nav>
+				<!-- .main-navigation -->
+			</div>
+			<!-- .main-navigation-wrap -->
+		</header>
+
 		<h1>하우스 등록하기</h1>
 		<hr>
 		<p>1단계 기본 사항 입력</p>
@@ -21,7 +66,7 @@
 		<input type="hidden" name="replies" value="0">
 		<input type="hidden" name="score" value="0">
 		<input type="hidden" name="memNo" value="${memberVO.memNo }">
-		
+
 		<h4>등록하시려는 숙소의 범위를 입력해 주세요</h4>
 		<select name="scope" required="required" class="form-control col-md-4">
 			<option value="">집전체</option>
@@ -39,7 +84,7 @@
 		</select> <br> <br>
 		<p>최대 숙박 가능인원</p>
 		<br>
-		<input type="text" name="maxCapacity"required="required">
+		<input type="text" name="maxCapacity" required="required">
 		<br>
 		<p>사용할 수 있는 침실은 몇개인가요?</p>
 		<br>
@@ -55,11 +100,13 @@
 		<br>
 		<hr>
 		<p>숙소의 위치를 알려주세요</p>
-		<a href="/homeshare/jusoPopup" onclick="window.open(this.href, '_blanck', 'width=600, height=400'); return false">주소입력</a>
+		<a href="/homeshare/jusoPopup"
+			onclick="window.open(this.href, '_blanck', 'width=600, height=400'); return false">주소입력</a>
 		<input type="text" name="location" required="required">
 		<hr>
 		<p>어떤 편의시설을 제공하나요?</p>
-		<input type="checkbox" name="utilities" value="필수품목" required="required">
+		<input type="checkbox" name="utilities" value="필수품목"
+			required="required">
 		필수품목<br>수건, 침대 시트, 비누, 화장지, 베개<br>
 		<input type="checkbox" name="utilities" value="internet">
 		무선인터넷<br>
@@ -90,14 +137,16 @@
 		헬스장<br>
 		<hr>
 		<h1>2단계 상세 정보 입력하기</h1>
-		
-		
+
+
+
+
 		<h1>최대 10개의 파일을 올려주세요</h1>
 		<input type="file" name="files" multiple>
-		
-		
+
+
 		<h1>사진주소</h1>
-		
+
 		<input type="text" name="image" required="required">
 		<br>
 
@@ -123,37 +172,42 @@
 		<input type="text" name="checkinInterval" required="required">
 		<hr>
 		체크인 가능 시간을 선택해 주세요
-		<input type="text" name="checkinTime"required="required">
-		<input type="text" name="checkoutTime"required="required">
+		<input type="text" name="checkinTime" required="required">
+		<input type="text" name="checkoutTime" required="required">
 		<hr>
 		<p>게스트가 얼마나 숙박할 수 있나요?</p>
-		<input type="text" name="stayNight"required="required">
+		<input type="text" name="stayNight" required="required">
 		박<br>
-		<input type="text" name="stayDay"required="required">
+		<input type="text" name="stayDay" required="required">
 		일<br>
 		<hr>
 		<p>예약 가능한 시간 정하기</p>
 		최소
-		<input type="date" name="bookableDateBegin" min="sysdate"required="required">
+		<input type="date" name="bookableDateBegin" min="sysdate"
+			required="required">
 		<br> 최대
-		<input type="date" name="bookableDateEnd" min="sysdate"required="required">
+		<input type="date" name="bookableDateEnd" min="sysdate"
+			required="required">
 		<br>
 		<hr>
 		<p>숙소요금 설정하기</p>
-		<input type="text" name="price"required="required">
+		<input type="text" name="price" required="required">
 		<br>
 		<input type="submit" value="등록하기">
 		<br>
-	
+		<div id="sidebox"> 플로팅 박스 </div>
+
+
 	</form>
 	<%@ include file="../footer.jspf"%>
-<script type="text/javascript">
-  $(document).ready(function(){
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$(window).scroll(function() {
+				console.log('스크롤 이동');
+				
 
-    
-    
-    
-  });//end document
-  </script>  
+			}); //end window scroll
+		});//end document
+	</script>
 </body>
 </html>

@@ -14,13 +14,13 @@
 <body>
 
 	<!-- 헤더정보 가져오기 -->
-	<%@ include file="../header.jspf"%>
-	houseNo = ${houseVO.houseNo }
+	<%@ include file="../navheader.jspf"%>
 	<form id="frm">
 		<h1>
 			${houseVO.title }
 		</h1>
 		<div class="row">
+		
 		<div class="col-md-2">인원 ${houseVO.maxCapacity }명</div>
 		<div class="col-md-2">침실 ${houseVO.bedroom }개</div>
 		<div class="col-md-2">욕실${houseVO.bathroom }개</div>
@@ -38,13 +38,13 @@
 			<input id="imgSource" type="hidden" value="${houseVO.image }" />
 			<br>
 			<div id="imgArea"></div>
-			<input type="text" name="houseNo" value="${houseVO.houseNo }">
+			<input type="text" name="houseNo"  id = "houseNo" value="${houseVO.houseNo }">
 			<input type="text" name="memNo" value="${houseVO.memNo }">
 	</form>
 	<hr>
 	${ houseVO.info}
 	<hr>
-	<form style="float:right;" class="border col-md-5" style="position: relative; z-index: 1;">
+	<div style="float:right;" class="border col-md-5" style="position: relative; z-index: 1;">
 		<h4>계산 영역</h4>
 			<div class= "row">
 			<div class="disableList" id="disableCheckIn" style="position: relative; z-index: 1;"></div>
@@ -83,11 +83,11 @@
 			</div>
 			<div id="bookdate"></div>
 			<input type="submit" id="bookbtn" value="예약하기">
-			<button type="button" id="temp">체크</button>
+			<button type="button" id="test">체크</button>
 			<div id="bookResult"></div>
 		</div>
 		
-	</form>
+	</div>
 
 	<%@ include file="../reply.jspf"%>
 
@@ -154,8 +154,9 @@
 		 $('#disableCheckOut').on('clik', function(){
 			var checkin = new Date($("#disableCheckIn").datepicker().val());
 			var checkout =new Date($("#disableCheckOut").datepicker().val());
-			var datediffer = Math.ceil((checkout.getTime()-checkin.getTime())/(1000*3600*24));
-			console.log('disableCheckOut click datediffer : ' + datediffer);
+			console.log('checkout val : ' + checkout);
+			//var datediffer = Math.ceil((checkout.getTime()-checkin.getTime())/(1000*3600*24));
+			//console.log('disableCheckOut click datediffer : ' + datediffer);
 			
 		 });//end disableCheckOut click
 		 
@@ -185,13 +186,41 @@
 		});
 		
 
-		
+		//테스트 실행
+		$('#test').click(function(){
+			var bookNo = 0;
+			var bookMemNo = '${memberVO.memNo}';
+			var bookHouseNo = $('#houseNo').val();
+			var checkin = $("#disableCheckIn").datepicker().val();
+			var checkout = $("#disableCheckOut").datepicker().val();
+			var hostCheck = 0;
+			var bookMem = $('#bookMem').val();
+			var totalPrice = $('#totalPrice').val();
+			console.log('bookmemono : '+ bookMemNo);
+			var price = $('#price');
+			var datediffer = Math.ceil((checkout.getTime()-checkin.getTime())/(1000*3600*24));
+			var totalprice = datediffer * bookMem * price;
+			var obj = {
+					'bookNo' : bookNo,
+					'bookMemNo': sessionMemNo,
+					'bookHouseNo': bookHouseNo,
+					'checkin': checkin,
+					'checkout': checkout,
+					'hostCheck': hostCheck,
+					'bookMem': bookMem,
+					'totalPrice': totalprice
+					
+			};
+			$.each(obj, function (index, item){
+				console.log('item : ' + index + " value : " + item);
+			});
+		});//end test
 		
 		//bookForm ajax 작성
 		$('#bookbtn').click(function(){ // 예약하기 버튼을 누르면 ajax로 bookcontroller 전송
 			var bookNo = 0;
 			var bookMemNo = '${memberVO.memNo}';
-			var bookHouseNo = '${houseVO.houseNo }';
+			var bookHouseNo = $('#houseNo').val();
 			var checkin = $("#disableCheckIn").datepicker().val();
 			var checkout = $("#disableCheckOut").datepicker().val();
 			var hostCheck = 0;
@@ -201,7 +230,7 @@
 			var price = $('#price');
 			
 			//날짜차이
-			var datediffer = Math.ceil((checkout.getTime()-checkin.getTime())/(1000*3600*24));
+			var datediffer = Math.ceil((new Date(checkout).getTime()- new Date(checkin).getTime())/(1000*3600*24));
 			var totalprice = datediffer * bookMem * price;
 		
 			//dt.setDate(dt.getDate()+1);
@@ -211,6 +240,7 @@
 				preventDefault();
 			}
 			var obj = {
+					'houseNo' : '${houseVO.houseNo}',
 					'bookNo' : bookNo,
 					'bookMemNo': sessionMemNo,
 					'bookHouseNo': bookHouseNo,
@@ -228,7 +258,7 @@
 	
 			$.ajax({
 				type : 'post',
-				 url : '/homeshare/book',
+				 url : '/homeshare/book/insert',
 				 headers : {
 			  	  	    'Content-Type' : 'application/json', 
 			  	  	    'X-HTTP-Method-Override' : 'POST'
@@ -247,12 +277,13 @@
 					+ '<button type="button" id="book_cancel">취소하기</button>');
 					//getAllBooks(); // 예약후 예약 불러오기
 				} //end sucess
-			});//end ajax
+			});//end ajax 
 			return false; // 새로고침 없이
 			//getAllBooks(); // 예약후 예약 불러오기
+			
 		});//end click;
 		//end book ajax
-		//getBookReusult 모든 결과 가져오기 
+		//getBookReusult 모든 결과 가져오기  
 	
 		
 		
@@ -262,7 +293,7 @@
 		//모든 예약영역 불러오기
 		var disabledDays =[]; // 불가능한 날짜를 담을 배열 -> 전역변수로 선언
 		function getAllBooks(){
-			var houseNo = '${houseVO.houseNo}';
+			var houseNo = $('#houseNo').val();
 			console.log('getAllBooks 실행');
 			var url = '/homeshare/book/all/' + houseNo;
 			console.log(url);
@@ -326,7 +357,7 @@
 							    var date2 = date.toISOString().slice(0,10);
 
 							    console.log('date2 :' + date2);
-							   if(split.length){
+							   if(split){
 							    for (i = 0; i < split.length; i++) {
 							        console.log("split[" + i + "] " + split[i] + " date2 : " + date2);
 							    	var newDate = new Date(split[i]);
@@ -409,7 +440,7 @@
 		//end img 출력기능
 		
 		
-		var houseNo = ${houseVO.houseNo};
+		
 	  	
 	});//end document
 	

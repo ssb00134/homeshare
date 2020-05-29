@@ -59,12 +59,17 @@
 		
 
 		//TODO : click과 blur 분리할것
+		if($('#checkin').val()){//만약 
+			
+		}
+		
+		
 		$('#dateCheckIn').on('click  blur',function(){
 			console.log('값 : ' +$('#dateCheckIn').datepicker().val());
 			$('#checkIn').val($("#dateCheckIn").datepicker().val());
 			$('#dateCheckIn').datepicker("destroy");
 			//체크아웃의 최소값 주기
-			
+		
 		});
 		$('#dateCheckOut').on('blur ',function(){
 			console.log('값 : ' +$('#dateCheckOut').datepicker().val());

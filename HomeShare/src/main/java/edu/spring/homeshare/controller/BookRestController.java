@@ -26,7 +26,7 @@ public class BookRestController {
 	@Autowired
 	private BookService bookService;
 	
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(value = "/insert",method = RequestMethod.POST)
 	public ResponseEntity<Integer>  creatBook(
 			@RequestBody BookVO vo) {
 		logger.info("book-insert ½ÇÇà");

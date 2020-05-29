@@ -245,6 +245,9 @@
 .css .nt+.nt, .css .o, .css .o+.nt {
 	color: #999
 }
+/* bootstap nav가 상단을 덮어버리는 문제 해결 */
+body { padding-top: 70px; } 
+
 
 @font-face {
 	font-family: anchorjs-link;
@@ -311,6 +314,20 @@
 body {
 	position: relative
 }
+
+
+
+.pull-left {
+  float: left !important;
+}
+.pull-right {
+  float: right !important;
+}
+
+
+
+
+
 
 .table code {
 	font-size: 13px;
