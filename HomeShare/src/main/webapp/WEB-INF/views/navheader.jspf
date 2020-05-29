@@ -73,7 +73,7 @@
 							<a class="dropdown-item" href="/homeshare/member/alerm">알람설정</a>
 							<form class="dropdown-item" action="/homeshare/book/booking"
 								method="post">
-								<input type="submit" value="내가 예약한 숙소">
+								<button class="btn btn-default" type="submit">내가 예약한 숙소</button>
 							</form>
 
 							<!-- 호스트인지 확인 -->

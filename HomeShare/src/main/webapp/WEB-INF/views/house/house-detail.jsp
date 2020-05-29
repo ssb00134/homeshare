@@ -31,6 +31,7 @@
 		<div>이용가능시설 ${houseVO.spaces }</div>
 		<br>
 		<div>가격 ${houseVO.price }</div>
+		<p class="lead">${houseVO.info }</p>
 			<br>
 			<input id="imgSource" type="hidden" value="${houseVO.image }" />
 			<br>
@@ -41,17 +42,18 @@
 	<hr>
 	${ houseVO.info}
 	<hr>
-	<div dir="rtl"
-		style="height: 100%; width: 50%; border: 1px solid grey;">
+	<form>
 		계산 영역
+			<div class= "form-group">
+			<div class="disableList" id="disableCheckIn"></div>
+			<div class="disableList" id="disableCheckOut"></div>
+			</div>
 		<div>
 			<input type="text" class="testDatepicker" id="checkIn" name="checkin"
 				value="">
 			<br>
 		</div>
 		<input type="hidden" id="checkInDate">
-		<br>
-
 		<div>
 			<input type="text" class="testDatepicker" id="checkOut"
 				name="checkout">
@@ -70,24 +72,22 @@
 					value="1">
 				<br>
 			</div>
-			<input type="number" readonly="readonly" name="price" id="price"
-				value="${houseVO.price }">
-			<br> 총 합계
-			<input type="number" readonly="readonly" name="totalPrice" min="1"
+			<div class="form-group">
+			<input type="number" class="col-md-4"name="price" id="price"
+				value="${houseVO.price }" readonly>
+			총 합계
+			<input type="number" class="col-md-4" readonly="readonly" name="totalPrice" min="1"
 				max="${houseVO.maxCapacity }" id="totalPrice"
-				value="${houseVO.price }">
-			<br>
+				value="${houseVO.price }" readonly>
+			</div>
 			<div id="bookdate"></div>
 			<input type="submit" id="bookbtn" value="예약하기">
 			<div id="bookResult"></div>
 		</div>
-	</div>
-	<%@ include file="../reply.jspf"%>
-	------------------------------- 예약불가 영역
-	<div id="books"></div>
-	<div id="disableList" class="datePicker"></div>
+	</form>
 
-	-------------------------------end test area
+	<%@ include file="../reply.jspf"%>
+
 	<br>
 
 
@@ -229,8 +229,8 @@
 			var bookNo = 0;
 			var bookMemNo = '${memberVO.memNo}';
 			var bookHouseNo = '${houseVO.houseNo}';
-			var checkin = $('#checkIn').val();
-			var checkout = $('#checkOut').val();
+			var checkin = $("#disableCheckIn").datepicker().val();
+			var checkout = $("#disableCheckOut").datepicker().val();
 			var hostCheck = 0;
 			var bookMem = $('#bookMem').val();
 			var totalPrice = $('#totalPrice').val();
@@ -275,6 +275,7 @@
 					console.log('data : ' + data);
 					$('#bookResult').html('<button type="button">승인대기중</button>'
 					+ '<button type="button" id="book_cancel">취소하기</button>');
+					getAllBooks(); // 예약후 예약 불러오기
 				} //end sucess
 			});//end ajax
 			return false; // 새로고침 없이
@@ -286,13 +287,10 @@
 		
 		
 		//예약 취소하기 구현
-	
 
-		
-
-		var disabledDays =[];
 			
 		//모든 예약영역 불러오기
+		var disabledDays =[]; // 불가능한 날짜를 담을 배열 -> 전역변수로 선언
 		function getAllBooks(){
 			var houseNo = '${houseVO.houseNo}'
 			console.log('getAllBooks 실행');
@@ -327,10 +325,6 @@
 					 					console.log('checkindate : ' + checkindate);
 					 					console.log('checkoutdate : ' + checkoutdate);
 					 					
-					 					
-					 					
-					 					
-					 					
 					 					//선택불가 리스트를 리턴하는 함수
 					 				var getDaysArray = function(start, end) {
 										    for(var arr=[],dt=start; dt<=end; dt.setDate(dt.getDate()+1)){
@@ -355,9 +349,7 @@
 
  					 				
 								});// end each
-								
-								
-								
+			
 								// 특정일 선택막기
 								function disableAllTheseDays(date) {
 								console.log('bdate : '  + date);
@@ -383,51 +375,29 @@
 							    return [true];
 								} 
 
-			 			 		$('#disableList').datepicker({
-			 			 			 dateFormat: "yyyy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
+			 			 		$('.disableList').datepicker({
+			 			 			 dateFormat: "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
 			 						 changeMonth: true, 
 			 				         changeYear: true,
 			 				         nextText: '다음 달',
 			 				         prevText: '이전 달',
 			 			        	 minDate : (new Date() ),
 			 			        	beforeShowDay: disableAllTheseDays,
-			 			 		}); //end datepicker  
+			 			 		}); //end disableList datepicker
 			 			 		
-			 			 		 var num1 =new Date('${houseVO.bookableDateBegin}');
-			 					 var num2 = new Date();
-			 					 var num3 = new Date('$(checkOutDate)');
-			 					 
-			 					
-			 					 
-			 					 $( "#checkIn" ).datepicker({
-			 							
-			 							 dateFormat: "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
-			 							 changeMonth: true, 
-			 					         changeYear: true,
-			 					         nextText: '다음 달',
-			 					         prevText: '이전 달',
-			 				        	 minDate : (num2>num1)&&(num3>num1)?num1:(num2>num3?num3:num2),
+			 			 		
+			 			 		$('#disableCheckIn').on('click',function(index,element){
+			 			 			console.log('click');
+			 			 			console.log($("#disableCheckIn").datepicker().val());
+			 			 			$('#checkIn').val($("#disableCheckIn").datepicker().val());
+			 			 		}) ; //end datepicker
+			 			 		
+			 			 		$('#disableCheckOut').on('click',function(index,element){
+			 			 			console.log('click');
+			 			 			console.log($("#disableCheckOut").datepicker().val());
+			 			 			$('#checkOut').val($("#disableCheckOut").datepicker().val());
+			 			 		}) ; //end datepicker
 
-			 				        	 //최소 예약가능 시간
-			 				        	 
-			 				       	     maxDate:$('#checkOut').val(),
-			 				       	  	beforeShowDay: noBefore
-			 				    	});
-			 					 
-			 					 $( "#checkOut" ).datepicker({
-			 							
-			 							dateFormat: "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
-			 							changeMonth: true, 
-			 					         changeYear: true,
-			 					         nextText: '다음 달',
-			 					         prevText: '이전 달',
-			 				        	 minDate : (num2>num1)&&(num3>num1)?num1:(num2>num3?num3:num2),
-
-			 				        	 //최소 예약가능 시간
-			 				        	 
-			 				       	     maxDate: $( "#checkIn" ).val()
-			 				    	});
-	-
 								$('#books').html(list);
 					} //end callback
 			)//end getJSON
@@ -435,13 +405,6 @@
 		}//end getAllbooks
 		
 
-		
-		
-		
-		
-		
-		
-		
 		
 		//이미지 출력기능
 		var imgSource = $('#imgSource').val();
