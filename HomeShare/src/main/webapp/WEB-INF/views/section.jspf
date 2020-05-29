@@ -22,8 +22,8 @@
 			
 	</form>
 			<div class="row">
-			<div id="dateCheckIn" class="col-md-3"></div>
-			<div id="dateCheckOut" class="col-md-3"></div>
+			<div id="dateCheckIn" class="col-md-3" style="position: relative; z-index: 1;"></div>
+			<div id="dateCheckOut" class="col-md-3" style="position: relative; z-index: 1;"></div>
 			</div>
 
 	<hr>

@@ -15,7 +15,7 @@
 
 	<!-- 헤더정보 가져오기 -->
 	<%@ include file="../header.jspf"%>
-
+	houseNo = ${houseVO.houseNo }
 	<form id="frm">
 		<h1>
 			${houseVO.title }
@@ -44,21 +44,21 @@
 	<hr>
 	${ houseVO.info}
 	<hr>
-	<form style="float:right;" class="border col-md-5">
+	<form style="float:right;" class="border col-md-5" style="position: relative; z-index: 1;">
 		<h4>계산 영역</h4>
 			<div class= "row">
-			<div class="disableList" id="disableCheckIn"></div>
+			<div class="disableList" id="disableCheckIn" style="position: relative; z-index: 1;"></div>
 			<div class="disableList" id="disableCheckOut"></div>
 			</div>
 		<div>
 			<input type="text" class="testDatepicker" id="checkIn" name="checkin"
-				value="">
+				value="" readonly>
 			<br>
 		</div>
 		<input type="hidden" id="checkInDate">
 		<div>
 			<input type="text" class="testDatepicker" id="checkOut"
-				name="checkout">
+				name="checkout" readonly>
 			<br>
 			<input type="hidden" id="checkOutDate">
 			<br>
@@ -70,8 +70,7 @@
 
 		<div>
 			<div>
-				<input type="number" name="bookMem" id="bookMem" numberOnly
-					value="1">
+				<input type="number" name="bookMem" id="bookMem" value="1">
 				<br>
 			</div>
 			<div class="form-group">
@@ -84,8 +83,10 @@
 			</div>
 			<div id="bookdate"></div>
 			<input type="submit" id="bookbtn" value="예약하기">
+			<button type="button" id="temp">체크</button>
 			<div id="bookResult"></div>
 		</div>
+		
 	</form>
 
 	<%@ include file="../reply.jspf"%>
@@ -99,11 +100,10 @@
 	TODO : 리플의 memid와 세션의 memid가 일치하는지 확인할것 ->프론트엔드에서 막음 ->서버에서 막기
 	<br> TODO : 결제한 회원만 리플가능
 
+	<div id="books"></div>
 	<%@ include file="../footer.jspf"%>
-
 	<script type="text/javascript">
 	$(document).ready(function(){
-		
 		getAllBooks();
 		
 
@@ -150,57 +150,15 @@
 		
 		 
 		 var date1Time = null;
-		$( "#checkIn" ).change('click',function(){
-	    		console.log('on 실행' );			
-	    		checkIn = $(this).val();
-		    	console.log('this vaule : ' + $(this).val());
-    		 	//string 타입임	    	
-		    	 console.log('checkIn : ' + checkIn);
-		    		 
-	    		 if(checkIn !=null || checkIn !='undefined' || checkIn !=''){
-		    		 ar1 = checkIn.toString().split('-');
-		    		 date1 = new Date(ar1[0],ar1[1],ar1[2]);
-		    		 console.log('date1 : ' + date1);
-		    		 $('#checkInDate').val(date1.getTime());
-		    		 date1Time =  date1.getTime();
-		    		 
-		    		 var dateDiffer =($('#checkOutDate').val() - $('#checkInDate').val()) / (86400*1000);
-		    			$('#dateDiffer').val(dateDiffer);
-	    		 }
-	    		 console.log('체크아웃 : ' + $('#checkOut').val());
-	    		
-	    });
-		var date2Time = null;
-		$( "#checkOut" ).change('click',function(){
-			console.log('on 실행' );
-			 var checkOut = $(this).val();
-	    		console.log('this vaule : ' + $(this).val());
-	    		 //string 타입임	    	
-	    		 console.log('checkOut : ' + checkOut);
-	    		 
-	    		 if(checkOut !=null || checkOut !='undefined'|| checkOut !=''){
-		    		 ar2 = checkOut.toString().split('-');
-		    		 date2 = new Date(ar2[0],ar2[1],ar2[2]);
-		    		 $('#checkOutDate').val(date2.getTime());
-		    		 console.log('date2 gettime : ' + date2.getTime());
-		    	
-		    		 date2Time =  date2.getTime();
-		    		 var dateDiffer =($('#checkOutDate').val() - $('#checkInDate').val()) / (86400*1000);
-		    			$('#dateDiffer').val(dateDiffer);
-	    		 }	 
-   		 });
 		
-		//totalprice
-		//가격 = 인원 * 날짜 * 기본가격
-		
-		// 이전 날짜들은 선택막기 
-		function noBefore(date){ 
-		   if (date < new Date()) 
-		       return [false]; 
-		   return [true]; 
-		}
-		
-		
+		 $('#disableCheckOut').on('clik', function(){
+			var checkin = new Date($("#disableCheckIn").datepicker().val());
+			var checkout =new Date($("#disableCheckOut").datepicker().val());
+			var datediffer = Math.ceil((checkout.getTime()-checkin.getTime())/(1000*3600*24));
+			console.log('disableCheckOut click datediffer : ' + datediffer);
+			
+		 });//end disableCheckOut click
+		 
 
 		$('#bookMem').focus(function(){
 			console.log('focus');
@@ -226,17 +184,27 @@
 			
 		});
 		
+
+		
+		
 		//bookForm ajax 작성
 		$('#bookbtn').click(function(){ // 예약하기 버튼을 누르면 ajax로 bookcontroller 전송
 			var bookNo = 0;
 			var bookMemNo = '${memberVO.memNo}';
-			var bookHouseNo = '${houseVO.houseNo}';
+			var bookHouseNo = '${houseVO.houseNo }';
 			var checkin = $("#disableCheckIn").datepicker().val();
 			var checkout = $("#disableCheckOut").datepicker().val();
 			var hostCheck = 0;
 			var bookMem = $('#bookMem').val();
 			var totalPrice = $('#totalPrice').val();
 			console.log('bookmemono : '+ bookMemNo);
+			var price = $('#price');
+			
+			//날짜차이
+			var datediffer = Math.ceil((checkout.getTime()-checkin.getTime())/(1000*3600*24));
+			var totalprice = datediffer * bookMem * price;
+		
+			//dt.setDate(dt.getDate()+1);
 			if(bookMemNo===null || bookMemNo==='undefined' || bookMemNo===''){ //세션이 없을때,
 				//onbeforeunload 
 				alert('로그인을 먼저 해주세요');
@@ -250,7 +218,7 @@
 					'checkout': checkout,
 					'hostCheck': hostCheck,
 					'bookMem': bookMem,
-					'totalPrice': totalPrice
+					'totalPrice': totalprice
 					
 			};
 			$.each(obj, function (index, item){
@@ -277,11 +245,11 @@
 					console.log('data : ' + data);
 					$('#bookResult').html('<button type="button">승인대기중</button>'
 					+ '<button type="button" id="book_cancel">취소하기</button>');
-					getAllBooks(); // 예약후 예약 불러오기
+					//getAllBooks(); // 예약후 예약 불러오기
 				} //end sucess
 			});//end ajax
 			return false; // 새로고침 없이
-			getAllBooks(); // 예약후 예약 불러오기
+			//getAllBooks(); // 예약후 예약 불러오기
 		});//end click;
 		//end book ajax
 		//getBookReusult 모든 결과 가져오기 
@@ -294,7 +262,7 @@
 		//모든 예약영역 불러오기
 		var disabledDays =[]; // 불가능한 날짜를 담을 배열 -> 전역변수로 선언
 		function getAllBooks(){
-			var houseNo = '${houseVO.houseNo}'
+			var houseNo = '${houseVO.houseNo}';
 			console.log('getAllBooks 실행');
 			var url = '/homeshare/book/all/' + houseNo;
 			console.log(url);
@@ -358,6 +326,7 @@
 							    var date2 = date.toISOString().slice(0,10);
 
 							    console.log('date2 :' + date2);
+							   if(split.length){
 							    for (i = 0; i < split.length; i++) {
 							        console.log("split[" + i + "] " + split[i] + " date2 : " + date2);
 							    	var newDate = new Date(split[i]);
@@ -374,6 +343,9 @@
 							            return [false];
 							        }
 							    }
+							   }else{
+								   console.log('예약이 없습니다.');
+							   }
 							    return [true];
 								} 
 
@@ -392,15 +364,28 @@
 			 			 			console.log('click');
 			 			 			console.log($("#disableCheckIn").datepicker().val());
 			 			 			$('#checkIn').val($("#disableCheckIn").datepicker().val());
+			 			 			var checkin = new Date($("#disableCheckIn").datepicker().val());
+			 						var checkout =new Date($("#disableCheckOut").datepicker().val());
+			 						var datediffer = Math.ceil((checkout.getTime()-checkin.getTime())/(1000*3600*24));
+			 						console.log('datediffer : ' + datediffer);
+			 						$('#dateDiffer').val(datediffer);
 			 			 		}) ; //end datepicker
 			 			 		
 			 			 		$('#disableCheckOut').on('click',function(index,element){
 			 			 			console.log('click');
-			 			 			console.log($("#disableCheckOut").datepicker().val());
 			 			 			$('#checkOut').val($("#disableCheckOut").datepicker().val());
+			 			 			var checkin = new Date($("#disableCheckIn").datepicker().val());
+			 						var checkout =new Date($("#disableCheckOut").datepicker().val());
+			 						var datediffer = Math.ceil((checkout.getTime()-checkin.getTime())/(1000*3600*24));
+			 						console.log('datediffer : ' + datediffer);
+			 						$('#dateDiffer').val(datediffer);
+			 			 			
 			 			 		}) ; //end datepicker
-
+								console.log('list : ' + list);
 								$('#books').html(list);
+			 			 		
+			 			 		
+							
 					} //end callback
 			)//end getJSON
 
