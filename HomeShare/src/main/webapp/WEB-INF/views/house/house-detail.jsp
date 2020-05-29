@@ -6,8 +6,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
 <%@ include file="../cdn.jspf"%>
+<style type="text/css">
+.ui-datepicker{ font-size: 12px; width: 200px; }
+</style>
 </head>
 <body>
 
@@ -42,9 +44,9 @@
 	<hr>
 	${ houseVO.info}
 	<hr>
-	<form>
-		계산 영역
-			<div class= "form-group">
+	<form style="float:right;" class="border col-md-5">
+		<h4>계산 영역</h4>
+			<div class= "row">
 			<div class="disableList" id="disableCheckIn"></div>
 			<div class="disableList" id="disableCheckOut"></div>
 			</div>

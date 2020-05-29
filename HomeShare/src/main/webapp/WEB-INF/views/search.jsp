@@ -35,10 +35,6 @@
 		<c:forEach var="vo" items="${houseList }">
 			<div class="container-fluid">
 				<div class="house_list_item">
-
-					
-
-
 					<div class="house_list_item_click" id="${vo.houseNo }">
 						<div class="col-md-8">${vo.scope}</div>
 						<div class="row">

@@ -7,9 +7,9 @@
 		<div class="form-group">
 			<input type="text" class="form-control" placeholder="지역"
 				name="location">
-			<input type="text" class="form-control" placeholder="체크인 시간"
+			<input type="text" class="form-control" placeholder="체크인 시간" id="checkIn"
 				name="checkIn">
-			<input type="text" class="form-control" placeholder="체크아웃 시간"
+			<input type="text" class="form-control" placeholder="체크아웃 시간" id="checkOut"
 				name="checkOut">
 			<input type="text" class="form-control" placeholder="인원"
 				name="maxCapacity">
@@ -17,21 +17,60 @@
 			<input type="hidden" name="type" value="">
 			<input type="hidden" name="scope" value="">
 			<input type="hidden" name="bedroom" value="">
-			<button type="button" class="btn navbar-nav navbar-right"
-				data-toggle="modal" data-target="#dateArea">달력</button>
 			<input type="submit" value="검색하기" class="btn btn-default">
 		</div>
-			<div class="modal" id="dateArea">
-		<div class="modal" id="dateCheckIn">체크인</div>
-		<div class="modal" id="dateCheckIn">체크아웃</div>
-	</div>
+			
 	</form>
+			<div class="row">
+			<div id="dateCheckIn" class="col-md-3"></div>
+			<div id="dateCheckOut" class="col-md-3"></div>
+			</div>
 
 	<hr>
 </section>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$('#dateCheckIn').datepicker({});
-		$('#dateCheckOut').datepicker({});
+		$('#checkIn').on('click',function(index,element){
+			console.log('checkIn click');
+			$('#dateCheckIn').datepicker({
+				dateFormat: "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
+				 changeMonth: true, 
+		         changeYear: true,
+		         nextText: '다음 달',
+		         prevText: '이전 달',
+		         minDate : (new Date() ),
+			});
+			
+		});// end checkin click;
+		
+		
+		$('#checkOut').on('click',function(index,element){
+			console.log('checkOut click');
+			$('#dateCheckOut').datepicker({
+				dateFormat: "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
+				 changeMonth: true, 
+		         changeYear: true,
+		         nextText: '다음 달',
+		         prevText: '이전 달',
+		         minDate : (new Date() ),
+			});
+			
+		});// end checkin click;
+		
+
+		//TODO : click과 blur 분리할것
+		$('#dateCheckIn').on('click  blur',function(){
+			console.log('값 : ' +$('#dateCheckIn').datepicker().val());
+			$('#checkIn').val($("#dateCheckIn").datepicker().val());
+			$('#dateCheckIn').datepicker("destroy");
+			//체크아웃의 최소값 주기
+			
+		});
+		$('#dateCheckOut').on('blur ',function(){
+			console.log('값 : ' +$('#dateCheckOut').datepicker().val());
+			$('#checkOut').val($("#dateCheckOut").datepicker().val());
+			$('#dateCheckOut').datepicker("destroy");
+		});
+		
 	})//end document;
 </script>
