@@ -20,7 +20,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="select_by_houseno" resultType="houseVO">
-		select * from ${house} where ${houseNo} = #{houseNo}
+		select * from ${house}
+		where ${houseNo} = #{houseNo}
 	</select>
 
 	<!-- memno 기준으로 모든 하우스 정보를 가져오는 쿼리 -->
@@ -28,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		parameterType="int">
 		select * from ${house} where ${memNo} = #{memNo}
 	</select>
-	
+
 	<!-- memno 기준으로 1개의 하우스 정보를 가져오는 쿼리 -->
 	<select id="select_by_memno" resultType="houseVO"
 		parameterType="int">
@@ -203,54 +204,52 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<selectKey keyProperty="houseNo" resultType="Integer"
 			order="BEFORE">
 			SELECT house_pk.nextval FROM dual
-		</selectKey> 
+		</selectKey>
 	</insert>
 
 
 
 	<update id="update">
-		UPDATE 테이블명 SET 필드명='변경할값' WHERE 필드명=해당값;
 		update
 		${house} set
-		${houseNo} = #{houseNo},
-		${type} = #{type},
-		${scope} =
-		#{scope},
-		${maxCapacity} = #{maxCapacity},
+		
+		${type} = #{type,jdbcType=VARCHAR},
+		${scope} =#{scope},
+		${maxCapacity} =
+		#{maxCapacity},
 		${bedroom} = #{bedroom},
 		${bed} = #{bed},
-		${bathroom} = #{bathroom},
+		${bathroom} =
+		#{bathroom},
 		${utilities} = #{utilities},
 		${spaces} = #{spaces},
 		${title} = #{title},
 		${info} = #{info},
-		${rules} =
-		#{rules},
+		${rules} =#{rules},
 		${checkinTime} = #{checkinTime},
-		${checkoutTime} =
-		#{checkoutTime},
+		${checkoutTime} =#{checkoutTime},
 		${stayNight} = #{stayNight},
 		${stayDay} = #{stayDay},
 		${bookableDateBegin} = #{bookableDateBegin},
-		${bookableDateEnd} =
-		#{bookableDateEnd},
+		${bookableDateEnd}
+		=#{bookableDateEnd},
 		${price} = #{price},
 		${memNo} = #{memNo},
-		${replies}
-		= #{replies},
+		${replies}= #{replies},
 		${image} = #{image},
-		${checkinInterval} =
-		#{checkinInterval},
+		${checkinInterval}
+		=#{checkinInterval},
 		${score} = #{score},
 		${location} = #{location}
-		where
+		
+		 where
 		${houseNo} = #{houseNo}
 	</update>
 
 	<delete id="delete">
 		delete from ${house}
 		where ${houseNo} = #{houseNo}
-		
+
 	</delete>
 
 </mapper>

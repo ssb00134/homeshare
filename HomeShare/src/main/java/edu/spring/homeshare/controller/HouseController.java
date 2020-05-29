@@ -184,16 +184,29 @@ public class HouseController {
 					//업로드하기 
 					fileResult = FileUploadUtil.saveUploadedFile(uploadPath, "houseno" + result,
 							f.getOriginalFilename(), f.getBytes());
-					logger.info("업로드 결과 fileResult : " + fileResult);
-					
-					//디렉토리 읽어오기
-					String path = uploadPath + File.separator + "houseno" + result;
-					String filePath = FileUploadUtil.readDirectory(path);
-					logger.info("filePath" + filePath);
-					
-					
-					return "/";
+					logger.info("업로드 결과 fileResult : " + fileResult);	
 				}
+				//디렉토리 읽어오기
+				String path = uploadPath + File.separator + "houseno" + result;
+				String filePath = FileUploadUtil.readDirectory(path);
+				
+				logger.info("filePath" + filePath);	
+				
+				
+				//vo에 파일패스 업데이트하기
+				logger.info("result (houseno) : " + result);
+				vo.setImage(filePath);
+				vo.setHouseNo(result); //result == 현재 시퀸스값
+				logger.info("업데이트전 vo : " + vo.toString());
+				
+				
+				int updateResult = houseService.update(vo);
+				if(updateResult == 1) {
+					logger.info("사진주소를 업데이트 하였습니다.");
+				}else {
+					logger.info("사진주소 업데이트에 실패 하였습니다.");
+				}
+				
 				return "/";
 			}
 		} else if (files.length == 0) {
