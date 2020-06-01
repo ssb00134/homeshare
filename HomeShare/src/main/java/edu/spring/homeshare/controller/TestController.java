@@ -17,4 +17,15 @@ public class TestController {
 	public void webSocket() {
 		logger.info("websocket 실행" );
 	}
+	
+	@RequestMapping(value = "/sample")
+	public void jusopopup() {
+		logger.info("sample 실행" );
+		
+	}
+	@RequestMapping(value = "/jusoPopup")
+	public void jusopopup2() {
+		logger.info("jusopopup 실행" );
+	}
+	
 }

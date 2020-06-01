@@ -45,7 +45,7 @@
 		<div id="ishostbook"></div>
 		<br>
 		<div>
-			<a href="/homeshare/jusoPopup">
+			<a href="/homeshare/test/sample">
 				<input type="text">
 				주소테스트
 			</a>
@@ -71,11 +71,6 @@
 			//예약 획수 가져오기
 		
 			//툴팁초기화
-			
-
-			
-			
-			
 			
 			var session = '${memId}';
 			console.log('session : ' + session);
