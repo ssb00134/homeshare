@@ -113,38 +113,45 @@
 						</div>
 						<!-- modal body -->
 						<div class="form-group">
-							<label for="id" class="col-md-2 control-label" >Id</label>
+							<label for="id" class="col-md-2 control-label">Id</label>
 							<div class="col-md-10">
 								<input type="text" class="form-control" id="id" name="MemId"
 									placeholder="아이디를 입력해주세요">
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="password" class="col-md-2 control-label" >Password</label>
+							<label for="password" class="col-md-2 control-label">Password</label>
 							<div class="col-md-10">
-								<input type="password" class="form-control" id="password" name="password"
-									placeholder="비밀번호를 입력해주세요">
+								<input type="password" class="form-control" id="password"
+									name="password" placeholder="비밀번호를 입력해주세요">
 							</div>
 						</div>
 						<div class="form-group">
-							
+
 							<div class="col-md-10">
-								<input type="password" class="form-control" id="passwordchk" 
+								<input type="password" class="form-control" id="passwordchk"
 									placeholder="비밀번호 확인">
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="MemName" class="col-md-2 control-label" >Name</label>
+							<label for="MemName" class="col-md-2 control-label">Name</label>
 							<div class="col-md-10">
-								<input type="text" class="form-control" id="MemName"  name="MemName"
-									placeholder="이름입력">
+								<input type="text" class="form-control" id="MemName"
+									name="MemName" placeholder="이름입력">
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="email" class="col-md-2 control-label">email</label>
 							<div class="col-md-10">
-								<input type="email" class="form-control" id="email"  name="email"
+								<input type="email" class="form-control" id="email" name="email"
 									placeholder="이메일입력">
+							</div>
+							<div class="form-group">
+								성별
+								<input type="radio" name="gender" value="남성">
+								남성
+								<input type="radio" name="gender" value="여성">
+								여성
 							</div>
 						</div>
 
@@ -156,7 +163,8 @@
 						</div>
 					</div>
 				</div>
-			</form>W
+			</form>
+			W
 
 
 

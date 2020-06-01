@@ -14,6 +14,9 @@
 <input type="password" name="password-check"  placeholder="password check"><br>
 <input type="text" name="MemName"  placeholder="이름 입력"><br>
 <input type="text" name="email"  placeholder="email입력"><br>
+성별
+<input type="text" name="gender"  value="남성">남성
+<input type="text" name="gender"  value="여성">여성
 <input type="submit" value="가입하기"> <br>
 </form>
 </body>

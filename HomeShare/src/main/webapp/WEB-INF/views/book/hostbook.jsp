@@ -38,10 +38,7 @@
 	</div>
 	<script type="text/javascript">
 		$(document).ready(
-				function() {
-					
-				
-					
+				function() {					
 					getsHouseNoByMemNo();
 					
 				function getsHouseNoByMemNo() {
@@ -70,22 +67,13 @@
 							  	  		  		+ '<input type="hidden" id="bookHouseNo" value="' + this.bookHouseNo + '" /><br>'
 							  	  		  		+ this.bookHouseNo
 							  	  		  		+ '&nbsp;&nbsp;' // 공백
-							  	  		  		+ '<input type="text" id="bookMemNo" value="' + this.bookMemNo + '" />'
-							  	  		  		+ '&nbsp;&nbsp;' // 공백
 							  	  		  		+ this.bookMemNo
-								  	  		  	+ '<input type="text" id="checkin" value="' + this.checkin.split(' ')[0] + '" />'
 							  	  		  		+ '&nbsp;&nbsp;' // 공백
-							  	 
+							  	 				+ this.checkin.split(' ')[0]
 							  	  		  		+ '&nbsp;&nbsp;' // 공백
-								  	  		  	+ '<input type="text" id="checkout" value="' + this.checkout.split(' ')[0] + '" />'
-							  	  		  		+ '&nbsp;&nbsp;' // 공백
-							  	  		  		
-							  	  		  		+ '&nbsp;&nbsp;' // 공백
-								  	  		  	+ '<input type="text" id="hostCheck" value="' + this.hostCheck + '" />'
+							  	  		  		+ this.checkout.split(' ')[0]
 							  	  		  		+ '&nbsp;&nbsp;' // 공백
 							  	  		  		+ this.hostCheck
-							  	  		  		+ '&nbsp;&nbsp;' // 공백
-							  	  	  		  	+ '<input type="text" id="totalPrice" value="' + this.totalPrice + '" />'
 							  	  		  		+ '&nbsp;&nbsp;' // 공백
 							  	  		  		+ this.totalPrice
 							  	  		  		+ '&nbsp;&nbsp;' // 공백

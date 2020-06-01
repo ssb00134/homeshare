@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import edu.spring.ex03.domain.ReplyVO;
 import edu.spring.homeshare.domain.HouseVO;
 import edu.spring.homeshare.util.PageCriteria;
 

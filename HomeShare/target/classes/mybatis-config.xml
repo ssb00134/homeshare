@@ -14,7 +14,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<property name="email" value="email" />
 		<property name="houseNo" value="houseNo" />
 		<property name="account" value="account" />
-
+		<property name="gender" value="gender" />
+		
+		
 		<!-- house table 변수 설정 -->
 		<!-- 시퀸스 -->
 		<property name="housePk" value="HOUSE_PK"/>

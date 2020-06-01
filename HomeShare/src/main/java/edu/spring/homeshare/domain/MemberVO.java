@@ -8,14 +8,20 @@ public class MemberVO {
 	private String houseNo;
 	private String account;
 	private String memName;
+	private String gender;
 	
 	public MemberVO() {}
 
 	
 	
 
+	
+
+
+
+
 	public MemberVO(int memNo, String memId, String password, String email, String houseNo, String account,
-			String memName) {
+			String memName, String gender) {
 		super();
 		this.memNo = memNo;
 		this.memId = memId;
@@ -24,7 +30,13 @@ public class MemberVO {
 		this.houseNo = houseNo;
 		this.account = account;
 		this.memName = memName;
+		this.gender = gender;
 	}
+
+
+
+
+
 
 
 
@@ -84,13 +96,38 @@ public class MemberVO {
 	public void setMemName(String memName) {
 		this.memName = memName;
 	}
+	
+	
+
+	public String getGender() {
+		return gender;
+	}
+
+
+
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+
+
+
+
+
+
 
 
 	@Override
 	public String toString() {
-		return "memberVO [memNo=" + memNo + ", memId=" + memId + ", password=" + password + ", email=" + email
-				+ ", houseNo=" + houseNo + ", account=" + account + ", memName=" + memName + "]";
+		return "MemberVO [memNo=" + memNo + ", memId=" + memId + ", password=" + password + ", email=" + email
+				+ ", houseNo=" + houseNo + ", account=" + account + ", memName=" + memName + ", gender=" + gender + "]";
 	}
+
+
+
+
+	
 	
 	
 	
