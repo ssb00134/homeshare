@@ -177,12 +177,17 @@
 												var list = '';
 												var width = $('.home__slider').width();
 												var height = $('.home__slider').height();
+												console.log('width : ' + width + ' height : ' + height);
 												imgsplit.forEach(function(index) {
 															if (imgsplit[imgsplit.length - 1] != index) {
 																console
 																		.log("index : "
 																				+ index);
-																list += '<li><img width="300" height="150" src="/homeshare/house/display/'
+																list += '<li><img width="'
+																+	width
+																+'" height="'
+																+ height
+																+ '" src="/homeshare/house/display/'
 																		+ index
 																		+ '"></li>';
 															}
