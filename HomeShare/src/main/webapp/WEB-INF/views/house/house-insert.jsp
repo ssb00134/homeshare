@@ -88,7 +88,7 @@
 		<br>
 		<p>사용할 수 있는 침실은 몇개인가요?</p>
 		<br>
-		<input type="text" name="badRoom" required="required">
+		<input type="text" name="bedroom" required="required">
 		<br>
 		<p>사용할 수 있는 침대는 몇개인가요?</p>
 		<br>
@@ -147,7 +147,7 @@
 
 		<h1>사진주소</h1>
 
-		<input type="text" name="image" required="required">
+		<input type="text" name="image" >
 		<br>
 
 		<p>숙소의 제목을 입력해 주세요</p>

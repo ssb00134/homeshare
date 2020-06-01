@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import edu.spring.ex03.domain.ReplyVO;
 import edu.spring.homeshare.domain.HouseVO;
 import edu.spring.homeshare.util.PageCriteria;
 
@@ -119,7 +120,9 @@ public class HouseDAOImple implements HouseDAO {
 	@Override
 	public int update(HouseVO vo) {
 		logger.info("update ½ÇÇà");
-		return sqlSession.selectOne(NAMESPACE + ".update");
+		logger.info("image : " + vo.getImage());
+		logger.info("houseno : " + vo.getHouseNo());
+		return sqlSession.update(NAMESPACE + ".update", vo);
 	}
 
 }

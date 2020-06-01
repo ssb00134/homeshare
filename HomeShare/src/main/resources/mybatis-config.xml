@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<property name="title" value="title"/>
 		<property name="info" value="info"/>
 		<property name="rules" value="rules"/>
-		<property name="checkinTime" value="checkoutTime"/>
+		<property name="checkinTime" value="checkinTime"/>
 		<property name="checkoutTime" value="checkoutTime"/>
 		<property name="stayNight" value="stayNight"/>
 		<property name="stayDay" value="stayDay"/>
@@ -43,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<property name="image" value="image"/>
 		<property name="score" value="score"/>
 		<property name="checkinInterval" value="checkinInterval"/>
-		<property name="loaction" value="location"/>
+		<property name="location" value="location"/>
 
 
 

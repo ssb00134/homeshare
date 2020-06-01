@@ -212,38 +212,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="update">
 		update
 		${house} set
-		
-		${type} = #{type,jdbcType=VARCHAR},
-		${scope} =#{scope,jdbcType=VARCHAR},
-		${maxCapacity} =
-		#{maxCapacity,jdbcType=VARCHAR},
-		${bedroom} = #{bedroom,jdbcType=VARCHAR},
-		${bed} = #{bed,jdbcType=VARCHAR},
-		${bathroom} =
-		#{bathroom,jdbcType=VARCHAR},
-		${utilities} = #{utilities,jdbcType=VARCHAR},
-		${spaces} = #{spaces, jdbcType=VARCHAR},
-		${title} = #{title,jdbcType=VARCHAR},
-		${info} = #{info,jdbcType=VARCHAR},
-		${rules} =#{rules,jdbcType=VARCHAR},
-		${checkinTime} = #{checkinTime,jdbcType=VARCHAR},
-		${checkoutTime} =#{checkoutTime,jdbcType=VARCHAR},
-		${stayNight} = #{stayNight,jdbcType=VARCHAR},
-		${stayDay} = #{stayDay,jdbcType=VARCHAR},
-		${bookableDateBegin} = #{bookableDateBegin,jdbcType=VARCHAR},
-		${bookableDateEnd}
-		=#{bookableDateEnd,jdbcType=VARCHAR},
-		${price} = #{price,jdbcType=VARCHAR},
-		${memNo} = #{memNo,jdbcType=VARCHAR},
-		${replies}= #{replies,jdbcType=VARCHAR},
-		${image} = #{image,jdbcType=VARCHAR},
-		${checkinInterval}
-		=#{checkinInterval,jdbcType=VARCHAR},
-		${score} = #{score,jdbcType=VARCHAR},
-		${loaction} = #{loaction,jdbcType=VARCHAR}
-		
+		${image} = #{image}
 		 where
-		${houseNo} = #{houseNo,jdbcType=VARCHAR}
+		${houseNo} = #{houseNo}
+		
 	</update>
 
 	<delete id="delete">

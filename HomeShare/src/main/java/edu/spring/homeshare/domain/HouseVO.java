@@ -3,7 +3,7 @@ package edu.spring.homeshare.domain;
 import java.sql.Date;
 import java.util.Arrays;
 
-public class HouseVO {
+public class HouseVO  {
 	
 	private int houseNo ;
 	private String type ;

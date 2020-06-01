@@ -1,6 +1,6 @@
 package edu.spring.homeshare.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+	
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,17 +24,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
-import edu.spring.homeshare.domain.BookVO;
 import edu.spring.homeshare.domain.HouseVO;
-import edu.spring.homeshare.domain.MemberVO;
 import edu.spring.homeshare.service.BookService;
 import edu.spring.homeshare.service.HouseService;
 import edu.spring.homeshare.util.FileUploadUtil;
@@ -237,7 +233,6 @@ public class HouseController {
 		int sessionMemNo = (int) session.getAttribute("memNo"); // 세션에서 아이디 가져오기
 		logger.info("세션값 : " + sessionMemNo);
 
-		PrintWriter out = res.getWriter();
 
 		if (sessionMemNo == memNo) {// 전송받은 memno와 세션에서의 memno가 일치하면 delete를 실행한다. 
 			logger.info("세션 일치 삭제 실행");
