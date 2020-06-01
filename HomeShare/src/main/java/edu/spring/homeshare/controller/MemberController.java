@@ -48,14 +48,19 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="logout")
-	public String logout( HttpServletRequest req) {
+	public String logout(   HttpServletRequest req) {
 		logger.info("logout 호출 ");
 		HttpSession session = req.getSession();
 		session.removeAttribute("memId");
 		session.invalidate();
 		
 		String referer = (String)req.getHeader("REFERER");
-
+		logger.info("referer : " + referer );
+		/* 예외처리 로그아웃*/
+		if(referer.equals("http://localhost:8081/homeshare/book/booking")) {
+			return "redirect:/" ;
+		}
+		
 		return "redirect:" + referer;
 	}
 	

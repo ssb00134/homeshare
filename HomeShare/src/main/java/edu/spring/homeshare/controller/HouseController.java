@@ -150,7 +150,10 @@ public class HouseController {
 	/* insert 메핑 */
 	// 숙소등록
 	@RequestMapping(value = "/house-insert", method = RequestMethod.GET)
-	public void houseInsertGet() {
+	public void houseInsertGet(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String sessionMemNo = (String) session.getAttribute("memId"); // 세션에서 아이디 가져오기
+		logger.info("세션 아이디 : " + sessionMemNo);
 		logger.info("house-insert get 실행");
 	}
 
