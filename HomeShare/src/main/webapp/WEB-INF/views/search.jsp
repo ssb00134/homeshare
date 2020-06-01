@@ -34,9 +34,10 @@
 	<div id="house-lists">
 		<c:forEach var="vo" items="${houseList }">
 			<div class="container-fluid">
-				<div class="house_list_item">
-					<div class="house_list_item_click " style="border : 1px solid red;" id="${vo.houseNo }">
-						<div class="col-md-8">${vo.scope}</div>
+				<div class="house_list_item" style="border : 3px solid blue;">
+					<div class="row" style="border : 2px solid green;">
+					<div class="house_list_item_click col-md-7" style="border : 1px solid red;" id="${vo.houseNo }">
+						<div >${vo.scope}</div>
 						<div class="row">
 							<div class="col-md-10">${vo.title}</div>
 							<div class="col-md-2">별점 ${vo.score}</div>
@@ -44,17 +45,21 @@
 						<div>${vo.price}$</div>
 						<div class="col-md-8">${vo.location}</div>
 
-						<div class="row">
+						<div class="row" style="border : 1px solid grey;">
 							<div class="col-md-2">인원 ${vo.maxCapacity }명</div>
 							<div class="col-md-2">침실 ${vo.bedroom }개</div>
 							<div class="col-md-2">침대 ${vo.bed }개</div>
 							<div class="col-md-2">화장실 ${vo.bathroom }개</div>
 						</div>
-						<div class="row">
+						<div class="row" style="border : 1px solid grey;">
 							<div class="col-md-">${vo.utilities }</div>
 						</div>
+						</div>
 
-
+								<!-- 이미지슬라이더 -->
+					<div class="home__slider col-md-5">
+						<ul class="bxslider"></ul>
+					</div>	
 					</div>
 					<div class="sessionchk">
 						<button type="submit" id="btn_update">수정</button>
@@ -67,11 +72,7 @@
 					
 					
 					
-					<!-- 이미지슬라이더 -->
 					
-					<div class="home__slider ">
-						<ul class="bxslider"></ul>
-					</div>				
 				</div>
 				<hr>
 			</div>
@@ -108,6 +109,7 @@
 		$(document)
 				.ready(
 						function() {
+							console.log('home__slider col-md-5 : ' + $('.home__slider').width());
 							//업데이트시 동작설정
 							$('#btn_delete')
 									.click(
@@ -173,6 +175,8 @@
 														.split(',');
 												console.log('imgsplit  : ' +  imgsplit.value);
 												var list = '';
+												var width = $('.home__slider').width();
+												var height = $('.home__slider').height();
 												imgsplit.forEach(function(index) {
 															if (imgsplit[imgsplit.length - 1] != index) {
 																console
@@ -194,7 +198,8 @@
 								speed : 5000,
 								pause : 4000,
 								mode : 'fade',
-								slideWidth  : 400,
+								slideWidth  : $('.home__slider').width(),
+								slideHeight : $('.home__slider').height(),
 								autoControls : true,
 								pager : true,
 							});
