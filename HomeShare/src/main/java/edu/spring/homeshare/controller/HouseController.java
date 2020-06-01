@@ -3,7 +3,9 @@ package edu.spring.homeshare.controller;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
@@ -13,9 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -27,12 +31,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
 import edu.spring.homeshare.domain.BookVO;
 import edu.spring.homeshare.domain.HouseVO;
 import edu.spring.homeshare.domain.MemberVO;
 import edu.spring.homeshare.service.BookService;
 import edu.spring.homeshare.service.HouseService;
 import edu.spring.homeshare.util.FileUploadUtil;
+import edu.spring.homeshare.util.MediaUtil;
 import edu.spring.homeshare.util.PageCriteria;
 import edu.spring.homeshare.util.PageMaker;
 
@@ -254,6 +260,43 @@ public class HouseController {
 			logger.info("세션이 일치하지 않습니다.");
 			return "/";
 		}
+	}
+	
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ResponseEntity<byte[]> display(String fileName) throws IOException {
+		logger.info("display() 호출");
+		logger.info("fileName : " + fileName);
+		
+		ResponseEntity<byte[]> entity = null;
+		InputStream in = null;
+		String  filePath = uploadPath + File.separator + fileName;
+		
+		if(fileName != null) {
+			 logger.info("filePath : " + filePath);
+			in = new FileInputStream(filePath); // 경로가 null이 아니면 정상 작업			
+		}else {
+			 filePath = uploadPath + File.separator + "noimage.jpg";
+			in = new FileInputStream(filePath); // 		
+		}
+		
+		logger.info("in : " + in);
+		// 파일 확장자
+		String extension = 
+				filePath.substring(filePath.lastIndexOf(".") + 1);
+		
+		// 응답 헤더(response header)에 Content-Type 설정
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(MediaUtil.geMediaType(extension));
+		
+		// 데이터 전송
+	
+			entity = new ResponseEntity<byte[]>(
+					IOUtils.toByteArray(in), // 파일에서 읽은 데이터
+					httpHeaders, // 응답 헤더
+					HttpStatus.OK // 응답 코드
+				);
+		
+		return entity;
 	}
 	
 	

@@ -166,28 +166,30 @@
 												var imgSource = $(this)
 														.children('input')
 														.val();
+												if(imgSource==='' ||imgSource===null){
+													console.log('imgSource is null ');
+													list += '<li><img width="100" height="100" src="/homeshare/house/display?"></li>';
+												}else{
 
-												console.log('imgSource : '
-														+ imgSource);
 												var imgsplit = imgSource
 														.split(',');
-												console.log(imgsplit);
+												console.log('imgsplit  : ' +  imgsplit.value);
 												var list = '';
-												imgsplit
-														.forEach(function(index) {
+												imgsplit.forEach(function(index) {
 															if (imgsplit[imgsplit.length - 1] != index) {
 																console
 																		.log("index : "
 																				+ index);
-																list += '<li><img width="100" height="100" src="/homeshare/display?fileName='
+																list += '<li><img width="100" height="100" src="/homeshare/house/display?fileName='
 																		+ index
 																		+ '" alt="'
 																		+ index.length
 																		+ '"></li>';
 															}
 														});
-												$(element).find('ul')
-														.html(list);
+												} //end else
+												console.log('list : ' + list);
+												$(element).find('ul').html(list);
 											});
 
 							//bxslider	
