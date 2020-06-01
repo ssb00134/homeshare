@@ -168,7 +168,7 @@
 														.val();
 												if(imgSource==='' ||imgSource===null){
 													console.log('imgSource is null ');
-													list += '<li><img width="100" height="100" src="/homeshare/house/display?"></li>';
+													list += '<li><img width="100" height="100" src="/homeshare/house/display"></li>';
 												}else{
 
 												var imgsplit = imgSource
@@ -180,10 +180,8 @@
 																console
 																		.log("index : "
 																				+ index);
-																list += '<li><img width="100" height="100" src="/homeshare/house/display?fileName='
+																list += '<li><img width="100" height="100" src="/homeshare/house/display/'
 																		+ index
-																		+ '" alt="'
-																		+ index.length
 																		+ '"></li>';
 															}
 														});

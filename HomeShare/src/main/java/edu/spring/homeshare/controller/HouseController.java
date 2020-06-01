@@ -1,7 +1,5 @@
 package edu.spring.homeshare.controller;
 
-	
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -25,6 +23,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -45,14 +44,14 @@ public class HouseController {
 
 	@Autowired
 	private HouseService houseService;
-	
+
 	@Autowired
 	private BookService bookService;
 
 	@Resource(name = "uploadPath")
 	private String uploadPath;
 
-	//TODO : 삭제된 값이 리스트에 남아있음
+	// TODO : 삭제된 값이 리스트에 남아있음
 	@RequestMapping(value = "/house-list", method = RequestMethod.GET)
 	public void houseLIst(Model model, Integer page, Integer prePage, HttpServletRequest req) {
 		logger.info("houselist get 실행");
@@ -120,38 +119,33 @@ public class HouseController {
 		logger.info(vo.toString());
 		model.addAttribute("houseVO", vo);
 	}
-	
+
 	/* 호스팅 메핑 */
-	@RequestMapping(value="/host",method = RequestMethod.POST)
+	@RequestMapping(value = "/host", method = RequestMethod.POST)
 	public void Housting(Model model, HttpServletRequest req) {
-		logger.info("hosting 실행 " );
-		
-		//세션에서 아이디, memNo 가져오기
+		logger.info("hosting 실행 ");
+
+		// 세션에서 아이디, memNo 가져오기
 		HttpSession session = req.getSession();
 		String sessionMemId = (String) session.getAttribute("memId"); // 세션에서 아이디 가져오기
-		if(sessionMemId != null) {
+		if (sessionMemId != null) {
 			int memNo = (int) session.getAttribute("memNo");
 			List<HouseVO> list = houseService.selectAllByMemNO(memNo);
 			logger.info("list : " + list.toString());
 			model.addAttribute("list", list);
-			
-			
-			
-			
-		}else {
+
+		} else {
 			logger.info("세션이 없습니다. 로그인 해주세요");
 		}
 	}
-	
-	/* list all 모든 정보 보기*/
-	@RequestMapping(value="/listall",method = RequestMethod.GET)
+
+	/* list all 모든 정보 보기 */
+	@RequestMapping(value = "/listall", method = RequestMethod.GET)
 	public void listAll(Model model) {
 		List<HouseVO> list = houseService.selectAll();
 		model.addAttribute("list", list);
 		logger.info("list : " + list.toString());
 	}
-	
-	
 
 	/* insert 메핑 */
 	// 숙소등록
@@ -169,46 +163,50 @@ public class HouseController {
 			logger.info("inset 실행");
 			logger.info("파일 갯수 : " + files.length);
 			int result = 0;
-			//이미지에 파일 개수를 넣는다.
+			// 이미지에 파일 개수를 넣는다.
 			vo.setImage(Integer.toString(files.length));
-			
+
 			result = houseService.create(vo);
 			if (result == 0) {
 				logger.info("insert 실패");
 				return "/";
 			} else {
-				//TODO : 시퀸스가 같은 폴더가 있을때 예외처리 할것
+				// TODO : 시퀸스가 같은 폴더가 있을때 예외처리 할것
 				logger.info("insert 성공");
 				logger.info("insert 결과 houseNo : " + result);
 				String fileResult = null;
 				logger.info("파일업로드 시작");
 				for (MultipartFile f : files) {
-					//업로드하기 
+					// 업로드하기
 					fileResult = FileUploadUtil.saveUploadedFile(uploadPath, "houseno" + result,
 							f.getOriginalFilename(), f.getBytes());
-					logger.info("업로드 결과 fileResult : " + fileResult);	
+					logger.info("업로드 결과 fileResult : " + fileResult);
 				}
-				//디렉토리 읽어오기
+				// 디렉토리 읽어오기
 				String path = uploadPath + File.separator + "houseno" + result;
 				String filePath = FileUploadUtil.readDirectory(path);
-				
-				logger.info("filePath" + filePath);	
-				
-				
-				//vo에 파일패스 업데이트하기
+
+				logger.info("filePath" + filePath);
+
+				// vo에 파일패스 업데이트하기
 				logger.info("result (houseno) : " + result);
-				vo.setImage(filePath);
-				vo.setHouseNo(result); //result == 현재 시퀸스값
+				String[] sep = filePath.split(",");
+				String totalPath = "";
+				for (int i = 0; i < sep.length; i++) {
+					totalPath += "houseno" + result + File.separator + sep[i] + ",";
+				}
+
+				vo.setImage(totalPath); // 경로 + 파일
+				vo.setHouseNo(result); // result == 현재 시퀸스값
 				logger.info("업데이트전 vo : " + vo.toString());
-				
-				
+
 				int updateResult = houseService.update(vo);
-				if(updateResult == 1) {
+				if (updateResult == 1) {
 					logger.info("사진주소를 업데이트 하였습니다.");
-				}else {
+				} else {
 					logger.info("사진주소 업데이트에 실패 하였습니다.");
 				}
-				
+
 				return "/";
 			}
 		} else if (files.length == 0) {
@@ -256,35 +254,38 @@ public class HouseController {
 			return "/";
 		}
 	}
-	
-	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public ResponseEntity<byte[]> display(String fileName) throws IOException {
+
+	@RequestMapping(value = "/display/{houseno}/{fileno:.+}", method = RequestMethod.GET)
+	public ResponseEntity<byte[]> display(
+			@PathVariable("houseno")  String houseno,
+			@PathVariable("fileno")  String fileno)throws IOException {
 		logger.info("display() 호출");
-		logger.info("fileName : " + fileName);
+		logger.info("houseno : " + houseno);
+		logger.info("fileno : " + fileno);
 		
 		ResponseEntity<byte[]> entity = null;
 		InputStream in = null;
-		String  filePath = uploadPath + File.separator + fileName;
+		String  filePath = uploadPath + File.separator + houseno + File.separator + fileno;
 		
-		if(fileName != null) {
+		
+		// 파일 확장자
+				String extension = 
+						filePath.substring(filePath.lastIndexOf(".") + 1);
+				
+		if(houseno != null) {
 			 logger.info("filePath : " + filePath);
 			in = new FileInputStream(filePath); // 경로가 null이 아니면 정상 작업			
 		}else {
+			logger.info("houseno 없음");
 			 filePath = uploadPath + File.separator + "noimage.jpg";
 			in = new FileInputStream(filePath); // 		
 		}
 		
-		logger.info("in : " + in);
-		// 파일 확장자
-		String extension = 
-				filePath.substring(filePath.lastIndexOf(".") + 1);
-		
 		// 응답 헤더(response header)에 Content-Type 설정
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(MediaUtil.geMediaType(extension));
-		
+
 		// 데이터 전송
-	
 			entity = new ResponseEntity<byte[]>(
 					IOUtils.toByteArray(in), // 파일에서 읽은 데이터
 					httpHeaders, // 응답 헤더
