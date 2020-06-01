@@ -255,6 +255,7 @@ public class HouseController {
 		}
 	}
 
+	
 	@RequestMapping(value = "/display/{houseno}/{fileno:.+}", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> display(
 			@PathVariable("houseno")  String houseno,
@@ -295,6 +296,40 @@ public class HouseController {
 		return entity;
 	}
 	
+	
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ResponseEntity<byte[]> display() throws IOException {
+		logger.info("display() noimage 호출");
+		
+		
+		ResponseEntity<byte[]> entity = null;
+		InputStream in = null;
+		String  filePath = uploadPath + File.separator + "noimage.jpg";
+		
+		
+		// 파일 확장자
+				String extension = 
+						filePath.substring(filePath.lastIndexOf(".") + 1);
+				
+		
+			logger.info("houseno 없음");
+			 
+			in = new FileInputStream(filePath); // 		
+		
+		
+		// 응답 헤더(response header)에 Content-Type 설정
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(MediaUtil.geMediaType(extension));
+
+		// 데이터 전송
+			entity = new ResponseEntity<byte[]>(
+					IOUtils.toByteArray(in), // 파일에서 읽은 데이터
+					httpHeaders, // 응답 헤더
+					HttpStatus.OK // 응답 코드
+				);
+		
+		return entity;
+	}
 	
 	
 

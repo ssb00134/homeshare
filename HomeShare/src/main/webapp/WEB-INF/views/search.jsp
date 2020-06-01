@@ -68,12 +68,10 @@
 					
 					
 					<!-- 이미지슬라이더 -->
-					<div class="row">
-					<div class="home__slider">
-						<ul class="bxslider"></ul>
-					</div>
-					</div>
 					
+					<div class="home__slider ">
+						<ul class="bxslider"></ul>
+					</div>				
 				</div>
 				<hr>
 			</div>
@@ -180,7 +178,7 @@
 																console
 																		.log("index : "
 																				+ index);
-																list += '<li><img width="100" height="100" src="/homeshare/house/display/'
+																list += '<li><img width="300" height="150" src="/homeshare/house/display/'
 																		+ index
 																		+ '"></li>';
 															}
@@ -196,6 +194,7 @@
 								speed : 5000,
 								pause : 4000,
 								mode : 'fade',
+								slideWidth  : 400,
 								autoControls : true,
 								pager : true,
 							});
