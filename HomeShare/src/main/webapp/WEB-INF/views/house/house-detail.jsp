@@ -230,6 +230,12 @@
 				alert('로그인을 먼저 해주세요');
 				preventDefault();
 			}
+			console.log('dateDiffer :' + dateDiffer);
+			if($('#dateDiffer').val() < 0 ){
+				console.log('0보다 작음');
+				alert('예약 불가 : 날짜를 확인해 주세요');
+				preventDefault;
+			}
 			var obj = {
 					'houseNo' : '${houseVO.houseNo}',
 					'bookNo' : bookNo,
@@ -373,8 +379,6 @@
 								// houseVoMinDate : db에 저장된 체크인 날짜
 
 								
-								
-								
 								// bookableDateBegin 디비에 저장된 체크인 가능한 시간 + 체크인가능시간 반영됨
 								//직접 변수 사용시 오류가 발생하므로 우회해서 접근
 								var bookableDateBegin = new Date($('#bookableDateBegin').val());
@@ -383,8 +387,10 @@
 										bookableDateBegin.getDate()
 										+ checkinInterval
 								); 
+								var bookableDateEnd = new Date($('#bookableDateEnd').val());
 								
 								console.log('bookableDateBegin : ' + bookableDateBegin);
+								console.log('bookableDateEnd :' + bookableDateEnd);
 
 								$('#disableCheckIn').datepicker({
 			 			 			 dateFormat: "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
@@ -394,6 +400,7 @@
 			 				         prevText: '이전 달',
 			 			        	 minDate : ( new Date() < bookableDateBegin  ?
 			 			        			bookableDateBegin : new Date()) ,
+			 			        	maxDate : bookableDateEnd,
 			 			        	beforeShowDay: disableAllTheseDays, 
 			 			 		}); //end disableList datepicker
 			 			 		
@@ -403,7 +410,8 @@
 			 				         changeYear: true,
 			 				         nextText: '다음 달',
 			 				         prevText: '이전 달',
-			 			        	 minDate : $('#checkIn').val(),
+			 			        	 minDate : $('#disableCheckIn').datepicker().val(),
+			 			        	 maxDate : bookableDateEnd,
 			 			        	beforeShowDay: disableAllTheseDays,
 			 			 		}); //end disableList datepicker
 			 			 		
