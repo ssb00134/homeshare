@@ -1,0 +1,28 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!-- 로그인 모달 폼 -->
+<form class="modal" id="LoginModal"
+	action="/homeshare/member/login-post" method="post">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<!-- modal head -->
+			<div class="modal-header">
+				<h4 class="modal-title">로그인</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<!-- modal body -->
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="id"
+					name="memId">
+				<input type="password" class="form-control" placeholder="pw"
+					name="password">
+			</div>
+
+			<!-- modal footer -->
+			<div class="modal-footer">
+				<button type="submit" class="btn ">Login</button>
+				<button type="button" class="btn " data-dismiss="modal">close</button>
+			</div>
+		</div>
+	</div>
+</form>
