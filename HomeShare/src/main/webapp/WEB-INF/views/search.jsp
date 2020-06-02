@@ -69,10 +69,6 @@
 					<div class="memNo" id="${vo.memNo }">${vo.memNo }</div>
 					<input class="imgSource" type="hidden" value="${vo.image }" />
 					<br>
-					
-					
-					
-					
 				</div>
 				<hr>
 			</div>

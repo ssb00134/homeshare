@@ -3,28 +3,35 @@
 <section>
 	<hr>
 	<h1>예약하기</h1>
-	<div class="row">
-		<div class="col-md-1">숙소</div>
-		<div class="col-md-1">장기숙박</div>
-	</div>
-	<form action="search" method="get" class="form-inline">
-		<div class="form-group">
-			<input type="text" class="form-control col-md-4" placeholder="지역"
-				name="location">
-			<input type="text" class="form-control col-md-2" placeholder="체크인 시간"
-				id="checkIn" name="checkIn">
-			<input type="text" class="form-control col-md-2"
-				placeholder="체크아웃 시간" id="checkOut" name="checkOut">
-			<input type="text" class="form-control col-md-2" placeholder="인원"
-				name="maxCapacity">
-			<input type="hidden" name="houseNo" value="0">
-			<input type="hidden" name="type" value="">
-			<input type="hidden" name="scope" value="">
-			<input type="hidden" name="bedroom" value="">
-			<input type="submit" value="검색하기" class="btn btn-default ">
-		</div>
 
-	</form>
+	<div class="container-fluid" style="border : 1px solid grey;">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-1">숙소</div>
+					<div class="col-md-1">장기숙박</div>
+				</div>
+				<form action="search" method="get" class="form-inline col-md-12" style="border : 1px solid grey">
+					<div class="form-group col-md-12">
+						<input type="text" class="form-control col-md-4" placeholder="지역"
+							name="location">
+						<input type="text" class="form-control col-md-2"
+							placeholder="체크인 시간" id="checkIn" name="checkIn">
+						<input type="text" class="form-control col-md-2"
+							placeholder="체크아웃 시간" id="checkOut" name="checkOut">
+						<input type="text" class="form-control col-md-2" placeholder="인원"
+							name="maxCapacity">
+						<input type="hidden" name="houseNo" value="0">
+						<input type="hidden" name="type" value="">
+						<input type="hidden" name="scope" value="">
+						<input type="hidden" name="bedroom" value="">
+						<input type="submit" value="검색하기" class="btn btn-default col-md-2">
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
 	<div class="row">
 		<div id="dateCheckIn" class="col-md-3"
 			style="position: relative; z-index: 1;"></div>

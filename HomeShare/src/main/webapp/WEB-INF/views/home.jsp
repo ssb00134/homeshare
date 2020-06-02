@@ -35,7 +35,7 @@
 	<br>
 	<br>
 	<h1>왜 HomeShare에서 예약을 해야 할까요?</h1>
-	<div class="container row" style="border : 1px solid grey">
+	<div class="container-fluid row " style="border : 1px solid grey">
 			
 			<div class="row col-md-4" style="border: 1px solid grey">
 				<img src="/homeshare/display/starscore.png" class="img-fluid" height="50%" />
@@ -57,7 +57,7 @@
 
 
 
-	<div class="container">
+	<div class="container full-width">
 		<div class="row">
 			<div class="col-md-8 col-lg-8 col-sm-8">
 

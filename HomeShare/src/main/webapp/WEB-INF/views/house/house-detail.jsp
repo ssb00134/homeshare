@@ -20,7 +20,7 @@
 			${houseVO.title }
 		</h1>
 		<div class="row">
-		
+		<div class="col-md-2">인원 ${houseVO.bookableDateBegin }예약가능시간</div>
 		<div class="col-md-2">인원 ${houseVO.maxCapacity }명</div>
 		<div class="col-md-2">침실 ${houseVO.bedroom }개</div>
 		<div class="col-md-2">욕실${houseVO.bathroom }개</div>
@@ -44,7 +44,7 @@
 	<hr>
 	${ houseVO.info}
 	<hr>
-	<div style="float:right;" class="border col-md-5" style="position: relative; z-index: 1;">
+	<div  class="border col-md-5 row-fluid"  style="position: relative; z-index: 1;">
 		<h4>계산 영역</h4>
 			<div class= "row">
 			<div class="disableList" id="disableCheckIn" style="position: relative; z-index: 1;"></div>
@@ -67,7 +67,9 @@
 		<input type="text" id="dateDiffer">
 		<input type="hidden" name="bookhouseNo" value="${houseVO.houseNo }">
 		<input type="hidden" name="bookMemNo" value="${memberVO.memNo }">
-
+		<input type="hidden" id="bookableDateBegin" value="${houseVO.bookableDateBegin }">
+		<input type="hidden" id="bookableDateEnd" value="${houseVO.bookableDateEnd }">
+		<input type="hidden" id="checkinInterval" value="${houseVO.checkinInterval }">
 		<div>
 			<div>
 				<input type="number" name="bookMem" id="bookMem" value="1">
@@ -368,15 +370,31 @@
 							   }
 							    return [true];
 								} 
+								// houseVoMinDate : db에 저장된 체크인 날짜
 
-			 			 		$('#disableCheckIn').datepicker({
+								
+								
+								
+								// bookableDateBegin 디비에 저장된 체크인 가능한 시간 + 체크인가능시간 반영됨
+								//직접 변수 사용시 오류가 발생하므로 우회해서 접근
+								var bookableDateBegin = new Date($('#bookableDateBegin').val());
+								var checkinInterval = $('#checkinInterval').val()*1;
+								bookableDateBegin.setDate(
+										bookableDateBegin.getDate()
+										+ checkinInterval
+								); 
+								
+								console.log('bookableDateBegin : ' + bookableDateBegin);
+
+								$('#disableCheckIn').datepicker({
 			 			 			 dateFormat: "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
 			 						 changeMonth: true, 
 			 				         changeYear: true,
 			 				         nextText: '다음 달',
 			 				         prevText: '이전 달',
-			 			        	 minDate : (new Date() ),
-			 			        	beforeShowDay: disableAllTheseDays,
+			 			        	 minDate : ( new Date() < bookableDateBegin  ?
+			 			        			bookableDateBegin : new Date()) ,
+			 			        	beforeShowDay: disableAllTheseDays, 
 			 			 		}); //end disableList datepicker
 			 			 		
 			 			 		$('#disableCheckOut').datepicker({
@@ -432,7 +450,7 @@
 		imgsplit.forEach(function(element){
 			 if(imgsplit[imgsplit.length-1] != element){
 			    	console.log("element : " + element);
-				    list += '<img src="/homeshare/display?fileName=' + element + '" size="100%"><br>';
+				    list += '<img src="/homeshare/display/' + element + '" size="100%"><br>';
 			    }
 		});
 		$('#imgArea').html(list);
