@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -79,32 +80,7 @@ public class FileUploadController {
 	
 
 	
-	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public ResponseEntity<byte[]> display(String fileName) throws IOException {
-		logger.info("display() 호출");
-		
-		ResponseEntity<byte[]> entity = null;
-		InputStream in = null;
-		
-		String filePath = uploadPath + fileName;
-		in = new FileInputStream(filePath);
-		
-		// 파일 확장자
-		String extension = 
-				filePath.substring(filePath.lastIndexOf(".") + 1);
-		
-		// 응답 헤더(response header)에 Content-Type 설정
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.setContentType(MediaUtil.geMediaType(extension));
-		
-		// 데이터 전송
-		entity = new ResponseEntity<byte[]>(
-					IOUtils.toByteArray(in), // 파일에서 읽은 데이터
-					httpHeaders, // 응답 헤더
-					HttpStatus.OK // 응답 코드
-				);
-		return entity;
-	}
+	
 
 	private String saveUploadFile(MultipartFile file) {
 		// UUID : 업로드하는 파일 이름이 중복되지 않도록
@@ -120,6 +96,112 @@ public class FileUploadController {
 			logger.error("파일 저장 실패");
 			return null;
 		}
+	}
+	
+	@RequestMapping(value = "/display/{houseno}/{fileno:.+}", method = RequestMethod.GET)
+	public ResponseEntity<byte[]> display(
+			@PathVariable("houseno")  String houseno,
+			@PathVariable("fileno")  String fileno)throws IOException {
+		logger.info("display() houseno fileno 호출");
+		logger.info("houseno : " + houseno);
+		logger.info("fileno : " + fileno);
+		
+		ResponseEntity<byte[]> entity = null;
+		InputStream in = null;
+		String  filePath = uploadPath + File.separator + houseno + File.separator + fileno;
+		
+		
+		// 파일 확장자
+				String extension = 
+						filePath.substring(filePath.lastIndexOf(".") + 1);
+				
+		if(houseno != null) {
+			 logger.info("filePath : " + filePath);
+			in = new FileInputStream(filePath); // 경로가 null이 아니면 정상 작업			
+		}else {
+			logger.info("houseno 없음");
+			 filePath = uploadPath + File.separator + "noimage.jpg";
+			in = new FileInputStream(filePath); // 		
+		}
+		
+		// 응답 헤더(response header)에 Content-Type 설정
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(MediaUtil.geMediaType(extension));
+
+		// 데이터 전송
+			entity = new ResponseEntity<byte[]>(
+					IOUtils.toByteArray(in), // 파일에서 읽은 데이터
+					httpHeaders, // 응답 헤더
+					HttpStatus.OK // 응답 코드
+				);
+		
+		return entity;
+	}
+	
+	
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ResponseEntity<byte[]> display() throws IOException {
+		logger.info("display() noimage 호출");
+		
+		
+		ResponseEntity<byte[]> entity = null;
+		InputStream in = null;
+		String  filePath = uploadPath + File.separator + "noimage.jpg";
+		
+		
+		// 파일 확장자
+				String extension = 
+						filePath.substring(filePath.lastIndexOf(".") + 1);
+				
+		
+			logger.info("houseno 없음");
+			 
+			in = new FileInputStream(filePath); // 		
+		
+		
+		// 응답 헤더(response header)에 Content-Type 설정
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(MediaUtil.geMediaType(extension));
+
+		// 데이터 전송
+			entity = new ResponseEntity<byte[]>(
+					IOUtils.toByteArray(in), // 파일에서 읽은 데이터
+					httpHeaders, // 응답 헤더
+					HttpStatus.OK // 응답 코드
+				);
+		
+		return entity;
+	}
+	@RequestMapping(value = "/display/{file:.+}", method = RequestMethod.GET)
+	public ResponseEntity<byte[]> displayFile(
+			@PathVariable("file") String file) throws IOException {
+		logger.info("display() file 호출");
+		
+		ResponseEntity<byte[]> entity = null;
+		InputStream in = null;
+		String  filePath = uploadPath + File.separator + file;
+		
+		
+		// 파일 확장자
+				String extension = 
+						filePath.substring(filePath.lastIndexOf(".") + 1);
+	
+			 
+			in = new FileInputStream(filePath); // 		
+		
+		
+		// 응답 헤더(response header)에 Content-Type 설정
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(MediaUtil.geMediaType(extension));
+
+		// 데이터 전송
+			entity = new ResponseEntity<byte[]>(
+					IOUtils.toByteArray(in), // 파일에서 읽은 데이터
+					httpHeaders, // 응답 헤더
+					HttpStatus.OK // 응답 코드
+				);
+		
+		return entity;
 	}
 
 }

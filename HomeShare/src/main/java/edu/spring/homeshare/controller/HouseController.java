@@ -263,7 +263,7 @@ public class HouseController {
 	public ResponseEntity<byte[]> display(
 			@PathVariable("houseno")  String houseno,
 			@PathVariable("fileno")  String fileno)throws IOException {
-		logger.info("display() 호출");
+		logger.info("display() houseno fileno 호출");
 		logger.info("houseno : " + houseno);
 		logger.info("fileno : " + fileno);
 		
@@ -316,6 +316,37 @@ public class HouseController {
 				
 		
 			logger.info("houseno 없음");
+			 
+			in = new FileInputStream(filePath); // 		
+		
+		
+		// 응답 헤더(response header)에 Content-Type 설정
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(MediaUtil.geMediaType(extension));
+
+		// 데이터 전송
+			entity = new ResponseEntity<byte[]>(
+					IOUtils.toByteArray(in), // 파일에서 읽은 데이터
+					httpHeaders, // 응답 헤더
+					HttpStatus.OK // 응답 코드
+				);
+		
+		return entity;
+	}
+	@RequestMapping(value = "/display/{file:.+}", method = RequestMethod.GET)
+	public ResponseEntity<byte[]> displayFile(
+			@PathVariable("file") String file) throws IOException {
+		logger.info("display() file 호출");
+		
+		ResponseEntity<byte[]> entity = null;
+		InputStream in = null;
+		String  filePath = uploadPath + File.separator + file;
+		
+		
+		// 파일 확장자
+				String extension = 
+						filePath.substring(filePath.lastIndexOf(".") + 1);
+	
 			 
 			in = new FileInputStream(filePath); // 		
 		

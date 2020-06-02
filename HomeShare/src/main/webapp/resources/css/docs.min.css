@@ -1,7 +1,70 @@
-.hll {
-	background-color: #ffc
+
+
+.container content, .container aside {
+	position: relative;
 }
 
+aside{
+	
+}
+
+figure {
+	width: 100%;
+	position: relative;
+}
+
+figure img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+figure h4 {
+	position: absolute;
+	top: calc(100% - 50px);
+	left: 0;
+	width: 100%;
+	height: 50px;
+	color: #fff;
+	background: rgba(0, 0, 0, 0.6);
+	margin: 0;
+}
+
+figure .overlay {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	overflow: hidden;
+	width: 100%;
+	height: 0;
+	color: #fff;
+	background: rgba(0, 0, 0, 0.6);
+	-webkit-transition: .6s ease;
+	transition: .6s ease;
+}
+
+figure .overlay .description {
+	font-size: 20px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+figure:hover h4 {
+	display: none;
+}
+
+figure:hover .overlay {
+	display: block;
+	height: 100%;
+}
+
+/* -------------------------------------------------------------------------------- */
 .c {
 	color: #999
 }
@@ -246,8 +309,9 @@
 	color: #999
 }
 /* bootstap nav가 상단을 덮어버리는 문제 해결 */
-body { padding-top: 70px; } 
-
+body {
+	padding-top: 70px;
+}
 
 @font-face {
 	font-family: anchorjs-link;
@@ -315,19 +379,13 @@ body {
 	position: relative
 }
 
-
-
 .pull-left {
-  float: left !important;
+	float: left !important;
 }
+
 .pull-right {
-  float: right !important;
+	float: right !important;
 }
-
-
-
-
-
 
 .table code {
 	font-size: 13px;

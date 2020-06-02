@@ -112,13 +112,7 @@
 		var itemsMemNo = '${houseVO.memNo}';
 		console.log('sessionmemNo : '+sessionMemNo);
 		console.log('items memNo : ' + itemsMemNo);
-		//sessionchk
-		if(itemsMemNo ===  sessionMemNo){
-			console.log('세션No itemsno 일치');
-			$('.sessionchk').show();
-		}else{
-			$('.sessionchk').hide();
-		}
+
 		
 		//삭제 버튼
 		var frm = $('#frm');
@@ -130,12 +124,7 @@
 			frm.submit();
 		});
 		
-		
-	
-		
 
-
-		
 		/* 달력영역 */
 		var checkIn= $('#checkIn').val();
 		var checkOut= $('#checkOut').val();
@@ -278,7 +267,7 @@
 					//getAllBooks(); // 예약후 예약 불러오기
 				} //end sucess
 			});//end ajax 
-			return false; // 새로고침 없이
+			//return false; // 새로고침 없이
 			//getAllBooks(); // 예약후 예약 불러오기
 			
 		});//end click;
@@ -380,13 +369,23 @@
 							    return [true];
 								} 
 
-			 			 		$('.disableList').datepicker({
+			 			 		$('#disableCheckIn').datepicker({
 			 			 			 dateFormat: "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
 			 						 changeMonth: true, 
 			 				         changeYear: true,
 			 				         nextText: '다음 달',
 			 				         prevText: '이전 달',
 			 			        	 minDate : (new Date() ),
+			 			        	beforeShowDay: disableAllTheseDays,
+			 			 		}); //end disableList datepicker
+			 			 		
+			 			 		$('#disableCheckOut').datepicker({
+			 			 			 dateFormat: "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
+			 						 changeMonth: true, 
+			 				         changeYear: true,
+			 				         nextText: '다음 달',
+			 				         prevText: '이전 달',
+			 			        	 minDate : $('#checkIn').val(),
 			 			        	beforeShowDay: disableAllTheseDays,
 			 			 		}); //end disableList datepicker
 			 			 		

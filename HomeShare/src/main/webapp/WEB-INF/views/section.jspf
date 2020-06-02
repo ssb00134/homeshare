@@ -3,14 +3,18 @@
 <section>
 	<hr>
 	<h1>예약하기</h1>
+	<div class="row">
+		<div class="col-md-1">숙소</div>
+		<div class="col-md-1">장기숙박</div>
+	</div>
 	<form action="search" method="get" class="form-inline">
 		<div class="form-group">
 			<input type="text" class="form-control col-md-4" placeholder="지역"
 				name="location">
-			<input type="text" class="form-control col-md-2" placeholder="체크인 시간" id="checkIn"
-				name="checkIn">
-			<input type="text" class="form-control col-md-2" placeholder="체크아웃 시간" id="checkOut"
-				name="checkOut">
+			<input type="text" class="form-control col-md-2" placeholder="체크인 시간"
+				id="checkIn" name="checkIn">
+			<input type="text" class="form-control col-md-2"
+				placeholder="체크아웃 시간" id="checkOut" name="checkOut">
 			<input type="text" class="form-control col-md-2" placeholder="인원"
 				name="maxCapacity">
 			<input type="hidden" name="houseNo" value="0">
@@ -19,63 +23,62 @@
 			<input type="hidden" name="bedroom" value="">
 			<input type="submit" value="검색하기" class="btn btn-default ">
 		</div>
-			
+
 	</form>
-			<div class="row">
-			<div id="dateCheckIn" class="col-md-3" style="position: relative; z-index: 1;"></div>
-			<div id="dateCheckOut" class="col-md-3" style="position: relative; z-index: 1;"></div>
-			</div>
+	<div class="row">
+		<div id="dateCheckIn" class="col-md-3"
+			style="position: relative; z-index: 1;"></div>
+		<div id="dateCheckOut" class="col-md-3"
+			style="position: relative; z-index: 1;"></div>
+	</div>
 
 	<hr>
 </section>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$('#checkIn').on('click',function(index,element){
+		$('#checkIn').on('click', function(index, element) {
 			console.log('checkIn click');
 			$('#dateCheckIn').datepicker({
-				dateFormat: "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
-				 changeMonth: true, 
-		         changeYear: true,
-		         nextText: '다음 달',
-		         prevText: '이전 달',
-		         minDate : (new Date() ),
+				dateFormat : "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
+				changeMonth : true,
+				changeYear : true,
+				nextText : '다음 달',
+				prevText : '이전 달',
+				minDate : (new Date()),
 			});
-			
+
 		});// end checkin click;
-		
-		
-		$('#checkOut').on('click',function(index,element){
+
+		$('#checkOut').on('click', function(index, element) {
 			console.log('checkOut click');
 			$('#dateCheckOut').datepicker({
-				dateFormat: "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
-				 changeMonth: true, 
-		         changeYear: true,
-		         nextText: '다음 달',
-		         prevText: '이전 달',
-		         minDate : (new Date() ),
+				dateFormat : "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
+				changeMonth : true,
+				changeYear : true,
+				nextText : '다음 달',
+				prevText : '이전 달',
+				minDate : $('#checkIn').val(),
 			});
-			
+
 		});// end checkin click;
-		
 
 		//TODO : click과 blur 분리할것
-		if($('#checkin').val()){//만약 
-			
+		if ($('#checkin').val()) {//만약 
+
 		}
-		
-		
-		$('#dateCheckIn').on('click  blur',function(){
-			console.log('값 : ' +$('#dateCheckIn').datepicker().val());
+
+		$('#dateCheckIn').on('click  blur', function() {
+			console.log('값 : ' + $('#dateCheckIn').datepicker().val());
 			$('#checkIn').val($("#dateCheckIn").datepicker().val());
 			$('#dateCheckIn').datepicker("destroy");
 			//체크아웃의 최소값 주기
-		
+
 		});
-		$('#dateCheckOut').on('blur ',function(){
-			console.log('값 : ' +$('#dateCheckOut').datepicker().val());
+		$('#dateCheckOut').on('blur ', function() {
+			console.log('값 : ' + $('#dateCheckOut').datepicker().val());
 			$('#checkOut').val($("#dateCheckOut").datepicker().val());
 			$('#dateCheckOut').datepicker("destroy");
 		});
-		
+
 	})//end document;
 </script>

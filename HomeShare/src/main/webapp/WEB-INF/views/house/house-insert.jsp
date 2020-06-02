@@ -16,48 +16,7 @@
 		enctype="multipart/form-data" method="post">
 
 
-		<header class="floating-header">
-			<a href="#" class="site-logo"
-				style="font-size: 30px; color: #5bc0de; font-weight: bold">
-				Bootdey.com </a>
-
-			<div class="floating-menu-btn">
-				<div class="floating-menu-toggle-wrap">
-					<div class="floating-menu-toggle">
-						<span class="bar"></span>
-						<span class="bar"></span>
-						<span class="bar"></span>
-					</div>
-				</div>
-			</div>
-
-			<div class="main-navigation-wrap">
-				<nav class="main-navigation" data-back-btn-text="Back">
-					<ul class="menu">
-						<li class="menu-item-has-children current-menu-item delay-0">
-							<a href="#">
-								<i class="fa fa-arrow-right" aria-hidden="true"></i>More Options
-							</a>
-							<ul class="sub-menu">
-
-								<li class="current-menu-item"><a href="#">Home Design
-										Agency</a></li>
-								<li><a href="#">Home Architecture</a></li>
-								<li><a href="#">Home Photographer</a></li>
-							</ul>
-						</li>
-						<li class="delay-1"><a href="#">Portfolio</a></li>
-						<li class="delay-2"><a href="#">Blog</a></li>
-						<li class="delay-3"><a href="#">About Us</a></li>
-						<li class="delay-4"><a href="#">Contacts</a></li>
-						<li class="delay-5"><a href="#">Elements</a></li>
-					</ul>
-					<!-- .menu -->
-				</nav>
-				<!-- .main-navigation -->
-			</div>
-			<!-- .main-navigation-wrap -->
-		</header>
+		
 
 		<h1>하우스 등록하기</h1>
 		<hr>

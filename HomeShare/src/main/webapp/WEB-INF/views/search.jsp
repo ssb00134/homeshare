@@ -34,9 +34,9 @@
 	<div id="house-lists">
 		<c:forEach var="vo" items="${houseList }">
 			<div class="container-fluid">
-				<div class="house_list_item" style="border : 3px solid blue;">
-					<div class="row" style="border : 2px solid green;">
-					<div class="house_list_item_click col-md-7" style="border : 1px solid red;" id="${vo.houseNo }">
+				<div class="house_list_item" >
+					<div class="row" >
+					<div class="house_list_item_click col-md-7"  id="${vo.houseNo }">
 						<div >${vo.scope}</div>
 						<div class="row">
 							<div class="col-md-10">${vo.title}</div>
@@ -45,13 +45,13 @@
 						<div>${vo.price}$</div>
 						<div class="col-md-8">${vo.location}</div>
 
-						<div class="row" style="border : 1px solid grey;">
+						<div class="row" >
 							<div class="col-md-2">인원 ${vo.maxCapacity }명</div>
 							<div class="col-md-2">침실 ${vo.bedroom }개</div>
 							<div class="col-md-2">침대 ${vo.bed }개</div>
 							<div class="col-md-2">화장실 ${vo.bathroom }개</div>
 						</div>
-						<div class="row" style="border : 1px solid grey;">
+						<div class="row" >
 							<div class="col-md-">${vo.utilities }</div>
 						</div>
 						</div>
