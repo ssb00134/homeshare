@@ -1,5 +1,7 @@
 package edu.spring.homeshare.service;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,11 @@ public class MemberServiceImple implements MemberDAO, MemberService {
 	public MemberVO select(String memId) {
 		return memberDao.select(memId);
 	}
+	@Override
+	public List<MemberVO> readAllMemberOrderby(String orderby) {
+		return memberDao.selectall(orderby);
+	}
+
 	
 
 }

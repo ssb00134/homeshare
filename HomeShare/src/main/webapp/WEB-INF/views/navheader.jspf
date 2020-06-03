@@ -59,14 +59,21 @@
 									data-target="#hostbookModal">내예약</div>
 								<!-- 로그인 모달 폼 -->
 								<%@ include file="hostbook_modal.jspf"%>
-								
+
 								<form class="dropdown-item border-0"
 									action="/homeshare/book/hostbook" method="post">
 									<input type="submit" value="내 host로 들어온 예약">
 								</form>
 
 							</c:if>
-
+							<!-- 관리자인지 확인 -->
+							<c:if test="${memberVO.memId eq 'admin' }">
+								<div class="dropdown-divider"></div>
+								<form class="dropdown-item" action="/homeshare/admin/main"
+									method="post">
+									 <button type="submit" class="btn btn-default">관리자페이지</button>
+								</form>
+							</c:if>
 
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item" href="/homeshare/member/logout">로그아웃</a>

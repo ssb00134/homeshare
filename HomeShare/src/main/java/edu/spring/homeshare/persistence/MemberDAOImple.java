@@ -1,5 +1,7 @@
 package edu.spring.homeshare.persistence;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,6 +40,11 @@ public class MemberDAOImple implements MemberDAO {
 	public MemberVO select(String memId) {
 		logger.info("select ½ÇÇà");
 		return sqlSession.selectOne(NAMESPACE +".select", memId);
+	}
+	
+	@Override
+	public List<MemberVO> selectall(String orderby) {
+		return sqlSession.selectList(NAMESPACE + ".select_all_member_orderby",orderby);
 	}
 
 }
