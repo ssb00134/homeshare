@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="container-fluid">
+	<form class="container-fluid" action="/homeshare/admin/crm_result">
 		<h4>회원 검색하기</h4>
 		<div class="row">
 			<div class="form-group col-md-1 border">
@@ -41,7 +41,7 @@
 				<select class="form-control" id="searchbyname" name="orderby">
 					<option value="memId">아이디</option>
 					<option value="memName">이름</option>
-					<option value="memName">이름</option>
+					<option value="email">이메일</option>
 				</select>
 			</div>
 			<div class="form-group col-md-1 border">
@@ -54,7 +54,7 @@
 				<button type="submit" class="btn btn-default">초기화</button>
 			</div>
 		</div>
-	</div>
+	</form>
 	<div id= "crmResult"></div>
 	<script type="text/javascript">
 		$(document).ready(function() {

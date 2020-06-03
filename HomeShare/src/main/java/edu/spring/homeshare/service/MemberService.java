@@ -1,5 +1,6 @@
 package edu.spring.homeshare.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import edu.spring.homeshare.domain.HouseVO;
@@ -10,7 +11,7 @@ public interface MemberService {
 	String findId(MemberVO vo);
 	int insert(MemberVO vo);
 	MemberVO select(String memId);
-	List<MemberVO> readAllMemberOrderby(String orderby);
+	List<MemberVO> readAllMemberOrderby(HashMap<String, Object> map);
 	
 
 }

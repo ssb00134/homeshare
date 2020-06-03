@@ -1,5 +1,6 @@
 package edu.spring.homeshare.persistence;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -43,8 +44,8 @@ public class MemberDAOImple implements MemberDAO {
 	}
 	
 	@Override
-	public List<MemberVO> selectall(String orderby) {
-		return sqlSession.selectList(NAMESPACE + ".select_all_member_orderby",orderby);
+	public List<MemberVO> selectall(HashMap<String, Object> map) {
+		return sqlSession.selectList(NAMESPACE + ".select_all_member_orderby",map);
 	}
 
 }

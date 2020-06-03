@@ -1,5 +1,6 @@
 package edu.spring.homeshare.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -35,9 +36,10 @@ public class MemberServiceImple implements MemberDAO, MemberService {
 		return memberDao.select(memId);
 	}
 	@Override
-	public List<MemberVO> readAllMemberOrderby(String orderby) {
-		return memberDao.selectall(orderby);
+	public List<MemberVO> readAllMemberOrderby(HashMap<String, Object> map) {
+		return memberDao.selectall(map);
 	}
+	
 
 	
 

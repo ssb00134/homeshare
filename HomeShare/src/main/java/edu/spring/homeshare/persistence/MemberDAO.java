@@ -1,5 +1,6 @@
 package edu.spring.homeshare.persistence;
 
+import java.util.HashMap;
 import java.util.List;
 
 import edu.spring.homeshare.domain.MemberVO;
@@ -9,7 +10,7 @@ public interface MemberDAO {
 	String findId(MemberVO vo);
 	int insert(MemberVO vo);
 	MemberVO select(String memId);
-	List<MemberVO> selectall(String orderby);
+	List<MemberVO> selectall(HashMap<String, Object> map);
 	
 
 }
