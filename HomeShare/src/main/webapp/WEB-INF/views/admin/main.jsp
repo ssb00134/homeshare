@@ -62,7 +62,7 @@
 									<path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
 								고객관리
 							</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">
+						<li class="nav-item" ><a class="nav-link" href="#">
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 									viewBox="0 0 24 24" fill="none" stroke="currentColor"
 									stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -72,7 +72,7 @@
 									<line x1="6" y1="20" x2="6" y2="14"></line></svg>
 								신고내역 확인
 							</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">
+						<li class="nav-item" id="hostManagement"><a class="nav-link" href="#">
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 									viewBox="0 0 24 24" fill="none" stroke="currentColor"
 									stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -80,7 +80,7 @@
 									<polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
 									<polyline points="2 17 12 22 22 17"></polyline>
 									<polyline points="2 12 12 17 22 12"></polyline></svg>
-								Integrations
+								숙소관리
 							</a></li>
 					</ul>
 
@@ -183,6 +183,13 @@
 			$('#crmsidebar').click(function(){
 				$("#contents").load("/homeshare/admin/crm");
 			}); //end crmsidebar clikc
+			
+			$('#hostManagement').click(function(){
+				$("#contents").load("/homeshare/admin/hostmanagement");
+			}); //end crmsidebar clikc
+			
+			
+	
 		});//end script
 	</script>
 </body>

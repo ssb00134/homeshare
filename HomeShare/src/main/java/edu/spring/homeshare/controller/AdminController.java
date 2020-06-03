@@ -46,10 +46,20 @@ public class AdminController {
 		logger.info("admin crm 실행");
 	}
 
-	@RequestMapping(value = "/crm_result")
+	@RequestMapping(value = "/hostmanagement")
+	public void hostManagement() {
+		logger.info("hostmanagement  실행");
+	}
+	@RequestMapping(value = "/hostmanagement_result")
+	public void hostManagementResult() {
+		logger.info("hostmanagement_result  실행");
+	}
+	
+	@RequestMapping(value = "/crm_result", method =  RequestMethod.POST)
 	public void adminCrmResult(Model model, Integer page, Integer prePage, HttpServletRequest req) {
 		logger.info("admin crmResult 실행");
 		
+				
 		/*페이징처리*/
 		PageCriteria c = new PageCriteria();
 		logger.info("page : " + page);
@@ -63,6 +73,7 @@ public class AdminController {
 		
 		/*파라미터 지정*/
 		String orderby = req.getParameter("orderby");
+		if(orderby != null) { //orderby가 null이 아닐때 실행
 		model.addAttribute("orderby", orderby); //모달에 파라이터 저장
 		
 		/* map에 변수 넣기*/
@@ -89,6 +100,9 @@ public class AdminController {
 		maker.setPageData();
 		logger.info("maker : " + maker.toString());
 		model.addAttribute("pageMaker", maker);
+		}else {
+			
+		}
 	}
 
 }

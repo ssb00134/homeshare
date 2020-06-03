@@ -23,6 +23,8 @@
           <th>이름</th>
           <th>이메일</th>
           <th>성별</th>
+          <th>수정</th>
+          <th>삭제</th>
         </tr>
   	</thead>
   	<tbody>
@@ -33,6 +35,9 @@
   	<td>${vo.memName }</td>
   	<td>${vo.email }</td>
   	<td>${vo.gender }</td>
+  	<td><button type="submit" class="btn btn-default">수정하기</button></td>
+  	<td><button type="submit" class="btn btn-default">삭제하기</button></td>
+  	
   	
   	</tr>
   	</c:forEach>

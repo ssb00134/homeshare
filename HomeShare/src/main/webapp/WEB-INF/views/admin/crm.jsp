@@ -70,7 +70,7 @@
 				event.preventDefault();
 				var frm = $('#adminCrmForm'); // form의 정보를 frm에 저장
 				frm.attr('action', '/homeshare/admin/crm_result'); // form에 action 속성 추가
-				frm.attr('method', 'get'); // form에 method 속성 추가
+				frm.attr('method', 'post'); // form에 method 속성 추가
 				frm.submit();
 				$('#iframe1').show();
 			});//end click
