@@ -31,5 +31,7 @@ public interface HouseDAO {
 	
 	int selectSeqence(); //houseNo 가장 높은 것을 리턴
 	int update(HouseVO vo);
+	
+	List<HouseVO> selectSingle(HashMap<String, Object> map);
 
 }

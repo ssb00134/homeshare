@@ -22,4 +22,6 @@ public interface HouseService {
 	int update(HouseVO vo);
 	int delete(int houseNo);
 	int seqence();
+	
+	List<HouseVO> readSingle(HashMap<String, Object> map);
 }

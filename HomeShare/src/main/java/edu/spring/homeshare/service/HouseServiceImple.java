@@ -79,4 +79,9 @@ public class HouseServiceImple implements HouseService {
 		// TODO Auto-generated method stub
 		return HouseDao.selectSeqence();
 	}
+	
+	@Override
+	public List<HouseVO> readSingle(HashMap<String, Object> map) {
+		return HouseDao.selectSingle(map);
+	}
 }

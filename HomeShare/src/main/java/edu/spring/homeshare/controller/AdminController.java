@@ -1,8 +1,11 @@
 package edu.spring.homeshare.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,10 +14,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.spring.homeshare.HomeController;
+import edu.spring.homeshare.domain.HouseVO;
 import edu.spring.homeshare.domain.MemberVO;
 import edu.spring.homeshare.service.BookService;
 import edu.spring.homeshare.service.HouseService;
@@ -41,18 +47,111 @@ public class AdminController {
 		logger.info("admin main 실행");
 	}
 
-	@RequestMapping(value = "/crm")
-	public void adminCrm() {
-		logger.info("admin crm 실행");
-	}
+	
 
-	@RequestMapping(value = "/hostmanagement")
+	@RequestMapping(value = "/housemanagement")
 	public void hostManagement() {
 		logger.info("hostmanagement  실행");
 	}
-	@RequestMapping(value = "/hostmanagement_result")
-	public void hostManagementResult() {
+	/* 단일검색 */
+	@RequestMapping(value = "/housemanagement_result/{option}/{number}")
+	public void hostManagementResult(
+			Model model, Integer page, Integer prePage, HttpServletRequest req,
+			@RequestParam("option") String option,
+			@RequestParam(value = "number", defaultValue ="0") Integer number) {
 		logger.info("hostmanagement_result  실행");
+		
+		/* 페이징 처리 */
+		PageCriteria c = new PageCriteria();
+		logger.info("page : " + page);
+		
+		if (page != null) {
+			c.setPage(page);
+		}
+		if (prePage != null) {
+			c.setNumsPerPage(prePage);
+		}
+		/* 파라미터 지정 */
+		logger.info("option : " + option);
+		logger.info("number : " + number);
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("option", option);
+		map.put("start", c.getStart());
+		map.put("end", c.getEnd());
+		map.put("number", number);
+		logger.info("maptostring : " + map.toString());
+
+		List<HouseVO> houseList = houseService.readSingle(map);
+		logger.info("list 정보 : " + houseList.toString());
+		model.addAttribute("houseList", houseList);
+	}
+	
+	@RequestMapping(value = "/housemanagement_result")
+	public void housemanagement_result(
+			Model model, 
+			Integer page, 
+			Integer prePage,
+			HttpServletRequest req
+			) {
+		logger.info("관리자 페이지 다중 검색 실행");
+		
+		
+		/* 페이징 처리 */
+		PageCriteria c = new PageCriteria();
+		logger.info("page : " + page);
+
+		if (page != null) {
+			c.setPage(page);
+		}
+		if (prePage != null) {
+			c.setNumsPerPage(prePage);
+		}
+		
+		/* 파라미터 지정 */
+		String location = req.getParameter("location");
+		logger.info("location : " + location);
+		String bookableDateBegin = req.getParameter("checkIn");
+		logger.info("bookableDateBegin : " + bookableDateBegin);
+		String bookableDateEnd = req.getParameter("checkOut");
+		logger.info("bookableDateEnd : " + bookableDateEnd);
+		String maxCapacity = req.getParameter("maxCapacity");
+		logger.info("maxCapacity : " + maxCapacity);
+
+		/* hash맵에 정보 넣기 */
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("location", location);
+		map.put("bookableDateBegin", bookableDateBegin);
+		map.put("bookableDateEnd", bookableDateEnd);
+		map.put("maxCapacity", maxCapacity);
+		map.put("start", c.getStart());
+		map.put("end", c.getEnd());
+		logger.info("maptostring : " + map.toString());
+
+		List<HouseVO> list = houseService.multySelect(map);
+		logger.info("list 정보 : " + list.toString());
+		model.addAttribute("houseList", list);
+
+		PageMaker maker = new PageMaker();
+		maker.setCriteria(c);
+		maker.setTotalCount(houseService.getToTotalNumsOfRecords());
+		maker.setPageData();
+		model.addAttribute("pageMaker", maker);
+
+		
+
+		logger.info("전체 하우스 수 : " + maker.getTotalCount());
+		logger.info("현재 선택된 페이지 : " + c.getPage());
+		logger.info("한 페이지 당 게시글 수 : " + c.getNumsPerPage());
+		logger.info("시작 페이지 링크 번호(startPageNO) : " + maker.getStartPageNo());
+		logger.info("끝 페이지 링크 번호(endPageNo) : " + maker.getEndPageNo());
+	}
+	
+	
+	
+	@RequestMapping(value = "/crm")
+	public void adminCrm() {
+		logger.info("admin crm 실행");
 	}
 	
 	@RequestMapping(value = "/crm_result", method =  RequestMethod.POST)

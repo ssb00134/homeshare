@@ -156,6 +156,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 		</where>
 	</select>
+	
+	<!-- 4가지 변수중에서 단일검색 -->
+	<select id="select_single" parameterType="java.util.HashMap" resultType="houseVO">
+		select * from house where ${option} = #{number}
+	</select>
 
 
 

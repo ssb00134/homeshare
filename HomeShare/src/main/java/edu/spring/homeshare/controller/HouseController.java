@@ -97,9 +97,7 @@ public class HouseController {
 		maker.setPageData();
 		model.addAttribute("pageMaker", maker);
 
-		/* 현재 시퀀스 보기 */
-		int seqence = houseService.seqence();
-		logger.info("현재 시퀀스 : " + seqence);
+		
 
 		logger.info("전체 하우스 수 : " + maker.getTotalCount());
 		logger.info("현재 선택된 페이지 : " + c.getPage());

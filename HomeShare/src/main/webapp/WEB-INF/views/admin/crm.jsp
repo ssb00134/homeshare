@@ -72,7 +72,11 @@
 				frm.attr('action', '/homeshare/admin/crm_result'); // form에 action 속성 추가
 				frm.attr('method', 'post'); // form에 method 속성 추가
 				frm.submit();
-				$('#iframe1').show();
+				$('#iframe1').load(function(){
+					console.log('iframe 로드 ');
+					$('#iframe1').show();
+				});
+				
 			});//end click
 		});//end script
 	</script>

@@ -123,5 +123,11 @@ public class HouseDAOImple implements HouseDAO {
 		logger.info("houseno : " + vo.getHouseNo());
 		return sqlSession.update(NAMESPACE + ".update", vo);
 	}
+	@Override
+	public List<HouseVO> selectSingle(HashMap<String, Object> map) {
+		logger.info("HashMap ½ÇÇà");
+		logger.info("map : " + map.toString());
+		return sqlSession.selectList(NAMESPACE + ".select_single" , map);
+	}
 
 }
