@@ -20,7 +20,7 @@
 	<button type="button" class="btn btn-default" data-toggle="modal"
 		data-placement="left" title="Tooltip on left" id="bookcount"
 		data-toggle="modal" data-target="#hostbookModal"></button>
-	<%@ include file="hostbook.jspf"%>
+	<%@ include file="hostbook_modal.jspf"%>
 
 
 
