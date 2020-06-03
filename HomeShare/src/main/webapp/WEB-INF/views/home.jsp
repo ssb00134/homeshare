@@ -17,10 +17,10 @@
 		<button id="btn_logout" type="button"></button>
 	</c:if>
 
-	<button type="button" class="btn btn-default" data-toggle="tooltip"
-		data-placement="left" title="Tooltip on left" id="bookcount">
-	</button>
-
+	<button type="button" class="btn btn-default" data-toggle="modal"
+		data-placement="left" title="Tooltip on left" id="bookcount"
+		data-toggle="modal" data-target="#hostbookModal"></button>
+	<%@ include file="hostbook.jspf"%>
 
 
 
@@ -35,24 +35,27 @@
 	<br>
 	<br>
 	<h1>왜 HomeShare에서 예약을 해야 할까요?</h1>
-	<div class="container-fluid row " style="border : 1px solid grey">
-			
-			<div class="row col-md-4" style="border: 1px solid grey">
-				<img src="/homeshare/display/starscore.png" class="img-fluid" height="50%" />
-				<div>트립어드바이저의 유용한 전 세계 여행자 커뮤니티 덕분에 최고의 상품을 예약할 수 있습니다</div>
-			</div>	
-				
-				
-			<div class="row col-md-4" style="border: 1px solid grey">
-				<img src="/homeshare/display/timeicon.png" class="img-fluid" height="50%" />
-				<p>24시간 전까지 자유롭게 취소 가능 계획이 변경되었나요? 문제없습니다. 
-				체험 시작 최대 24시간 전까지 변경 또는 취소하세요</p>
-			</div>
-			
-			<div class="row col-md-4" style="border: 1px solid grey">
-				<img src="/homeshare/display/lowpriceicon.png" class="img-fluid"height="50%"  />
-				저렴한 가격 보장 매번 최저가로 최고의 경험을 즐기세요
-			</div>
+	<div class="container-fluid row " style="border: 1px solid grey">
+
+		<div class="row col-md-4" style="border: 1px solid grey">
+			<img src="/homeshare/display/starscore.png" class="img-fluid"
+				height="50%" />
+			<div>트립어드바이저의 유용한 전 세계 여행자 커뮤니티 덕분에 최고의 상품을 예약할 수 있습니다</div>
+		</div>
+
+
+		<div class="row col-md-4" style="border: 1px solid grey">
+			<img src="/homeshare/display/timeicon.png" class="img-fluid"
+				height="50%" />
+			<p>24시간 전까지 자유롭게 취소 가능 계획이 변경되었나요? 문제없습니다. 체험 시작 최대 24시간 전까지 변경
+				또는 취소하세요</p>
+		</div>
+
+		<div class="row col-md-4" style="border: 1px solid grey">
+			<img src="/homeshare/display/lowpriceicon.png" class="img-fluid"
+				height="50%" />
+			저렴한 가격 보장 매번 최저가로 최고의 경험을 즐기세요
+		</div>
 	</div>
 
 

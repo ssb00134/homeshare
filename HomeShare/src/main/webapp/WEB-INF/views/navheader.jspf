@@ -54,14 +54,16 @@
 									method="post">
 									<input type="submit" value="숙소관리하기">
 								</form>
+
+								<div class="btn navbar-nav navbar-right" data-toggle="modal"
+									data-target="#hostbookModal">내예약</div>
+								<!-- 로그인 모달 폼 -->
+								<%@ include file="hostbook_modal.jspf"%>
+								
 								<form class="dropdown-item border-0"
 									action="/homeshare/book/hostbook" method="post">
 									<input type="submit" value="내 host로 들어온 예약">
 								</form>
-								<li  class="btn navbar-nav navbar-right"
-									data-toggle="modal" data-target="#hostbookModal">내예약</li>
-								<!-- 로그인 모달 폼 -->
-								<%@ include file="hostbook_modal.jspf"%>
 
 							</c:if>
 
@@ -69,8 +71,7 @@
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item" href="/homeshare/member/logout">로그아웃</a>
 						</div></li>
-					<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a>
-					</li>
+
 
 				</c:if>
 			</ul>
