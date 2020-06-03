@@ -12,6 +12,6 @@ public interface MemberService {
 	int insert(MemberVO vo);
 	MemberVO select(String memId);
 	List<MemberVO> readAllMemberOrderby(HashMap<String, Object> map);
-	
+	int totalCount();
 
 }

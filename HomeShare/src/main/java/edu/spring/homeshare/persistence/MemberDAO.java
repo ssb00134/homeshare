@@ -11,7 +11,7 @@ public interface MemberDAO {
 	int insert(MemberVO vo);
 	MemberVO select(String memId);
 	List<MemberVO> selectall(HashMap<String, Object> map);
-	
+	int gettotalcount();
 
 }
 

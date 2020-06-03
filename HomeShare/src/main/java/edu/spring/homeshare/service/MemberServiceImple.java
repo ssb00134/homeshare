@@ -39,8 +39,23 @@ public class MemberServiceImple implements MemberDAO, MemberService {
 	public List<MemberVO> readAllMemberOrderby(HashMap<String, Object> map) {
 		return memberDao.selectall(map);
 	}
+	@Override
+	public int totalCount() {
+		return memberDao.gettotalcount();
+	}
 	
-
+	
+	//???????????????????????????????????????
+	@Override
+	public int gettotalcount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public List<MemberVO> selectall(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }

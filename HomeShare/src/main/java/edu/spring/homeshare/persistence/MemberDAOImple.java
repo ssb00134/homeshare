@@ -47,5 +47,9 @@ public class MemberDAOImple implements MemberDAO {
 	public List<MemberVO> selectall(HashMap<String, Object> map) {
 		return sqlSession.selectList(NAMESPACE + ".select_all_member_orderby",map);
 	}
-
+	@Override
+	public int gettotalcount() {
+		logger.info("gettotalcount ½ÇÇà");
+		return sqlSession.selectOne(NAMESPACE + ".total_count");
+	}
 }

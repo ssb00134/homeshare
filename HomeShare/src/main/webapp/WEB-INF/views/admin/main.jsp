@@ -51,7 +51,7 @@
 										d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
 								Products
 							</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">
+						<li class="nav-item" id = "crmsidebar"><a class="nav-link" href="#">
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 									viewBox="0 0 24 24" fill="none" stroke="currentColor"
 									stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -180,7 +180,9 @@
 	</div>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#contents").load("/homeshare/admin/crm");
+			$('#crmsidebar').click(function(){
+				$("#contents").load("/homeshare/admin/crm");
+			}); //end crmsidebar clikc
 		});//end script
 	</script>
 </body>

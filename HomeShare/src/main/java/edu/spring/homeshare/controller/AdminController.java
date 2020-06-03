@@ -20,6 +20,7 @@ import edu.spring.homeshare.service.BookService;
 import edu.spring.homeshare.service.HouseService;
 import edu.spring.homeshare.service.MemberService;
 import edu.spring.homeshare.util.PageCriteria;
+import edu.spring.homeshare.util.PageMaker;
 
 @Controller
 @RequestMapping(value = "admin")
@@ -62,6 +63,7 @@ public class AdminController {
 		
 		/*파라미터 지정*/
 		String orderby = req.getParameter("orderby");
+		model.addAttribute("orderby", orderby); //모달에 파라이터 저장
 		
 		/* map에 변수 넣기*/
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -69,10 +71,24 @@ public class AdminController {
 		map.put("end", c.getEnd());
 		logger.info("end : " + c.getEnd());
 		map.put("orderby", orderby);
-		logger.info("map : " +map.toString());	
+		logger.info("map : " +map.toString());
+		
+		
 		/*mybatis 적용*/
 		List<MemberVO> memberList = memberSeervice.readAllMemberOrderby(map);
-		logger.info("list : " + memberList);
+		logger.info("memberList : " + memberList);
+		
+		
+		
+		model.addAttribute("memberList", memberList); //memberlist 보내기
+		
+		/* 페이징 처리 */
+		PageMaker maker = new PageMaker();
+		maker.setCriteria(c);
+		maker.setTotalCount(memberSeervice.totalCount());
+		maker.setPageData();
+		logger.info("maker : " + maker.toString());
+		model.addAttribute("pageMaker", maker);
 	}
 
 }

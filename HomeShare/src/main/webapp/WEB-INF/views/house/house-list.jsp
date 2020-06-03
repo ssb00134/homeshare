@@ -119,7 +119,7 @@
 		$('.bxslider').html(list);
 		//end img 출력기능
 
-  		
+  		//페이징
   	  // 클릭한 a태그의 정보를 가져오는 코드
   	  $('.pager li a').click(function() { 
   	    // .pager 클래스의 하위 li 요소의 하위 a 요소를 찾아감
