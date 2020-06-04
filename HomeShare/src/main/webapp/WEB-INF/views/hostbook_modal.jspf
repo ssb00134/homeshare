@@ -12,7 +12,7 @@
 			<!-- modal body -->
 			<div class="container-fluid">
 				<div class="row">
-					<div class=col-md-1>예약자</div>
+					<div class=col-md-1>예약번호</div>
 					<div class="divider"></div>
 					<div class=col-md-1>숙소번호</div>
 					<div class="divider"></div>
@@ -37,168 +37,95 @@
 		</div>
 </form>
 <script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
-						getsHouseNoByMemNo();
+$(document).ready(function () {
+    getsHouseNoByMemNo();
+    function getsHouseNoByMemNo() {
+        var url = '/homeshare/house/ishost/' + '${memberVO.memNo }';
+        console.log('url : ' + url);
+        $.getJSON(url, function (jsonData) {
+            console.log(JSON.stringify(jsonData));
+            var parse = [];
+            parse = JSON
+                .stringify(jsonData)
+                .replace('[', '')
+                .replace(']', '')
+                .split(',');
+            console.log(parse[0]); // 가져온 houseno 정보
+            if (parse.length > 0) { // 만약 1개 이상의 house가 있으면 - host이면
+                $(parse).each(function (index, element) {
+                    console.log(index + ' : ' + element);
+                    var url = '/homeshare/book/all/' + element;
+                    console.log('url : ' + url);
+                    var count = 0;
+                    $.getJSON(url, function (jsonData) {
+ 
+                        var list = '';
+                        $(jsonData).each(function () {
+                        	
+                        	var dateDiffer = new Date(this.checkout.split(' ')[0]).getDate()
+                        	- new Date(this.checkin.split(' ')[0] ).getDate();
+                        	console.log('dateDiffer : ' +dateDiffer);
+                        	
+                        	
+                            
+                            //this.hostCheck 가 1일때만 실행함
+                        	if(this.hostCheck == 0){ // checkin이 0일때  미수락상태일때 실행
+	                            list += '<div class="book_item">' 
+	                            + '<div class="row">' 
+	                            + '<div id="bookNo" class=col-md-1>' + this.bookNo + '</div>' 
+	                            + '<div id="bookHouseNo" class=col-md-1>' + this.bookHouseNo + '</div>' 
+	                            + '<div class=col-md-2>' + this.checkin.split(' ')[0] + '</div>' 
+	                            + '<div class=col-md-2>' + this.checkout.split(' ')[0] + '</div>'
+	                            + '<div class=col-md-1>'+ this.bookMem + '</div>' 
+	                            + '<div class=col-md-1>' + dateDiffer + '</div>'
+	                            + '<div class=col-md-2>'+ this.totalPrice + '</div>'
+	                            + '<div class=col-md-1>' 
+	                            + '<button class="btn_update btn btn-success" type="submit">O</button>' 
+	                            + '</div>' 
+	                            + '<div class=col-md-1>' 
+	                            + '<button class="btn_delete btn btn-danger" type="submit">X</button>' 
+	                            + '</div>' 
+	                            + '</div>' 
+	                            + '<hr>';
+                        	}
+                            
+                            console.log('list : ' + list);
+                            $('#hostbook').html(list);
+                        }); // end jsonEach
+                    } // end callback
+                    ); // end getJSON
+                }); // end each
+            } // end if parse>0
+        }); // end getJSON
+    };
+    // end getallhostbook
+    // 시작할때 자동 실행
 
-						function getsHouseNoByMemNo() {
-							var url = '/homeshare/house/ishost/'
-									+ '${memberVO.memNo }';
-							console.log('url : ' + url);
-							$
-									.getJSON(
-											url,
-											function(jsonData) {
-												console.log(JSON
-														.stringify(jsonData));
-												var parse = [];
-												parse = JSON
-														.stringify(jsonData)
-														.replace('[', '')
-														.replace(']', '')
-														.split(',');
-												console.log(parse[0]); //가져온 houseno 정보		
-
-												if (parse.length > 0) { //만약 1개 이상의 house가 있으면 - host이면
-													$(parse)
-															.each(
-																	function(
-																			index,
-																			element) {
-																		console
-																				.log(index
-																						+ ' : '
-																						+ element);
-																		var url = '/homeshare/book/all/'
-																				+ element;
-																		console
-																				.log('url : '
-																						+ url);
-																		var count = 0;
-																		$
-																				.getJSON(
-																						url,
-																						function(
-																								jsonData) {
-
-																							var list = '';
-																							$(
-																									jsonData)
-																									.each(
-																											function() {
-																												console
-																														.log('this.bookno : '
-																																+ this.bookNo);
-																												list += '<div class="book_item">'
-																														+ '<div class="row">'
-																														+ '<input type="hidden" id="rno" value="' + this.bookNo + '" /><br>'
-																														+ '<input type="hidden" id="bookHouseNo" value="' + this.bookHouseNo + '" /><br>'
-																														+ '<div class=col-md-2>'
-																														+ this.bookHouseNo
-																														+ '</div>' // 공백
-																														+ this.bookMemNo
-																														+ '<div class=col-md-2>'
-																														+ this.checkin
-																																.split(' ')[0]
-																														+ '</div>' // 공백
-																														+ this.checkout
-																																.split(' ')[0]
-																														+ '<div class=col-md-2>'
-																														+ this.hostCheck
-																														+ '</div>' // 공백
-																														+ this.totalPrice
-																														+ '<div class=col-md-2>'
-
-																														+ '<button class="btn_update" type="button">수락</button>'
-																														+ '&nbsp;'
-																														+ '<button class="btn_delete" type="button">거절</button>'
-																														+ '</div>'
-																														+ '</div>'
-																														+ '<hr>';
-																												console
-																														.log('list : '
-																																+ list);
-																												$(
-																														'#hostbook')
-																														.html(
-																																list);
-																											});// end jsonEach
-
-																						}//end callback
-																				);//end getJSON
-																	});// end each
-												}//end if parse>0
-
-											});//end getJSON
-						}
-						; //end getallhostbook 
-
-						//시작할때 자동 실행
-						function initialize() {
-							$('.book_list_item')
-									.each(
-											function(index, element) {
-												var hostCheck = $(element)
-														.find('#hostCheck')
-														.val();
-												if (hostCheck === "0") {
-													console
-															.log('hostCheck === "0" ');
-													$(element).find('#status')
-															.val('예약 대기중');
-													$(element)
-															.append(
-																	'<input type="button" class="btn_update" value="예약 수락하기">');
-												} else {
-													$(element).find('#status')
-															.val('예약수락됨')
-													$(element)
-															.append(
-																	'<input type="button" class="btn_delete" value="예약 취소">');
-												}
-											});//end each	
-						}
-						initialize();
-
-						//bookForm ajax 작성
-						$('.book_list_item')
-								.on(
-										'click',
-										'.book_list_item .btn_update',
-										function() {
-											console.log('btnupdate 클릭');
-											var bookNo = $(this).prevAll(
-													'#bookNo').val();
-											var hostCheck = 1;
-											console.log('예약번호 : ' + bookNo
-													+ ' 호스트여부 : ' + hostCheck);
-
-											//ajax 요청
-											$
-													.ajax({
-														type : 'put',
-														url : '/homeshare/book/'
-																+ bookNo,
-														headers : {
-															'Content-Type' : 'application/json',
-															'X-HTTP-Method-Override' : 'PUT'
-														},
-														data : JSON
-																.stringify({
-																	'hostCheck' : hostCheck
-																}),
-														success : function(
-																result) {
-															if (result == 'success') {
-																alert('수정 성공');
-
-																initialize();
-															} //end if
-														}//end success
-													});//end ajax
-										});
-
-					});//end document
+    // bookForm ajax 작성
+    $('.book_item').on('click', '.book_item .btn_update', function () {
+        console.log('btnupdate 클릭');
+        var bookNo = $(this).prevAll('#bookNo').val();
+        var hostCheck = 1;
+        console.log('예약번호 : ' + bookNo + ' 호스트여부 : ' + hostCheck);
+        // ajax 요청
+        $.ajax({
+            type: 'put',
+            url: '/homeshare/book/' + bookNo,
+            headers: {
+                'Content-Type': 'application/json',
+                'X-HTTP-Method-Override': 'PUT'
+            },
+            data: JSON.stringify(
+                {'hostCheck': hostCheck}
+            ),
+            success: function (result) {
+                if (result == 'success') {
+                    alert('수정 성공');
+                } // end if
+            } // end success
+        }); // end ajax
+        return false;//rod
+    });
+});
 </script>
 
