@@ -1,5 +1,6 @@
 package edu.spring.homeshare.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -42,5 +43,10 @@ public class BookServiceImple implements BookService {
 	@Override
 	public int update(BookVO vo) {
 		return BookDao.update(vo);
+	}
+	
+	@Override
+	public List<BookVO> readOptionAndDate(HashMap<String, Object> map) {
+		return BookDao.selectOptionAndDate(map);
 	}
 }

@@ -45,8 +45,8 @@
 	</table>
 
 	
-	<div>
-    <ul class="pager">
+	<nav>
+    <ul class="pagination border">
       <c:if test="${pageMaker.hasPrev }">
         <li><a href="${pageMaker.startPageNo - 1}">이전</a></li>
       </c:if>
@@ -58,7 +58,7 @@
         <li><a href="${pageMaker.endPageNo + 1}" >다음</a></li>
       </c:if>
     </ul>
-  </div>
+  </nav>
   <form id="pagingForm" style="display: none;">
       <input type="text" name="page" value="${pageMaker.criteria.page }">
       <input type="text" name="orderby" value="${orderby }">
@@ -67,7 +67,7 @@
   
   $(document).ready(function(){
 	  //페이징 처리
-	    $('.pager li a').click(function() { 
+	    $('.pagination li a').click(function() { 
 	    	 event.preventDefault(); 
 	    	 var targetPage = $(this).attr('href'); // a 태그 href 속성의 값을 저장
 	   	    console.log(targetPage);

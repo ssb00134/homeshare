@@ -1,5 +1,6 @@
 package edu.spring.homeshare.persistence;
 
+import java.util.HashMap;
 import java.util.List;
 
 import edu.spring.homeshare.domain.BookVO;
@@ -11,5 +12,6 @@ public interface BookDAO {
 	int insert(BookVO vo);
 	int update(BookVO vo);
 	int delete(int bookNo);
+	List<BookVO> selectOptionAndDate(HashMap<String, Object> map);
 	
 }

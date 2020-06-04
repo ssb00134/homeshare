@@ -6,36 +6,52 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="edu.spring.homeshare.BookMapper">
 
 	<!-- 집번호로 찾기 -->
-	<!-- 호스트가  예약 확인하기-->
+	<!-- 호스트가 예약 확인하기 -->
 	<select id="select_by_houseNo" resultType="bookVO">
-		select * from ${book} where ${bookHouseNo} =#{bookHouseNo}
+		select * from ${book}
+		where ${bookHouseNo} =#{bookHouseNo}
 	</select>
-	
+
 	<!-- 유저번호로 찾기 -->
 	<!-- 유저가 예약 검색 -->
 	<select id="select_by_MemNo" resultType="bookVO">
-		select * from ${book} where ${bookMemNo} =#{bookMemNo}
+		select * from ${book}
+		where ${bookMemNo} =#{bookMemNo}
 	</select>
-	
-	<!--  -->
-	
+
+	<!-- houseno, memno 2가지, 시작/종료 4가지변수로 검색 -->
+	<select id="select_option_and_date" parameterType="java.util.HashMap"
+		resultType="bookVO">
+		select * from ${book} where ${option} = #{optionValue}
+		and ${hostCheck} = #{hostCheck}
+		<if test='checkIn != null and checkIn != ""'>
+			AND ${checkin} <![CDATA[>=]]>
+			#{checkIn}
+		</if>
+		<if test='checkOut != null and checkOut != ""'>
+			AND ${checkout} <![CDATA[<=]]>
+			#{checkOut}
+		</if>
+	</select>
 
 
 
 	<insert id="insert">
 
 		insert into ${book}
-		values(0, #{bookMemNo},#{bookHouseNo}, #{checkin},
+		values(0,
+		#{bookMemNo},#{bookHouseNo}, #{checkin},
 		#{checkout} , #{hostCheck},
 		#{bookMem}, #{totalPrice})
 	</insert>
-	
+
 	<update id="update">
 		update ${book}
 		set ${hostCheck} = #{hostCheck}
-		where ${bookNo} = #{bookNo}
+		where
+		${bookNo} = #{bookNo}
 	</update>
-	
+
 	<delete id="delete">
 		delete from ${hostCheck}
 		where ${bookNo} = #{bookNo}

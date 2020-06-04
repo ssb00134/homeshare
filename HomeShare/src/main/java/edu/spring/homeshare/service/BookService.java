@@ -1,5 +1,6 @@
 package edu.spring.homeshare.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -13,4 +14,5 @@ public interface BookService {
 	List<BookVO> selectMemNo(int memNo);
 	int update(BookVO vo);
 	int delete(int bookNo);
+	List<BookVO> readOptionAndDate(HashMap<String, Object> map);
 }

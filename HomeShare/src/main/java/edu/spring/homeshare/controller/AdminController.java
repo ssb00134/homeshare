@@ -2,6 +2,7 @@ package edu.spring.homeshare.controller;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.spring.homeshare.HomeController;
+import edu.spring.homeshare.domain.BookVO;
 import edu.spring.homeshare.domain.HouseVO;
 import edu.spring.homeshare.domain.MemberVO;
 import edu.spring.homeshare.service.BookService;
@@ -111,9 +113,9 @@ public class AdminController {
 		/* 파라미터 지정 */
 		String location = req.getParameter("location");
 		logger.info("location : " + location);
-		String bookableDateBegin = req.getParameter("checkIn");
+		String bookableDateBegin = req.getParameter("bookableDateBegin");
 		logger.info("bookableDateBegin : " + bookableDateBegin);
-		String bookableDateEnd = req.getParameter("checkOut");
+		String bookableDateEnd = req.getParameter("bookableDateEnd");
 		logger.info("bookableDateEnd : " + bookableDateEnd);
 		String maxCapacity = req.getParameter("maxCapacity");
 		logger.info("maxCapacity : " + maxCapacity);
@@ -154,7 +156,7 @@ public class AdminController {
 		logger.info("admin crm 실행");
 	}
 	
-	@RequestMapping(value = "/crm_result", method =  RequestMethod.POST)
+	@RequestMapping(value = "/crm_result")
 	public void adminCrmResult(Model model, Integer page, Integer prePage, HttpServletRequest req) {
 		logger.info("admin crmResult 실행");
 		
@@ -202,6 +204,50 @@ public class AdminController {
 		}else {
 			
 		}
+	}
+	//bookmanagement
+	/*------------------------------------------------------*/
+	@RequestMapping(value = "/bookmanagement")
+	public void bookManagement() {
+		logger.info("bookablemenagement 실행 " );
+	}
+	
+	@RequestMapping(value = "/bookmanagement_result")
+	public void bookManagementResult(Model model, Integer page, Integer prePage, HttpServletRequest req) {
+		logger.info("bookablemenagement Result 실행 " );
+		
+		/*페이징 처리*/
+		PageCriteria c = new PageCriteria();
+		logger.info("page : " + page);
+
+		if (page != null) {
+			c.setPage(page);
+		}
+		if (prePage != null) {
+			c.setNumsPerPage(prePage);
+		}
+		
+		/* 파라미터 지정*/
+		String option = req.getParameter("option");
+		String optionValue = req.getParameter("optionValue");
+		String checkIn = req.getParameter("checkIn");
+		String checkOut = req.getParameter("checkOut");
+		String hostCheck = req.getParameter("hostCheck");
+		logger.info("option"  + option);
+		logger.info("optionValue : " + optionValue );
+		logger.info("checkIn : " + checkIn );
+		logger.info("checkOut : " + checkOut );
+		/* hash맵에 정보 넣기 */
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("option", option);
+		map.put("optionValue", optionValue);
+		map.put("checkIn",checkIn);
+		map.put("checkOut", checkOut);
+		map.put("hostCheck", hostCheck);//승인여부
+		logger.info("map : " + map.toString());
+		
+		List<BookVO> list = bookService.readOptionAndDate(map);
+		logger.info("list 정보 : " + list);
 	}
 
 }

@@ -1,5 +1,6 @@
 package edu.spring.homeshare.persistence;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -37,5 +38,8 @@ public class BookDAOImple implements BookDAO {
 	public int update(BookVO vo) {
 		return sqlSession.update(NAMESPACE + ".update",vo); 
 	}
-
+	@Override
+	public List<BookVO> selectOptionAndDate(HashMap<String, Object> map) {
+		return sqlSession.selectList(NAMESPACE +".select_option_and_date", map);
+	}
 }

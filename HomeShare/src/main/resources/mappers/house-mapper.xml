@@ -133,9 +133,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 
-
-
-
 	<select id="total_count_multy_select" resultType="Integer">
 		select count(*) total_cnt
 		from ${house}

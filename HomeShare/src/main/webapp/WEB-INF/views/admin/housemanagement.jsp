@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form class="container-fluid" id="adminHouseForm" target="iframe1">
 		<h4>숙소 검색하기</h4>
+	<form class="container-fluid" id="adminHouseForm" target="iframe1">
 		<h4>단일검색</h4>
 		<div class="row border">
 			<div class="form-group col-md-4 border">
