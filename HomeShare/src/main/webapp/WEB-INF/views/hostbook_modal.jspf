@@ -38,16 +38,10 @@
 </form>
 <script type="text/javascript">
 $(document).ready(function () {
-	
-	
 
-	
-	
-	
-	
-	
-	
     getsHouseNoByMemNo();
+    
+    
     function getsHouseNoByMemNo() {
         var url = '/homeshare/house/ishost/' + '${memberVO.memNo }';
         console.log('url : ' + url);
@@ -94,7 +88,7 @@ $(document).ready(function () {
 	                            + '</div>' 
 	                            + '<div class=col-md-1>' 
 	                            + '<input type="hidden" value="' + this.bookNo + '" >'
-	                            + '<button class="btn_delete btn btn-danger" type="text">X</button>' 
+	                            + '<button class="btn_bookDelete btn btn-danger" type="text">X</button>' 
 	                            + '</div>' 
 	                            + '</div>' 
 	                            + '<hr>';
@@ -129,22 +123,20 @@ $(document).ready(function () {
                             });//end btn_bookUpdate click
                             
                             
-                            $('#btn_bookDelete').on('click',function(){
+                            $('.btn_bookDelete').on('click',function(){
                             	event.preventDefault();
                             	 console.log('btn_bookDelete 클릭');
                             	 //var hostCheck = $(this).prev().val() ; // 이전 선택자 
                             	 var bookNo = $(this).prev().val();
-                            	 console.log('bookno :' + bookNo);
+                            	 console.log('bookNo :' + bookNo);
 	                            $.ajax({
 	                                type: 'delete',
 	                                url: '/homeshare/book/' + bookNo,
 	                                headers: {
-	                                    'Content-Type': 'application/json',
-	                                    'X-HTTP-Method-Override': 'PUT'
+	                                	'Content-Type' : 'application/json', 
+	                          	  	    'X-HTTP-Method-Override' : 'DELETE'
 	                                },
-	                                data: JSON.stringify(
-	                                    {'bookNo': bookNo}
-	                                ),
+	                               
 	                                success: function (result) {
 	                                    if (result == 'success') {
 	                                        alert('삭제 성공');

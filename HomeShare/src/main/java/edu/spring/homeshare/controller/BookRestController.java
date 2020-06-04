@@ -25,71 +25,60 @@ public class BookRestController {
 
 	@Autowired
 	private BookService bookService;
-	
-	@RequestMapping(value = "/insert",method = RequestMethod.POST)
-	public ResponseEntity<Integer>  creatBook(
-			@RequestBody BookVO vo) {
+
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
+	public ResponseEntity<Integer> creatBook(@RequestBody BookVO vo) {
 		logger.info("book-insert 실행");
 		logger.info("bookVo 정보 : " + vo.toString());
 		int result = bookService.create(vo);
-		return new ResponseEntity<Integer>(result,HttpStatus.OK);
+		return new ResponseEntity<Integer>(result, HttpStatus.OK);
 	}
-	
+
 	//호스트에 등록된 모든 정보를 가져오는 메핑
-	@RequestMapping(value="/all/{no}", method = RequestMethod.GET )
-	public ResponseEntity<List<BookVO>>  bookList(
-			@PathVariable("no") int houseNo ) {
+	@RequestMapping(value = "/all/{no}", method = RequestMethod.GET)
+	public ResponseEntity<List<BookVO>> bookList(@PathVariable("no") int houseNo) {
 		logger.info("host all 실행 호스트가 예약을 가져옴");
-		logger.info("houseNo : " +houseNo);
+		logger.info("houseNo : " + houseNo);
 		List<BookVO> list = bookService.selectHouseNo(houseNo);
-		return new ResponseEntity<List<BookVO>>(list,HttpStatus.OK);
+		return new ResponseEntity<List<BookVO>>(list, HttpStatus.OK);
 	}
-	
-	
-	
-	@RequestMapping(value = "/bookmember/{no}", 
-			method = RequestMethod.GET)
-	public ResponseEntity<List<BookVO>> books(
-			@PathVariable("no") int memNo) {
+
+	@RequestMapping(value = "/bookmember/{no}", method = RequestMethod.GET)
+	public ResponseEntity<List<BookVO>> books(@PathVariable("no") int memNo) {
 		List<BookVO> list = bookService.selectMemNo(memNo);
 		return new ResponseEntity<List<BookVO>>(list, HttpStatus.OK);
 	}
-	
-	@RequestMapping(value = "/{no}", 
-			method = RequestMethod.PUT)
-	public ResponseEntity<String> updateBook(
-			@PathVariable("no") int bookNo,
-			@RequestBody BookVO vo){
+
+	@RequestMapping(value = "/{no}", method = RequestMethod.PUT)
+	public ResponseEntity<String> updateBook(@PathVariable("no") int bookNo, @RequestBody BookVO vo) {
 		logger.info("put 실행");
 		vo.setBookNo(bookNo);
 		logger.info("vo " + vo.toString());
 		int result = bookService.update(vo);
 		ResponseEntity<String> entity = null;
-		if(result == 1) {
+		if (result == 1) {
 			logger.info("업데이트 성공");
 			entity = new ResponseEntity<String>("success", HttpStatus.OK);
-		}else {
+		} else {
 			logger.info("업데이트 실패");
 			entity = new ResponseEntity<String>("fail", HttpStatus.OK);
 		}
 		return entity;
 	}
-	
-	
 
-	@RequestMapping(value="/{no}", method = RequestMethod.DELETE)
-	public ResponseEntity<String>  BookDelete(
-			@PathVariable("no") int bookNo) {
+	@RequestMapping(value = "/{no}", method = RequestMethod.DELETE)
+	public ResponseEntity<String> deleteBook(@PathVariable("no") int bookNo) {
 		logger.info("book-delete 실행");
+		logger.info("bookno : " + bookNo);
 		int result = bookService.delete(bookNo);
 		ResponseEntity<String> entity = null;
+		logger.info("result : " + result);
 		if (result == 1) {
 			entity = new ResponseEntity<String>("success", HttpStatus.OK);
 		} else {
 			entity = new ResponseEntity<String>("fail", HttpStatus.OK);
 		}
-		return entity;	
+		return entity;
 	}
-	
-	
+
 }

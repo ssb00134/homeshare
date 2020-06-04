@@ -31,7 +31,7 @@ public class BookDAOImple implements BookDAO {
 	}
 	@Override
 	public int delete(int bookNo) {
-		return sqlSession.delete(NAMESPACE +".delete" + bookNo);
+		return sqlSession.delete(NAMESPACE +".delete" , bookNo);
 	}
 	
 	@Override

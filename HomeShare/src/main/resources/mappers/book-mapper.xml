@@ -53,7 +53,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 
 	<delete id="delete">
-		delete from ${hostCheck}
+		delete from ${book}
 		where ${bookNo} = #{bookNo}
 	</delete>
 
