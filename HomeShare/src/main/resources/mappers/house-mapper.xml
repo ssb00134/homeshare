@@ -95,8 +95,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<!-- 다중검색 start -->
 		SELECT * FROM ${house}
 		<where>
-		<if test='location != null and location != ""'>
-			location like '%' || #{location} || '%'
+			<if test='location != null and location != ""'>
+				location like '%' || #{location} || '%'
 			</if>
 			<if test='bookableDateBegin != null and bookableDateBegin != ""'>
 				AND ${bookableDateBegin} <![CDATA[>=]]>
@@ -155,9 +155,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 		</where>
 	</select>
-	
+
 	<!-- 4가지 변수중에서 단일검색 -->
-	<select id="select_single" parameterType="java.util.HashMap" resultType="houseVO">
+	<select id="select_single" parameterType="java.util.HashMap"
+		resultType="houseVO">
 		select * from house where ${option} = #{number}
 	</select>
 
@@ -217,10 +218,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="update">
 		update
 		${house} set
-		${image} = #{image}
-		 where
+		${type} = ${type},
+		${scope} =
+		${scope},
+		${maxCapacity} = ${maxCapacity},
+		${bedroom} = ${bedroom},
+		${bed} = ${bed},
+		${bathroom} =${bathroom},
+		${utilities} =${utilities},
+		${spaces} =${spaces},
+		${title} =${title},
+		${info} =${info},
+		${rules}
+		=${rules},
+		${checkinTime} =${checkinTime},
+		${checkoutTime} =${checkoutTime},
+		${stayNight} =${stayNight},
+		${stayDay} =${stayDay},
+		${bookableDateBegin}
+		=${bookableDateBegin},
+		${bookableDateEnd} =${bookableDateEnd},
+		${price}
+		=${price},
+		${replies} =${replies},
+		${image} =${image},
+		${checkinInterval} =${checkinInterval},
+		${score} =${score},
+		${location}
+		=${location},
+		${reportCount} = #{reportCount}
+		where
 		${houseNo} = #{houseNo}
-		
+
 	</update>
 
 	<delete id="delete">

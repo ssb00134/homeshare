@@ -1,10 +1,6 @@
-
-
 .container content, .container aside {
 	position: relative;
 }
-
-
 
 figure {
 	width: 100%;
@@ -60,6 +56,18 @@ figure:hover h4 {
 figure:hover .overlay {
 	display: block;
 	height: 100%;
+}
+
+.table .text {
+  position: relative;
+}
+
+ .text  {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 50%;
+  
 }
 
 /* -------------------------------------------------------------------------------- */
@@ -306,7 +314,6 @@ figure:hover .overlay {
 .css .nt+.nt, .css .o, .css .o+.nt {
 	color: #999
 }
-
 
 @font-face {
 	font-family: anchorjs-link;

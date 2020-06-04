@@ -53,11 +53,15 @@ public class ReportRestController {
 			reAttr.addFlashAttribute("insert_result", "success");
 			
 			/* house에 ReportCount 추가하기 */
-//			HouseVO house = houseService.selectByHouseNo(vo.getReportHouseNo());
-//			int reportCount = house.getReportCount(); // house의 신고 갯수 1 추가
-//			house.setReportCount(reportCount + 1); //
-//			logger.info("reportCount 신고횟수 1 증가 : " + reportCount );
-			
+			HouseVO housevo = houseService.selectByHouseNo(vo.getReportHouseNo());
+			int reportCount = housevo.getReportCount();
+			housevo.setReportCount(reportCount + 1); // report 1 증가
+			int updateResult = houseService.update(housevo);
+			if(updateResult==1) {
+				logger.info("신고 횟수 1 증가 " );
+			}else {
+				logger.info("업데이트 실패");
+			}
 			
 		}else {
 			logger.info("insert 실패");

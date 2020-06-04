@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%@ include file="../cdn.jspf"%>
+<link href="/homeshare/resources/css/docs.min.css" rel="stylesheet">
 </head>
 <body>
 	<h1>숙소 검색결과</h1>
@@ -18,12 +19,12 @@
 	</c:if>
 	<c:if test="${houseList ne null }">
 		<div class="table-responsive">
-			<table class="table table-bordered table-hover">
+			<table class="table table-bordered table-hover text-overflow ">
 				<thead>
-					<tr>
+					<tr class="text">
 						<th>숙소번호</th>
 						<th>호스트번호</th>
-						<th>지역</th>
+						<th class="text">지역</th>
 						<th>예약가능일</th>
 						<td>예약종료일</td>
 						<td>숙소유형</td>
@@ -31,26 +32,28 @@
 						<td>침실</td>
 						<td>침대</td>
 						<td>욕실</td>
-						<td>유틸리티</td>
-						<td>이용가능시설</td>
-						<td>제목</td>
-						<td>소개</td>
-						<td>규칙</td>
-						<td>x박
-						<td>
+						<td><div class="text">유틸리티</div></td>
+						<td><div class="text">이용가능시설</div></td>
+						<td><div class="text">제목</div></td>
+						<td><div class="text">소개</div></td>
+						<td><div class="text">규칙</div></td>
+						<td>x박</td>
 						<td>x일</td>
 						<td>체크인여유</td>
 						<td>숙소이용가격</td>
-						<td>리플수</td>
+						<td>누적신고횟수</td>
+						<td>후기수</td>
 						<td>별점</td>
+						<td>수정</td>
+						<td>삭제</td>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="vo" items="${houseList }">
-						<tr>
+						<tr class="text" >
 							<td>${vo.houseNo }</td>
 							<td>${vo.memNo }</td>
-							<td>${vo.location }</td>
+							<td class="text">${vo.location }</td>
 							<td>${vo.bookableDateBegin }</td>
 							<td>${vo.bookableDateEnd }</td>
 							<td>${vo.scope}</td>
@@ -58,21 +61,22 @@
 							<td>${vo.bedroom}</td>
 							<td>${vo.bed}</td>
 							<td>${vo.bathroom}</td>
-							<td>${vo.utilities}</td>
-							<td>${vo.spaces}</td>
-							<td>${vo.title}</td>
-							<td>${vo.info}</td>
-							<td>${vo.rules}</td>
+							<td ><div class="text">${vo.utilities}</div></td>
+							<td ><div class="text">${vo.spaces}</div></td>
+							<td><div class="text">${vo.title}</div></td>
+							<td><div class="text">${vo.info}</div></td>
+							<td><div class="text">${vo.rules}</div></td>
 							<td>${vo.stayNight}박
 							<td>
 							<td>${vo.stayDay}일</td>
 							<td>${vo.checkinInterval}일</td>
 							<td>${vo.price}</td>
+							<td>${vo.reportCount }</td>
 							<td></td>
 							<td></td>
 
-							<td><button type="submit" class="btn btn-default">수정하기</button></td>
-							<td><button type="submit" class="btn btn-default">삭제하기</button></td>
+							<td><button type="submit" class="btn btn-default">수정</button></td>
+							<td><button type="submit" class="btn btn-default">삭제</button></td>
 						</tr>
 					</c:forEach>
 				</tbody>
