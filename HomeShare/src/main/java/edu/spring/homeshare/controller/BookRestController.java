@@ -76,14 +76,19 @@ public class BookRestController {
 	}
 	
 	
-	
-	
-	@RequestMapping(value="book-delete", method = RequestMethod.POST)
-	public ResponseEntity<Integer>  BookDelete(
-			@RequestBody BookVO vo) {
-		logger.info("book-insert 실행");
-		int result = bookService.create(vo);
-		return new ResponseEntity<Integer>(result,HttpStatus.OK);
+
+	@RequestMapping(value="/{no}", method = RequestMethod.DELETE)
+	public ResponseEntity<String>  BookDelete(
+			@PathVariable("no") int bookNo) {
+		logger.info("book-delete 실행");
+		int result = bookService.delete(bookNo);
+		ResponseEntity<String> entity = null;
+		if (result == 1) {
+			entity = new ResponseEntity<String>("success", HttpStatus.OK);
+		} else {
+			entity = new ResponseEntity<String>("fail", HttpStatus.OK);
+		}
+		return entity;	
 	}
 	
 	

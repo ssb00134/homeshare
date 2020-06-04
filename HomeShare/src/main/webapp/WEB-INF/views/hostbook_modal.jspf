@@ -38,6 +38,15 @@
 </form>
 <script type="text/javascript">
 $(document).ready(function () {
+	
+	
+
+	
+	
+	
+	
+	
+	
     getsHouseNoByMemNo();
     function getsHouseNoByMemNo() {
         var url = '/homeshare/house/ishost/' + '${memberVO.memNo }';
@@ -71,7 +80,7 @@ $(document).ready(function () {
                             //this.hostCheck 가 1일때만 실행함
                         	if(this.hostCheck == 0){ // checkin이 0일때  미수락상태일때 실행
 	                            list += '<div class="book_item">' 
-	                            + '<div class="row">' 
+	                            + '<div class=" row">' 
 	                            + '<div id="bookNo" class=col-md-1>' + this.bookNo + '</div>' 
 	                            + '<div id="bookHouseNo" class=col-md-1>' + this.bookHouseNo + '</div>' 
 	                            + '<div class=col-md-2>' + this.checkin.split(' ')[0] + '</div>' 
@@ -80,10 +89,12 @@ $(document).ready(function () {
 	                            + '<div class=col-md-1>' + dateDiffer + '</div>'
 	                            + '<div class=col-md-2>'+ this.totalPrice + '</div>'
 	                            + '<div class=col-md-1>' 
-	                            + '<button class="btn_update btn btn-success" type="submit">O</button>' 
+	                            + '<input type="hidden" value="' + this.bookNo + '" >'
+	                            + '<button class="btn btn-success" id ="btn_bookUpdate" type="text">O</button>' 
 	                            + '</div>' 
 	                            + '<div class=col-md-1>' 
-	                            + '<button class="btn_delete btn btn-danger" type="submit">X</button>' 
+	                            + '<input type="hidden" value="' + this.bookNo + '" >'
+	                            + '<button class="btn_delete btn btn-danger" type="text">X</button>' 
 	                            + '</div>' 
 	                            + '</div>' 
 	                            + '<hr>';
@@ -91,6 +102,59 @@ $(document).ready(function () {
                             
                             console.log('list : ' + list);
                             $('#hostbook').html(list);
+                            
+                            $('#btn_bookUpdate').on('click',function(){
+                            	event.preventDefault();
+                            	 console.log('btn_bookUpdate 클릭');
+                            	 //var hostCheck = $(this).prev().val() ; // 이전 선택자 
+                            	 var bookNo = $(this).prev().val();
+                            	 console.log('bookno :' + bookNo);
+	                            $.ajax({
+	                                type: 'put',
+	                                url: '/homeshare/book/' + bookNo,
+	                                headers: {
+	                                    'Content-Type': 'application/json',
+	                                    'X-HTTP-Method-Override': 'PUT'
+	                                },
+	                                data: JSON.stringify(
+	                                    {'hostCheck': 1}
+	                                ),
+	                                success: function (result) {
+	                                    if (result == 'success') {
+	                                        alert('수정 성공');
+	                                        getsHouseNoByMemNo();//제귀가능 리프레쉬
+	                                    } // end if
+	                                } // end success
+	                            }); // end ajax
+                            });//end btn_bookUpdate click
+                            
+                            
+                            $('#btn_bookDelete').on('click',function(){
+                            	event.preventDefault();
+                            	 console.log('btn_bookDelete 클릭');
+                            	 //var hostCheck = $(this).prev().val() ; // 이전 선택자 
+                            	 var bookNo = $(this).prev().val();
+                            	 console.log('bookno :' + bookNo);
+	                            $.ajax({
+	                                type: 'delete',
+	                                url: '/homeshare/book/' + bookNo,
+	                                headers: {
+	                                    'Content-Type': 'application/json',
+	                                    'X-HTTP-Method-Override': 'PUT'
+	                                },
+	                                data: JSON.stringify(
+	                                    {'bookNo': bookNo}
+	                                ),
+	                                success: function (result) {
+	                                    if (result == 'success') {
+	                                        alert('삭제 성공');
+	                                        getsHouseNoByMemNo();//제귀가능 리프레쉬
+	                                    } // end if
+	                                } // end success
+	                            }); // end ajax
+                            });//end btn_bookdelete click
+                            
+
                         }); // end jsonEach
                     } // end callback
                     ); // end getJSON
@@ -101,31 +165,10 @@ $(document).ready(function () {
     // end getallhostbook
     // 시작할때 자동 실행
 
-    // bookForm ajax 작성
-    $('.book_item').on('click', '.book_item .btn_update', function () {
-        console.log('btnupdate 클릭');
-        var bookNo = $(this).prevAll('#bookNo').val();
-        var hostCheck = 1;
-        console.log('예약번호 : ' + bookNo + ' 호스트여부 : ' + hostCheck);
-        // ajax 요청
-        $.ajax({
-            type: 'put',
-            url: '/homeshare/book/' + bookNo,
-            headers: {
-                'Content-Type': 'application/json',
-                'X-HTTP-Method-Override': 'PUT'
-            },
-            data: JSON.stringify(
-                {'hostCheck': hostCheck}
-            ),
-            success: function (result) {
-                if (result == 'success') {
-                    alert('수정 성공');
-                } // end if
-            } // end success
-        }); // end ajax
-        return false;//rod
-    });
+  
+    
+
+    
 });
 </script>
 
