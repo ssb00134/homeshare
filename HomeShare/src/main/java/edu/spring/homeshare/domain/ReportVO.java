@@ -5,16 +5,22 @@ public class ReportVO {
 	private int reportMemNo;
 	private int reportHouseNo;
 	private String reason;
+	private int reportedHostNo;
 	
 	public ReportVO() {}
 
-	public ReportVO(int reportNo, int reportMemNo, int reportHouseNo, String reason) {
+	
+
+	public ReportVO(int reportNo, int reportMemNo, int reportHouseNo, String reason, int reportedHostNo) {
 		super();
 		this.reportNo = reportNo;
 		this.reportMemNo = reportMemNo;
 		this.reportHouseNo = reportHouseNo;
 		this.reason = reason;
+		this.reportedHostNo = reportedHostNo;
 	}
+
+
 
 	public int getReportNo() {
 		return reportNo;
@@ -48,11 +54,27 @@ public class ReportVO {
 		this.reason = reason;
 	}
 
+	public int getReportedHostNo() {
+		return reportedHostNo;
+	}
+
+
+
+	public void setReportedHostNo(int reportedHostNo) {
+		this.reportedHostNo = reportedHostNo;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "ReportVO [reportNo=" + reportNo + ", reportMemNo=" + reportMemNo + ", reportHouseNo=" + reportHouseNo
-				+ ", reason=" + reason + "]";
-	};
+				+ ", reason=" + reason + ", reportedHostNo=" + reportedHostNo + "]";
+	}
+
+
+
+
 	
 
 	

@@ -276,6 +276,7 @@ public class AdminController {
 		}
 		
 		List<ReportVO> reportList = reportService.read();
+		logger.info("reportList : " + reportList);
 		model.addAttribute("reportList", reportList);
 		
 		PageMaker maker = new PageMaker();

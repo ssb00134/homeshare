@@ -1,40 +1,95 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<button type="button" class="btn navbar-nav navbar-right"
+<button type="button" class="btn navbar-nav navbar-right border"
 	data-toggle="modal" data-target="#ReportModal">신고하기</button>
 
-<form action="report" id="ReportModal" class="modal">
+<form id="ReportModal" class="modal">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<!-- modal head -->
-			<div class="modal-header">
+			<div class="modal-header ">
+
 				<h4 class="modal-title">신고하기</h4>
 			</div>
 			<!-- modal body -->
 			<div class="form-group">이 숙소를 신고하시는 이유를 알려주세요. 내용은 호스트에게 공개되지
 				않습니다.</div>
-			<input type="hidden" name="reportNo" value="0">
-			<input type="hidden" name="reportMemNo" value="${memberVO.memNo}">
-			<input type="hidden" name="reportHouseNo" value="${houseVO.houseNo}">
+			<input type="hidden" id="reportNo" value="0">
+			<input type="hidden" id="reportMemNo" value="${memberVO.memNo}">
+			<input type="hidden" id="reportHouseNo" value=" ${houseVO.houseNo}">
+			<input type="hidden" id="reportedHostNo" value=" ${houseVO.memNo}">
 			<div class="form-group">
-				<input type="radio" name="reason" value="부정확하거나 틀린 정보가 있어요">
+				<input type="radio" id="reason" name="reason"
+					value="부정확하거나 틀린 정보가 있어요">
 				부정확하거나 틀린 정보가 있어요<br>
-				<input type="radio" name="reason" value="실제 숙소가 아닙니다">
+				<input type="radio" id="reason" name="reason" value="실제 숙소가 아닙니다">
 				실제 숙소가 아닙니다<br>
-				<input type="radio" name="reason" value="사기입니다">
+				<input type="radio" id="reason" name="reason" value="사기입니다">
 				사기입니다<br>
-				<input type="radio" name="reason" value="불쾌합니다">
+				<input type="radio" id="reason" name="reason" value="불쾌합니다">
 				불쾌합니다<br>
-				<input type="radio" id="reason" value="기타" onclick="">
+				<input type="radio" id="reason" name="reason" value="기타" onclick="">
 				기타<br>
 
 				<!-- modal footer -->
 				<div class="modal-footer">
-					<button type="submit" class="btn ">신고하기</button>
+					<button type="submit" class="btn_report_add ">신고하기</button>
 					<button type="button" class="btn " data-dismiss="modal">취소</button>
 				</div>
 			</div>
 		</div>
 	</div>
 </form>
+<script type="text/javascript">
+	$(document).ready(function() {
+		
+		$('.btn_report_add').click(function() {
+			event.preventDefault(); //폼 제출 안함
+			
+			var reportNo = $('#reportNo').val(); 
+			var reportMemNo = $('#reportMemNo').val();
+			var reportHouseNo = $('#reportHouseNo').val();
+			var reason = $('#reason').val();
+			var reportedHostNo = $('#reportedHostNo').val();
+			
+
+			var obj = {
+				'reportNo' : reportNo,
+				'reportMemNo' : reportMemNo,
+				'reportHouseNo' : reportHouseNo,
+				'reason' : reason,
+				'reportedHostNo' : reportedHostNo
+			}; //end var obj
+			$.each(obj, function(index, element){
+				console.log(index +" : " + element);
+			});//end obj
+			
+
+			$.ajax({
+				type : 'post',
+				url : '/homeshare/report/insert',
+				headers : {
+					'Content-Type' : 'application/json',
+					'X-HTTP-Method-Override' : 'POST'
+				},
+				data : JSON.stringify(obj),
+				success : function(result, status) {
+					console.log(result);
+					console.log(status);
+					if (result == 1) {
+						alert('신고 접수 완료');
+
+						$('#reportno').val('');
+						$('#reportMemNo').val('');
+						$('#reportHouseNo').val('');
+						$('#reason').val('');
+						return false; //갱신 없이
+					}//end if
+				} //end success
+
+			});//end ajax
+			return false; //갱신 없이
+		});// end report add click
+	});//end document
+</script>

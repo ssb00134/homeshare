@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<insert id="insert">
 		insert into ${report}
-		values(0,#{reportMemNo},#{reportHouseNo},#{reason})
+		values(0,#{reportMemNo},#{reportHouseNo},#{reason},#{reportedHostNo})
 	</insert>
 	
 	<select id="select_all_by_houseNo" resultType="reportVO">
