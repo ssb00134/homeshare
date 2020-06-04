@@ -25,6 +25,7 @@
 		<input type="hidden" name="replies" value="0">
 		<input type="hidden" name="score" value="0">
 		<input type="hidden" name="memNo" value="${memberVO.memNo }">
+		<input type="hidden" name="reportCount" value="0">
 
 		<h4>등록하시려는 숙소의 범위를 입력해 주세요</h4>
 		<select name="scope" required="required" class="form-control col-md-4">
@@ -104,9 +105,6 @@
 		<input type="file" name="files" multiple>
 
 
-		<h1>사진주소</h1>
-
-		<input type="text" name="image" >
 		<br>
 
 		<p>숙소의 제목을 입력해 주세요</p>

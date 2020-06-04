@@ -18,6 +18,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from ${report} where ${reportHouseNo} = #{reportHouseNo}
 	</select>
 	
+	<select id="select_all" resultType="reportVO">
+		select *
+		from ${report} 
+	</select>
+	
 	
 	
 </mapper>

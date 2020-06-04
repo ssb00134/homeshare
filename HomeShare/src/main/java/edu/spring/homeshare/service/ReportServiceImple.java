@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import edu.spring.homeshare.domain.HouseVO;
 import edu.spring.homeshare.domain.ReportVO;
 import edu.spring.homeshare.persistence.ReportDAO;
 
@@ -19,5 +20,9 @@ public class ReportServiceImple implements ReportService{
 	@Override
 	public List<ReportVO> read(int houseNo) {
 		return reportDao.select(houseNo);
+	}
+	@Override
+	public List<ReportVO> read() {
+		return reportDao.select();
 	}
 }

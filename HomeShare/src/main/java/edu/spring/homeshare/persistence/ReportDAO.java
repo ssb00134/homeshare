@@ -8,4 +8,5 @@ import edu.spring.homeshare.domain.ReportVO;
 public interface ReportDAO {
 	int insert(ReportVO vo);
 	List<ReportVO> select(int houseNo);
+	List<ReportVO> select();
 }

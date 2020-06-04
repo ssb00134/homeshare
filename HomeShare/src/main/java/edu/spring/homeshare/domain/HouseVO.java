@@ -30,7 +30,7 @@ public class HouseVO  {
 	private int checkinInterval ;
 	private int score ;
 	private String location;
-	
+	private int reportCount;
 	
 	public HouseVO() {}
 
@@ -38,7 +38,7 @@ public class HouseVO  {
 	public HouseVO(int houseNo, String type, String scope, int maxCapacity, int bedroom, int bed, int bathroom,
 			String utilities, String spaces, String title, String info, String rules, String checkinTime,
 			String checkoutTime, int stayNight, int stayDay, Date bookableDateBegin, Date bookableDateEnd, int price,
-			int memNo, String replies, String image, int checkinInterval, int score, String location) {
+			int memNo, String replies, String image, int checkinInterval, int score, String location, int reportCount) {
 		super();
 		this.houseNo = houseNo;
 		this.type = type;
@@ -65,7 +65,11 @@ public class HouseVO  {
 		this.checkinInterval = checkinInterval;
 		this.score = score;
 		this.location = location;
+		this.reportCount = reportCount;
 	}
+
+
+
 
 
 	public int getHouseNo() {
@@ -318,6 +322,16 @@ public class HouseVO  {
 	}
 
 
+	public int getReportCount() {
+		return reportCount;
+	}
+
+
+	public void setReportCount(int reportCount) {
+		this.reportCount = reportCount;
+	}
+
+
 	@Override
 	public String toString() {
 		return "HouseVO [houseNo=" + houseNo + ", type=" + type + ", scope=" + scope + ", maxCapacity=" + maxCapacity
@@ -326,8 +340,12 @@ public class HouseVO  {
 				+ checkinTime + ", checkoutTime=" + checkoutTime + ", stayNight=" + stayNight + ", stayDay=" + stayDay
 				+ ", bookableDateBegin=" + bookableDateBegin + ", bookableDateEnd=" + bookableDateEnd + ", price="
 				+ price + ", memNo=" + memNo + ", replies=" + replies + ", image=" + image + ", checkinInterval="
-				+ checkinInterval + ", score=" + score + ", location=" + location + "]";
+				+ checkinInterval + ", score=" + score + ", location=" + location + ", reportCount=" + reportCount
+				+ "]";
 	}
+
+
+	
 	
 	
 	

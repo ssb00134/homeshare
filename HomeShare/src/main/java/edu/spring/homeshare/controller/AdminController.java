@@ -24,9 +24,11 @@ import edu.spring.homeshare.HomeController;
 import edu.spring.homeshare.domain.BookVO;
 import edu.spring.homeshare.domain.HouseVO;
 import edu.spring.homeshare.domain.MemberVO;
+import edu.spring.homeshare.domain.ReportVO;
 import edu.spring.homeshare.service.BookService;
 import edu.spring.homeshare.service.HouseService;
 import edu.spring.homeshare.service.MemberService;
+import edu.spring.homeshare.service.ReportService;
 import edu.spring.homeshare.util.PageCriteria;
 import edu.spring.homeshare.util.PageMaker;
 
@@ -43,6 +45,9 @@ public class AdminController {
 
 	@Autowired
 	private MemberService memberSeervice;
+	
+	@Autowired
+	private ReportService reportService;
 
 	@RequestMapping(value = "/main")
 	public void adminMain() {
@@ -249,5 +254,40 @@ public class AdminController {
 		List<BookVO> list = bookService.readOptionAndDate(map);
 		logger.info("list 정보 : " + list);
 	}
+	//report 메핑
+	/*--------------------------------------------------------------*/
+	@RequestMapping(value="reportmanagement")
+	public void reportManage() {
+		logger.info("report 실행 " );
+	}
+	@RequestMapping(value="reportmanagement_result")
+	public void reportManageResult(Model model,Integer page, Integer prePage) {
+		logger.info("report result 실행 " );
+		
+		/* 페이징 처리 */
+		PageCriteria c = new PageCriteria();
+		logger.info("page : " + page);
 
+		if (page != null) {
+			c.setPage(page);
+		}
+		if (prePage != null) {
+			c.setNumsPerPage(prePage);
+		}
+		
+		List<ReportVO> reportList = reportService.read();
+		model.addAttribute("reportList", reportList);
+		
+		PageMaker maker = new PageMaker();
+		maker.setCriteria(c);
+		maker.setTotalCount(houseService.getToTotalNumsOfRecords());
+		maker.setPageData();
+		model.addAttribute("pageMaker", maker);
+		
+		logger.info("전체 하우스 수 : " + maker.getTotalCount());
+		logger.info("현재 선택된 페이지 : " + c.getPage());
+		logger.info("한 페이지 당 게시글 수 : " + c.getNumsPerPage());
+		logger.info("시작 페이지 링크 번호(startPageNO) : " + maker.getStartPageNo());
+		logger.info("끝 페이지 링크 번호(endPageNo) : " + maker.getEndPageNo());
+	}
 }

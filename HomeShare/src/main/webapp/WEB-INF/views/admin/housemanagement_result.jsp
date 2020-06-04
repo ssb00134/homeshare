@@ -45,36 +45,36 @@
 						<td>별점</td>
 					</tr>
 				</thead>
-				<c:forEach var="vo" items="${houseList }">
-					<tr>
-						<td>${vo.houseNo }</td>
-						<td>${vo.memNo }</td>
-						<td>${vo.location }</td>
-						<td>${vo.bookableDateBegin }</td>
-						<td>${vo.bookableDateEnd }</td>
-						<td>${vo.scope}</td>
-						<td>${vo.maxCapacity}</td>
-						<td>${vo.bedroom}</td>
-						<td>${vo.bed}</td>
-						<td>${vo.bathroom}</td>
-						<td>${vo.utilities}</td>
-						<td>${vo.spaces}</td>
-						<td>${vo.title}</td>
-						<td>${vo.info}</td>
-						<td>${vo.rules}</td>
-						<td>${vo.stayNight}박
-						<td>
-						<td>${vo.stayDay}일</td>
-						<td>${vo.checkinInterval}일</td>
-						<td>${vo.price}</td>
-						<td></td>
-						<td></td>
-
-						<td><button type="submit" class="btn btn-default">수정하기</button></td>
-						<td><button type="submit" class="btn btn-default">삭제하기</button></td>
-					</tr>
-				</c:forEach>
 				<tbody>
+					<c:forEach var="vo" items="${houseList }">
+						<tr>
+							<td>${vo.houseNo }</td>
+							<td>${vo.memNo }</td>
+							<td>${vo.location }</td>
+							<td>${vo.bookableDateBegin }</td>
+							<td>${vo.bookableDateEnd }</td>
+							<td>${vo.scope}</td>
+							<td>${vo.maxCapacity}</td>
+							<td>${vo.bedroom}</td>
+							<td>${vo.bed}</td>
+							<td>${vo.bathroom}</td>
+							<td>${vo.utilities}</td>
+							<td>${vo.spaces}</td>
+							<td>${vo.title}</td>
+							<td>${vo.info}</td>
+							<td>${vo.rules}</td>
+							<td>${vo.stayNight}박
+							<td>
+							<td>${vo.stayDay}일</td>
+							<td>${vo.checkinInterval}일</td>
+							<td>${vo.price}</td>
+							<td></td>
+							<td></td>
+
+							<td><button type="submit" class="btn btn-default">수정하기</button></td>
+							<td><button type="submit" class="btn btn-default">삭제하기</button></td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>

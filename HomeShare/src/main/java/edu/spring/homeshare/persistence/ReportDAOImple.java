@@ -24,4 +24,8 @@ public class ReportDAOImple implements ReportDAO{
 	public List<ReportVO> select(int houseNo) {
 		return sqlSession.selectList(NAMESPACE + ".select_all_by_houseno", houseNo);
 	}
+	@Override
+	public List<ReportVO> select() {
+		return sqlSession.selectList(NAMESPACE + ".select_all");
+	}
 }

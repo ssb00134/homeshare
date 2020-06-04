@@ -95,7 +95,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<!-- 다중검색 start -->
 		SELECT * FROM ${house}
 		<where>
+		<if test='location != null and location != ""'>
 			location like '%' || #{location} || '%'
+			</if>
 			<if test='bookableDateBegin != null and bookableDateBegin != ""'>
 				AND ${bookableDateBegin} <![CDATA[>=]]>
 				#{bookableDateBegin}
@@ -201,7 +203,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{image},
 		#{checkinInterval},
 		#{score},
-		#{location}
+		#{location},
+		#{reportCount}
 		)
 		<selectKey keyProperty="houseNo" resultType="Integer"
 			order="BEFORE">
