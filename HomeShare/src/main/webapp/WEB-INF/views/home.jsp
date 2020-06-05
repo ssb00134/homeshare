@@ -123,9 +123,9 @@
 	<%@ include file="footer.jspf"%>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			ishost();
+			getBookByHostId();
 
-			function ishost() {
+			function getBookByHostId() {
 				console.log('getAllBookByMemId 실행 ');
 				var url = '/homeshare/book/all/' + '${memId }';
 				console.log('url : ' + url);
@@ -153,7 +153,7 @@
 	                            + '<div class=col-md-2>'+ this.totalPrice + '</div>'
 	                            + '<div class=col-md-1>' 
 	                            + '<input type="hidden" value="' + this.bookNo + '" >'
-	                            + '<button class="btn btn-success" id ="btn_bookUpdate" type="text">O</button>' 
+	                            + '<button class="btn_bookUpdate btn btn-success" id ="btn_bookUpdate" type="text">O</button>' 
 	                            + '</div>' 
 	                            + '<div class=col-md-1>' 
 	                            + '<input type="hidden" value="' + this.bookNo + '" >'
@@ -162,16 +162,65 @@
 	                            + '</div>' 
 	                            + '<hr>';
                         	}
-                        	$('#hostbook').html(list);
-                            
-                            console.log('list : ' + list);
-                            
+                        	$('#hostbook').html(list);        
+            
                             if(count>0){
     							$('#bookcount').html('새로운 예약이 있습니다');
     						}
+                            //book delete
+                            $('.btn_bookDelete').on('click',function(){
+                            	event.preventDefault();
+                            	 console.log('btn_bookDelete 클릭');
+                            	 //var hostCheck = $(this).prev().val() ; // 이전 선택자 
+                            	 var bookNo = $(this).prev().val();
+                            	 console.log('bookNo :' + bookNo);
+	                            $.ajax({
+	                                type: 'delete',
+	                                url: '/homeshare/book/' + bookNo,
+	                                headers: {
+	                                	'Content-Type' : 'application/json', 
+	                          	  	    'X-HTTP-Method-Override' : 'DELETE'
+	                                },
+	                               
+	                                success: function (result) {
+	                                    if (result == 'success') {
+	                                        alert('삭제 성공');
+	                                        getBookByHostId();//제귀가능 리프레쉬
+	                                    } // end if
+	                                } // end success
+	                            }); // end ajax
+                            });//end btn_bookdelete click
+                            
+                          //book update
+                            $('.btn_bookUpdate').on('click',function(){
+                            	event.preventDefault();
+                            	 console.log('btn_bookUpdate 클릭');
+                            	 //var hostCheck = $(this).prev().val() ; // 이전 선택자 
+                            	 var bookNo = $(this).prev().val();
+                            	 console.log('bookNo :' + bookNo);
+	                            $.ajax({
+	                                type: 'put',
+	                                url: '/homeshare/book/' + bookNo,
+	                                headers: {
+	                                	'Content-Type' : 'application/json', 
+	                          	  	    'X-HTTP-Method-Override' : 'PUT'
+	                                },
+	                                data: JSON.stringify(
+		                                    {'hostCheck': 1}
+		                                ),
+	                                success: function (result) {
+	                                    if (result == 'success') {
+	                                        alert('수락 성공');
+	                                        getBookByHostId();//제귀가능 리프레쉬
+	                                    } // end if
+	                                } // end success
+	                            }); // end ajax
+                            });//end btn_bookdelete click
+       
+                            
 						});//end each
-						
 					}// end if
+					
 				}); //end getJSON
 			}
 			;// end ishost

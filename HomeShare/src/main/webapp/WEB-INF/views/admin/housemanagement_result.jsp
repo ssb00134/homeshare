@@ -19,7 +19,7 @@
 	</c:if>
 	<c:if test="${houseList ne null }">
 		<div class="table-responsive">
-			<table class="table table-bordered table-hover text-overflow ">
+			<table class="table table-bordered table-hover tt ">
 				<thead class="text">
 					<tr class="text">
 						<th>숙소번호</th>

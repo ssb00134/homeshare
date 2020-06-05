@@ -57,18 +57,12 @@ figure:hover .overlay {
 	display: block;
 	height: 100%;
 }
-
-.table .text {
-  position: relative;
+table{
+	color: #999;
 }
 
- .text  {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  max-width: 50%;
-  
-}
+
+
 
 /* -------------------------------------------------------------------------------- */
 .c {
