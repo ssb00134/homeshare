@@ -20,18 +20,49 @@
 	<button type="button" class="btn btn-default" data-toggle="modal"
 		data-placement="left" title="Tooltip on left" id="bookcount"
 		data-toggle="modal" data-target="#hostbookModal"></button>
-	<<%-- %@ include file="hostbook_modal.jspf"%> --%>
+	
+		<form class="modal fade" id="hostbookModal">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<!-- modal head -->
+				<div class="modal-header">
+					<h5 class="modal-title">숙소현황</h5>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<!-- modal body -->
+				<div class="container-fluid">
+					<div class="row">
+						<div class=col-md-1>예약번호</div>
+						<div class="divider"></div>
+						<div class=col-md-1>숙소번호</div>
+						<div class="divider"></div>
+						<div class=col-md-2>체크인</div>
+						<div class="divider"></div>
+						<div class=col-md-2>체크아웃</div>
+						<div class="divider"></div>
+						<div class=col-md-1>인원수</div>
+						<div class=col-md-1>방문일수</div>
+						<div class=col-md-2>총 가격</div>
+						<div class=col-md-1>수락</div>
+						<div class="divider"></div>
+						<div class=col-md-1>거절</div>
+						<div class="divider"></div>
+						<hr>
+						</div>
+					</div>
+					<div class="form-group">
+						<div id="hostbook"></div>
+					</div>
+				</div>
+			</div>
+	</form>
 
 
+	<%@ include file="navheader.jspf"%>
 
-
-
-	<%-- <%@ include file="navheader.jspf"%> --%>
-
-
+	<br>
+	<br>
 	<%@ include file="section.jspf"%>
-	<br>
-	<br>
 	<br>
 	<br>
 	<h1>왜 HomeShare에서 예약을 해야 할까요?</h1>
@@ -92,32 +123,58 @@
 	<%@ include file="footer.jspf"%>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			console.log('is host? : ' + ishost());
-			if(ishost()){
-				$('#bookcount').html('새로운 예약이 있습니다');
-			}
-			getsHouseNoByMemNo();
-			
-			
-			function getsHouseNoByMemNo() {
-			var url = '/homeshare/book/all/' + '${memId }';
-			$.getJSON(url, function (jsonData) {
-				$(jsonData).each(function () {
-					
-				});//end each
-			});//end getJSON
-			}//end function
-			
-			
-			
+			ishost();
+
 			function ishost() {
 				console.log('getAllBookByMemId 실행 ');
 				var url = '/homeshare/book/all/' + '${memId }';
 				console.log('url : ' + url);
-				if($.getJSON(url)){
-					return true;
-				}else return false;
-			};// end getAllBookByMemId
+				$.getJSON(url, function(jsonData) {
+					if (jsonData.length > 0) {
+						console.log('jsonData 개수 : ' + jsonData.length);
+						var list='';
+						var count =0;
+						$(jsonData).each(function() {
+							var dateDiffer = new Date(this.checkout.split(' ')[0]).getDate()
+                        	- new Date(this.checkin.split(' ')[0] ).getDate();
+                        	console.log('dateDiffer : ' +dateDiffer);
+                        	 //this.hostCheck 가 1일때만 실행함
+                        	
+                        	if(this.hostCheck == 0){ // checkin이 0일때  미수락상태일때 실행
+                        		count++;
+                        		list += '<div class="book_item">' 
+	                            + '<div class=" row">' 
+	                            + '<div id="bookNo" class=col-md-1>' + this.bookNo + '</div>' 
+	                            + '<div id="bookHouseNo" class=col-md-1>' + this.bookHouseNo + '</div>' 
+	                            + '<div class=col-md-2>' + this.checkin.split(' ')[0] + '</div>' 
+	                            + '<div class=col-md-2>' + this.checkout.split(' ')[0] + '</div>'
+	                            + '<div class=col-md-1>'+ this.bookMem + '</div>' 
+	                            + '<div class=col-md-1>' + dateDiffer + '</div>'
+	                            + '<div class=col-md-2>'+ this.totalPrice + '</div>'
+	                            + '<div class=col-md-1>' 
+	                            + '<input type="hidden" value="' + this.bookNo + '" >'
+	                            + '<button class="btn btn-success" id ="btn_bookUpdate" type="text">O</button>' 
+	                            + '</div>' 
+	                            + '<div class=col-md-1>' 
+	                            + '<input type="hidden" value="' + this.bookNo + '" >'
+	                            + '<button class="btn_bookDelete btn btn-danger" type="text">X</button>' 
+	                            + '</div>' 
+	                            + '</div>' 
+	                            + '<hr>';
+                        	}
+                        	$('#hostbook').html(list);
+                            
+                            console.log('list : ' + list);
+                            
+                            if(count>0){
+    							$('#bookcount').html('새로운 예약이 있습니다');
+    						}
+						});//end each
+						
+					}// end if
+				}); //end getJSON
+			}
+			;// end ishost
 
 		}); // end document
 	</script>
