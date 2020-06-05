@@ -13,13 +13,18 @@
 </head>
 <body>
 	<h1>숙소 검색결과</h1>
-
+	<span class="text" style="display:block">
+	dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+		ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+		dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+		dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd</span>
 	<c:if test="${houseList eq null }">
 		<h1>검색결과가 없습니다.</h1>
+		
 	</c:if>
 	<c:if test="${houseList ne null }">
 		<div class="table-responsive">
-			<table class="table table-bordered table-hover tt ">
+			<table class="table table-bordered table-hover text ">
 				<thead class="text">
 					<tr class="text">
 						<th>숙소번호</th>
@@ -34,7 +39,7 @@
 						<td>욕실</td>
 						<td class="text"><div class="text">유틸리티</div></td>
 						<td class="text"><div class="text">이용가능시설</div></td>
-						<td class="text"><div class="text">제목</div></td>
+						<td style="width : 1%"><div class="text">제목</div></td>
 						<td class="text"><div class="text">소개</div></td>
 						<td class="text"><div class="text">규칙</div></td>
 						<td>x박</td>
@@ -63,8 +68,8 @@
 							<td>${vo.bathroom}</td>
 							<td class="text"><div class="text">${vo.utilities}</div></td>
 							<td class="text"><div class="text">${vo.spaces}</div></td>
-							<td class="text"><div class="text">${vo.title}</div></td>
-							<td class="text"><div class="text">${vo.info}</div></td>
+							<td style="width : 1%"><div class="text">${vo.title}</div></td>
+							<td style="width : 25%"><div style="display:block" class="text">${vo.info}</div></td>
 							<td class="text"><div class="text">${vo.rules}</div></td>
 							<td>${vo.stayNight}박
 							<td>
