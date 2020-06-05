@@ -13,5 +13,6 @@ public interface BookDAO {
 	int update(BookVO vo);
 	int delete(int bookNo);
 	List<BookVO> selectOptionAndDate(HashMap<String, Object> map);
+	List<BookVO> selectByHostId(String hostId);
 	
 }

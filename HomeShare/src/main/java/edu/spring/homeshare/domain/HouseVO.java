@@ -31,14 +31,12 @@ public class HouseVO  {
 	private int score ;
 	private String location;
 	private int reportCount;
+	private String hostId;
 	
 	public HouseVO() {}
 
 
-	public HouseVO(int houseNo, String type, String scope, int maxCapacity, int bedroom, int bed, int bathroom,
-			String utilities, String spaces, String title, String info, String rules, String checkinTime,
-			String checkoutTime, int stayNight, int stayDay, Date bookableDateBegin, Date bookableDateEnd, int price,
-			int memNo, String replies, String image, int checkinInterval, int score, String location, int reportCount) {
+	public HouseVO(int houseNo, String type, String scope, int maxCapacity, int bedroom, int bed, int bathroom, String utilities, String spaces, String title, String info, String rules, String checkinTime, String checkoutTime, int stayNight, int stayDay, Date bookableDateBegin, Date bookableDateEnd, int price, int memNo, String replies, String image, int checkinInterval, int score, String location, int reportCount, String hostId) {
 		super();
 		this.houseNo = houseNo;
 		this.type = type;
@@ -66,11 +64,8 @@ public class HouseVO  {
 		this.score = score;
 		this.location = location;
 		this.reportCount = reportCount;
+		this.hostId = hostId;
 	}
-
-
-
-
 
 	public int getHouseNo() {
 		return houseNo;
@@ -332,17 +327,24 @@ public class HouseVO  {
 	}
 
 
+	
+	public String getHostId() {
+		return hostId;
+	}
+
+
+	public void setHostId(String hostId) {
+		this.hostId = hostId;
+	}
+
+
 	@Override
 	public String toString() {
-		return "HouseVO [houseNo=" + houseNo + ", type=" + type + ", scope=" + scope + ", maxCapacity=" + maxCapacity
-				+ ", bedroom=" + bedroom + ", bed=" + bed + ", bathroom=" + bathroom + ", utilities=" + utilities
-				+ ", spaces=" + spaces + ", title=" + title + ", info=" + info + ", rules=" + rules + ", checkinTime="
-				+ checkinTime + ", checkoutTime=" + checkoutTime + ", stayNight=" + stayNight + ", stayDay=" + stayDay
-				+ ", bookableDateBegin=" + bookableDateBegin + ", bookableDateEnd=" + bookableDateEnd + ", price="
-				+ price + ", memNo=" + memNo + ", replies=" + replies + ", image=" + image + ", checkinInterval="
-				+ checkinInterval + ", score=" + score + ", location=" + location + ", reportCount=" + reportCount
-				+ "]";
+		return "HouseVO [houseNo=" + houseNo + ", type=" + type + ", scope=" + scope + ", maxCapacity=" + maxCapacity + ", bedroom=" + bedroom + ", bed=" + bed + ", bathroom=" + bathroom + ", utilities=" + utilities + ", spaces=" + spaces + ", title=" + title + ", info=" + info + ", rules=" + rules + ", checkinTime=" + checkinTime + ", checkoutTime=" + checkoutTime + ", stayNight=" + stayNight + ", stayDay=" + stayDay + ", bookableDateBegin=" + bookableDateBegin + ", bookableDateEnd="
+				+ bookableDateEnd + ", price=" + price + ", memNo=" + memNo + ", replies=" + replies + ", image=" + image + ", checkinInterval=" + checkinInterval + ", score=" + score + ", location=" + location + ", reportCount=" + reportCount + ", hostId=" + hostId + "]";
 	}
+
+
 
 
 	

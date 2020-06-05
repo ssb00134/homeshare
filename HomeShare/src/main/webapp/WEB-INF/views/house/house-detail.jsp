@@ -40,6 +40,7 @@
 			<div id="imgArea"></div>
 			<input type="text" name="houseNo"  id = "houseNo" value="${houseVO.houseNo }">
 			<input type="text" name="memNo" value="${houseVO.memNo }">
+			<input type="text" id="hostId" value="${houseVO.hostId }">
 	</form>
 	<hr>
 	${ houseVO.info}
@@ -186,11 +187,10 @@
 			var checkout = $("#disableCheckOut").datepicker().val();
 			var hostCheck = 0;
 			var bookMem = $('#bookMem').val();
-			var totalPrice = $('#totalPrice').val();
 			console.log('bookmemono : '+ bookMemNo);
 			var price = $('#price');
 			var datediffer = Math.ceil((checkout.getTime()-checkin.getTime())/(1000*3600*24));
-			var totalprice = datediffer * bookMem * price;
+			var totalPrice = datediffer * bookMem * price;
 			var obj = {
 					'bookNo' : bookNo,
 					'bookMemNo': sessionMemNo,
@@ -199,7 +199,7 @@
 					'checkout': checkout,
 					'hostCheck': hostCheck,
 					'bookMem': bookMem,
-					'totalPrice': totalprice
+					'totalPrice': totalPrice
 					
 			};
 			$.each(obj, function (index, item){
@@ -219,6 +219,12 @@
 			var totalPrice = $('#totalPrice').val();
 			console.log('bookmemono : '+ bookMemNo);
 			var price = $('#price');
+			var bookHostId = $('#hostId').val();
+			
+			//제약조건 자기자신 예약 불가
+			if(bookHostId === '${memId}'){
+				alert('자신의 숙소는 예약할 수 없습니다.');
+			}
 			
 			//날짜차이
 			var datediffer = Math.ceil((new Date(checkout).getTime()- new Date(checkin).getTime())/(1000*3600*24));
@@ -245,7 +251,8 @@
 					'checkout': checkout,
 					'hostCheck': hostCheck,
 					'bookMem': bookMem,
-					'totalPrice': totalprice
+					'totalPrice': totalprice,
+					'bookHostId' : bookHostId
 					
 			};
 			$.each(obj, function (index, item){

@@ -47,6 +47,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<property name="checkinInterval" value="checkinInterval"/>
 		<property name="location" value="location"/>
 		<property name="reportCount" value="reportCount"/>
+		<property name="hostId" value="hostId"/>
 
 
 
@@ -83,6 +84,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<property name="hostCheck" value="hostCheck" />
 		<property name="bookMem" value="bookMem" />
 		<property name="totalPrice" value="totalPrice" />
+		<property name="bookHostId" value="bookHostId" />
 
 
 

@@ -42,4 +42,9 @@ public class BookDAOImple implements BookDAO {
 	public List<BookVO> selectOptionAndDate(HashMap<String, Object> map) {
 		return sqlSession.selectList(NAMESPACE +".select_option_and_date", map);
 	}
+	
+	@Override
+	public List<BookVO> selectByHostId(String hostId) {
+		return sqlSession.selectList(NAMESPACE +".select_all_by_hostId" , hostId);
+	}
 }

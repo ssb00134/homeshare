@@ -49,4 +49,8 @@ public class BookServiceImple implements BookService {
 	public List<BookVO> readOptionAndDate(HashMap<String, Object> map) {
 		return BookDao.selectOptionAndDate(map);
 	}
+	@Override
+	public List<BookVO> readByHostId(String hostId) {
+		return BookDao.selectByHostId(hostId);
+	}
 }

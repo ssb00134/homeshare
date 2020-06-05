@@ -15,4 +15,5 @@ public interface BookService {
 	int update(BookVO vo);
 	int delete(int bookNo);
 	List<BookVO> readOptionAndDate(HashMap<String, Object> map);
+	List<BookVO> readByHostId(String hostId);
 }
