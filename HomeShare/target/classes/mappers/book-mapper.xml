@@ -19,9 +19,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 
-	<select id="select_all_by_hostId" resultType="bookVO">
+	<select id="select_all_by_hostId" resultType="bookVO" parameterType="String">
 		select * from ${book} where 
-		${bookHostId} = #{hostId};
+		${bookHostId} = #{bookHostId}
 	</select>
 
 

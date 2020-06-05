@@ -35,11 +35,11 @@ public class BookRestController {
 	}
 
 	//호스트에 등록된 모든 정보를 가져오는 메핑
-	@RequestMapping(value = "/all/{no}", method = RequestMethod.GET)
-	public ResponseEntity<List<BookVO>> bookList(@PathVariable("no") int houseNo) {
+	@RequestMapping(value = "/all/{hostId}", method = RequestMethod.GET)
+	public ResponseEntity<List<BookVO>> bookList(@PathVariable("hostId") String hostId) {
 		logger.info("host all 실행 호스트가 예약을 가져옴");
-		logger.info("houseNo : " + houseNo);
-		List<BookVO> list = bookService.selectHouseNo(houseNo);
+		logger.info("hostId : " + hostId);
+		List<BookVO> list = bookService.readByHostId(hostId);
 		return new ResponseEntity<List<BookVO>>(list, HttpStatus.OK);
 	}
 

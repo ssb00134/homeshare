@@ -50,7 +50,7 @@ public class BookServiceImple implements BookService {
 		return BookDao.selectOptionAndDate(map);
 	}
 	@Override
-	public List<BookVO> readByHostId(String hostId) {
-		return BookDao.selectByHostId(hostId);
+	public List<BookVO> readByHostId(String bookHostId) {
+		return BookDao.selectByHostId(bookHostId);
 	}
 }
