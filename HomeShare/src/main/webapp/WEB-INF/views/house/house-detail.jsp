@@ -109,8 +109,8 @@
 				</div>
 
 
-				날짜차이
-				<input type="text" id="dateDiffer">
+			
+				<input type="hidden" id="dateDiffer">
 				<input type="hidden" name="bookhouseNo" value="${houseVO.houseNo }">
 				<input type="hidden" name="bookMemNo" value="${memberVO.memNo }">
 				<input type="hidden" id="bookableDateBegin"
@@ -120,29 +120,42 @@
 				<input type="hidden" id="checkinInterval"
 					value="${houseVO.checkinInterval }">
 				<div>
-					<div>
-						<input type="number" name="bookMem" id="bookMem" value="1">
+					<div >
+					<button type="button" class="btn" id="btnBookMem">인원선택</button>
+						<div id="bookMem2"></div>
+						<input type="hidden" name="bookMem" id="bookMem" value="1" readonly="readonly">
 						<br>
 					</div>
+					<select >
+					</select>
+					
+					
 					<div class="form-group">
-						<input type="number" class="col-md-4" name="price" id="price"
+						<input type="hidden" class="col-md-4" name="price" id="price"
 							value="${houseVO.price }" readonly>
-						총 합계
-						<input type="number" class="col-md-4" readonly="readonly"
-							name="totalPrice" min="1" max="${houseVO.maxCapacity }"
-							id="totalPrice" value="${houseVO.price }" readonly>
+						
 					</div>
 					<div id="bookdate"></div>
-					<input type="submit" id="bookbtn" value="예약하기">
-					<button type="button" id="test">체크</button>
 					<div id="bookResult"></div>
 				</div>
 				<div class="container" id="bookArea">
-					<div class="row col-md-12">
-						<div class="col-md-4">$${houseVO.price } * </div>
+					
+						<div class="row">기본요금 : $${houseVO.price }  </div>
+						<div class="row">
+						<div class="col-md-4" >인원  </div> 
 						<div class="col-md-4" id="bookAreaBookMem"></div> 
-						<div class="col-md-3" id="bookAreaDateDiffer"></div>
-					</div>
+						</div>
+						<div class="row">
+						<div class="col-md-4" id="bookAreaDateDiffer"></div>
+						<div class="col-md-4">박</div>
+						</div>
+						<hr>
+						<div class="row">
+						<div class="col-md-4">총 합계</div>
+						<div class="col-md-4" id="bookAreaDateTotalPrice"></div>
+						</div>
+						<button type="submit" id="bookbtn" class="btn btn-default">예약하기</button>
+					
 					
 				</div>
 			</div>
@@ -182,12 +195,23 @@
 								$('#spacesDiv').append(
 										'<div class ="row col-md-12 border">'
 												+ element + '</div>');
+								
+								
 							}); //end each
 
 							//로딩시 모달 데이터 초기화 
 							$("#disableCheckIn").datepicker().val('');
 							$("#disableCheckIn").datepicker().val('');
-
+							
+							
+							$('#btnBookMem').click(function(){
+								for(var i=0; i<${houseVO.maxCapacity}; i++){
+									$('bookMem2').html();										
+								}
+								
+							});
+							
+							
 							/* 모달 영역*/
 							$('#disableCheckOut')
 									.on(
@@ -251,12 +275,20 @@
 									}); //end disableCheckOut click
 									
 							$('#bookMem').on('click blur focus', function(){
-								if($(this).value === 0 || $('#DateDiffer').val() !=="undefined"){
+								var checkin = $("#disableCheckIn").datepicker().val();
+								var checkout = $("#disableCheckOut").datepicker().val();
+								
+								var datediffer = Math.ceil((new Date(checkout).getTime() 
+										- new Date(checkin).getTime())/ (1000 * 3600 * 24));
+								
+								
+								if($(this).value === 0 || $('#disableCheckOut').val() =="undefined"){
 									$('#bookArea').hide();
 								}else{
 									console.log('this is ' + $('#bookMem').val());
 									$('#bookAreaBookMem').html($('#bookMem').val() + '명');
-									$('#bookAreaDateDiffer').html($('#DateDiffer').val() +'박');
+									$('#bookAreaDateDiffer').html(datediffer +'박');
+									$('#bookAreaDateTotalPrice').html('$' + $('#price').val()*$('#bookMem').val()*datediffer);
 									$('#bookArea').show();
 								}
 								
