@@ -121,25 +121,22 @@
 					value="${houseVO.checkinInterval }">
 				<div>
 					<div >
-					<button type="button" class="btn" id="btnBookMem">인원선택</button>
-						<div id="bookMem2"></div>
-						<input type="hidden" name="bookMem" id="bookMem" value="1" readonly="readonly">
+						
+						<select name="bookMem" id="bookMem"></select>
 						<br>
 					</div>
-					<select >
-					</select>
 					
 					
-					<div class="form-group">
-						<input type="hidden" class="col-md-4" name="price" id="price"
+					
+					<input type="hidden" class="col-md-4" name="price" id="price"
 							value="${houseVO.price }" readonly>
 						
-					</div>
+					
 					<div id="bookdate"></div>
 					<div id="bookResult"></div>
 				</div>
 				<div class="container" id="bookArea">
-					
+						<hr>
 						<div class="row">기본요금 : $${houseVO.price }  </div>
 						<div class="row">
 						<div class="col-md-4" >인원  </div> 
@@ -204,12 +201,9 @@
 							$("#disableCheckIn").datepicker().val('');
 							
 							
-							$('#btnBookMem').click(function(){
-								for(var i=0; i<${houseVO.maxCapacity}; i++){
-									$('bookMem2').html();										
-								}
-								
-							});
+							for(var i=0; i<${houseVO.maxCapacity}; i++){
+								$('#bookMem').append('<option value="' + i + '">' + i + '명');							
+							}
 							
 							
 							/* 모달 영역*/
@@ -282,7 +276,7 @@
 										- new Date(checkin).getTime())/ (1000 * 3600 * 24));
 								
 								
-								if($(this).value === 0 || $('#disableCheckOut').val() =="undefined"){
+								if($(this).val() == "0" || $('#disableCheckOut').val() =="undefined"){
 									$('#bookArea').hide();
 								}else{
 									console.log('this is ' + $('#bookMem').val());
