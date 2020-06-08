@@ -207,8 +207,10 @@
 							
 							/* 모달 영역*/
 							$('#disableCheckOut').on('click focus blur',function() {
-									console.log('disableCheckOut click');
+								if($("#disableCheckIn").datepicker().val()!== ""){
+									console.log('체크인 값 : ' + $("#disableCheckIn").datepicker().val());
 									$("#DateModal .close").click();
+								}
 							}); //end disableCheckIn click
 
 							getAllBooks();

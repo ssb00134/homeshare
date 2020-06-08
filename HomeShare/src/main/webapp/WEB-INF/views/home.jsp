@@ -12,7 +12,6 @@
 <%@ include file="cdn.jspf"%>
 </head>
 <body>
-<div class="text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaasfgfgfdvbsssssserwfsfgdgdsfhsghgfhfghghryhryjyjdyjxzsdf</div>
 	<c:if test="${not empty memId }">
 	${memId }님, 환영합니다. <br>
 		<button id="btn_logout" type="button"></button>
