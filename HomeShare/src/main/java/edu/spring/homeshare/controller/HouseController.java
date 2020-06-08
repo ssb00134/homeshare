@@ -163,11 +163,10 @@ public class HouseController {
 		if (files.length > 0 || files.length < 11) {
 			logger.info("inset 실행");
 			logger.info("파일 갯수 : " + files.length);
-			int result = 0;
-			// 이미지에 파일 개수를 넣는다.
-			vo.setImage(Integer.toString(files.length));
+			
+			
 
-			result = houseService.create(vo);
+			int result = houseService.create(vo);
 			if (result == 0) {
 				logger.info("insert 실패");
 				return "/";
@@ -203,6 +202,7 @@ public class HouseController {
 
 				int updateResult = houseService.update(vo);
 				if (updateResult == 1) {
+					logger.info("업데이트 후 vo : " + vo.toString());
 					logger.info("사진주소를 업데이트 하였습니다.");
 				} else {
 					logger.info("사진주소 업데이트에 실패 하였습니다.");
