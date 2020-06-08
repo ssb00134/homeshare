@@ -66,6 +66,9 @@
 	<%@ include file="section.jspf"%>
 	<br>
 	<br>
+	<a href = "/homeshare/test/import">import 테스트</a>
+	<br>
+	<br>
 	<h1>왜 HomeShare에서 예약을 해야 할까요?</h1>
 	<div class="container-fluid row " style="border: 1px solid grey">
 

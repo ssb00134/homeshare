@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!-- 리플 모달 -->
-<input type="button" id="reply_btn" value="댓글 입력하기" />
 
 <button type="button" class="btn navbar-nav navbar-right"
 	data-toggle="modal" data-target="#ReplyInputModal">댓글 입력하기</button>

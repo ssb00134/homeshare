@@ -27,5 +27,9 @@ public class TestController {
 	public void jusopopup2() {
 		logger.info("jusopopup 실행" );
 	}
+	@RequestMapping(value="/import")
+	public void imort() {
+		logger.info("import 실행" );
+	}
 	
 }
