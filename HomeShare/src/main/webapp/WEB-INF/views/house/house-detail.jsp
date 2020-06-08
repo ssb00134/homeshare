@@ -102,7 +102,7 @@
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
+							<button type="button" class="btn btn-secondary" id=""
 								data-dismiss="modal">닫기</button>
 						</div>
 					</div>
@@ -193,7 +193,6 @@
 										'<div class ="row col-md-12 border">'
 												+ element + '</div>');
 								
-								
 							}); //end each
 
 							//로딩시 모달 데이터 초기화 
@@ -207,15 +206,10 @@
 							
 							
 							/* 모달 영역*/
-							$('#disableCheckOut')
-									.on(
-											'click focus blur',
-											function() {
-
-												console.log('DateModal : '
-														+ DateModal);
-
-											}); //end disableCheckIn click
+							$('#disableCheckOut').on('click focus blur',function() {
+									console.log('disableCheckOut click');
+									$("#DateModal .close").click();
+							}); //end disableCheckIn click
 
 							getAllBooks();
 
@@ -288,43 +282,7 @@
 								
 							});// end bookMem click
 
-							//테스트 실행
-							$('#test').click(
-									function() {
-										var bookNo = 0;
-										var bookMemNo = '${memberVO.memNo}';
-										var bookHouseNo = $('#houseNo').val();
-										var checkin = $("#disableCheckIn")
-												.datepicker().val();
-										var checkout = $("#disableCheckOut")
-												.datepicker().val();
-										var hostCheck = 0;
-										var bookMem = $('#bookMem').val();
-										console
-												.log('bookmemono : '
-														+ bookMemNo);
-										var price = $('#price');
-										var datediffer = Math.ceil((checkout
-												.getTime() - checkin.getTime())
-												/ (1000 * 3600 * 24));
-										var totalPrice = datediffer * bookMem
-												* price;
-										var obj = {
-											'bookNo' : bookNo,
-											'bookMemNo' : sessionMemNo,
-											'bookHouseNo' : bookHouseNo,
-											'checkin' : checkin,
-											'checkout' : checkout,
-											'hostCheck' : hostCheck,
-											'bookMem' : bookMem,
-											'totalPrice' : totalPrice
-
-										};
-										$.each(obj, function(index, item) {
-											console.log('item : ' + index
-													+ " value : " + item);
-										});
-									}); //end test
+							
 
 							//bookForm ajax 작성
 							$('#bookbtn')
