@@ -205,8 +205,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{checkinInterval},
 		#{score},
 		#{location},
-		#{reportCount}
-		${hostId}
+		#{reportCount},
+		#{hostId}
 		)
 		<selectKey keyProperty="houseNo" resultType="Integer"
 			order="BEFORE">
