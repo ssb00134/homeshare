@@ -150,27 +150,26 @@
 																	console
 																			.log(this.memId == '${memId}');
 
-																	list += '<div class="reply_item" readonly>'
-																			+ '<pre>'
+																	list += '<div class="container-fluid border">'
+																		
 																			+ '<input type="hidden" id="rno" readonly value="' + this.rno + '" /><br>'
-																			+ '<input type="text" id="reply_memid" readonly value="' + this.memId + '" />'
-																			+ '&nbsp;&nbsp;' // 공백
-																			+ '<input type="text" id="reply_content" value="' + this.content + '" />'
-																			+ '&nbsp;&nbsp;' // 공백
-																			+ date
-																					.getFullYear()
-																			+ '년'
-																			+ date
-																					.getMonth()
-																			+ '월'
-																			+ '&nbsp;&nbsp;' // 공백
-																			+ '총별점 '
-																			+ '<input type="number" min="0" max="5" id="reply_score" readonly  value="' + this.replyScore + '" />'
-																			+ "청결점수 "
-																			+ '<input type="number" min="0" max="5" id="reply_cleanScore" readonly value="' + this.cleanScore + '"/>'
-																			+ '&nbsp;&nbsp;' // 공백
-																			+ '체크인점수'
-																			+ '<input type="number" min="0" max="5" id="reply_checkinScore" readonly  value="' + this.checkinScore + '" />'
+																			
+																			+ '<div class="row">'
+																		
+																			+ '<div id="reply_memid" class="row border">' + this.memId +'</div>'
+																			+ '<div id="reply_date" class="row border">' + date.getFullYear() + '년'
+																			+ date.getMonth()
+																			+ '월' +'</div>'
+																			+ '</div>'
+																			+ '<div class="row">'
+																			+ '<div class="col-md-4 border" id="reply_content">' + this.content + '</div>'
+																			+ '<div class="col-md-4 border">'
+																			+ '<div> 총 만족도' + this.replyScore + '</div>'
+																			+ '<div> 청결 만족도 ' + this.cleanScore + '</div>'
+																			+ '<div> 체크인 만족도' + this.checkinScore + '</div>'
+																			+'</div>'
+																			+'</div>'
+																			+ '</div>';
 
 																	if (this.memId === '${memId}') {
 																		console
@@ -180,7 +179,6 @@
 																				+ '&nbsp;'
 																				+ '<button class="btn_delete" type="button">삭제</button>'
 																	}
-																	+'</pre>'
 																			+ '<hr>'
 																			+ '</div>';
 																});//end each
