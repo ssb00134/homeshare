@@ -42,12 +42,11 @@
 
 
 <!-- 리플 영역 -->
-아이디 ${memId }
 
 <hr>
-<div id="showReply">
+<div id="showReply" class="container-fluid border">
 	총
-	<div id="countReply"></div>
+	<div id="countReply" class="d-inline"></div>
 	개의 후기가 있습니다.
 </div>
 <hr>

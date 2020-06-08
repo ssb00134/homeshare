@@ -37,27 +37,25 @@
 				<div class="house_list_item" >
 					<div class="row" >
 					<div class="house_list_item_click col-md-7"  id="${vo.houseNo }">
-						<div >${vo.scope}</div>
-						<div class="row">
-							<div class="col-md-10">${vo.title}</div>
-							<div class="col-md-2">별점 ${vo.score}</div>
+						<div class="row col-md-12">${vo.title}
 						</div>
-						<div>${vo.price}$</div>
-						<div class="col-md-8">${vo.location}</div>
-
+						<div class="row border">
+						<div class="col-md-8">${vo.type } ${vo.scope }</div>
+						<div class="col-md-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>${vo.score}</div>
+						</div>
+						<div class="row col-md-12">${vo.location}</div>
 						<div class="row" >
-							<div class="col-md-2">인원 ${vo.maxCapacity }명</div>
-							<div class="col-md-2">침실 ${vo.bedroom }개</div>
-							<div class="col-md-2">침대 ${vo.bed }개</div>
-							<div class="col-md-2">화장실 ${vo.bathroom }개</div>
+							<div class="col-md-2">인원 ${vo.maxCapacity }명 *</div>
+							<div class="col-md-2">침실 ${vo.bedroom }개 *</div>
+							<div class="col-md-2">침대 ${vo.bed }개 *</div>
+							<div class="col-md-2">화장실 ${vo.bathroom }개 </div>
 						</div>
-						<div class="row" >
-							<div class="col-md-">${vo.utilities }</div>
-						</div>
+						<input type="hidden" id="utilities" value="${vo.utilities }">
+						<div id="utilDiv"></div>
 						</div>
 
 								<!-- 이미지슬라이더 -->
-					<div class="home__slider col-md-5">
+					<div class="home__slider col-md-5 border">
 						<ul class="bxslider"></ul>
 					</div>	
 					</div>
@@ -105,6 +103,20 @@
 		$(document)
 				.ready(
 						function() {
+							 // 유틸리티 영역
+	                        var utilities = $('#utilities').val();
+	                        $.each(utilities.split(','), function(index, element)
+	                        {
+	                        	console.log('util element ' + element);
+	                                $('#utilDiv').append('<div class ="row col-md-12 border">' + element + '</div>');
+	                        }); //end each
+							
+							
+							
+							
+							
+							
+							
 							console.log('home__slider col-md-5 : ' + $('.home__slider').width());
 							//업데이트시 동작설정
 							$('#btn_delete')

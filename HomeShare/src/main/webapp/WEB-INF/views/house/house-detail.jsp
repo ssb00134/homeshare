@@ -18,77 +18,92 @@
 	<div class="row border">
 		<h1>${houseVO.title }</h1>
 	</div>
+	<div class="row col-md-2 border">
+		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+			viewBox="0 0 24 24">
+			<path
+				d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z" /></svg>
+		${houseVO.score }
+	</div>
 	<input id="imgSource" type="hidden" value="${houseVO.image }" />
 	<div id="imgArea" class="row border"></div>
 	<div class="row">
 		<div class="col-md-8">
 			<div class="container-fluid">
 				<div class="row border">
-					<div class="row col-md-12"><h4>${houseVO.hostId }님이호스팅 하는 ${houseVO.type}</h4></div>
+					<div class="row col-md-12">
+						<h4>
+							<strong>${houseVO.hostId }</strong>님이호스팅 하는 <strong>${houseVO.type}</strong>
+						</h4>
+					</div>
 					<div class="row col-md-12 border">
 						<div class="col-md-2">인원 ${houseVO.maxCapacity }명</div>
 						<div class="col-md-2">침실 ${houseVO.bedroom }개</div>
 						<div class="col-md-2">욕실${houseVO.bathroom }개</div>
 					</div>
-						<div class= "row col-md-12">예약가능기간 ${houseVO.bookableDateBegin } ~  ${houseVO.bookableDateEnd } </div>
-				</div>
-				<div class="row col-md-12">
-				
-				<input type="hidden" value="${houseVO.utilities }" id="utilities">
-				<div id="utilDiv" class="col-md-12">
-				<h4>편의시설</h4> 
-				</div>
+					<div class="row col-md-12 border">
+						<div class="col-md-4 border">예약가능기간</div>
+						<div class="col-md-4 border">${houseVO.bookableDateBegin }</div>
+						<div class="col-md-4 border">${houseVO.bookableDateEnd }</div>
+					</div>
+					<div class="row col-md-12">
+
+						<input type="hidden" value="${houseVO.utilities }" id="utilities">
+						<div id="utilDiv" class="col-md-12">
+							<h4>편의시설</h4>
+						</div>
+					</div>
+					<hr>
+					<div class="row col-md-12">${houseVO.scope }</div>
+					<br> <br>
+					<input type="hidden" id="spaces" value=" ${houseVO.spaces }">
+					<div id="spacesDiv" class="col-md-12">
+						<h4>주변 시설</h4>
+					</div>
+
+					<div>가격 ${houseVO.price }</div>
+					<p class="lead">${houseVO.info }</p>
+					<br>
+
+					<input type="hidden" name="houseNo" id="houseNo"
+						value="${houseVO.houseNo }">
+					<input type="hidden" name="memNo" value="${houseVO.memNo }">
+					<input type="hidden" id="hostId" value="${houseVO.hostId }">
+					${ houseVO.info}
 				</div>
 				<hr>
-				<div class="row col-md-12">${houseVO.scope }</div>
-				<br>
-				
-				<br>
-				<input type="hidden"id="spaces" value=" ${houseVO.spaces }" >
-				<div id="spacesDiv" class="col-md-12">
-				<h4>주변 시설</h4>
-				</div>
-			
-				<div>가격 ${houseVO.price }</div>
-				<p class="lead">${houseVO.info }</p>
-				<br>
-
-				<input type="hidden" name="houseNo" id="houseNo"
-					value="${houseVO.houseNo }">
-				<input type="hidden" name="memNo" value="${houseVO.memNo }">
-				<input type="hidden" id="hostId" value="${houseVO.hostId }">
-				${ houseVO.info}
 			</div>
-			<hr>
 		</div>
 
 		<div class="col-md-4 border">
-			<div class="container-fluid">
+			<div class="container">
 				<div class="sidebar-nav">
-					<h4>계산 영역</h4>
-					<button type="button" class="btn navbar-nav navbar-right"
-						data-toggle="modal" data-target="#DateModal">체크인/체크아웃 조회</button>
-					<div class="modal" id="DateModal">
-						<div class="modal-content">
+					<h4>요금을 확인하려면 날짜를 입력해 주세요</h4>
+					<button type="button" class="btn btn-default" data-toggle="modal"
+						data-target="#DateModal">체크인/체크아웃 조회</button>
 
-							<!-- modal head -->
-							<div class="modal-header">
-								<h4 class="modal-title">날짜 선택</h4>
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-							</div>
-							<div class="modal-body">
-								<div class="container-fluid">
-									<div class="row">
-										<div class="col-md-6" id="disableCheckIn" data-toggle="toggle"></div>
-										<div class="col-md-6" id="disableCheckOut"
-											data-toggle="toggle"></div>
-									</div>
+				</div>
+				
+				<div class="modal" id="DateModal" role="dialog"
+					aria-labelledby="mySmallModalLabel">
+					<div class="modal-content">
+
+						<!-- modal head -->
+						<div class="modal-header">
+							<h4 class="modal-title">날짜 선택</h4>
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+						<div class="modal-body">
+							<div class="container-fluid">
+								<div class="row">
+									<div class="col-md-6" id="disableCheckIn" data-toggle="toggle"></div>
+									<div class="col-md-6" id="disableCheckOut" data-toggle="toggle"></div>
 								</div>
 							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary"
-									data-dismiss="modal">닫기</button>
-							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">닫기</button>
 						</div>
 					</div>
 				</div>
@@ -122,15 +137,23 @@
 					<button type="button" id="test">체크</button>
 					<div id="bookResult"></div>
 				</div>
+				<div class="container" id="bookArea">
+					<div class="row col-md-12">
+						<div class="col-md-4">$${houseVO.price } * </div>
+						<div class="col-md-4" id="bookAreaBookMem"></div> 
+						<div class="col-md-3" id="bookAreaDateDiffer"></div>
+					</div>
+					
+				</div>
 			</div>
 		</div>
 	</div>
 
 
-	<%@ include file="../reply.jspf"%>
 
-
-
+	<DIV>
+		<%@ include file="../reply.jspf"%>
+	</DIV>
 	<!-- Trigger/Open The Modal -->
 	<%@ include file="../report.jspf"%>
 
@@ -141,20 +164,41 @@
 		$(document)
 				.ready(
 						function() {
+							
+							$('#bookArea').hide(); // 초기화 영역
 							// 유틸리티 영역
 							var utilities = $('#utilities').val();
-							$.each(utilities.split(','), function(index, element){
-								$('#utilDiv').append('<div class ="row col-md-12 border">' +element + '</div>');
-							});//end each
-							
-							
+							$.each(utilities.split(','), function(index,
+									element) {
+								$('#utilDiv').append(
+										'<div class ="row col-md-12 border">'
+												+ element + '</div>');
+							}); //end each
+
 							var spaces = $('#spaces').val();
-							$.each(spaces.split(','), function(index, element){
-								console.log('spaces index : ' + index + ' spaces element : ' + element );
-								$('#spacesDiv').append('<div class ="row col-md-12 border">' +element + '</div>');
-							});//end each
-							
-							
+							$.each(spaces.split(','), function(index, element) {
+								console.log('spaces index : ' + index
+										+ ' spaces element : ' + element);
+								$('#spacesDiv').append(
+										'<div class ="row col-md-12 border">'
+												+ element + '</div>');
+							}); //end each
+
+							//로딩시 모달 데이터 초기화 
+							$("#disableCheckIn").datepicker().val('');
+							$("#disableCheckIn").datepicker().val('');
+
+							/* 모달 영역*/
+							$('#disableCheckOut')
+									.on(
+											'click focus blur',
+											function() {
+
+												console.log('DateModal : '
+														+ DateModal);
+
+											}); //end disableCheckIn click
+
 							getAllBooks();
 
 							//세션체크
@@ -181,7 +225,7 @@
 							var checkOut = $('#checkOut').val();
 							console.log('checkIn : ' + checkOut);
 							console.log('checkOut : ' + checkOut);
-							var ar1 = null;// checkIn 값을 담을 배열
+							var ar1 = null; // checkIn 값을 담을 배열
 							var date1 = null;
 							console.log('date1 :' + date1);
 							//체크아웃
@@ -204,47 +248,19 @@
 										//var datediffer = Math.ceil((checkout.getTime()-checkin.getTime())/(1000*3600*24));
 										//console.log('disableCheckOut click datediffer : ' + datediffer);
 
-									});//end disableCheckOut click
-
-							$('#bookMem')
-									.focus(
-											function() {
-												console.log('focus');
-												var bookMem = $('#bookMem')
-														.val();
-												var price = $('#price').val();
-												var dateDiffer = $(
-														'#dateDiffer').val();
-												$('#totalPrice').val(
-														bookMem * price
-																* dateDiffer);
-
-												console.log("bookmem : "
-														+ bookMem)
-												console.log($('#price').val());
-												console.log($('#dateDiffer')
-														.val());
-											});
-							$('#bookMem')
-									.blur(
-											function() {
-												console.log('blur');
-												var bookMem = $('#bookMem')
-														.val();
-												var price = $('#price').val();
-												var dateDiffer = $(
-														'#dateDiffer').val();
-												$('#totalPrice').val(
-														bookMem * price
-																* dateDiffer);
-
-												console.log("bookmem : "
-														+ bookMem)
-												console.log($('#price').val());
-												console.log($('#dateDiffer')
-														.val());
-
-											});
+									}); //end disableCheckOut click
+									
+							$('#bookMem').on('click blur focus', function(){
+								if($(this).value === 0 || $('#DateDiffer').val() !=="undefined"){
+									$('#bookArea').hide();
+								}else{
+									console.log('this is ' + $('#bookMem').val());
+									$('#bookAreaBookMem').html($('#bookMem').val() + '명');
+									$('#bookAreaDateDiffer').html($('#DateDiffer').val() +'박');
+									$('#bookArea').show();
+								}
+								
+							});// end bookMem click
 
 							//테스트 실행
 							$('#test').click(
@@ -282,7 +298,7 @@
 											console.log('item : ' + index
 													+ " value : " + item);
 										});
-									});//end test
+									}); //end test
 
 							//bookForm ajax 작성
 							$('#bookbtn')
@@ -394,11 +410,12 @@
 																						+ '<button type="button" id="book_cancel">취소하기</button>');
 																//getAllBooks(); // 예약후 예약 불러오기
 															} //end sucess
-														});//end ajax 
+														}); //end ajax 
 												//return false; // 새로고침 없이
 												//getAllBooks(); // 예약후 예약 불러오기
 
-											});//end click;
+											}); //end book mem click;
+
 							//end book ajax
 							//getBookReusult 모든 결과 가져오기  
 
@@ -508,7 +525,7 @@
 																		console
 																				.log(split.length);
 
-																	});// end each
+																	}); // end each
 
 													// 특정일 선택막기
 													function disableAllTheseDays(
@@ -712,9 +729,9 @@
 													$('#books').html(list);
 
 												} //end callback
-										)//end getJSON
+										) //end getJSON
 
-							}//end getAllbooks
+							} //end getAllbooks
 
 							//이미지 출력기능
 							var imgSource = $('#imgSource').val();
@@ -724,9 +741,10 @@
 							var list = '';
 							imgsplit
 									.forEach(function(element, index) {
-										if (imgsplit[imgsplit.length - 1] != element) {
-											console.log("index : " + index
-													+ "element : " + element);
+										if (imgsplit.length / 2 - 1 > index) {
+											console.log(" bx index : " + index
+													+ " bx element : "
+													+ element);
 											list += '<img src="/homeshare/display/'
 													+ element
 													+ '"class="col-md-5 img-responsive" size="100%"><br>';
@@ -735,7 +753,7 @@
 							$('#imgArea').html(list);
 							//end img 출력기능
 
-						});//end document
+						}); //end document
 	</script>
 </body>
 </html>
