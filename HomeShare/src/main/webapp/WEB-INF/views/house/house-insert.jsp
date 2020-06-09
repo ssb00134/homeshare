@@ -8,10 +8,10 @@
 <style type="text/css">
 #floatMenu {
 	position: absolute;
-	width: 200px;
+	width: 70%;
 	height: 200px;
 	left: 50px;
-	top: 250px;
+	top: 350px;
 	background-color: #606060;
 	color: #fff;
 }
@@ -19,6 +19,25 @@
 .btn .btnCircle {
 	border-border-radius: 50%;
 }
+
+header {
+  position: fixed;
+  top: 0;
+  /* width: 100% */
+  left: 0;
+  right: 0;
+  z-index : 1;
+  
+  height: 75px;
+  padding: 1rem;
+  color: white;
+  background: teal;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 </style>
 <%@ include file="../cdn.jspf"%>
 
@@ -30,16 +49,21 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b76b064de112b5b283e72470515766f4"></script>
 </head>
 <body>
-	<%@ include file="../navheader.jspf"%>
+	<header><h1>하우스 등록하기</h1></header>
 	<div class="row">
 		<div class="col-md-2"></div>
 		<form action="/homeshare/house/house-insert-post"
 			enctype="multipart/form-data" class="form-horizontal col-md-8"
 			method="post">
-
-			<h1>하우스 등록하기</h1>
+			
+			
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
 			<div id="class1">
-				<p>1단계 기본 사항 입력</p>
+				<h1>1단계 기본 사항 입력</h1>
 			</div>
 
 			<input type="hidden" name="houseNo" value="0">
@@ -48,6 +72,10 @@
 			<input type="hidden" name="memNo" value="${memberVO.memNo }">
 			<input type="hidden" name="reportCount" value="0">
 			<input type="hidden" name="hostId" value="${memberVO.memId }">
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
 			<h4>등록하시려는 숙소의 범위를 입력해 주세요</h4>
 			<div class="form-group border">
 				<select name="scope" required="required"
@@ -113,11 +141,11 @@
 			</div>
 			<div class="form-group border">
 			<input type="text" class="form-control"  name="location" id="roadFullAddr" required="required" readonly>
-			<input type="text"  id="local" required="required" readonly>
+			<input type="text"  id="local"  name="local" required="required" readonly>
 			<input type="hidden" id="entX">
 			<input type="hidden"  id="entY">
-			<input type="hidden" id="wgsX">
-			<input type="hidden"  id="wgsY">
+			<input type="hidden" id="wgsX" name="wgsX">
+			<input type="hidden"  id="wgsY" name="wgsY">
 			
 			</div>
 			<div id="map" class="border"  style="width:500px;height:400px;"></div>
@@ -314,7 +342,7 @@
 			<button class="btn" type="submit">등록하기</button>
 		</form>
 		<div class="col-md-2">
-			<div id="floatMenu">
+			<div id="floatMenu" class="form-control">
 				<button class="btn">prev</button>
 				<div data-target="#class1">1단계 기본 사항 입력</div>
 				<div data-target="#class2">2단계 상세 정보 입력하기</div>
