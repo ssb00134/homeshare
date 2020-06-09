@@ -66,7 +66,23 @@ public class ReplyRestContrller {
 
 		return new ResponseEntity<List<ReplyVO>>(list, HttpStatus.OK);
 	};
-
+	
+	@RequestMapping(value = "/{no}", method = RequestMethod.GET)
+	public ResponseEntity<String> readthisReply(
+			@PathVariable("houseNo") int houseNo, @RequestBody ReplyVO vo) {
+		
+		logger.info("get 실행 자신의 리플 보기");
+		int result = replyService.update(vo);
+		ResponseEntity<String> entity = null;
+		if (result == 1) {
+			entity = new ResponseEntity<String>("success", HttpStatus.OK);
+		} else {
+			entity = new ResponseEntity<String>("fail", HttpStatus.OK);
+		}
+		return entity;
+	}
+	
+	
 	@RequestMapping(value = "/{no}", method = RequestMethod.PUT)
 	public ResponseEntity<String> updateReply(@PathVariable("no") int rno, @RequestBody ReplyVO vo) {
 		vo.setRno(rno);

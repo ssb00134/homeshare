@@ -94,7 +94,7 @@ public class ReplyVO {
 	@Override
 	public String toString() {
 		return "ReplyVO [rno=" + rno + ", houseNo=" + houseNo + ", content=" + content + ", memId=" + memId
-				+ ", regdate=" + regdate + ", score=" + replyScore + ", cleanScore=" + cleanScore + ", checkinScore="
+				+ ", regdate=" + regdate + ", replyScore=" + replyScore + ", cleanScore=" + cleanScore + ", checkinScore="
 				+ checkinScore + "]";
 	}
 	

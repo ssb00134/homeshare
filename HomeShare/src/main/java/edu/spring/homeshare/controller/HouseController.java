@@ -50,10 +50,10 @@ public class HouseController {
 
 	@Resource(name = "uploadPath")
 	private String uploadPath;
-
-	// TODO : 삭제된 값이 리스트에 남아있음
+	
 	@RequestMapping(value = "/house-list", method = RequestMethod.GET)
-	public void houseLIst(Model model, Integer page, Integer prePage, HttpServletRequest req) {
+	public void search(HttpServletRequest req, Model model, Integer page, Integer prePage) {
+
 		/* 페이징 처리 */
 		PageCriteria c = new PageCriteria();
 		logger.info("page : " + page);
@@ -96,20 +96,6 @@ public class HouseController {
 		
 		for(int i=0; i<list.size(); i++) {
 			logger.info("list에서 받은 houseNo : " + list.get(i).getHouseNo());
-			
-			//후기가 있으면 실행할것
-			int replycount =  replyService.readCountHouseNo(list.get(i).getHouseNo());
-			if(replycount>0) { // 만약 후기가 있으면 실행할것
-				score[i] = replyService.readAvgScore(list.get(i).getHouseNo());
-				logger.info("score  : " + (Integer)score[i]);
-				list.get(i).setScore(score[i]);
-			}
-			
-			logger.info("replycount : " + replycount);
-			
-			
-			
-			
 			logger.info("list : " + list.toString());
 		}
 		logger.info("list 정보 : " + list.toString());
@@ -123,15 +109,14 @@ public class HouseController {
 		maker.setPageData();
 		model.addAttribute("pageMaker", maker);
 		
-		/* 현재 시퀀스 보기*/
-		int seqence = houseService.seqence();
-		logger.info("현재 시퀀스 : "  +seqence);
 		
 		logger.info("전체 하우스 수 : " + maker.getTotalCount());
 		logger.info("현재 선택된 페이지 : " + c.getPage());
 		logger.info("한 페이지 당 게시글 수 : " + c.getNumsPerPage());
 		logger.info("시작 페이지 링크 번호(startPageNO) : " + maker.getStartPageNo());
 		logger.info("끝 페이지 링크 번호(endPageNo) : " + maker.getEndPageNo());
+
+
 	}
 
 	/* location 검색 실행 */
