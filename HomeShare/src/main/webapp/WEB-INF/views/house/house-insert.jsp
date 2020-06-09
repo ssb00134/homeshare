@@ -21,42 +21,51 @@
 }
 
 header {
-  position: fixed;
-  top: 0;
-  /* width: 100% */
-  left: 0;
-  right: 0;
-  z-index : 1;
-  
-  height: 75px;
-  padding: 1rem;
-  color: white;
-  background: teal;
-  font-weight: bold;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+	position: fixed;
+	top: 0;
+	/* width: 100% */
+	left: 0;
+	right: 0;
+	z-index: 1;
+	text-align: center;
+	height: 75px;
+	padding: 1rem;
+	color: white;
+	background: grey;
+	font-weight: bold;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 75px;
 }
-
 </style>
 <%@ include file="../cdn.jspf"%>
 
- <!-- proj4 -->
-  <script
-  src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.6.2/proj4-src.js"
-></script>
- 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b76b064de112b5b283e72470515766f4"></script>
+<!-- proj4 -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.6.2/proj4-src.js"></script>
+
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b76b064de112b5b283e72470515766f4"></script>
 </head>
 <body>
-	<header><h1>하우스 등록하기</h1></header>
+	<header class="border">
+		<div class="row">
+		<div class="col-md-2 border">
+		<a href="/homeshare/">
+		<svg fill="#000000" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48px" height="48px"><path d="M 12 3.90625 L 11.75 4.0625 L 0.25 11.0625 L 0.75 11.9375 L 12 5.09375 L 23.25 11.9375 L 23.75 11.0625 L 20 8.78125 L 20 4 L 18 4 L 18 7.5625 L 12.25 4.0625 Z M 12 6.5 L 2 12.5 L 2 24 L 22 24 L 22 12.5 Z M 9 13 L 15 13 L 15 22 L 9 22 Z"/></svg>
+		</a>
+		</div>
+		<div class="col-md-8"><h1>숙소 등록하기</h1></div>
+		</div>
+	</header>
 	<div class="row">
 		<div class="col-md-2"></div>
 		<form action="/homeshare/house/house-insert-post"
 			enctype="multipart/form-data" class="form-horizontal col-md-8"
 			method="post">
-			
-			
+
+
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
@@ -132,23 +141,25 @@ header {
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
-			
-			
-			
+
+
+
 			<p>숙소의 위치를 알려주세요</p>
 			<div class="form-group border">
-				<button type="button" class="btn" id="btnLocation">주소 입력</button>	
+				<button type="button" class="btn" id="btnLocation">주소 입력</button>
 			</div>
 			<div class="form-group border">
-			<input type="text" class="form-control"  name="location" id="roadFullAddr" required="required" readonly>
-			<input type="text"  id="local"  name="local" required="required" readonly>
-			<input type="hidden" id="entX">
-			<input type="hidden"  id="entY">
-			<input type="hidden" id="wgsX" name="wgsX">
-			<input type="hidden"  id="wgsY" name="wgsY">
-			
+				<input type="text" class="form-control" name="location"
+					id="roadFullAddr" required="required" readonly>
+				<input type="text" id="local" name="local" required="required"
+					readonly>
+				<input type="hidden" id="entX">
+				<input type="hidden" id="entY">
+				<input type="hidden" id="wgsX" name="wgsX">
+				<input type="hidden" id="wgsY" name="wgsY">
+
 			</div>
-			<div id="map" class="border"  style="width:500px;height:400px;"></div>
+			<div id="map" class="border" style="width: 500px; height: 400px;"></div>
 			<div id="mapOption"></div>
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
@@ -156,7 +167,7 @@ header {
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
-			
+
 			<p>어떤 편의시설을 제공하나요?</p>
 			<div class="">
 				<div class="checkbox">
@@ -188,16 +199,16 @@ header {
 					헤어 드라이어
 				</div>
 			</div>
-			
+
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
-			
-			
-			
+
+
+
 			<div>게스트가 어떤 시설을 이용할 수 있나요?</div>
 			<div>
 				<input type="checkbox" name="spaces" value="주방">
@@ -219,38 +230,38 @@ header {
 				<input type="checkbox" name="spaces" value="헬스장">
 				헬스장
 			</div>
-			
+
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
-			
+
 			<div id="class2">
 				<h1>2단계 상세 정보 입력하기</h1>
 			</div>
 
 			<h1>최대 10개의 파일을 올려주세요</h1>
 			<input type="file" name="files" multiple>
-			
+
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
-			
+
 
 			<p>숙소의 제목을 입력해 주세요</p>
 			<div class="form-group">
-			<textarea name="title" class="form-control" required="required"></textarea>
+				<textarea name="title" class="form-control" required="required"></textarea>
 			</div>
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
-			
+
 			<p>게스트에게 숙소에 대해 설명해 주세요</p>
 			<div class="form-group">
-			<textarea name="info" class="form-control" required="required"></textarea>
+				<textarea name="info" class="form-control" required="required"></textarea>
 			</div>
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
@@ -259,7 +270,7 @@ header {
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
-			
+
 			<hr>
 			<div id="class3">
 				<h1>3단계 게스트를 맞이할 준비를 해주세요</h1>
@@ -287,17 +298,15 @@ header {
 			</select>
 			<div>체크인 가능 시간을 선택해 주세요</div>
 			<div class="form-group">
-					<div class="form-group col-md-4">
-					<label for="checkinTime">시작</label>
-					 <select name="checkinTime" id="checkinTime" 
-						required="required"></select>
-					</div>
-					
-					<div class="form-group col-md-4">
-						<label for="checkinTime">종료</label>
-					 <select name="checkoutTime" id="checkoutTime" 
-						required="required"></select>
-						</div>
+				<div class="form-group col-md-4">
+					<label for="checkinTime">시작</label> <select name="checkinTime"
+						id="checkinTime" required="required"></select>
+				</div>
+
+				<div class="form-group col-md-4">
+					<label for="checkinTime">종료</label> <select name="checkoutTime"
+						id="checkoutTime" required="required"></select>
+				</div>
 			</div>
 
 			<div class="form-group border"></div>
@@ -317,7 +326,7 @@ header {
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
-			
+
 			<p>예약 가능한 시간 정하기</p>
 			최소
 			<input type="date" name="bookableDateBegin" id="bookableDateBegin"
@@ -331,14 +340,14 @@ header {
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
-			
+
 			<p>숙소요금 설정하기</p>
 			<input type="text" name="price" required="required">
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
-			
+
 			<button class="btn" type="submit">등록하기</button>
 		</form>
 		<div class="col-md-2">
@@ -353,96 +362,141 @@ header {
 	</div>
 	<%@ include file="../footer.jspf"%>
 	<script type="text/javascript">
-
 		$(document)
 				.ready(
-				function() {
+						function() {
 
-					
+							$('#btnLocation')
+									.click(
+											function() {
+												// 주소검색을 수행할 팝업 페이지를 호출합니다.
+												// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrCoordUrl.do)를 호출하게 됩니다.
+												var pop = window
+														.open(
+																"/homeshare/test/jusoPopup",
+																"pop",
+																"width=570,height=420, scrollbars=yes, resizable=yes");
 
-					
-					
-							$('#btnLocation').click(function(){
-								// 주소검색을 수행할 팝업 페이지를 호출합니다.
-								// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrCoordUrl.do)를 호출하게 됩니다.
-								var pop = window.open("/homeshare/test/jusoPopup", "pop",
-								"width=570,height=420, scrollbars=yes, resizable=yes");	
-						
-								$('#map').html('<div id="mapClick" onclick="mapClick">클릭해서 주소를 확인해 주세요</div>');
-								
-								$('#mapClick').on('click' , function(){
-									console.log('mapClick click');
-									
-									/* 지도 그리기 */
-									var entX = $('#entX').val() * 1; //ent x : grs80 좌표
-									var entY = $('#entY').val() * 1; //entY : grs80 좌표
-					
-									
-									/*proj4 좌표변환 라이브러리 */
-									proj4.defs["EPSG:5179"] = "+proj=tmerc +lat_0=38 +lon_0=127.5 +k=0.9996 +x_0=1000000 +y_0=2000000 +ellps=GRS80 +units=m +no_defs";//제공되는 좌표 
-									
-									var grs80 = proj4.Proj(proj4.defs["EPSG:5179"]);
-									var wgs84 = proj4.Proj(proj4.defs["EPSG:4326"]); //경위도 
-									
-									var p =proj4.Point( entX , entY );// x,y가 바뀜 주의할것
-									p = proj4.transform( grs80, wgs84, p); 
-									console.log(p.x + " " + p.y); 
-									/*end proj4 좌표변환 라이브러리 */
-									
-									var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-									var options = { //지도를 생성할 때 필요한 기본 옵션
-										center: new kakao.maps.LatLng(p.y, p.x), //지도의 중심좌표.
-										level: 3 //지도의 레벨(확대, 축소 정도)
-									};
+												$('#map')
+														.html(
+																'<div id="mapClick" onclick="mapClick">클릭해서 주소를 확인해 주세요</div>');
 
-									var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-									/* 주소 저장하기*/
-									$('#wgsX').val(p.y);
-									$('#wgsY').val(p.x);
-									
-									$('#mapOption').append(
-											'<div>선택한 주소가 맞습니까?<div>'
-											+ '<button id="mapYes">네 맞습니다. </button>'
-											+ '<button id="mapNo">아니오 주소지가 다릅니다. </button>');
-									
-									
-									$('#mapYes').click(function(){
-										$('#mapOption').html('');
-									});
-									$('#mapNo').click(function(){ //모두 초기화하기
-										$('#mapOption').html('');
-										$('#map').html('');
-										$('#wgsX').val('');
-										$('#wgsY').val('');
-										$('#entX').val('');
-										$('#entY').val('');
-										$('#location').val('');
-										$('#local').val('');
-										
-									});
-									
-								}); //end mapClick click
-								
-							});
-							
-							
-								
-			
-							
-							
-		
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
+												$('#mapClick')
+														.on(
+																'click',
+																function() {
+																	console
+																			.log('mapClick click');
+
+																	/* 지도 그리기 */
+																	var entX = $(
+																			'#entX')
+																			.val() * 1; //ent x : grs80 좌표
+																	var entY = $(
+																			'#entY')
+																			.val() * 1; //entY : grs80 좌표
+
+																	/*proj4 좌표변환 라이브러리 */
+																	proj4.defs["EPSG:5179"] = "+proj=tmerc +lat_0=38 +lon_0=127.5 +k=0.9996 +x_0=1000000 +y_0=2000000 +ellps=GRS80 +units=m +no_defs";//제공되는 좌표 
+
+																	var grs80 = proj4
+																			.Proj(proj4.defs["EPSG:5179"]);
+																	var wgs84 = proj4
+																			.Proj(proj4.defs["EPSG:4326"]); //경위도 
+
+																	var p = proj4
+																			.Point(
+																					entX,
+																					entY);// x,y가 바뀜 주의할것
+																	p = proj4
+																			.transform(
+																					grs80,
+																					wgs84,
+																					p);
+																	console
+																			.log(p.x
+																					+ " "
+																					+ p.y);
+																	/*end proj4 좌표변환 라이브러리 */
+
+																	var container = document
+																			.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+																	var options = { //지도를 생성할 때 필요한 기본 옵션
+																		center : new kakao.maps.LatLng(
+																				p.y,
+																				p.x), //지도의 중심좌표.
+																		level : 3
+																	//지도의 레벨(확대, 축소 정도)
+																	};
+
+																	var map = new kakao.maps.Map(
+																			container,
+																			options); //지도 생성 및 객체 리턴
+																	/* 주소 저장하기*/
+																	$('#wgsX')
+																			.val(
+																					p.y);
+																	$('#wgsY')
+																			.val(
+																					p.x);
+
+																	$(
+																			'#mapOption')
+																			.append(
+																					'<div>선택한 주소가 맞습니까?<div>'
+																							+ '<button id="mapYes">네 맞습니다. </button>'
+																							+ '<button id="mapNo">아니오 주소지가 다릅니다. </button>');
+
+																	$('#mapYes')
+																			.click(
+																					function() {
+																						$(
+																								'#mapOption')
+																								.html(
+																										'');
+																					});
+																	$('#mapNo')
+																			.click(
+																					function() { //모두 초기화하기
+																						$(
+																								'#mapOption')
+																								.html(
+																										'');
+																						$(
+																								'#map')
+																								.html(
+																										'');
+																						$(
+																								'#wgsX')
+																								.val(
+																										'');
+																						$(
+																								'#wgsY')
+																								.val(
+																										'');
+																						$(
+																								'#entX')
+																								.val(
+																										'');
+																						$(
+																								'#entY')
+																								.val(
+																										'');
+																						$(
+																								'#location')
+																								.val(
+																										'');
+																						$(
+																								'#local')
+																								.val(
+																										'');
+
+																					});
+
+																}); //end mapClick click
+
+											});
+
 							/* 클릭시 이동*/
 							$("#floatMenu div").click(
 									function() {
