@@ -9,7 +9,7 @@
 <%
 	String inputYn = request.getParameter("inputYn");
 String roadFullAddr = request.getParameter("roadFullAddr");
-
+String sggNm  = request.getParameter("sggNm");
 String entX = request.getParameter("entX");
 String entY = request.getParameter("entY");
 %>
@@ -30,11 +30,13 @@ $(document).ready(function() {
 			var roadFullAddr = "<%=roadFullAddr%>";
 			var entX = "<%=entX%>";
 			var entY = "<%=entY%>";
+			var sggNm  = "<%=sggNm%>";
 			console.log('roadFullAddr :  ' + roadFullAddr);
 			$("#roadFullAddr",opener.document).val(roadFullAddr); 
 			$("#entX",opener.document).val(entX); 
 			$("#entY",opener.document).val(entY); 
-			
+			$("#city",opener.document).val(sggNm);
+			console.log('sggNm :  ' + sggNm);
 			window.close();
 			}
 	});//end document

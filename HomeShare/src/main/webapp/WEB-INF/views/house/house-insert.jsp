@@ -21,6 +21,13 @@
 }
 </style>
 <%@ include file="../cdn.jspf"%>
+
+ <!-- proj4 -->
+  <script
+  src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.6.2/proj4-src.js"
+></script>
+ 
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b76b064de112b5b283e72470515766f4"></script>
 </head>
 <body>
 	<%@ include file="../navheader.jspf"%>
@@ -105,11 +112,16 @@
 				<button type="button" class="btn" id="btnLocation">주소 입력</button>	
 			</div>
 			<div class="form-group border">
-			<input type="text" class="form-control"  name="location" id="roadFullAddr" required="required">
-			<input type="text" id="entX" required="required" readonly>
-			<input type="text"  id="entY" required="required">
-			</div>
+			<input type="text" class="form-control"  name="location" id="roadFullAddr" required="required" readonly>
+			<input type="text"  id="city" required="required" readonly>
+			<input type="hidden" id="entX">
+			<input type="hidden"  id="entY">
+			<input type="hidden" id="wgsX">
+			<input type="hidden"  id="wgsY">
 			
+			</div>
+			<div id="map" class="border"  style="width:500px;height:400px;"></div>
+			<div id="mapOption"></div>
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
@@ -317,20 +329,91 @@
 		$(document)
 				.ready(
 				function() {
-					function jusoCallBack(roadFullAddr, entX, entY){
-						// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-						console.log('roadFullAddr : ' + roadFullAddr);
-					}; //end document
+
+					
+
+					
+					
 							$('#btnLocation').click(function(){
 								// 주소검색을 수행할 팝업 페이지를 호출합니다.
 								// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrCoordUrl.do)를 호출하게 됩니다.
 								var pop = window.open("/homeshare/test/jusoPopup", "pop",
-								"width=570,height=420, scrollbars=yes, resizable=yes");
-								console.log('jusoCallBack 실행');
+								"width=570,height=420, scrollbars=yes, resizable=yes");	
+						
+								$('#map').html('<div id="mapClick" onclick="mapClick">클릭해서 주소를 확인해 주세요</div>');
 								
-								
+								$('#mapClick').on('click' , function(){
+									console.log('mapClick click');
+									
+									/* 지도 그리기 */
+									var entX = $('#entX').val() * 1; //ent x : grs80 좌표
+									var entY = $('#entY').val() * 1; //entY : grs80 좌표
+					
+									
+									/*proj4 좌표변환 라이브러리 */
+									proj4.defs["EPSG:5179"] = "+proj=tmerc +lat_0=38 +lon_0=127.5 +k=0.9996 +x_0=1000000 +y_0=2000000 +ellps=GRS80 +units=m +no_defs";//제공되는 좌표 
+									
+									var grs80 = proj4.Proj(proj4.defs["EPSG:5179"]);
+									var wgs84 = proj4.Proj(proj4.defs["EPSG:4326"]); //경위도 
+									
+									var p =proj4.Point( entX , entY );// x,y가 바뀜 주의할것
+									p = proj4.transform( grs80, wgs84, p); 
+									console.log(p.x + " " + p.y); 
+									/*end proj4 좌표변환 라이브러리 */
+									
+									var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+									var options = { //지도를 생성할 때 필요한 기본 옵션
+										center: new kakao.maps.LatLng(p.y, p.x), //지도의 중심좌표.
+										level: 3 //지도의 레벨(확대, 축소 정도)
+									};
+
+									var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+									/* 주소 저장하기*/
+									$('#wgsX').val(p.y);
+									$('#wgsY').val(p.x);
+									
+									$('#mapOption').append(
+											'<div>선택한 주소가 맞습니까?<div>'
+											+ '<button id="mapYes">네 맞습니다. </button>'
+											+ '<button id="mapNo">아니오 주소지가 다릅니다. </button>');
+									
+									
+									$('#mapYes').click(function(){
+										$('#mapOption').html('');
+									});
+									$('#mapNo').click(function(){ //모두 초기화하기
+										$('#mapOption').html('');
+										$('#map').html('');
+										$('#wgsX').val('');
+										$('#wgsY').val('');
+										$('#entX').val('');
+										$('#entY').val('');
+										$('#location').val('');
+										$('#city').val('');
+										
+									});
+									
+								}); //end mapClick click
 								
 							});
+							
+							
+								
+			
+							
+							
+		
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
 							
 							/* 클릭시 이동*/
 							$("#floatMenu div").click(

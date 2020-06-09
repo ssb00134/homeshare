@@ -23,15 +23,10 @@
 	<%@ include file="../navheader.jspf"%>
 	<h1>검색결과</h1>
 	
-	<div class="inner-addon left-addon">
-    <i class="glyphicon glyphicon-user">유저</i>
-   
-</div>
 	
-	
-	<hr>
-	<br>
-	<div id="house-lists">
+	<div class="row">
+	<div id="leftSpace" class="col-md-1"></div>
+	<div id="house-lists" class="col-md-6">
 		<c:forEach var="vo" items="${houseList }">
 			<div class="container-fluid">
 				<div class="house_list_item" >
@@ -72,6 +67,8 @@
 			</div>
 		</c:forEach>
 	</div>
+	<div id="rightSpace" class="col-md-1"></div>
+	</div>
 
 	
 	<hr>
@@ -97,7 +94,6 @@
 		</form>
 	</div>
 
-	<div></div>
 	<%@ include file="../footer.jspf"%>
 	<script type="text/javascript">
 		$(document)
