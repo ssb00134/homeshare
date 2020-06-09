@@ -32,11 +32,16 @@ public class HouseVO  {
 	private String location;
 	private int reportCount;
 	private String hostId;
+	private String wgsX;
+	private String wgsY;
+	private String local;
 	
 	public HouseVO() {}
 
 
-	public HouseVO(int houseNo, String type, String scope, int maxCapacity, int bedroom, int bed, int bathroom, String utilities, String spaces, String title, String info, String rules, String checkinTime, String checkoutTime, int stayNight, int stayDay, Date bookableDateBegin, Date bookableDateEnd, int price, int memNo, String replies, String image, int checkinInterval, double score, String location, int reportCount, String hostId) {
+	
+
+	public HouseVO(int houseNo, String type, String scope, int maxCapacity, int bedroom, int bed, int bathroom, String utilities, String spaces, String title, String info, String rules, String checkinTime, String checkoutTime, int stayNight, int stayDay, Date bookableDateBegin, Date bookableDateEnd, int price, int memNo, String replies, String image, int checkinInterval, double score, String location, int reportCount, String hostId, String wgsX, String wgsY, String local) {
 		super();
 		this.houseNo = houseNo;
 		this.type = type;
@@ -65,7 +70,13 @@ public class HouseVO  {
 		this.location = location;
 		this.reportCount = reportCount;
 		this.hostId = hostId;
+		this.wgsX = wgsX;
+		this.wgsY = wgsY;
+		this.local = local;
 	}
+
+
+
 
 	public int getHouseNo() {
 		return houseNo;
@@ -338,14 +349,59 @@ public class HouseVO  {
 	}
 
 
-	@Override
-	public String toString() {
-		return "HouseVO [houseNo=" + houseNo + ", type=" + type + ", scope=" + scope + ", maxCapacity=" + maxCapacity + ", bedroom=" + bedroom + ", bed=" + bed + ", bathroom=" + bathroom + ", utilities=" + utilities + ", spaces=" + spaces + ", title=" + title + ", info=" + info + ", rules=" + rules + ", checkinTime=" + checkinTime + ", checkoutTime=" + checkoutTime + ", stayNight=" + stayNight + ", stayDay=" + stayDay + ", bookableDateBegin=" + bookableDateBegin + ", bookableDateEnd="
-				+ bookableDateEnd + ", price=" + price + ", memNo=" + memNo + ", replies=" + replies + ", image=" + image + ", checkinInterval=" + checkinInterval + ", score=" + score + ", location=" + location + ", reportCount=" + reportCount + ", hostId=" + hostId + "]";
+
+
+	public String getWgsX() {
+		return wgsX;
 	}
 
 
 
+
+	public void setWgsX(String wgsX) {
+		this.wgsX = wgsX;
+	}
+
+
+
+
+	public String getWgsY() {
+		return wgsY;
+	}
+
+
+
+
+	public void setWgsY(String wgsY) {
+		this.wgsY = wgsY;
+	}
+
+
+
+
+	public String getLocal() {
+		return local;
+	}
+
+
+
+
+	public void setLocal(String local) {
+		this.local = local;
+	}
+
+
+
+
+	@Override
+	public String toString() {
+		return "HouseVO [houseNo=" + houseNo + ", type=" + type + ", scope=" + scope + ", maxCapacity=" + maxCapacity + ", bedroom=" + bedroom + ", bed=" + bed + ", bathroom=" + bathroom + ", utilities=" + utilities + ", spaces=" + spaces + ", title=" + title + ", info=" + info + ", rules=" + rules + ", checkinTime=" + checkinTime + ", checkoutTime=" + checkoutTime + ", stayNight=" + stayNight + ", stayDay=" + stayDay + ", bookableDateBegin=" + bookableDateBegin + ", bookableDateEnd="
+				+ bookableDateEnd + ", price=" + price + ", memNo=" + memNo + ", replies=" + replies + ", image=" + image + ", checkinInterval=" + checkinInterval + ", score=" + score + ", location=" + location + ", reportCount=" + reportCount + ", hostId=" + hostId + ", wgsX=" + wgsX + ", wgsY=" + wgsY + ", local=" + local + "]";
+	}
+	
+	
+	
+	
 
 	
 	

@@ -35,7 +35,7 @@ $(document).ready(function() {
 			$("#roadFullAddr",opener.document).val(roadFullAddr); 
 			$("#entX",opener.document).val(entX); 
 			$("#entY",opener.document).val(entY); 
-			$("#city",opener.document).val(sggNm);
+			$("#local",opener.document).val(sggNm);
 			console.log('sggNm :  ' + sggNm);
 			window.close();
 			}

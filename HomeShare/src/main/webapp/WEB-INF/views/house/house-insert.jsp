@@ -113,7 +113,7 @@
 			</div>
 			<div class="form-group border">
 			<input type="text" class="form-control"  name="location" id="roadFullAddr" required="required" readonly>
-			<input type="text"  id="city" required="required" readonly>
+			<input type="text"  id="local" required="required" readonly>
 			<input type="hidden" id="entX">
 			<input type="hidden"  id="entY">
 			<input type="hidden" id="wgsX">
@@ -389,7 +389,7 @@
 										$('#entX').val('');
 										$('#entY').val('');
 										$('#location').val('');
-										$('#city').val('');
+										$('#local').val('');
 										
 									});
 									

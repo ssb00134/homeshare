@@ -207,7 +207,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{score},
 		#{location},
 		#{reportCount},
-		#{hostId}
+		#{hostId},
+		#{wgsX},
+		#{wgsY},
+		#{local}
 		)
 		<selectKey keyProperty="houseNo" resultType="Integer"
 			order="BEFORE">
@@ -249,7 +252,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		${location}
 		=#{location},
 		${reportCount} = #{reportCount},
-		${hostId} = #{hostId}
+		${hostId} = #{hostId},
+		${wgsX} = #{wgsX},
+		${wgsY} = #{wgsY},
+		${local} = #{local}
 		where
 		${houseNo} = #{houseNo}
 

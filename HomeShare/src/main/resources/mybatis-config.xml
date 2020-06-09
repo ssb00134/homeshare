@@ -48,6 +48,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<property name="location" value="location"/>
 		<property name="reportCount" value="reportCount"/>
 		<property name="hostId" value="hostId"/>
+		<property name="wgsX" value="wgsX"/>
+		<property name="wgsY" value="wgsY"/>
+		<property name="local" value="local"/>
 
 
 
