@@ -76,7 +76,11 @@ public class HouseController {
 
 		/* hash맵에 정보 넣기 */
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("location", location);
+		if(location == null) {
+			map.put("location", "");
+		}else {
+			map.put("location", location);			
+		}
 		map.put("bookableDateBegin", bookableDateBegin);
 		map.put("bookableDateEnd", bookableDateEnd);
 		map.put("maxCapacity", maxCapacity);
@@ -87,10 +91,7 @@ public class HouseController {
 	
 		
 		List<HouseVO> list = houseService.multySelect(map);
-		
-		/* score에 리플 평균값 넣기*/
-		int[] score =  new int[list.size()];
-		
+		logger.info("list : " + list.toString());
 		//test
 		logger.info("list 1번재 값 : " + list.get(0).getHouseNo());
 		
