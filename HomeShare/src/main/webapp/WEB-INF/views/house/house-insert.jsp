@@ -55,6 +55,7 @@ header {
 		<a href="/homeshare/">
 		<svg fill="#000000" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48px" height="48px"><path d="M 12 3.90625 L 11.75 4.0625 L 0.25 11.0625 L 0.75 11.9375 L 12 5.09375 L 23.25 11.9375 L 23.75 11.0625 L 20 8.78125 L 20 4 L 18 4 L 18 7.5625 L 12.25 4.0625 Z M 12 6.5 L 2 12.5 L 2 24 L 22 24 L 22 12.5 Z M 9 13 L 15 13 L 15 22 L 9 22 Z"/></svg>
 		</a>
+		MAIN
 		</div>
 		<div class="col-md-8"><h1>숙소 등록하기</h1></div>
 		</div>
@@ -362,313 +363,264 @@ header {
 	</div>
 	<%@ include file="../footer.jspf"%>
 	<script type="text/javascript">
-		$(document)
-				.ready(
-						function() {
+    $(document).ready(function() {
+                $('#btnLocation').click(function() {
+                            // 주소검색을 수행할 팝업 페이지를 호출합니다.
+                            // 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrCoordUrl.do)를 호출하게 됩니다.
+                            var pop = window
+                                .open(
+                                    "/homeshare/test/jusoPopup",
+                                    "pop",
+                                    "width=570,height=420, scrollbars=yes, resizable=yes");
 
-							$('#btnLocation')
-									.click(
-											function() {
-												// 주소검색을 수행할 팝업 페이지를 호출합니다.
-												// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrCoordUrl.do)를 호출하게 됩니다.
-												var pop = window
-														.open(
-																"/homeshare/test/jusoPopup",
-																"pop",
-																"width=570,height=420, scrollbars=yes, resizable=yes");
+                            $('#map').html(
+                                    '<div id="mapClick" >클릭해서 주소를 확인해 주세요<input type="text" required="required"></div>'
+                                    );
+                            $('#mapClick').on('click',function() {
+                                        console.log('mapClick click');
 
-												$('#map')
-														.html(
-																'<div id="mapClick" onclick="mapClick">클릭해서 주소를 확인해 주세요</div>');
+                                        /* 지도 그리기 */
+                                        var entX = $(
+                                                '#entX')
+                                            .val() * 1; //ent x : grs80 좌표
+                                        var entY = $(
+                                                '#entY')
+                                            .val() * 1; //entY : grs80 좌표
 
-												$('#mapClick')
-														.on(
-																'click',
-																function() {
-																	console
-																			.log('mapClick click');
+                                        /*proj4 좌표변환 라이브러리 */
+                                        proj4.defs["EPSG:5179"] = "+proj=tmerc +lat_0=38 +lon_0=127.5 +k=0.9996 +x_0=1000000 +y_0=2000000 +ellps=GRS80 +units=m +no_defs"; //제공되는 좌표 
 
-																	/* 지도 그리기 */
-																	var entX = $(
-																			'#entX')
-																			.val() * 1; //ent x : grs80 좌표
-																	var entY = $(
-																			'#entY')
-																			.val() * 1; //entY : grs80 좌표
+                                        var grs80 = proj4
+                                            .Proj(proj4.defs["EPSG:5179"]);
+                                        var wgs84 = proj4
+                                            .Proj(proj4.defs["EPSG:4326"]); //경위도 
 
-																	/*proj4 좌표변환 라이브러리 */
-																	proj4.defs["EPSG:5179"] = "+proj=tmerc +lat_0=38 +lon_0=127.5 +k=0.9996 +x_0=1000000 +y_0=2000000 +ellps=GRS80 +units=m +no_defs";//제공되는 좌표 
+                                        var p = proj4.Point(entX,entY); // x,y가 바뀜 주의할것
+                                        p = proj4.transform(grs80,wgs84,p);
+                                        console
+                                            .log(p.x +
+                                                " " +
+                                                p.y);
+                                        /*end proj4 좌표변환 라이브러리 */
 
-																	var grs80 = proj4
-																			.Proj(proj4.defs["EPSG:5179"]);
-																	var wgs84 = proj4
-																			.Proj(proj4.defs["EPSG:4326"]); //경위도 
+                                        var container = document
+                                            .getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+                                        var options = { //지도를 생성할 때 필요한 기본 옵션
+                                            center: new kakao.maps.LatLng(
+                                                p.y,
+                                                p.x), //지도의 중심좌표.
+                                            level: 3
+                                            //지도의 레벨(확대, 축소 정도)
+                                        };
 
-																	var p = proj4
-																			.Point(
-																					entX,
-																					entY);// x,y가 바뀜 주의할것
-																	p = proj4
-																			.transform(
-																					grs80,
-																					wgs84,
-																					p);
-																	console
-																			.log(p.x
-																					+ " "
-																					+ p.y);
-																	/*end proj4 좌표변환 라이브러리 */
+                                        var map = new kakao.maps.Map(
+                                            container,
+                                            options); //지도 생성 및 객체 리턴
+                                        /* 주소 저장하기*/
+                                        $('#wgsX')
+                                            .val(
+                                                p.y);
+                                        $('#wgsY')
+                                            .val(
+                                                p.x);
 
-																	var container = document
-																			.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-																	var options = { //지도를 생성할 때 필요한 기본 옵션
-																		center : new kakao.maps.LatLng(
-																				p.y,
-																				p.x), //지도의 중심좌표.
-																		level : 3
-																	//지도의 레벨(확대, 축소 정도)
-																	};
+                                        $(
+                                                '#mapOption')
+                                            .append(
+                                                '<div>선택한 주소가 맞습니까?<div>' +
+                                                '<button id="mapYes">네 맞습니다. </button>' +
+                                                '<button id="mapNo">아니오 주소지가 다릅니다. </button>');
 
-																	var map = new kakao.maps.Map(
-																			container,
-																			options); //지도 생성 및 객체 리턴
-																	/* 주소 저장하기*/
-																	$('#wgsX')
-																			.val(
-																					p.y);
-																	$('#wgsY')
-																			.val(
-																					p.x);
+                                        $('#mapYes').click(function() {
+                                                    $('#mapOption').html('');
+                                                    $('#mapClick').html('');
+                                         });
+                                        $('#mapNo').click(function() { //모두 초기화하기
+                                            $('#mapOption').html('');
+                                            $('#map').html('');
+                                            $('#wgsX').val('');
+                                            $('#wgsY').val('');
+                                            $('#entX').val('');
+                                            $('#entY').val('');
+                                            $('#location').val('');
+                                            $('#local').val('');
 
-																	$(
-																			'#mapOption')
-																			.append(
-																					'<div>선택한 주소가 맞습니까?<div>'
-																							+ '<button id="mapYes">네 맞습니다. </button>'
-																							+ '<button id="mapNo">아니오 주소지가 다릅니다. </button>');
+                                        });
 
-																	$('#mapYes')
-																			.click(
-																					function() {
-																						$(
-																								'#mapOption')
-																								.html(
-																										'');
-																					});
-																	$('#mapNo')
-																			.click(
-																					function() { //모두 초기화하기
-																						$(
-																								'#mapOption')
-																								.html(
-																										'');
-																						$(
-																								'#map')
-																								.html(
-																										'');
-																						$(
-																								'#wgsX')
-																								.val(
-																										'');
-																						$(
-																								'#wgsY')
-																								.val(
-																										'');
-																						$(
-																								'#entX')
-																								.val(
-																										'');
-																						$(
-																								'#entY')
-																								.val(
-																										'');
-																						$(
-																								'#location')
-																								.val(
-																										'');
-																						$(
-																								'#local')
-																								.val(
-																										'');
+                                    }); //end mapClick click
 
-																					});
+                        });
 
-																}); //end mapClick click
+                /* 클릭시 이동*/
+                $("#floatMenu div").click(
+                    function() {
+                        var scrollPosition = $(
+                                $(this).attr("data-target"))
+                            .offset().top;
+                        console.log('scrollPosition : ' +
+                            scrollPosition);
+                        $("html").animate({
+                            scrollTop: scrollPosition - 100
+                        }, 500);
+                    }); //end click
 
-											});
+                var offset = $("#floatMenu").offset();
+                var topPadding = 200;
+                console.log('offset : ' + offset);
+                $(window)
+                    .scroll(
+                        function() {
+                            if ($(window).scrollTop() > offset.top) {
+                                $("#floatMenu")
+                                    .stop()
+                                    .animate({
+                                        marginTop: $(
+                                                window)
+                                            .scrollTop() -
+                                            offset.top +
+                                            topPadding
+                                    });
+                            } else {
+                                $("#floatMenu").stop()
+                                    .animate({
+                                        marginTop: 0
+                                    });
+                            };
+                        });
 
-							/* 클릭시 이동*/
-							$("#floatMenu div").click(
-									function() {
-										var scrollPosition = $(
-												$(this).attr("data-target"))
-												.offset().top;
-										console.log('scrollPosition : '
-												+ scrollPosition);
-										$("html").animate({
-											scrollTop : scrollPosition - 100
-										}, 500);
-									}); //end click
+                /*end 스크롤 이동*/
 
-							var offset = $("#floatMenu").offset();
-							var topPadding = 200;
-							console.log('offset : ' + offset);
-							$(window)
-									.scroll(
-											function() {
-												if ($(window).scrollTop() > offset.top) {
-													$("#floatMenu")
-															.stop()
-															.animate(
-																	{
-																		marginTop : $(
-																				window)
-																				.scrollTop()
-																				- offset.top
-																				+ topPadding
-																	});
-												} else {
-													$("#floatMenu").stop()
-															.animate({
-																marginTop : 0
-															});
-												}
-												;
-											});
+                //max capacity 값 넣기
+                for (var i = 1; i <= 15; i++) {
+                    $('#maxCapacity').append(
+                        '<option value="' + i + '">최대 ' + i +
+                        '명 숙박가능</option>');
+                }
 
-							/*end 스크롤 이동*/
+                //checkinInterval 값 넣기
+                $('#checkinInterval').append(
+                    '<option value="0">당일</option>');
+                for (var i = 1; i <= 7; i++) {
+                    $('#checkinInterval').append(
+                        '<option value="' + i + '">' + i +
+                        ' 일</option>');
+                }
 
-							//max capacity 값 넣기
-							for (var i = 1; i <= 15; i++) {
-								$('#maxCapacity').append(
-										'<option value="' + i + '">최대 ' + i
-												+ '명 숙박가능</option>');
-							}
+                //체크인 시간 넣기
+                $('#checkinTime').append(
+                    '<option value="flexible">조절가능</option>');
+                for (var i = 8; i <= 25; i++) {
+                    if (i < 12) {
+                        $('#checkinTime').append(
+                            '<option value="' + i + '">오전' + i +
+                            ' :00 </option>');
+                    } else if (i == 12) {
+                        $('#checkinTime')
+                            .append(
+                                '<option value="' + i + '">오후 12:00 </option>');
+                    } else if (i > 12 && i < 25) {
+                        $('#checkinTime').append(
+                            '<option value="' + i + '">오후' +
+                            (i - 12) +
+                            ' :00 </option>');
+                    } else {
+                        $('#checkinTime')
+                            .append(
+                                '<option value="' + i + '">오전 1:00 </option>');
+                    }
 
-							//checkinInterval 값 넣기
-							$('#checkinInterval').append(
-									'<option value="0">당일</option>');
-							for (var i = 1; i <= 7; i++) {
-								$('#checkinInterval').append(
-										'<option value="' + i + '">' + i
-												+ ' 일</option>');
-							}
+                }
 
-							//체크인 시간 넣기
-							$('#checkinTime').append(
-									'<option value="flexible">조절가능</option>');
-							for (var i = 8; i <= 25; i++) {
-								if (i < 12) {
-									$('#checkinTime').append(
-											'<option value="' + i + '">오전' + i
-													+ ' :00 </option>');
-								} else if (i == 12) {
-									$('#checkinTime')
-											.append(
-													'<option value="' + i + '">오후 12:00 </option>');
-								} else if (i > 12 && i < 25) {
-									$('#checkinTime').append(
-											'<option value="' + i + '">오후'
-													+ (i - 12)
-													+ ' :00 </option>');
-								} else {
-									$('#checkinTime')
-											.append(
-													'<option value="' + i + '">오전 1:00 </option>');
-								}
+                //체크아웃 시간 넣기
+                $('#checkoutTime').append(
+                    '<option value="flexible">조절가능</option>');
+                for (var i = 8; i <= 25; i++) {
+                    if (i < 12) {
+                        $('#checkoutTime').append(
+                            '<option value="' + i + '">오전' + i +
+                            ' :00 </option>');
+                    } else if (i == 12) {
+                        $('#checkoutTime')
+                            .append(
+                                '<option value="' + i + '">오후 12:00 </option>');
+                    } else if (i > 12 && i < 25) {
+                        $('#checkoutTime').append(
+                            '<option value="' + i + '">오후' +
+                            (i - 12) +
+                            ' :00 </option>');
+                    } else {
+                        $('#checkoutTime')
+                            .append(
+                                '<option value="' + i + '">오전 1:00 </option>');
+                    }
 
-							}
+                }
 
-							//체크아웃 시간 넣기
-							$('#checkoutTime').append(
-									'<option value="flexible">조절가능</option>');
-							for (var i = 8; i <= 25; i++) {
-								if (i < 12) {
-									$('#checkoutTime').append(
-											'<option value="' + i + '">오전' + i
-													+ ' :00 </option>');
-								} else if (i == 12) {
-									$('#checkoutTime')
-											.append(
-													'<option value="' + i + '">오후 12:00 </option>');
-								} else if (i > 12 && i < 25) {
-									$('#checkoutTime').append(
-											'<option value="' + i + '">오후'
-													+ (i - 12)
-													+ ' :00 </option>');
-								} else {
-									$('#checkoutTime')
-											.append(
-													'<option value="' + i + '">오전 1:00 </option>');
-								}
+                /*bedroom 증감 */
+                $('#bedroomIncrease').on(
+                    'click',
+                    function() {
+                        console.log('increase click');
+                        console.log('value : ' +
+                            $('#bedroom').val() * 1);
+                        $('#bedroom').val(
+                            $('#bedroom').val() * 1 + 1);
+                    }); //end bedroomIncrease
 
-							}
+                $('#bedroomDecrease').on(
+                    'click',
+                    function() {
+                        console.log('decrease click');
+                        console.log('value : ' +
+                            $('#bedroom').val() * 1);
+                        $('#bedroom').val(
+                            $('#bedroom').val() * 1 - 1);
+                        if ($('#bedroom').val() * 1 < 0) {
+                            $('#bedroom').val(0);
+                        }
+                    }); //end bedroomIncrease
 
-							/*bedroom 증감 */
-							$('#bedroomIncrease').on(
-									'click',
-									function() {
-										console.log('increase click');
-										console.log('value : '
-												+ $('#bedroom').val() * 1);
-										$('#bedroom').val(
-												$('#bedroom').val() * 1 + 1);
-									});//end bedroomIncrease
+                /*bed 증감 */
+                $('#bedIncrease').on('click', function() {
+                    console.log('increase click');
+                    console.log('value : ' + $('#bed').val() * 1);
+                    $('#bed').val($('#bed').val() * 1 + 1);
+                }); //end bedroomIncrease
 
-							$('#bedroomDecrease').on(
-									'click',
-									function() {
-										console.log('decrease click');
-										console.log('value : '
-												+ $('#bedroom').val() * 1);
-										$('#bedroom').val(
-												$('#bedroom').val() * 1 - 1);
-										if ($('#bedroom').val() * 1 < 0) {
-											$('#bedroom').val(0);
-										}
-									});//end bedroomIncrease
+                $('#bedDecrease').on('click', function() {
+                    console.log('decrease click');
+                    console.log('value : ' + $('#bed').val() * 1);
+                    $('#bed').val($('#bed').val() * 1 - 1);
+                    if ($('#bed').val() * 1 < 0) {
+                        $('#bed').val(0);
+                    }
+                }); //end bedroomIncrease
 
-							/*bed 증감 */
-							$('#bedIncrease').on('click', function() {
-								console.log('increase click');
-								console.log('value : ' + $('#bed').val() * 1);
-								$('#bed').val($('#bed').val() * 1 + 1);
-							});//end bedroomIncrease
+                /*욕실 증감 */
+                $('#bathroomIncrease').on(
+                    'click',
+                    function() {
+                        console.log('increase click');
+                        console.log('value : ' +
+                            $('#bathroom').val() * 1);
+                        $('#bathroom').val(
+                            $('#bathroom').val() * 1 + 1);
+                    }); //end bedroomIncrease
 
-							$('#bedDecrease').on('click', function() {
-								console.log('decrease click');
-								console.log('value : ' + $('#bed').val() * 1);
-								$('#bed').val($('#bed').val() * 1 - 1);
-								if ($('#bed').val() * 1 < 0) {
-									$('#bed').val(0);
-								}
-							});//end bedroomIncrease
+                $('#bathroomDecrease').on(
+                    'click',
+                    function() {
+                        console.log('decrease click');
+                        console.log('value : ' +
+                            $('#bathroom').val() * 1);
+                        $('#bathroom').val(
+                            $('#bathroom').val() * 1 - 1);
+                        if ($('#bathroom').val() * 1 < 0) {
+                            $('#bathroom').val(0);
+                        }
+                    }); //end bedroomIncrease
 
-							/*욕실 증감 */
-							$('#bathroomIncrease').on(
-									'click',
-									function() {
-										console.log('increase click');
-										console.log('value : '
-												+ $('#bathroom').val() * 1);
-										$('#bathroom').val(
-												$('#bathroom').val() * 1 + 1);
-									});//end bedroomIncrease
-
-							$('#bathroomDecrease').on(
-									'click',
-									function() {
-										console.log('decrease click');
-										console.log('value : '
-												+ $('#bathroom').val() * 1);
-										$('#bathroom').val(
-												$('#bathroom').val() * 1 - 1);
-										if ($('#bathroom').val() * 1 < 0) {
-											$('#bathroom').val(0);
-										}
-									});//end bedroomIncrease
-
-						});//end document
-	</script>
+            }); //end document
+</script>
 </body>
 </html>

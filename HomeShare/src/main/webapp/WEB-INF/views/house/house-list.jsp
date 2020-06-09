@@ -6,6 +6,14 @@
 <html>
 <head>
 <style type="text/css">
+header{
+	position: fixed;
+	top: 0;
+	color: white;
+	background: grey;
+	font-weight: bold;
+
+}
 </style>
 <%@ include file="../cdn.jspf"%>
 
