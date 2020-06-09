@@ -452,12 +452,12 @@ header {
 										console.log('scrollPosition : '
 												+ scrollPosition);
 										$("html").animate({
-											scrollTop : scrollPosition
+											scrollTop : scrollPosition - 100
 										}, 500);
 									}); //end click
 
 							var offset = $("#floatMenu").offset();
-							var topPadding = 15;
+							var topPadding = 200;
 							console.log('offset : ' + offset);
 							$(window)
 									.scroll(
