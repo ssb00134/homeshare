@@ -118,8 +118,8 @@ figure:hover .overlay {
  .text  {
   overflow: hidden;
   white-space: nowrap;
-  text-overflow: ellipsis;
-  max-width: 10%;
+  text-overflow: clip;
+  max-width: 20%;
 
 }
 
