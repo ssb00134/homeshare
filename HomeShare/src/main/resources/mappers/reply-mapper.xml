@@ -47,7 +47,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 리플 후기 평균 구하기 -->
 	<select id="select_avg_score" resultType="Integer">
-		select avg(${replyScore}) from ${reply} where ${reply}.${houseNo} = #{houseNo}
+		select avg(${replyScore},2) from ${reply} where ${reply}.${houseNo} = #{houseNo}
 	</select>
 </mapper>
 

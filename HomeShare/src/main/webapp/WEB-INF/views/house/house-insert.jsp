@@ -7,16 +7,18 @@
 <title>Insert title here</title>
 <style type="text/css">
 #floatMenu {
-position: absolute;
-width: 200px;
-height: 200px;
-left: 50px;
-top: 250px;
-background-color: #606060;
-color: #fff;
+	position: absolute;
+	width: 200px;
+	height: 200px;
+	left: 50px;
+	top: 250px;
+	background-color: #606060;
+	color: #fff;
 }
 
-
+.btn .btnCircle {
+	border-border-radius: 50%;
+}
 </style>
 <%@ include file="../cdn.jspf"%>
 </head>
@@ -29,8 +31,10 @@ color: #fff;
 			method="post">
 
 			<h1>하우스 등록하기</h1>
-			<div id="class1"><p>1단계 기본 사항 입력</p></div>
-			
+			<div id="class1">
+				<p>1단계 기본 사항 입력</p>
+			</div>
+
 			<input type="hidden" name="houseNo" value="0">
 			<input type="hidden" name="replies" value="0">
 			<input type="hidden" name="score" value="0">
@@ -62,9 +66,10 @@ color: #fff;
 			<p>사용할 수 있는 침실은 몇개인가요?</p>
 
 			<div class="form-group">
-				<button type="button" class="btn btn-default" id="bedroomDecrease">-</button>
+				<button type="button" class="btn btnCircle" id="bedroomDecrease">-</button>
 				<input type="text" name="bedroom" id="bedroom" value="0"
-					required="required" readonly>
+					class="col-md-1" required="required" readonly>
+
 				<button type="button" class="btn btn-default" id="bedroomIncrease">+</button>
 			</div>
 			<br>
@@ -72,8 +77,8 @@ color: #fff;
 			<br>
 			<div class="form-group">
 				<button type="button" class="btn btn-default" id="bedDecrease">-</button>
-				<input type="text" name="bed" id="bed" value="0" required="required"
-					readonly>
+				<input type="text" name="bed" id="bed" value="0" class="col-md-1"
+					required="required" readonly>
 				<button type="button" class="btn btn-default" id="bedIncrease">+</button>
 			</div>
 
@@ -82,17 +87,38 @@ color: #fff;
 			<div class="form-group">
 				<button type="button" class="btn btn-default" id="bathroomDecrease">-</button>
 				<input type="text" name="bathroom" id="bathroom" value="0"
-					required="required" readonly>
+					required="required" class="col-md-1" readonly>
 				<button type="button" class="btn btn-default" id="bathroomIncrease">+</button>
 			</div>
-
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			
+			
+			
 			<p>숙소의 위치를 알려주세요</p>
-			<a href="/homeshare/jusoPopup"
-				onclick="window.open(this.href, '_blanck', 'width=600, height=400'); return false">주소입력</a>
-			<input type="text" name="location" required="required">
-			<hr>
+			<div class="form-group border">
+				<button type="button" class="btn" id="btnLocation">주소 입력</button>	
+			</div>
+			<div class="form-group border">
+			<input type="text" class="form-control"  name="location" id="roadFullAddr" required="required">
+			<input type="text" id="entX" required="required" readonly>
+			<input type="text"  id="entY" required="required">
+			</div>
+			
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			
 			<p>어떤 편의시설을 제공하나요?</p>
-			<div>
+			<div class="">
 				<div class="checkbox">
 					<input type="checkbox" name="utilities" value="필수품목">
 					침대 시트, 비누, 화장지, 베개
@@ -122,8 +148,16 @@ color: #fff;
 					헤어 드라이어
 				</div>
 			</div>
-			<hr>
-			<br>
+			
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			
+			
+			
 			<div>게스트가 어떤 시설을 이용할 수 있나요?</div>
 			<div>
 				<input type="checkbox" name="spaces" value="주방">
@@ -145,23 +179,51 @@ color: #fff;
 				<input type="checkbox" name="spaces" value="헬스장">
 				헬스장
 			</div>
-			<hr>
-
-			<div id="class2"><h1>2단계 상세 정보 입력하기</h1></div>
+			
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			
+			<div id="class2">
+				<h1>2단계 상세 정보 입력하기</h1>
+			</div>
 
 			<h1>최대 10개의 파일을 올려주세요</h1>
 			<input type="file" name="files" multiple>
-
-
-			<br>
+			
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			
 
 			<p>숙소의 제목을 입력해 주세요</p>
-			<input type="text" name="title" required="required">
+			<div class="form-group">
+			<textarea name="title" class="form-control" required="required"></textarea>
+			</div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			
 			<p>게스트에게 숙소에 대해 설명해 주세요</p>
-			<input type="text" name="info" required="required">
-			<br> <br> <br> <br>
+			<div class="form-group">
+			<textarea name="info" class="form-control" required="required"></textarea>
+			</div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			
 			<hr>
-			<div id="class3"><h1>3단계 게스트를 맞이할 준비를 해주세요</h1></div>
+			<div id="class3">
+				<h1>3단계 게스트를 맞이할 준비를 해주세요</h1>
+			</div>
 			<div>게스트가 지켜야 할 숙소 이용규칙을 정하세요. 게스트는 예약하기 전에 숙소 이용규칙에 동의해야 합니다.</div>
 			<div>
 				어린이(2~12세) 숙박에 적합함
@@ -185,24 +247,37 @@ color: #fff;
 			</select>
 			<div>체크인 가능 시간을 선택해 주세요</div>
 			<div class="form-group">
-				<div class="col-md-4">
-					시작 <select name="checkinTime" id="checkinTime" class=" col-md-4"
+					<div class="form-group col-md-4">
+					<label for="checkinTime">시작</label>
+					 <select name="checkinTime" id="checkinTime" 
 						required="required"></select>
-				</div>
-
-				<div class="col-md-4">
-					종료 <select name="checkoutTime" id="checkoutTime" class=" col-md-4"
+					</div>
+					
+					<div class="form-group col-md-4">
+						<label for="checkinTime">종료</label>
+					 <select name="checkoutTime" id="checkoutTime" 
 						required="required"></select>
-				</div>
+						</div>
 			</div>
 
-			<hr>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
 			<p>게스트가 얼마나 숙박할 수 있나요?</p>
 			<input type="text" name="stayNight" required="required">
 			박<br>
 			<input type="text" name="stayDay" required="required">
 			일<br>
-			<hr>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			
 			<p>예약 가능한 시간 정하기</p>
 			최소
 			<input type="date" name="bookableDateBegin" id="bookableDateBegin"
@@ -210,29 +285,53 @@ color: #fff;
 			<br> 최대
 			<input type="date" name="bookableDateEnd" id="bookableDateEnd"
 				min="sysdate" required="required">
-			<br>
-			<hr>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			
 			<p>숙소요금 설정하기</p>
 			<input type="text" name="price" required="required">
-			<br>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			
 			<button class="btn" type="submit">등록하기</button>
 		</form>
 		<div class="col-md-2">
 			<div id="floatMenu">
 				<button class="btn">prev</button>
-				<div data-target="#class1">1단계</div>
-				<div data-target="#class2">2단계</div>
-				<div data-target="#class3">3단계</div>
+				<div data-target="#class1">1단계 기본 사항 입력</div>
+				<div data-target="#class2">2단계 상세 정보 입력하기</div>
+				<div data-target="#class3">3단계 게스트를 맞이할 준비</div>
 			</div>
 
 		</div>
 	</div>
 	<%@ include file="../footer.jspf"%>
 	<script type="text/javascript">
+
 		$(document)
 				.ready(
-						function() {
-
+				function() {
+					function jusoCallBack(roadFullAddr, entX, entY){
+						// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+						console.log('roadFullAddr : ' + roadFullAddr);
+					}; //end document
+							$('#btnLocation').click(function(){
+								// 주소검색을 수행할 팝업 페이지를 호출합니다.
+								// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrCoordUrl.do)를 호출하게 됩니다.
+								var pop = window.open("/homeshare/test/jusoPopup", "pop",
+								"width=570,height=420, scrollbars=yes, resizable=yes");
+								console.log('jusoCallBack 실행');
+								
+								
+								
+							});
+							
 							/* 클릭시 이동*/
 							$("#floatMenu div").click(
 									function() {
@@ -244,29 +343,38 @@ color: #fff;
 										$("html").animate({
 											scrollTop : scrollPosition
 										}, 500);
-							}); //end click
+									}); //end click
 
-					
-								
-									
-						
-						  var offset = $("#floatMenu").offset();
-						  var topPadding = 15;
-						  console.log('offset : ' + offset);
-						  $(window).scroll(function() {
-				                if ($(window).scrollTop() > offset.top) {
-				                    $("#floatMenu").stop().animate({
-				                        marginTop: $(window).scrollTop() - offset.top + topPadding
-				                    });
-				                } else {
-				                    $("#floatMenu").stop().animate({
-				                        marginTop: 0
-				                    });
-				                };
-				            });
-					
+							var offset = $("#floatMenu").offset();
+							var topPadding = 15;
+							console.log('offset : ' + offset);
+							$(window)
+									.scroll(
+											function() {
+												if ($(window).scrollTop() > offset.top) {
+													$("#floatMenu")
+															.stop()
+															.animate(
+																	{
+																		marginTop : $(
+																				window)
+																				.scrollTop()
+																				- offset.top
+																				+ topPadding
+																	});
+												} else {
+													$("#floatMenu").stop()
+															.animate({
+																marginTop : 0
+															});
+												}
+												;
+											});
+
+							/*end 스크롤 이동*/
+
 							//max capacity 값 넣기
-							for (var i = 0; i <= 15; i++) {
+							for (var i = 1; i <= 15; i++) {
 								$('#maxCapacity').append(
 										'<option value="' + i + '">최대 ' + i
 												+ '명 숙박가능</option>');

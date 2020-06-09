@@ -11,5 +11,7 @@
 <body>
 <%@ include file="../navheader.jspf"%>
 <h1>정보 수정하기</h1>
+
+
 </body>
 </html>
