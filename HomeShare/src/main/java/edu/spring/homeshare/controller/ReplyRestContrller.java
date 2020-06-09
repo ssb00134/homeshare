@@ -41,7 +41,7 @@ public class ReplyRestContrller {
 		int houseNo = vo.getHouseNo(); // 등록할 하우스 번호
 
 		//리플 평균값
-		int avgScore = replyService.readAvgScore(houseNo);
+		double avgScore = replyService.readAvgScore(houseNo);
 		logger.info("평균 : " + avgScore);
 
 		HouseVO housevo = houseservice.selectByHouseNo(houseNo); // housevo : 리플 houseno에 메핑된 housevo

@@ -28,7 +28,7 @@ public class HouseVO  {
 	private String replies ;
 	private String image ;
 	private int checkinInterval ;
-	private int score ;
+	private double score ;
 	private String location;
 	private int reportCount;
 	private String hostId;
@@ -36,7 +36,7 @@ public class HouseVO  {
 	public HouseVO() {}
 
 
-	public HouseVO(int houseNo, String type, String scope, int maxCapacity, int bedroom, int bed, int bathroom, String utilities, String spaces, String title, String info, String rules, String checkinTime, String checkoutTime, int stayNight, int stayDay, Date bookableDateBegin, Date bookableDateEnd, int price, int memNo, String replies, String image, int checkinInterval, int score, String location, int reportCount, String hostId) {
+	public HouseVO(int houseNo, String type, String scope, int maxCapacity, int bedroom, int bed, int bathroom, String utilities, String spaces, String title, String info, String rules, String checkinTime, String checkoutTime, int stayNight, int stayDay, Date bookableDateBegin, Date bookableDateEnd, int price, int memNo, String replies, String image, int checkinInterval, double score, String location, int reportCount, String hostId) {
 		super();
 		this.houseNo = houseNo;
 		this.type = type;
@@ -297,12 +297,12 @@ public class HouseVO  {
 	}
 
 
-	public int getScore() {
+	public double getScore() {
 		return score;
 	}
 
 
-	public void setScore(int score) {
+	public void setScore(double score) {
 		this.score = score;
 	}
 

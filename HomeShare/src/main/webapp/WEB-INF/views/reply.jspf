@@ -78,13 +78,14 @@
 							console.log('ceanScope : ' + cleanScore);
 
 							var checkinScore = $('#checkinScore').val(); // 클린점수
+							var replyScore = (cleanScore*1 + cleanScore*1 ) /2;
 							var obj = {
 								'rno' : 0,
 								'houseNo' : houseNo,
 								'content' : content,
 								'memId' : memId,
 								'regdate' : null,
-								'score' : 0,
+								'replyScore' : replyScore,
 								'cleanScore' : cleanScore,
 								'checkinScore' : checkinScore
 							}; // end var obj
