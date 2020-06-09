@@ -98,18 +98,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM ${house} where ${houseNo} = ${houseNo}
 		<choose>
 			<when test="location != null &amp;&amp; ''.equals(location)">
-
 				and location like '%' || #{location} || '%'
 			</when>
-			<when test="bookableDateBegin != null">
+			<when test="bookableDateBegin != null &amp;&amp; ''.equals(bookableDateBegin)">
 				AND ${bookableDateBegin} <![CDATA[>=]]>
 				#{bookableDateBegin}
 			</when>
-			<when test="bookableDateEnd != null">
+			<when test="bookableDateEnd != null &amp;&amp; ''.equals(bookableDateEnd)">
 				AND ${bookableDateEnd} <![CDATA[<=]]>
 				#{bookableDateEnd}
 			</when>
-			<when test="maxCapacity != null">
+			<when test="maxCapacity != null &amp;&amp; ''.equals(maxCapacity)">
 				AND ${maxCapacity} <![CDATA[<=]]>
 				maxCapacity
 			</when>

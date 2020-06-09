@@ -76,16 +76,20 @@ public class HouseController {
 
 		/* hash맵에 정보 넣기 */
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		if(location == null) {
-			map.put("location", "");
-		}else {
-			map.put("location", location);			
-		}
+		map.put("location", location);		
 		map.put("bookableDateBegin", bookableDateBegin);
 		map.put("bookableDateEnd", bookableDateEnd);
 		map.put("maxCapacity", maxCapacity);
 		map.put("start",c.getStart());
 		map.put("end",c.getEnd());
+		
+		// map이 null인 경우 처리하는 함수
+		for ( String key : map.keySet() ) {
+		    System.out.println("방법1) key : " + key +" / value : " + map.get(key));
+		    map.put(key,  map.get(key)==null? "":map.get(key));
+		}
+
+		
 		logger.info("maptostring : " + map.toString());
 
 	
