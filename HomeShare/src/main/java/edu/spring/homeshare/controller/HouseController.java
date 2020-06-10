@@ -204,7 +204,13 @@ public class HouseController {
 				MemberVO membervo = memberService.select(vo.getHostId());
 				int houseCount = houseService.getCountByMemNo(vo.getMemNo());
 				logger.info("houseCount : " + houseCount );
-				
+				membervo.setHouseCount(houseCount); // houseCount를 업데이트함
+				int memberUpdate = memberService.update(membervo);
+				if(memberUpdate == 1) {
+					logger.info("member에 house 개수를 추가했습니다.");
+				}else {
+					logger.info("member에 house 개수를 추가 하지 못했습니다.");
+				}
 				
 				/* 파일 업로드 하기*/
 				String fileResult = null;

@@ -30,7 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		${email}=#{email},
 		${gender}=#{gender}
 		where ${memNo} = #{memNo}
-	)
+	
 	</update>
 
 

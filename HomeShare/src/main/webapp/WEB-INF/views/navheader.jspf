@@ -58,7 +58,7 @@
 								</form>
 
 								<!-- 호스트인지 확인 -->
-								<c:if test="${not empty memberVO.houseNo }">
+								<c:if test="${memberVO.houseCount < 1 }">
 									<div class="dropdown-divider"></div>
 									<form class="dropdown-item" action="/homeshare/house/host"
 										method="post">
