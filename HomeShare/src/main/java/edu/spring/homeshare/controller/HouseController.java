@@ -30,8 +30,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.spring.homeshare.domain.HouseVO;
+import edu.spring.homeshare.domain.MemberVO;
 import edu.spring.homeshare.service.BookService;
 import edu.spring.homeshare.service.HouseService;
+import edu.spring.homeshare.service.MemberService;
 import edu.spring.homeshare.util.FileUploadUtil;
 import edu.spring.homeshare.util.MediaUtil;
 import edu.spring.homeshare.util.PageCriteria;
@@ -47,13 +49,16 @@ public class HouseController {
 
 	@Autowired
 	private BookService bookService;
+	
+	@Autowired
+	private MemberService memberService;
 
 	@Resource(name = "uploadPath")
 	private String uploadPath;
 	
 	@RequestMapping(value = "/house-list", method = RequestMethod.GET)
-	public void search(HttpServletRequest req, Model model, Integer page, Integer prePage) {
-
+	public void houseInsert(HttpServletRequest req, Model model, Integer page, Integer prePage) {
+		logger.info("house-list 호출");
 		/* 페이징 처리 */
 		PageCriteria c = new PageCriteria();
 		logger.info("page : " + page);
@@ -120,7 +125,9 @@ public class HouseController {
 		logger.info("한 페이지 당 게시글 수 : " + c.getNumsPerPage());
 		logger.info("시작 페이지 링크 번호(startPageNO) : " + maker.getStartPageNo());
 		logger.info("끝 페이지 링크 번호(endPageNo) : " + maker.getEndPageNo());
-
+		
+		
+		
 
 	}
 
@@ -192,6 +199,14 @@ public class HouseController {
 				// TODO : 시퀸스가 같은 폴더가 있을때 예외처리 할것
 				logger.info("insert 성공");
 				logger.info("insert 결과 houseNo : " + result);
+				
+				/* member 에 host 정보 넣기*/
+				MemberVO membervo = memberService.select(vo.getHostId());
+				int houseCount = houseService.getCountByMemNo(vo.getMemNo());
+				logger.info("houseCount : " + houseCount );
+				
+				
+				/* 파일 업로드 하기*/
 				String fileResult = null;
 				logger.info("파일업로드 시작");
 				for (MultipartFile f : files) {

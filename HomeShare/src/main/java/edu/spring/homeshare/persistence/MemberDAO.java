@@ -12,6 +12,9 @@ public interface MemberDAO {
 	MemberVO select(String memId);
 	List<MemberVO> selectall(HashMap<String, Object> map);
 	int gettotalcount();
+	
+	//update
+	int update(MemberVO vo);
 
 }
 

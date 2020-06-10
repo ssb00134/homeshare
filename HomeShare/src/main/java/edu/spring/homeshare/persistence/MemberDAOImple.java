@@ -52,4 +52,10 @@ public class MemberDAOImple implements MemberDAO {
 		logger.info("gettotalcount 실행");
 		return sqlSession.selectOne(NAMESPACE + ".total_count");
 	}
+	
+	@Override
+	public int update(MemberVO vo) {
+		logger.info(" update 실행");
+		return sqlSession.update(NAMESPACE + ".update", vo);
+	}
 }

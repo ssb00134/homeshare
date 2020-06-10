@@ -13,5 +13,7 @@ public interface MemberService {
 	MemberVO select(String memId);
 	List<MemberVO> readAllMemberOrderby(HashMap<String, Object> map);
 	int totalCount();
+	
+	int update(MemberVO vo);
 
 }

@@ -5,6 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b76b064de112b5b283e72470515766f4"></script>
 <style type="text/css">
 header{
 	position: fixed;
@@ -15,12 +17,12 @@ header{
 
 }
 </style>
-<%@ include file="../cdn.jspf"%>
+ <%@ include file="../cdn.jspf"%>
 
 <!-- bxslider -->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css" />
-<script
+ <script
 	src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 <meta charset="UTF-8">
 <title>게시판 메인 페이지</title>
@@ -34,12 +36,12 @@ header{
 	
 	<div class="row">
 	<div id="leftSpace" class="col-md-1"></div>
-	<div id="house-lists" class="col-md-6">
-		<c:forEach var="vo" items="${houseList }">
+	<div id="house-lists" class="col-md-6 border">
+		<c:forEach var="vo" items="${houseList }" varStatus="status">
 			<div class="container-fluid">
 				<div class="house_list_item" >
 					<div class="row" >
-					<div class="house_list_item_click col-md-7"  id="${vo.houseNo }">
+					<div class="house_list_item_click col-md-7 border"  id="${vo.houseNo }">
 						<div class="row col-md-12">${vo.title}
 						</div>
 						<div class="row border">
@@ -54,6 +56,8 @@ header{
 							<div class="col-md-2">화장실 ${vo.bathroom }개 </div>
 						</div>
 						<input type="hidden" id="utilities" value="${vo.utilities }">
+						<input type="text" id="wgsX" value="${vo.wgsX }">
+						<input type="text" id="wgsY" value="${vo.wgsY }">
 						<div id="utilDiv"></div>
 						</div>
 
@@ -75,7 +79,9 @@ header{
 			</div>
 		</c:forEach>
 	</div>
-	<div id="rightSpace" class="col-md-1"></div>
+	<div class="col-md-5 border">
+	<div id="map"></div>
+	</div>
 	</div>
 
 	
@@ -107,6 +113,8 @@ header{
 		$(document)
 				.ready(
 						function() {
+							
+							console.log('hello');
 							 // 유틸리티 영역
 	                        var utilities = $('#utilities').val();
 	                        $.each(utilities.split(','), function(index, element)
@@ -116,8 +124,38 @@ header{
 	                        }); //end each
 							
 							
+
+							/* end map */
 							
-							
+							$('.house_list_item_click').each(function(index,element){
+								console.log('index click : ' + index + 'element : ' + element);
+								var wgsX = $(element).find('#wgsX').val()*1;
+								var wgsY = $(element).find('#wgsY').val()*1;
+								console.log('click wgsX : ' + wgsX);
+								console.log('click wgsY : ' + wgsY);
+
+								 var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+
+								 console.log('container :' + container);
+	                            var options = { //지도를 생성할 때 필요한 기본 옵션
+			                             center: new kakao.maps.LatLng(wgsX,wgsY), //지도의 중심좌표.
+			                             level: 10
+	                               //지도의 레벨(확대, 축소 정도)
+	                           };
+	                            
+								 var map = new kakao.maps.Map(container,options); //지도 생성 및 객체 리턴 
+								 
+								// 마커가 표시될 위치입니다 
+								 var markerPosition = new kakao.maps.LatLng(wgsX, wgsY); 
+
+								 // 마커를 생성합니다
+								 var marker = new kakao.maps.Marker({
+								     position: markerPosition
+								 });
+								
+								// 마커가 지도 위에 표시되도록 설정합니다
+								 marker.setMap(map);
+							});
 							
 							
 							
@@ -133,7 +171,15 @@ header{
 												frm.attr('method', 'post');
 												frm.submit();
 											});
-
+							
+							
+							
+						/* 	$('.house_list_item_click').each(function(index,element){
+								console.log('element : ' + element + 'index : ' + index);
+								$(this).append('<input type="text" id="wgsX' + + '" value= ');
+							});//end each */
+							
+							
 							//클릭시 detail로 전송
 							$('.house_list_item_click')
 									.click(

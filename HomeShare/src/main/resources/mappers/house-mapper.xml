@@ -264,7 +264,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="delete">
 		delete from ${house}
 		where ${houseNo} = #{houseNo}
-
 	</delete>
 
 </mapper>
