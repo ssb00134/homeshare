@@ -22,13 +22,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 정보수정 -->
 	<update id="update" >
 	update ${member} set
-		${memId} =${memId},
-		${password} =${password},
-		${houseCount}=${houseCount},
-		${account}=${account},
-		${memName}=${memName},
-		${email}=${email},
-		${gender}=${gender}
+		${memId} =#{memId},
+		${password} =#{password},
+		${houseCount}=#{houseCount},
+		${account}=#{account},
+		${memName}=#{memName},
+		${email}=#{email},
+		${gender}=#{gender}
 		where ${memNo} = #{memNo}
 	)
 	</update>

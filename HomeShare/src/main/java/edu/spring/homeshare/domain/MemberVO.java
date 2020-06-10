@@ -12,9 +12,7 @@ public class MemberVO {
 	
 	public MemberVO() {}
 
-
-	public MemberVO(int memNo, String memId, String password, String email, int houseCount, String account,
-			String memName, String gender) {
+	public MemberVO(int memNo, String memId, String password, String email, int houseCount, String account, String memName, String gender) {
 		super();
 		this.memNo = memNo;
 		this.memId = memId;
@@ -25,7 +23,6 @@ public class MemberVO {
 		this.memName = memName;
 		this.gender = gender;
 	}
-
 
 	public int getMemNo() {
 		return memNo;
@@ -59,7 +56,15 @@ public class MemberVO {
 		this.email = email;
 	}
 
-	public String gethouseCount() {
+	public int getHouseCount() {
+		return houseCount;
+	}
+
+	public void setHouseCount(int houseCount) {
+		this.houseCount = houseCount;
+	}
+
+	public String getAccount() {
 		return account;
 	}
 
@@ -74,45 +79,22 @@ public class MemberVO {
 	public void setMemName(String memName) {
 		this.memName = memName;
 	}
-	
-	
 
 	public String getGender() {
 		return gender;
 	}
 
-
-
-
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
 
-
-	public int getHouseCount() {
-		return houseCount;
-	}
-
-
-	public void setHouseCount(int houseCount) {
-		this.houseCount = houseCount;
-	}
-
-
-	public String getAccount() {
-		return account;
-	}
-
-
-
 	@Override
 	public String toString() {
-		return "MemberVO [memNo=" + memNo + ", memId=" + memId + ", password=" + password + ", email=" + email
-				+ ", houseCount=" + houseCount + ", account=" + account + ", memName=" + memName + ", gender=" + gender + "]";
+		return "MemberVO [memNo=" + memNo + ", memId=" + memId + ", password=" + password + ", email=" + email + ", houseCount=" + houseCount + ", account=" + account + ", memName=" + memName + ", gender=" + gender + "]";
 	}
 
 
-
+	
 
 	
 	
