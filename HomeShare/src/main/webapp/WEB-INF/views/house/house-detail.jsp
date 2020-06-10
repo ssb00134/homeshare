@@ -410,9 +410,9 @@
 							//모든 예약영역 불러오기
 							var disabledDays = []; // 불가능한 날짜를 담을 배열 -> 전역변수로 선언
 							function getAllBooks() {
-								var houseNo = $('#houseNo').val();
+								var bookHostId = $('#hostId').val();
 								console.log('getAllBooks 실행');
-								var url = '/homeshare/book/all/' + houseNo;
+								var url = '/homeshare/book/all/' + bookHostId;
 								console.log(url);
 
 								var split;
@@ -627,87 +627,30 @@
 																		beforeShowDay : disableAllTheseDays,
 																	}); //end disableList datepicker
 
-													$('#disableCheckIn')
-															.on(
-																	'click',
-																	function(
-																			index,
-																			element) {
-																		console
-																				.log('click');
-																		console
-																				.log($(
-																						"#disableCheckIn")
-																						.datepicker()
-																						.val());
-																		$(
-																				'#checkIn')
-																				.val(
-																						$(
-																								"#disableCheckIn")
-																								.datepicker()
-																								.val());
-																		var checkin = new Date(
-																				$(
-																						"#disableCheckIn")
-																						.datepicker()
-																						.val());
-																		var checkout = new Date(
-																				$(
-																						"#disableCheckOut")
-																						.datepicker()
-																						.val());
-																		var datediffer = Math
-																				.ceil((checkout
-																						.getTime() - checkin
-																						.getTime())
-																						/ (1000 * 3600 * 24));
-																		console
-																				.log('datediffer : '
-																						+ datediffer);
-																		$(
-																				'#dateDiffer')
-																				.val(
-																						datediffer);
+													$('#disableCheckIn').on('click',function(index,element) {
+																		console.log('click');
+																		console.log($("#disableCheckIn").datepicker().val());
+																		$('#checkIn').val($("#disableCheckIn").datepicker().val());
+																		var checkin = new Date($("#disableCheckIn").datepicker().val());
+																		var checkout = new Date($("#disableCheckOut").datepicker().val());
+																		var datediffer = Math.ceil((checkout.getTime() - checkin.getTime())
+																				/ (1000 * 3600 * 24));
+																		console.log('datediffer : '+ datediffer);
+																		$('#dateDiffer').val(datediffer);
 																	}); //end datepicker
 
 													$('#disableCheckOut')
-															.on(
-																	'click',
-																	function(
-																			index,
-																			element) {
-																		console
-																				.log('click');
-																		$(
-																				'#checkOut')
-																				.val(
-																						$(
-																								"#disableCheckOut")
-																								.datepicker()
-																								.val());
+															.on('click',function(index,element) {
+																		console.log('click');
+																		$('#checkOut').val($("#disableCheckOut").datepicker().val());
 																		var checkin = new Date(
-																				$(
-																						"#disableCheckIn")
-																						.datepicker()
-																						.val());
-																		var checkout = new Date(
-																				$(
-																						"#disableCheckOut")
-																						.datepicker()
-																						.val());
-																		var datediffer = Math
-																				.ceil((checkout
-																						.getTime() - checkin
-																						.getTime())
+																				$("#disableCheckIn").datepicker().val());
+																		var checkout = new Date($("#disableCheckOut").datepicker().val());
+																		var datediffer = Math.ceil((checkout.getTime() - checkin.getTime())
 																						/ (1000 * 3600 * 24));
-																		console
-																				.log('datediffer : '
+																		console.log('datediffer : '
 																						+ datediffer);
-																		$(
-																				'#dateDiffer')
-																				.val(
-																						datediffer);
+																		$('#dateDiffer').val(datediffer);
 
 																	}); //end datepicker
 													console.log('list : '
