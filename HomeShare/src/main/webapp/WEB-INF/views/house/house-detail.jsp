@@ -5,8 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
 <%@ include file="../cdn.jspf"%>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b76b064de112b5b283e72470515766f4"></script>
 <link href="/homeshare/resources/css/docs.min.css" rel="stylesheet">
 
 </head>
@@ -69,9 +71,12 @@
 						value="${houseVO.houseNo }">
 					<input type="hidden" name="memNo" value="${houseVO.memNo }">
 					<input type="hidden" id="hostId" value="${houseVO.hostId }">
+					<input type="hidden" id="wgsX" value="${houseVO.wgsX }">
+					<input type="hidden" id="wgsY" value="${houseVO.wgsY }">
 					${ houseVO.info}
 				</div>
-				<hr>
+				<div id ="map" style="width:100%;height:350px;"></div>
+				
 			</div>
 		</div>
 
@@ -204,6 +209,38 @@
 								$('#bookMem').append('<option value="' + i + '">' + i + '명');							
 							}
 							
+							
+							/* map area*/
+							 var wgsX = $('#wgsX').val()*1;
+							 var wgsY = $('#wgsY').val()*1;
+							 console.log('x좌표 : ' + wgsX );
+							 console.log('Y좌표 : ' + wgsY );
+	
+							 var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+
+							 console.log('container :' + container);
+                             var options = { //지도를 생성할 때 필요한 기본 옵션
+		                             center: new kakao.maps.LatLng(wgsX,wgsY), //지도의 중심좌표.
+		                             level: 3
+                                //지도의 레벨(확대, 축소 정도)
+                            };
+                             
+							 var map = new kakao.maps.Map(container,options); //지도 생성 및 객체 리턴 
+							 
+							// 마커가 표시될 위치입니다 
+							 var markerPosition = new kakao.maps.LatLng(wgsX, wgsY); 
+
+							 // 마커를 생성합니다
+							 var marker = new kakao.maps.Marker({
+							     position: markerPosition
+							 });
+							
+							// 마커가 지도 위에 표시되도록 설정합니다
+							 marker.setMap(map);
+
+							/* end map */
+							
+	
 							
 							/* 모달 영역*/
 							$('#disableCheckOut').on('click focus blur',function() {
