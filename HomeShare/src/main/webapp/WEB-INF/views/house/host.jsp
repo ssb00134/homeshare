@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<%@ include file="../cdn.jspf"%>
 <!-- bxslider -->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css" />
@@ -15,7 +15,7 @@
 </head>
 <body>
 	<!-- 헤더정보 가져오기 -->
-	<%@ include file="../header.jspf"%>
+	<%@ include file="../navheader.jspf"%>
 	<h1>내 호스트 목록</h1>
 
 	<div id="book-lists">

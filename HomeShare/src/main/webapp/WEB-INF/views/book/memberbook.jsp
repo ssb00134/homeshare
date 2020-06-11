@@ -7,9 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<%@ include file="../cdn.jspf"%>
 </head>
 <body>
-	<%@ include file="../header.jspf"%>
+	<%@ include file="../navheader.jspf"%>
 	<h1>memberbooklist</h1>
 
 	<div id="book-lists">

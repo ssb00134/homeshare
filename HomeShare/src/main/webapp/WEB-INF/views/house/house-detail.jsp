@@ -201,8 +201,8 @@
 							}); //end each
 
 							//로딩시 모달 데이터 초기화 
-							$("#disableCheckIn").datepicker().val('');
-							$("#disableCheckIn").datepicker().val('');
+							$("#disableCheckIn").val('');
+							$("#disableCheckIn").val('');
 							
 							
 							for(var i=0; i<${houseVO.maxCapacity}; i++){
@@ -245,7 +245,8 @@
 							/* 모달 영역*/
 							$('#disableCheckOut').on('click focus blur',function() {
 								if($("#disableCheckIn").datepicker().val()!== ""){
-									console.log('체크인 값 : ' + $("#disableCheckIn").datepicker().val());
+									console.log('체크인 값 : ' + $("#disableCheckIn").datepicker().val().replace(/[/]/gi,'-'));
+									console.log('체크아웃 값 : ' + $("#disableCheckOut").datepicker().val());
 									$("#DateModal .close").click();
 								}
 							}); //end disableCheckIn click
@@ -294,6 +295,8 @@
 										var checkout = new Date($(
 												"#disableCheckOut")
 												.datepicker().val());
+										console.log('checkin val : '
+												+ checkin);
 										console.log('checkout val : '
 												+ checkout);
 										//var datediffer = Math.ceil((checkout.getTime()-checkin.getTime())/(1000*3600*24));
@@ -333,7 +336,7 @@
 														.val();
 												var checkin = $(
 														"#disableCheckIn")
-														.datepicker().val();
+														.datepicker().val().replace(/[/]/gi,'-');
 												var checkout = $(
 														"#disableCheckOut")
 														.datepicker().val();
@@ -351,6 +354,7 @@
 												//제약조건 자기자신 예약 불가
 												if (bookHostId === '${memId}') {
 													alert('자신의 숙소는 예약할 수 없습니다.');
+													preventDefault();
 												}
 
 												//날짜차이
@@ -612,20 +616,10 @@
 													// bookableDateBegin 디비에 저장된 체크인 가능한 시간 + 체크인가능시간 반영됨
 													//직접 변수 사용시 오류가 발생하므로 우회해서 접근
 													var bookableDateBegin = new Date(
-															$(
-																	'#bookableDateBegin')
-																	.val());
-													var checkinInterval = $(
-															'#checkinInterval')
-															.val() * 1;
-													bookableDateBegin
-															.setDate(bookableDateBegin
-																	.getDate()
-																	+ checkinInterval);
-													var bookableDateEnd = new Date(
-															$(
-																	'#bookableDateEnd')
-																	.val());
+															$('#bookableDateBegin').val());
+													var checkinInterval = $('#checkinInterval').val() * 1;
+													bookableDateBegin.setDate(bookableDateBegin.getDate()+ checkinInterval);
+													var bookableDateEnd = new Date($('#bookableDateEnd').val());
 
 													console
 															.log('bookableDateBegin : '

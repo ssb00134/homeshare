@@ -55,7 +55,8 @@ public class BookController {
 	
 	
 	// 호스트에 예약된 리스트
-	@RequestMapping(value = "/hostbook", method = RequestMethod.POST)
+	// 게스트가 예약한 정보 불러오기
+	@RequestMapping(value = "/memberbook", method = RequestMethod.POST)
 	public void hostbook(Model model, HttpServletRequest request) { // 호스트에 예약된 리스트
 
 		// 세션에서 아이디, memNo 가져오기
