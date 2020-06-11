@@ -29,8 +29,8 @@ public class BookController {
 	@Autowired
 	private HouseService houseService;
 
-	@RequestMapping(value = "/booking", method = RequestMethod.POST)
-	public void list2(Model model, HttpServletRequest request) {
+	@RequestMapping(value = "/memberbook", method = RequestMethod.POST)
+	public void memberbook(Model model, HttpServletRequest request) {
 
 		HttpSession session = request.getSession();
 
@@ -53,34 +53,6 @@ public class BookController {
 	}
 	
 	
-	
-	// 호스트에 예약된 리스트
-	// 게스트가 예약한 정보 불러오기
-	@RequestMapping(value = "/memberbook", method = RequestMethod.POST)
-	public void hostbook(Model model, HttpServletRequest request) { // 호스트에 예약된 리스트
 
-		// 세션에서 아이디, memNo 가져오기
-		HttpSession session = request.getSession();
-		String sessionMemId = (String) session.getAttribute("memId"); // 세션에서 아이디 가져오기
-		if (sessionMemId != null) {
-			int memNo = (int) session.getAttribute("memNo");
-			List<HouseVO> houseList = houseService.selectAllByMemNO(memNo);
-			logger.info("houseList : " + houseList.toString());
-			model.addAttribute("houseList", houseList);
-
-			// *내가 host하는 목록중에서 누군가가 예약했을때
-
-			List<BookVO> bookList = null;
-			for (int i = 0; i < houseList.size(); i++) {
-				int houseNo = houseList.get(i).getHouseNo();
-				bookList = bookService.selectHouseNo(houseNo);
-			}
-			model.addAttribute("bookList", bookList);
-
-		} else {
-			logger.info("세션이 없습니다. 로그인 해주세요");
-		}
-
-	}
 
 }

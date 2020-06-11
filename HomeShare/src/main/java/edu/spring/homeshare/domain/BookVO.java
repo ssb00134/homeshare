@@ -1,7 +1,5 @@
 package edu.spring.homeshare.domain;
 
-import java.sql.Date;
-
 public class BookVO {
 	private int bookNo;
 	private int bookMemNo;
