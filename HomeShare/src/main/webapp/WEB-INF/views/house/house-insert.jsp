@@ -49,7 +49,8 @@ header {
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b76b064de112b5b283e72470515766f4"></script>
 </head>
 <body>
-	<header class="border">
+<%@ include file="../navheader.jspf"%>
+	<!-- <header class="border">
 		<div class="row">
 		<div class="col-md-2 border">
 		<a href="/homeshare/">
@@ -59,7 +60,7 @@ header {
 		</div>
 		<div class="col-md-8"><h1>숙소 등록하기</h1></div>
 		</div>
-	</header>
+	</header> -->
 	<div class="row">
 		<div class="col-md-2"></div>
 		<form action="/homeshare/house/house-insert-post"

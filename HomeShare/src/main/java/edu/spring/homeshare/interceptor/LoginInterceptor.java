@@ -40,6 +40,11 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 			int memNo = (int) session.getAttribute("memNo");
 			logger.info("memno 세션값 : " + memNo);
 			
+			//HouseCount 세션값 가져오기
+			session.setAttribute("HouseCount",	vo.getHouseCount());
+			int HouseCount = (int) session.getAttribute("HouseCount");
+			logger.info("HouseCount 세션값 : " + memNo);
+			
 			
 			String referer = (String)request.getHeader("REFERER");
 			response.sendRedirect(referer);			
