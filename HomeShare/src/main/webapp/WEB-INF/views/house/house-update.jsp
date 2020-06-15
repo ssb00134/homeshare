@@ -11,13 +11,13 @@
 <%@ include file="../cdn.jspf"%>
 </head>
 <body>
-	${housevo.scope}
+	${housevo.price}
 	<%@ include file="../navheader.jspf"%>
 	<div class="row">
 		<div class="col-md-2"></div>
 		<h1>정보 수정하기</h1>
 		<form action="/homeshare/house/house-update"
-			class="form-horizontal col-md-8" method="get">
+			class="form-horizontal col-md-8" method="post">
 
 
 			<div class="form-group border"></div>
@@ -27,14 +27,16 @@
 			<div class="form-group border"></div>
 			<div id="class1">
 				<h1>1단계 기본 사항 입력</h1>
+			
 			</div>
 
-			<input type="hidden" name="houseNo" value="0">
-			<input type="hidden" name="replies" value="0">
-			<input type="hidden" name="score" value="0">
-			<input type="hidden" name="memNo" value="${memberVO.memNo }">
-
-			<input type="hidden" name="hostId" value="${memberVO.memId }">
+			<input type="hidden" name="houseNo" value="${housevo.houseNo}">
+			<input type="hidden" name="replies" value="${housevo.replies}">
+			<input type="hidden" name="score" value="${housevo.score}">
+			<input type="hidden" name="memNo" value="${housevo.memNo }">
+			<input type="hidden" name="reportCount" value="${housevo.reportCount }">
+			<input type="hidden" name="hostId" value="${housevo.hostId}">
+			<input type="hidden" name="image" value="${housevo.image}">
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
@@ -55,13 +57,13 @@
 				<select name="type" class="col-md-4" required="required">
 					<option value="">유형선택</option>
 					<option value="아파트"
-						<c:if test='${housevo.scope == "개인실"}'>selected</c:if>>아파트</option>
+						<c:if test='${housevo.type == "아파트"}'>selected</c:if>>아파트</option>
 					<option value="주택"
-						<c:if test='${housevo.scope == "개인실"}'>selected</c:if>>주택</option>
+						<c:if test='${housevo.type == "주택"}'>selected</c:if>>주택</option>
 					<option value="별채"
-						<c:if test='${housevo.scope == "개인실"}'>selected</c:if>>별채</option>
+						<c:if test='${housevo.type == "별채"}'>selected</c:if>>별채</option>
 					<option value="독특한숙소"
-						<c:if test='${housevo.scope == "개인실"}'>selected</c:if>>독특한숙소</option>
+						<c:if test='${housevo.type == "독특한숙소"}'>selected</c:if>>독특한숙소</option>
 				</select> <select name="maxCapacity" class="col-md-4" id="maxCapacity"
 					required="required">
 				</select>
@@ -247,15 +249,9 @@
 				<h1>2단계 상세 정보 입력하기</h1>
 			</div>
 
-			<h1>최대 10개의 파일을 올려주세요</h1>
-			<input type="file" name="files" multiple>
+			
 
-			<div class="form-group border"></div>
-			<div class="form-group border"></div>
-			<div class="form-group border"></div>
-
-
-			<p>숙소의 제목을 입력해 주세요</p>
+			<p>숙소의 제목을 입력해 주세요</p>;
 			<div class="form-group">
 				<textarea name="title" class="form-control" required="required"
 					readonly>${housevo.title }</textarea>
@@ -314,9 +310,11 @@
     				  </c:if>>
 			</div>
 			<div>체크인까지 최소한 어느정도 시간이 필요하세요?</div>
-			<br> <select name="checkinInterval" id="checkinInterval"
+			<div class="form-group">
+			<select name="checkinInterval" id="checkinInterval"
 				class="form-control" required="required">
 			</select>
+			</div>
 			<div>체크인 가능 시간을 선택해 주세요</div>
 			<div class="form-group">
 				<div class="form-group col-md-4">
@@ -337,11 +335,11 @@
 			<div class="form-group border"></div>
 			<p>게스트가 얼마나 숙박할 수 있나요?</p>
 			<div class="form-group">
-				<input type="text" name="stayNight" value="${housevo.stayNight }박"
+				<input type="text" name="stayNight" value="${housevo.stayNight }"
 					required="required">
 			</div>
 			<div class="form-group">
-				<input type="text" name="stayDay" value="${housevo.stayDay }일"
+				<input type="text" name="stayDay" value="${housevo.stayDay }"
 					required="required">
 			</div>
 			<div class="form-group border"></div>
@@ -369,14 +367,20 @@
 			<div class="form-group border"></div>
 
 			<p>숙소요금 설정하기</p>
-			<input type="text" name="price" value="${housvo.price }"
+			<input type="text" name="price" value="${housevo.price }"
 				required="required">
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
 			<div class="form-group border"></div>
 
-			<button class="btn" type="submit">등록하기</button>
+			<button class="btn" type="submit">수정하기</button>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			<div class="form-group border"></div>
+			
 		</form>
 		<div class="col-md-2">
 			<div id="floatMenu" class="form-control">
@@ -592,6 +596,7 @@
 							$('#checkinTime').append(
 									'<option value="flexible">조절가능</option>');
 							for (var i = 8; i <= 25; i++) {
+								$("#checkinTime").val("${housevo.checkinTime}").prop("selected", true);
 								if (i < 12) {
 									$('#checkinTime').append(
 											'<option value="' + i + '">오전' + i
@@ -617,6 +622,7 @@
 							$('#checkoutTime').append(
 									'<option value="flexible">조절가능</option>');
 							for (var i = 8; i <= 25; i++) {
+								$("#checkoutTime").val("${housevo.checkoutTime}").prop("selected", true);
 								if (i < 12) {
 									$('#checkoutTime').append(
 											'<option value="' + i + '">오전' + i

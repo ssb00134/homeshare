@@ -414,22 +414,31 @@ public class HouseController {
 		/*세션에서 정보 가져오기*/
 		HttpSession session = req.getSession();
 		String sessionMemId = (String) session.getAttribute("memId"); // 세션에서 아이디 가져오기
-		
-		
+
 		logger.info("houseNo : " + houseNo);
 		HouseVO housevo = houseService.selectByHouseNo(houseNo);
-		
-		
-		
-		
-		
+
 		model.addAttribute("housevo", housevo);
 	}
 	
 	
 	@RequestMapping(value = "/house-update", method = RequestMethod.POST)
-	public void houseUpdate(Model model) {
+	public void houseUpdate(HouseVO vo, HttpServletRequest req, Model model) {
 		//TODO : db에 업데이트 저장하고 이전화면으로 이동
+		//인터셉터 실행
+		model.addAttribute("housevo", vo);
+		
+		
+		logger.info("house update post 실행");
+		int updateResult = houseService.update(vo);
+		if(updateResult ==1 ) {
+			logger.info("정보 수정 성공");
+		}else {
+			logger.info("정보 수정 실패");
+		}
+		
+		
+	
 	}
 	
 	

@@ -64,7 +64,10 @@
 		class="edu.spring.homeshare.interceptor.HouseUpdateInterceptor">
 	</beans:bean>
 
-
+	<!-- 관리자 페이지 bean -->
+	<beans:bean id="AdminInterceptor"
+		class="edu.spring.homeshare.interceptor.AdminInterceptor">
+	</beans:bean>
 
 
 
@@ -97,7 +100,7 @@
 	</interceptors>
 
 
-
+	<!-- house update 인터셉터 -->
 	<interceptors>
 		<interceptor>
 			<mapping path="/house/house-update" />
@@ -105,6 +108,13 @@
 		</interceptor>
 	</interceptors>
 
+	<!-- 관리자 페이지 인터셉터 -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/admin/**" />
+			<beans:ref bean="AdminInterceptor" />
+		</interceptor>
+	</interceptors>
 
 
 	<!-- 문자열 리소스를 bean으로 추가 -->

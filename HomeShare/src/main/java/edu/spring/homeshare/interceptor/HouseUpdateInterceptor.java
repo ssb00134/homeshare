@@ -32,6 +32,10 @@ public class HouseUpdateInterceptor extends HandlerInterceptorAdapter {
 		
 		logger.info("세션아이디 : " + sessionMemId);
 		logger.info("hostid : " +housevo.getHostId());
+		
+		
+		
+		
 		if(housevo.getHostId().equals(sessionMemId)) {
 			logger.info("세션아이디와 hostid 일치 통과");
 		}else {

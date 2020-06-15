@@ -83,6 +83,7 @@
 										method="post">
 										<button type="submit" class="btn btn-default">관리자페이지</button>
 									</form>
+									<a href="/homeshare/admin/main" class="btn">관리자 get</a>
 								</c:if>
 
 								<div class="dropdown-divider"></div>
