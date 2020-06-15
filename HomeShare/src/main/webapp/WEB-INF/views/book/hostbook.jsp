@@ -80,20 +80,22 @@
 						<td>체크아웃</td>
 						<td>예약인원</td>
 						<td>총 가격</td>
+						<td>수락여부</td>
 
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="vo" items="${bookList }">
-						<tr id="bookItem" class="text">
+						<tr class="bookItem text">
 							<td>${vo.bookNo}</td>
-							<td id="checkin">${vo.checkin}</td>
-							<td>${vo.checkout}</td>
+							<td id="checkin">${vo.checkin.split(" ")[0]}</td>
+							<td id="checkout">${vo.checkout.split(" ")[0]}</td>
 							<td>${vo.bookMem}</td>
 							<td>${vo.totalPrice}</td>
-
-							<td><button type="submit" class="btn btn-default">수락</button></td>
-							<td><button type="submit" class="btn btn-default">거절</button></td>
+							<td>
+							<c:if test="${vo.hostCheck == 1}">수락</c:if>
+							<c:if test="${vo.hostCheck == 0}">거절</c:if>
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -220,13 +222,58 @@
 			
 			
 			
+			//TODO : 날짜 지나면 회색표시
+	/* 		$('#bookItem').each(function(){
+				var checkin = $(this).children('#checkin').html();
+				var checkout = $(this).children('#checkout').html();
+				
+				
+				console.log('checkout : ' + checkout);
+				
+			}); */
+			
+			disableAllTheseDays(new Date);
+			
+			function disableAllTheseDays(date) {
+				var disableList =[]; //예약불가 날짜를 담을 배열 선언
+				
+				$('.bookItem').each(function(index,element){
+					console.log('index ' + index + ' element : ' + element);
+					var checkin = $(element).children('#checkin').html();
+					var checkout = $(element).children('#checkout').html();
+					var checkinDate = new Date(checkin);
+					var checkoutDate = new Date(checkout);
+					console.log('checkoutDate :' + checkoutDate);
+					
+					disableList.push(getDaysArray(checkinDate,checkoutDate));
+					console.log("getDaysArray(checkinDate,checkoutDate) : " +getDaysArray(checkinDate,checkoutDate));
+				});
+				
+				console.log('bookitem each 이후 disablelist : ' + disableList);
+				console.log(disableList[0])
+				//선택불가 영역을 리턴하는 함수
+
+				function disableAllTheseDays(date) {
+				    var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
+				    for (i = 0; i < disabledDays.length; i++) {
+				        if($.inArray(y + '-' +(m+1) + '-' + d,disabledDays) != -1) {
+				            return [false];
+				        }
+				    }
+				    return [true];
+				}
+			} //end disableAllTheseDays
 			
 			
-			
-			
-			
-			
-			
+			// getDaysArray 선택불가 영역을 리턴하는 함수
+			function getDaysArray(start,end) {
+				for (var arr = [], dt = start; dt <= end; dt.setDate(dt.getDate() + 1)) {
+					arr.push(dt.toISOString().slice(0,10));
+				}
+				return arr;
+			};
+			// end getDaysArray 선택불가 영역을 리턴하는 함수
+
 			
 			$('#myTab a').click(function(e) {
 				e.preventDefault();
@@ -241,6 +288,8 @@
 				changeYear : true,
 				nextText : '다음 달',
 				prevText : '이전 달',
+				minDate : new Date(),
+				//beforeShowDay : disableAllTheseDays,
 			}); //end disableList
 
 			$('#dateArea2').datepicker({
@@ -249,12 +298,17 @@
 				changeYear : true,
 				nextText : '다음 달',
 				prevText : '이전 달',
+				minDate : new Date(),
+				//beforeShowDay : disableAllTheseDays,
 			}); //end disableList
+			
+			
+			
 			
 			var checkin1 =  $('#checkin');
 			console.log('checkin : ' + checkin1.html());
 			
-			$('#bookItem').each(function(index, element){
+			$('.bookItem').each(function(index, element){
 				var checkin1 =  $('#checkin');
 				console.log('index : ' + index + ' element : ' + element);
 				console.log('checkin : ' + element);
