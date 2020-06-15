@@ -72,7 +72,7 @@
 
 									<form class="dropdown-item border-0"
 										action="/homeshare/book/hostbook" method="post">
-										<input type="submit" value="내 host로 들어온 예약">
+										<button class="btn btn-default" type="submit">내 host로 들어온 예약</button>
 									</form>
 
 								</c:if>

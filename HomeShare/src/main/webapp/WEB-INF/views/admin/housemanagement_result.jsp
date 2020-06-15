@@ -13,11 +13,7 @@
 </head>
 <body>
 	<h1>숙소 검색결과</h1>
-	<span class="text" style="display:block">
-	dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-		ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-		dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-		dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd</span>
+
 	<c:if test="${houseList eq null }">
 		<h1>검색결과가 없습니다.</h1>
 		

@@ -18,28 +18,56 @@
 	<%@ include file="../navheader.jspf"%>
 	<h1>내 호스트 목록</h1>
 
-	<div id="book-lists">
-		<c:forEach var="vo" items="${list }">
-			<div class="host_list_item" id="${vo.houseNo }">
-				<div>번호${vo.houseNo }</div>
-				<div>title : ${vo.title}</div>
-				<div>${vo.price}$</div>
-				<div>${vo.scope}</div>
-				<div>${vo.location}</div>
-				<input class="imgSource" id="items" type="hidden"
-					value="${vo.image }" />
-				<br>
-				<!-- 이미지슬라이더 -->
-				<div class="home__slider">
-					<ul class="bxslider"></ul>
+	<c:if test="${houseList ne null }">
+		<c:forEach var="vo" items="${houseList }">
+			<div class="houselist_item container-fluid border">
+				<input type="hidden" id="houseNo" value="${vo.houseNo }">
+				<div class="row">
+					<div id="${vo.houseNo }" class="houselist_item_click col-md-8">
+						<div class="row">
+							<div class="col-md2 border">숙소번호</div>
+							<div class="col-md1 border">${vo.houseNo}</div>
+							<div class="col-md-4">최대 이용가능 인원</div>
+							<div class="1">${vo.maxCapacity }명</div>
+							<div class="col-md-3">${vo.scope }</div>
+							<div class="col-md-3">${vo.type }</div>
+						</div>
+						<div class="row">
+							<div class="col-md-3">화장실 ${vo.bathroom }개</div>
+							<div class="col-md-3">침대 ${vo.bed }개</div>
+							<div class="col-md-3">침실 ${vo.bedroom }개</div>
+						</div>
+						<div class="row"></div>
+						<div class="col-md-12 border">${vo.title }</div>
+						<div class="col-md-12 border">${vo.info }</div>
+						<div class="col-md-12 border">${vo.location }</div>
+						<div class="col-md-12 border">${vo.rules }</div>
+					</div>
+					<div class="col-md-4 border">
+					
+						<div class="row border">사진영역</div>
+						<div class="row">
+							<input type="text" value="${vo.houseNo }">
+							<button class="btn_house_update btn col-md-4">숙소 정보 수정</button>
+							<button class="btn_house_delete btn col-md-4">숙소 삭제</button>
+							<button  class="btn_image_update btn col-md-4">사진 수정하기</button>
+						</div>
+					</div>
 				</div>
+				<hr>
 			</div>
-			<hr>
+
+
 		</c:forEach>
-	</div>
+	</c:if>
+
+
+
+
+
 	<div>
 		<form id="pagingForm" style="display: none;">
-			
+
 			<input type="text" name="houseNo">
 		</form>
 	</div>
@@ -72,7 +100,7 @@
 				return false;
 			});// end click
 
-			$('.host_list_item').click(function() {
+			$('.houselist_item_click').click(function() {
 				event.preventDefault();
 				var houseNo = this.id;
 				console.log(houseNo);
@@ -82,6 +110,18 @@
 				frm.find('[name="houseNo"]').val(houseNo);
 				frm.submit();
 			}); // end click()
+
+			$('.btn_house_update').click(function() {
+				event.preventDefault();
+				
+				var houseNo = $(this).prevAll('input').val();
+				console.log('houseNo : ' + houseNo);
+				var frm = $('#pagingForm');
+				frm.attr('action', 'house-update');
+				frm.attr('method', 'get');
+				frm.find('[name="houseNo"]').val(houseNo);
+				frm.submit(); // form 데이터 전송 
+			});
 
 		})//end document
 	</script>

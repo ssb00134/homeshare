@@ -8,125 +8,95 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%@ include file="../cdn.jspf"%>
+<style type="text/css">
+
+.ui-datepicker{ font-size: 15px; width: 450px; }
+.ui-datepicker select.ui-datepicker-month{ width:30%; font-size: 11px; }
+.ui-datepicker select.ui-datepicker-year{ width:40%; font-size: 11px; }
+
+</style>
 </head>
 <body>
 	<%@ include file="../navheader.jspf"%>
-	<h1>내 house로 들어온 예약</h1>
+	<h1>내가 수락한 예약</h1>
 	<div id="hostbook"></div>
 
+	<c:if test="${bookList ne null }">
+		<div class="row">
+			<table class="table table-bordered table-hover text col-md-8">
+				<thead class="text">
+					<tr class="text">
+						<td>예약번호</td>
+						<td>체크인</td>
+						<td>체크아웃</td>
+						<td>예약인원</td>
+						<td>총 가격</td>
+
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="vo" items="${bookList }">
+						<tr id="bookItem" class="text">
+							<td>${vo.bookNo}</td>
+							<td id="checkin">${vo.checkin}</td>
+							<td>${vo.checkout}</td>
+							<td>${vo.bookMem}</td>
+							<td>${vo.totalPrice}</td>
+
+							<td><button type="submit" class="btn btn-default">수락</button></td>
+							<td><button type="submit" class="btn btn-default">거절</button></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+			<div class="col-md-4 border">
+				<div id="dateArea1"></div>
+				<div id="dateArea2"></div>
+			</div>
+		</div>
+
+		<h1>대기중인예약</h1>
+		
+		<h1>지난 예약내역 보기</h1>
+
+
+	</c:if>
+
 	<script type="text/javascript">
-		$(document).ready(
-				function() {					
-					getsHouseNoByMemNo();
-					
-				function getsHouseNoByMemNo() {
-					var url = '/homeshare/house/ishost/' + '${memberVO.memNo }';
-					console.log('url : ' + url);
-						$.getJSON(url, function(jsonData) {
-							console.log(JSON.stringify(jsonData));
-							var parse = [];
-							parse = JSON.stringify(jsonData).replace('[','').replace(']','').split(',');
-							console.log(parse[0]); //가져온 houseno 정보		
-							
-							if(parse.length > 0){ //만약 1개 이상의 house가 있으면 - host이면
-								$(parse).each(function(index, element){
-									console.log(index  + ' : ' + element);
-									var url = '/homeshare/book/all/' + element;
-									console.log('url : ' + url);
-									var count =0;
-									$.getJSON(url,function(jsonData){
-										
-										var list='';
-										$(jsonData).each(function(){
-											console.log('this.bookno : ' + this.bookNo);
-											list += '<div class="book_item">'
-							  	  		  		+ '<pre>'
-							  	  		  		+ '<input type="hidden" id="rno" value="' + this.bookNo + '" /><br>'
-							  	  		  		+ '<input type="hidden" id="bookHouseNo" value="' + this.bookHouseNo + '" /><br>'
-							  	  		  		+ this.bookHouseNo
-							  	  		  		+ '&nbsp;&nbsp;' // 공백
-							  	  		  		+ this.bookMemNo
-							  	  		  		+ '&nbsp;&nbsp;' // 공백
-							  	 				+ this.checkin.split(' ')[0]
-							  	  		  		+ '&nbsp;&nbsp;' // 공백
-							  	  		  		+ this.checkout.split(' ')[0]
-							  	  		  		+ '&nbsp;&nbsp;' // 공백
-							  	  		  		+ this.hostCheck
-							  	  		  		+ '&nbsp;&nbsp;' // 공백
-							  	  		  		+ this.totalPrice
-							  	  		  		+ '&nbsp;&nbsp;' // 공백
-							  	  		  		
-							  	  		  		+ '<button class="btn_update" type="button">수락</button>'
-							  	  		  		+ '&nbsp;'
-							  	  		  		+ '<button class="btn_delete" type="button">거절</button>'
-							  	  		  		+ '</pre>' + '</div>' +'<hr>';
-							  	  		  		console.log('list : ' +list );
-							  	  		  	$('#hostbook').html(list);	
-										});// end jsonEach
-										
-										
-									}//end callback
-									);//end getJSON
-								});// end each
-							}//end if parse>0
-							
-							
-						});//end getJSON
-					}; //end getallhostbook 
-				
+		$(document).ready(function() {
+			$('#myTab a').click(function(e) {
+				e.preventDefault();
+				console.log('mytab click');
+				$('#myTab a[href="#profile"]').tab('show'); // Select tab by name
+			});
 
+			/* dateArea에 정보 추가하기*/
+			$('#dateArea1').datepicker({
+				dateFormat : "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
+				changeMonth : true,
+				changeYear : true,
+				nextText : '다음 달',
+				prevText : '이전 달',
+			}); //end disableList
 
-					
-					//시작할때 자동 실행
-					function initialize(){
-						$('.book_list_item').each(function(index,element){
-							var hostCheck = $(element).find('#hostCheck').val();
-							if(hostCheck=== "0"){
-								console.log('hostCheck === "0" ');
-								$(element).find('#status').val('예약 대기중') ;
-								$(element).append('<input type="button" class="btn_update" value="예약 수락하기">');
-							}else{
-								$(element).find('#status').val('예약수락됨') 
-								$(element).append('<input type="button" class="btn_delete" value="예약 취소">');
-							}
-						});//end each	
-					}
-					initialize();
-					
-					
-					
-					
-					
-
-				//bookForm ajax 작성
-				$('.book_list_item').on('click', '.book_list_item .btn_update', function(){
-					console.log('btnupdate 클릭');
-					var bookNo = $(this).prevAll('#bookNo').val();
-					var hostCheck = 1;
-					console.log('예약번호 : ' + bookNo + ' 호스트여부 : ' + hostCheck);
-					
-					//ajax 요청
-					$.ajax({
-						type : 'put',
-						url : '/homeshare/book/' + bookNo,
-					 	headers : {
-				  	  	    'Content-Type' : 'application/json', 
-				  	  	    'X-HTTP-Method-Override' : 'PUT'
-				  	  	}, 
-				  	  	data : JSON.stringify({
-				  	  		'hostCheck' : hostCheck
-				  	  	}),
-				  	  	success : function(result){
-				  	  		if(result=='success'){
-				  	  			alert('수정 성공');
-				  	  			
-				  	  			initialize();
-				  	  		} //end if
-				  	  	}//end success
-					});//end ajax
-				});
-
-				});//end document
+			$('#dateArea2').datepicker({
+				dateFormat : "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
+				changeMonth : true,
+				changeYear : true,
+				nextText : '다음 달',
+				prevText : '이전 달',
+			}); //end disableList
+			
+			var checkin1 =  $('#checkin');
+			console.log('checkin : ' + checkin1.html());
+			
+			$('#bookItem').each(function(index, element){
+				var checkin1 =  $('#checkin');
+				console.log('index : ' + index + ' element : ' + element);
+				console.log('checkin : ' + element);
+			});
+			
+		});//endscript
 	</script>
 </body>
 </html>

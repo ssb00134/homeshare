@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -153,9 +154,9 @@ public class HouseController {
 		String sessionMemId = (String) session.getAttribute("memId"); // 세션에서 아이디 가져오기
 		if (sessionMemId != null) {
 			int memNo = (int) session.getAttribute("memNo");
-			List<HouseVO> list = houseService.selectAllByMemNO(memNo);
-			logger.info("list : " + list.toString());
-			model.addAttribute("list", list);
+			List<HouseVO> houseList = houseService.selectAllByMemNO(memNo);
+			logger.info("list : " + houseList.toString());
+			model.addAttribute("houseList", houseList);
 
 		} else {
 			logger.info("세션이 없습니다. 로그인 해주세요");
@@ -180,6 +181,8 @@ public class HouseController {
 		logger.info("house-insert get 실행");
 	}
 
+	
+	
 	@RequestMapping(value = "/house-insert-post", method = RequestMethod.POST)
 	public String houseInsertPost(HouseVO vo, MultipartFile[] files, RedirectAttributes reAttr) throws IOException {
 		logger.info("house-insert-post 실행");
@@ -400,6 +403,33 @@ public class HouseController {
 				);
 		
 		return entity;
+	}
+	
+	
+	/* 업데이트 메핑*/
+	@RequestMapping(value = "/house-update", method = RequestMethod.GET)
+	public void houseUpdateGet(int houseNo, HttpServletRequest req, Model model) {
+		logger.info("update Get 호출 : ");
+		
+		/*세션에서 정보 가져오기*/
+		HttpSession session = req.getSession();
+		String sessionMemId = (String) session.getAttribute("memId"); // 세션에서 아이디 가져오기
+		
+		
+		logger.info("houseNo : " + houseNo);
+		HouseVO housevo = houseService.selectByHouseNo(houseNo);
+		
+		
+		
+		
+		
+		model.addAttribute("housevo", housevo);
+	}
+	
+	
+	@RequestMapping(value = "/house-update", method = RequestMethod.POST)
+	public void houseUpdate(Model model) {
+		//TODO : db에 업데이트 저장하고 이전화면으로 이동
 	}
 	
 	
