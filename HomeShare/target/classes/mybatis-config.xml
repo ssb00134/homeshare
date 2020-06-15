@@ -15,6 +15,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<property name="houseCount" value="houseCount" />
 		<property name="account" value="account" />
 		<property name="gender" value="gender" />
+		<property name="phoneReleaseToHost" value="phoneReleaseToHost" />
 		
 		
 		<!-- house table 변수 설정 -->

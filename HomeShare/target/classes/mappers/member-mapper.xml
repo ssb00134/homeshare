@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 회원가입 sql -->
 	<insert id="insert" parameterType="memberVO">
 		insert into member
-		values(0,#{memId},#{password},0,null,#{memName},#{email},#{gender})
+		values(0,#{memId},#{password},0,null,#{memName},#{email},#{gender},#{phoneReleaseToHost})
 	</insert>
 
 	<!-- 로그인 Sql -->
@@ -29,6 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		${memName}=#{memName},
 		${email}=#{email},
 		${gender}=#{gender}
+		${phoneReleaseToHost}=#{phoneReleaseToHost}
 		where ${memNo} = #{memNo}
 	
 	</update>

@@ -1,64 +1,98 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+
+<form class="modal" id="SignUpModal"
+	action="/homeshare/member/sign-up-post" method="post">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<!-- modal head -->
+			<div class="modal-header">
+				<h4 class="modal-title">회원가입</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<!-- modal body -->
 			
-			<form class="modal" id="SignUpModal"
-				action="/homeshare/member/sign-up-post" method="post">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<!-- modal head -->
-						<div class="modal-header">
-							<h4 class="modal-title">회원가입</h4>
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-						</div>
-						<!-- modal body -->
-						<div class="form-group">
-							<label for="id" class="col-md-2 control-label">Id</label>
-							<div class="col-md-10">
-								<input type="text" class="form-control" id="id" name="MemId"
-									placeholder="아이디를 입력해주세요">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="password" class="col-md-2 control-label">Password</label>
-							<div class="col-md-10">
-								<input type="password" class="form-control" id="password"
-									name="password" placeholder="비밀번호를 입력해주세요">
-							</div>
-						</div>
-						<div class="form-group">
-
-							<div class="col-md-10">
-								<input type="password" class="form-control" id="passwordchk"
-									placeholder="비밀번호 확인">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="MemName" class="col-md-2 control-label">Name</label>
-							<div class="col-md-10">
-								<input type="text" class="form-control" id="MemName"
-									name="MemName" placeholder="이름입력">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="email" class="col-md-2 control-label">email</label>
-							<div class="col-md-10">
-								<input type="email" class="form-control" id="email" name="email"
-									placeholder="이메일입력">
-							</div>
-							<div class="form-group">
-								성별
-								<input type="radio" name="gender" value="남성">
-								남성
-								<input type="radio" name="gender" value="여성">
-								여성
-							</div>
-						</div>
-
-						<!-- modal footer -->
-						<div class="modal-footer">
-							<input type="submit" value="가입하기">
-							<button type="button" class="btn " data-dismiss="modal">close</button>
-						</div>
-					</div>
+			<!-- hiddenarea -->
+			<input type="hidden" name="memNo" value="0">
+			<input type="hidden" name="houseCount" value="0">
+			<input type="hidden" name="account" value="0">
+			
+			<div class="form-group">
+				<label for="id" class="col-md-2 control-label">Id</label>
+				<div class="col-md-10">
+					<input type="text" class="form-control" id="id" name="MemId"
+						placeholder="아이디를 입력해주세요">
 				</div>
-			</form>
+			</div>
+			<div class="form-group">
+				<label for="password" class="col-md-2 control-label">Password</label>
+				<div class="col-md-10">
+					<input type="password" class="form-control" id="password"
+						name="password" placeholder="비밀번호를 입력해주세요">
+				</div>
+			</div>
+			<div class="form-group">
+
+				<div class="col-md-10">
+					<input type="password" class="form-control" id="passwordchk"
+						placeholder="비밀번호 확인">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="MemName" class="col-md-2 control-label">Name</label>
+				<div class="col-md-10">
+					<input type="text" class="form-control" id="MemName" name="MemName"
+						placeholder="이름입력">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="email" class="col-md-2 control-label">email</label>
+				<div class="col-md-10">
+					<input type="email" class="form-control" id="email" name="email"
+						placeholder="이메일입력">
+				</div>
+				<div class="form-group">
+					성별
+					<input type="radio" name="gender" value="남성">
+					남성
+					<input type="radio" name="gender" value="여성">
+					여성
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="form-check-label" for="phoneReleaseToHost"> 내
+					전화번호를 호스트에게 공개하시겠습니까? </label>
+				<div class="form-check">
+					<input class="form-check-input" type="radio" name="phoneReleaseToHost"
+						id="phoneReleaseToHost" value="true" >
+					<label class="form-check-label" for="exampleRadios1">
+						동의함 </label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="radio" name="phoneReleaseToHost"
+						id="phoneReleaseToHost" value="flase" checked >
+					<label class="form-check-label" for="exampleRadios1">
+						동의하지 않음 </label>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value=""
+						id="phoneReleaseToHost" required>
+					<label class="form-check-label" for="phoneReleaseToHost">
+						이용약관동의 </label>
+
+					<div class="invalid-feedback">반드시 동의해야함</div>
+				</div>
+			</div>
+
+
+			<!-- modal footer -->
+			<div class="modal-footer">
+				<input type="submit" value="가입하기">
+				<button type="button" class="btn " data-dismiss="modal">close</button>
+			</div>
+		</div>
+	</div>
+</form>

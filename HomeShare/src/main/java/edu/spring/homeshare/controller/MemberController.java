@@ -98,14 +98,7 @@ public class MemberController {
 	}
 	/*end 회원가입 매핑*/
 	
-	
-	/*호스트 되기 메핑*/
-	@RequestMapping(value="/became-a-host", method = RequestMethod.GET)
-	public void registHost(String url, Model model) {
-		logger.info("registHost() 호출");
-		logger.info("url : " + url); // 이전경로(로그인을 위해 왔던)의 값 출력
-		model.addAttribute("targetUrl", url);	
-	}
+
 	
 	
 	

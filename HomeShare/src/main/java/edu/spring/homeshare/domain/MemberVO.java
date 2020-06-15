@@ -9,10 +9,11 @@ public class MemberVO {
 	private String account;
 	private String memName;
 	private String gender;
+	private String phoneReleaseToHost;
 	
 	public MemberVO() {}
 
-	public MemberVO(int memNo, String memId, String password, String email, int houseCount, String account, String memName, String gender) {
+	public MemberVO(int memNo, String memId, String password, String email, int houseCount, String account, String memName, String gender, String phoneReleaseToHost) {
 		super();
 		this.memNo = memNo;
 		this.memId = memId;
@@ -22,6 +23,7 @@ public class MemberVO {
 		this.account = account;
 		this.memName = memName;
 		this.gender = gender;
+		this.phoneReleaseToHost = phoneReleaseToHost;
 	}
 
 	public int getMemNo() {
@@ -88,10 +90,23 @@ public class MemberVO {
 		this.gender = gender;
 	}
 
+	
+	
+
+	public String getPhoneReleaseToHost() {
+		return phoneReleaseToHost;
+	}
+
+	public void setPhoneReleaseToHost(String phoneReleaseToHost) {
+		this.phoneReleaseToHost = phoneReleaseToHost;
+	}
+
 	@Override
 	public String toString() {
-		return "MemberVO [memNo=" + memNo + ", memId=" + memId + ", password=" + password + ", email=" + email + ", houseCount=" + houseCount + ", account=" + account + ", memName=" + memName + ", gender=" + gender + "]";
+		return "MemberVO [memNo=" + memNo + ", memId=" + memId + ", password=" + password + ", email=" + email + ", houseCount=" + houseCount + ", account=" + account + ", memName=" + memName + ", gender=" + gender + ", phoneReleaseToHost=" + phoneReleaseToHost + "]";
 	}
+
+	
 
 
 	
