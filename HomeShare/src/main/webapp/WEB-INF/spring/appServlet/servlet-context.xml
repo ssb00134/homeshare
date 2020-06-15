@@ -58,6 +58,19 @@
 		class="edu.spring.homeshare.interceptor.SignUpInterceptor">
 	</beans:bean>
 
+
+	<!-- 숙소 업데이트 bean -->
+	<beans:bean id="HouseUpdateInterceptor"
+		class="edu.spring.homeshare.interceptor.HouseUpdateInterceptor">
+	</beans:bean>
+
+
+
+
+
+
+
+
 	<!-- Interceptor가 가로챌 URL 매핑 설정 -->
 	<!-- 로그인 인터셉터 -->
 	<interceptors>
@@ -82,6 +95,17 @@
 			<beans:ref bean="SignUpInterceptor" />
 		</interceptor>
 	</interceptors>
+
+
+
+	<interceptors>
+		<interceptor>
+			<mapping path="/house/house-update" />
+			<beans:ref bean="HouseUpdateInterceptor" />
+		</interceptor>
+	</interceptors>
+
+
 
 	<!-- 문자열 리소스를 bean으로 추가 -->
 	<!-- String uploadPath = new String("경로"); -->

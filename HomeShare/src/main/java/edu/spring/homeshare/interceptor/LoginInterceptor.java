@@ -24,10 +24,12 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		MemberVO vo = (MemberVO) modelAndView.getModel().get("login_result");
 		if (vo != null) {
 			logger.info("로그인 성공");
-			HttpSession session = request.getSession();
 			
 			//memvo 세션값 가져오기
+			HttpSession session = request.getSession();
 			session.setAttribute("memberVO",	vo);
+			
+			
 			logger.info("vo 세션값 : " + session.getAttribute("memberVO").toString());
 			//memId 세션값 가져오기
 			session.setAttribute("memId",	vo.getMemId());
