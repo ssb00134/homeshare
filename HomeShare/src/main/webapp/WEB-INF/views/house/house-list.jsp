@@ -8,14 +8,7 @@
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b76b064de112b5b283e72470515766f4"></script>
 <style type="text/css">
-header{
-	position: fixed;
-	top: 0;
-	color: white;
-	background: grey;
-	font-weight: bold;
 
-}
 </style>
  <%@ include file="../cdn.jspf"%>
 
