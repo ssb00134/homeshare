@@ -30,15 +30,14 @@ public class HouseUpdateInterceptor extends HandlerInterceptorAdapter {
 		HttpSession session = request.getSession();
 		String sessionMemId = (String) session.getAttribute("memId"); // 세션에서 아이디 가져오기
 		
-		logger.info("sessionMemId : " + sessionMemId);
-		logger.info("hostId : " + housevo.getHostId());
-		if(sessionMemId.equals(housevo.getHostId())) {
+		logger.info("세션아이디 : " + sessionMemId);
+		logger.info("hostid : " +housevo.getHostId());
+		if(housevo.getHostId().equals(sessionMemId)) {
 			logger.info("세션아이디와 hostid 일치 통과");
-		}else{
+		}else {
 			logger.info("세션아이디와 hostid 불일치");
-			
-			session.setAttribute("update_fail",	"update_fail");
 			response.sendRedirect("/homeshare/");
+			
 		}
 	
 	}
