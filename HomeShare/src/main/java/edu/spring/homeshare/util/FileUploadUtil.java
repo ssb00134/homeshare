@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
+import javax.swing.Box.Filler;
 
 import org.imgscalr.Scalr;
 import org.slf4j.Logger;
@@ -99,15 +100,39 @@ public class FileUploadUtil {
 	public static void deleteFile(String path, String houseNo, String item) { //경로 , item
 		System.out.println("삭제할 파일 이름 : " + item);
 		
-		File file = new File(path + File.separator + houseNo + File.separator + item);
-        System.out.println("삭제할 폴더 경로 : " + path + File.separator + houseNo + File.separator + item);
+		File file = new File(path + "\\\\" + houseNo + "\\\\" + item);
+        System.out.println("삭제할 폴더 경로 : " + path + "\\\\" + houseNo + "\\\\" + item);
+        
     	if( file.exists() ){
     		if(file.delete()){
-    			System.out.println("파일삭제 성공");
+    			System.out.println("파일삭제 성공 file : " + file.getName());
+    			//TODO : rename
+    			String folderpath = path + File.separator + houseNo;
+    			File dir = new File(folderpath);
+    			File []fileList = dir.listFiles();
     			
+    		
+				for(File folderFile : fileList){
+				    if(folderFile.isFile()){
+				    	String fileName = folderFile.getName();
+				    	System.out.println("폴더내첫쨰값 : " + fileName.charAt(0));
+				    	
+				    }
+				} 
+
     			
     		}else{
     			System.out.println("파일삭제 실패");
+    			String folderpath = path + File.separator + houseNo;
+    			File dir = new File(folderpath);
+    			File []fileList = dir.listFiles();
+
+    			for(File folderFile : fileList){
+				    if(folderFile.isFile()){
+				    	String fileName = folderFile.getName();
+				    	System.out.println("폴더내첫쨰값 : " + fileName.charAt(0));
+				    }
+				} 
     			
     		}
     	}else{

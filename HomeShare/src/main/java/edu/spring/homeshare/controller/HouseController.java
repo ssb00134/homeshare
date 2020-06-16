@@ -430,6 +430,9 @@ public class HouseController {
 				logger.info("파일 삭제 실패");
 			}
 			
+			//파일 이름 정하기
+			
+			
 			
 		} 
 		return "/";
