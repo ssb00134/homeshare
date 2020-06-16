@@ -102,16 +102,24 @@ public class FileUploadUtil {
 		}
 	}
 
-	public static void deleteFile(String item) {
+	public static void deleteFile(String path, String houseNo, String item) { //경로 , item
 		System.out.println("삭제할 파일 이름 : " + item);
 		
-		File file = new File(item);
-        
+		File file = new File(path + File.separator + houseNo + File.separator + item);
+        System.out.println("삭제할 폴더 경로 : " + path + File.separator + houseNo + File.separator + item);
     	if( file.exists() ){
     		if(file.delete()){
     			System.out.println("파일삭제 성공");
+    			//파일 rename하기
+    			int fileLength = 0;
+    			fileLength = countFile(path, houseNo);
+    			System.out.println("deleteFile " + houseNo +"폴더의 파일 개수 : " + fileLength );
+    			
     		}else{
     			System.out.println("파일삭제 실패");
+    			int fileLength = 0;
+    			fileLength = countFile(path, houseNo);
+    			System.out.println("deleteFile " + houseNo +"폴더의 파일 개수 : " + fileLength );
     		}
     	}else{
     		System.out.println("파일이 존재하지 않습니다.");

@@ -61,15 +61,15 @@
 						</div>
 					</div>
 					<div class="card-footer row">
-						<input type="hidden" value="${vo.houseNo }" id="houseNo">
-						<input type="hidden" value="${vo.memNo }" id="memNo">
+					
 						<form class="frm" style="display: none;">
 							<input type="text" value="${vo.houseNo }" name="houseNo">
 							<input type="text" name="memNo" value="${vo.memNo }">
 						</form>
 						<form class="imgFrm col-md-12" style="display: none;">
-							<input type="text" value="${vo.houseNo }" name="houseNo">
-							<input type="text" name="memNo" value="${vo.memNo }">
+							<input type="hidden" value="${vo.houseNo }" name="houseNo" class="houseNo">
+							<input type="hidden" value="${vo.memNo }" Name="memNo" class="memNo">
+							<input type="hidden"  Name="item" >
 							<input type="text" class="imgSource2" value="${vo.image }">
 							<div class="imgSplit form-group">
 								
@@ -90,7 +90,7 @@
 	</c:if>
 
 		<div>
-		<form id="deleteItems" style="display: none;">
+		<form id=deleteItemForm style="display: none;">
 		</form>
 	</div>
 	<%@ include file="../footer.jspf"%>
@@ -140,6 +140,9 @@
 				console.log('imgfrm index : '+ index + ' element : ' + element);
 				var imgFrm = $(element);
 				var imgSource2 = imgFrm.children('.imgSource2').val();
+				var houseNo = $('');
+				var memNo ='';
+				console.log('imgFrm houseno : ' + houseNo);
 				console.log('imgSource2 : ' + imgSource2);
 				var imgSplit = imgSource2.split(',');
 				var list='';
@@ -152,7 +155,6 @@
 							 + '" alt="'
 							 + index
 							 +'slide">'
-							
 							 +'<button type="button" id="' 
 							 +element2.split('\\')[1]
 							 +'" class="btnDeleteItem btn btn-danger col-md-12">삭제하기</button>'
@@ -180,9 +182,18 @@
 			}); 
 	 		
 	 		$('.btnDeleteItem').click(function(e){
-	 			alert('click');
-	 			
-	 			console.log('btnDeleteItem click' + $(this).html());
+	 			var imgFrm = $(this).parents('form');
+ 				console.log('imgFrm : '+ imgFrm.html());
+ 				var item = $(this).attr('id');
+ 				console.log('item : '+item);
+ 				
+	 			if(confirm("정말 이 사진을 삭제하시겠습니까?") == true){
+	 				
+	 				imgFrm.attr('action','/homeshare/house/house-deleteItem');
+	 				imgFrm.attr('method', 'post');
+	 				imgFrm.find('[name="item"]').val(item);
+	 				imgFrm.submit();
+	 			}
 	 		});//end click
 	 		
 	 		

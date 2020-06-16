@@ -404,6 +404,37 @@ public class HouseController {
 		}
 	}
 	
+	/* 사진 삭제 메핑 */
+	// TODO : 삭제시 해당 아이디의 모든 데이터가 삭제됨
+	@RequestMapping(value = "/house-deleteItem", method = RequestMethod.POST)
+	public String deleteItem(int houseNo, int memNo, String item, HttpServletRequest req, HttpServletResponse res) throws IOException {
+		
+		logger.info("전송받은 houseNo : " + houseNo);
+		logger.info("전송받은 memNo : " + memNo);
+		logger.info("전송받은 item : " + item);
+		
+		// 세션 설정
+		HttpSession session = req.getSession();
+		int sessionMemNo = (int) session.getAttribute("memNo"); // 세션에서 아이디 가져오기
+		logger.info("세션값 : " + sessionMemNo);
+
+	
+		if (sessionMemNo == memNo) {// 전송받은 memno와 세션에서의 memno가 일치하면 delete를 실행한다. 
+			logger.info("세션값일치: " + sessionMemNo);
+			//파일 삭제
+			try {
+				FileUploadUtil.deleteFile(uploadPath, "houseno" + Integer.toString(houseNo) , item); //경로 , 폴더, 삭제아이템
+				logger.info("파일 삭제 성공");
+				//TODO : 재정렬
+			} catch (Exception e) {
+				logger.info("파일 삭제 실패");
+			}
+			
+			
+		} 
+		return "/";
+	}
+	
 	/* 삭제 메핑 */
 	// TODO : 삭제시 해당 아이디의 모든 데이터가 삭제됨
 	@RequestMapping(value = "/house-delete", method = RequestMethod.POST)
@@ -439,12 +470,6 @@ public class HouseController {
 			logger.info("세션이 일치하지 않습니다.");
 			return "/";
 		}
-	}
-	
-	@ResponseBody
-	public ResponseEntity<String> deleteAjax(){
-		String result = null;
-		return new ResponseEntity<String>(result, HttpStatus.OK);
 	}
 	
 	
