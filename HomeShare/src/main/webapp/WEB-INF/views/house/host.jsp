@@ -135,37 +135,35 @@
 				document.location.href='/homeshare/house/house-update?houseNo=' + houseNo;
 			});
 			
-			//img update 첫번째로 실행했을때
-			$('.btnImgUpdate').one('click',function(){
-				console.log('update click' + event);
-				$(this).siblings('.imgFrm').show();
-				var list='';
-				
-				var imgFrm = $(this).siblings('.imgFrm');
-				
-				
+			
+			$('.imgFrm').each(function(index,element){
+				console.log('imgfrm index : '+ index + ' element : ' + element);
+				var imgFrm = $(element);
 				var imgSource2 = imgFrm.children('.imgSource2').val();
 				console.log('imgSource2 : ' + imgSource2);
 				var imgSplit = imgSource2.split(',');
-				$.each(imgSplit,function(index,element){
-					if(index < imgSplit.length / 2 -1 ){
-						console.log('imgSplit[' +index + "] : " + element);
+				var list='';
+				$.each(imgSplit,function(index2,element2){
+					if(index2 < imgSplit.length / 2 -1 ){
+						console.log('imgSplit[' +index2 + "] : " + element2);
 						list += '<div class="imgItems">'
 							 +'<img class="img-fluid d-block w-100" src="/homeshare/house/display/'
-							 + element 
+							 + element2 
 							 + '" alt="'
 							 + index
 							 +'slide">'
 							
-							 +'<button id="' 
-							 +element.split('\\')[1]
-							 +'" class="btnDeleteItem btn btn-dnager col-md-12">삭제하기</button>'
+							 +'<button type="button" id="' 
+							 +element2.split('\\')[1]
+							 +'" class="btnDeleteItem btn btn-danger col-md-12">삭제하기</button>'
 							 + '</div>';
 					}
 				}); //end imgsplit each
-				imgFrm.children('.imgSplit').append(list);
-				
+				imgFrm.children('.imgSplit').append(list);				
 			});
+			
+			
+			
 			//그 이후 실행했을때
 			$('.btnImgUpdate').on('click',function(){
 				$(this).siblings('.imgFrm').toggle();
@@ -183,7 +181,7 @@
 	 		
 	 		$('.btnDeleteItem').click(function(e){
 	 			alert('click');
-	 			e.preventDefault();
+	 			
 	 			console.log('btnDeleteItem click' + $(this).html());
 	 		});//end click
 	 		
