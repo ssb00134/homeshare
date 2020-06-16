@@ -25,17 +25,14 @@
 			<c:forEach var="vo" items="${houseList }">
 				<!-- cardgrooup -->
 
-				<div class="hostItem card" >
+				<div class="hostItem card">
 					<input type="hidden" id="imgSource" value="${vo.image }">
-					<div class="card-header">header</div>
+					<input type="hidden" id="houseNo" value="${vo.houseNo }">
+					<div class="card-header">${vo.title }</div>
 					<div class="card-body" id="imgArea">
 						<div id="carouselExampleControls" class="carousel slide"
 							data-ride="carousel">
-							<div class="carousel-inner">
-								
-								
-								
-							</div>
+							<div class="carousel-inner" id="carousel-inner"></div>
 							<a class="carousel-control-prev" href="#carouselExampleControls"
 								role="button" data-slide="prev">
 								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -50,7 +47,7 @@
 					</div>
 					<div class="card-body">
 						<p class="card-text">
-						<h5 class="card-title border">${vo.title }</h5>
+						<h5 class="card-title border">${vo.info }</h5>
 						</p>
 						<div class="card-text">
 							<strong>유틸리티</strong> <small>${vo.utilities }</small>
@@ -63,8 +60,28 @@
 							<small>${vo.bookableDateEnd }</small>
 						</div>
 					</div>
-					<div class="card-footer">
-						<small class="text-muted">footer</small>
+					<div class="card-footer row">
+						<input type="hidden" value="${vo.houseNo }" id="houseNo">
+						<input type="hidden" value="${vo.memNo }" id="memNo">
+						<form class="frm" style="display: none;">
+							<input type="text" value="${vo.houseNo }" name="houseNo">
+							<input type="text" name="memNo" value="${vo.memNo }">
+						</form>
+						<form class="imgFrm col-md-12" style="display: none;">
+							<input type="text" value="${vo.houseNo }" name="houseNo">
+							<input type="text" name="memNo" value="${vo.memNo }">
+							<input type="text" class="imgSource2" value="${vo.image }">
+							<div class="imgSplit form-group">
+								
+							</div>
+						</form>
+						
+						<button class="btnUpdate btn col-md-4 border">숙소정보
+							수정하기</button>
+						<button class="btnImgUpdate btn col-md-4 border">이미지
+							수정하기</button>
+						<button class="btnDelete btn btn-danger col-md-4 border">숙소
+							삭제하기</button>
 					</div>
 				</div>
 			</c:forEach>
@@ -72,23 +89,20 @@
 		<!-- end cardgroup -->
 	</c:if>
 
-	<div>
-		<form id="pagingForm" style="display: none;">
 
-			<input type="text" name="houseNo">
-		</form>
-	</div>
 	<%@ include file="../footer.jspf"%>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			
-			var list='';
+			
 			$('.hostItem').each(function(index, element){
 				console.log('index : ' + index + ' element : ' + element);
 				var imgSource = $(element).children('#imgSource').val();
 				console.log('imgsource : '+ imgSource);
 				
 				var imgSplit = imgSource.split(',');
+				
+				var list='';	
 				$.each(imgSplit, function(index2,element2){
 					if(index2 < imgSplit.length / 2 -1 ){
 						console.log('imgSplit[' +index2 + "] : " + element2);
@@ -104,11 +118,55 @@
 								+ 'slide">'
 								+ '</div>';
 					}
-				}); //end imgsource each
+				}); //end imgsplit each
+					$(element).find('#carousel-inner').append(list);
 				console.log(list);
-				$(element).find('.carousel-inner').append(list);
 			});
-			console.log('list : ' + list);
+			
+			
+			$('.btnUpdate').click(function(event){
+				console.log('update click' + event);
+				//var imgSource = $(element).children('#imgSource').val();
+				var houseNo = $(this).siblings('#houseNo').val();
+				console.log('houseNo : ' + houseNo);
+				document.location.href='/homeshare/house/house-update?houseNo=' + houseNo;
+			});
+			
+			$('.btnImgUpdate').click(function(event){
+				console.log('update click' + event);
+				var list='';
+				
+				var imgFrm = $(this).siblings('.imgFrm');
+				imgFrm.show();
+				
+				var imgSource2 = imgFrm.children('.imgSource2').val();
+				console.log('imgSource2 : ' + imgSource2);
+				var imgSplit = imgSource2.split(',');
+				$.each(imgSplit,function(index,element){
+					if(index < imgSplit.length / 2 -1 ){
+						console.log('imgSplit[' +index + "] : " + element);
+						list += '<img class="img-fluid d-block w-100" src="/homeshare/house/display/'
+							 + element 
+							 + '" alt="'
+							 + index
+							 +'slide">';
+					}
+				}); //end imgsplit each
+				imgFrm.children('.imgSplit').append(list);
+				
+			});
+			
+			
+	 		$('.btnDelete').click(function(event){
+				if(confirm("정말 이 숙소를 삭제하시겠습니까??") == true){
+					console.log('삭제 확인');
+					var frm = $(this).siblings('.frm');
+					frm.attr('action','/homeshare/house/house-delete');
+					frm.attr('method', 'post');
+					frm.submit();
+				}
+
+			}); 
 			
 
 		})//end document

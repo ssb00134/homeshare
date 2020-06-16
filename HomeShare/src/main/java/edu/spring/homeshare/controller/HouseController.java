@@ -208,6 +208,7 @@ public class HouseController {
 				int houseCount = houseService.getCountByMemNo(vo.getMemNo());
 				logger.info("houseCount : " + houseCount );
 				membervo.setHouseCount(houseCount); // houseCount를 업데이트함
+				logger.info("업데이트할 membervo : " + membervo);
 				int memberUpdate = memberService.update(membervo);
 				if(memberUpdate == 1) {
 					logger.info("member에 house 개수를 추가했습니다.");
@@ -267,7 +268,7 @@ public class HouseController {
 	public String delete(int houseNo, int memNo, HttpServletRequest req, HttpServletResponse res) throws IOException {
 		
 		logger.info("전송받은 houseNo : " + houseNo);
-		logger.info("전송받은 memNo : " + memNo);
+	
 		
 		// 세션 설정
 		HttpSession session = req.getSession();
