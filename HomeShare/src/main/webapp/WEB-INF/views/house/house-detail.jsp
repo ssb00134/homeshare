@@ -567,13 +567,7 @@
 																+ date2);
 														if (split) {
 															for (i = 0; i < split.length; i++) {
-																console
-																		.log("split["
-																				+ i
-																				+ "] "
-																				+ split[i]
-																				+ " date2 : "
-																				+ date2);
+																console.log("split["+ i+ "] "+ split[i]+ " date2 : "+ date2);
 																var newDate = new Date(
 																		split[i]);
 																newDate

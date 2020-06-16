@@ -235,7 +235,7 @@
 			disableAllTheseDays(new Date);
 			
 			function disableAllTheseDays(date) {
-				var disableList =[]; //예약불가 날짜를 담을 배열 선언
+				var disableStrings =''; //예약불가 날짜를 담을 배열 선언
 				
 				$('.bookItem').each(function(index,element){
 					console.log('index ' + index + ' element : ' + element);
@@ -245,15 +245,37 @@
 					var checkoutDate = new Date(checkout);
 					console.log('checkoutDate :' + checkoutDate);
 					
-					disableList.push(getDaysArray(checkinDate,checkoutDate));
-					console.log("getDaysArray(checkinDate,checkoutDate) : " +getDaysArray(checkinDate,checkoutDate));
+					disableStrings += getDaysArray(checkinDate,checkoutDate);
+					
 				});
 				
-				console.log('bookitem each 이후 disablelist : ' + disableList);
-				console.log(disableList[0])
+				console.log('bookitem each 이후 disableStrings : ' + disableStrings);
 				//선택불가 영역을 리턴하는 함수
+				var disableList = disableStrings.split(',');
+				console.log('disableList : ' + disableList);
+				console.log('disableList length : ' + disableList.length);
+				
+				console.log('매개변수 date : '+ date);
+				var isoDate = date.toISOString().slice(0, 10);
+				console.log('isoDate : ' + isoDate);
+				
+				
+				
+				if (disableList) { // disableList에 값이 있을때만 실행함
+					for (i = 0; i < disableList.length -1 ; i++) { //마지막 배열은 제외 ''이므로
+						
+						console.log('disableList[' + i + '] : ' + disableList[i] + ' isoDate : ' + isoDate );
+						console.log('disableList[' + i + '](' + disableList[i] +') === isoDate ' + isoDate +'? ' 
+								+ (disableList[i] ==isoDate));
+						if( disableList[i] == (isoDate) ){ //만약 문자열이 일치하면
+							console.log('제거할 isoDate : ' + isoDate);
+							return [ false ];
+						}
+					}
+						return [true];
+				}
 
-				function disableAllTheseDays(date) {
+				/* function disableAllTheseDays(date) {
 				    var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
 				    for (i = 0; i < disabledDays.length; i++) {
 				        if($.inArray(y + '-' +(m+1) + '-' + d,disabledDays) != -1) {
@@ -261,16 +283,16 @@
 				        }
 				    }
 				    return [true];
-				}
+				} */
 			} //end disableAllTheseDays
 			
 			
 			// getDaysArray 선택불가 영역을 리턴하는 함수
 			function getDaysArray(start,end) {
-				for (var arr = [], dt = start; dt <= end; dt.setDate(dt.getDate() + 1)) {
-					arr.push(dt.toISOString().slice(0,10));
+				for (var arr = '', dt = start; dt <= end; dt.setDate(dt.getDate() + 1)) {
+					arr += dt.toISOString().slice(0,10) + ',';
 				}
-				return arr;
+				return arr; //마지막에 구분
 			};
 			// end getDaysArray 선택불가 영역을 리턴하는 함수
 
@@ -289,7 +311,7 @@
 				nextText : '다음 달',
 				prevText : '이전 달',
 				minDate : new Date(),
-				//beforeShowDay : disableAllTheseDays,
+				beforeShowDay : disableAllTheseDays,
 			}); //end disableList
 
 			$('#dateArea2').datepicker({
