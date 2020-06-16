@@ -20,7 +20,7 @@ public class FileUploadUtil {
 
 	public static String saveUploadedFile(String uploadPath, String NextHouseNo, String fileName, byte[] data) throws IOException {
 
-		UUID uuid = UUID.randomUUID();
+		
 
 		// 파일의 갯수
 		int fileLength = 0;
@@ -28,7 +28,7 @@ public class FileUploadUtil {
 		logger.info(NextHouseNo + "시퀸스 폴더의 파일 갯수 : " + fileLength);
 
 		String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
-		String saveName = (fileLength / 2 + 1) + "." + extension;
+		String saveName = fileLength + "." + extension;
 
 		String savePath = getUploadPath(uploadPath, NextHouseNo);
 
@@ -37,13 +37,7 @@ public class FileUploadUtil {
 		FileCopyUtils.copy(data, target);
 
 		String result = null;
-		if (MediaUtil.geMediaType(extension) != null) {
-			result = createThumbnail(uploadPath, savePath, saveName);
-		} else {
-			result = createIcon(uploadPath, savePath, saveName);
-		}
-
-		return result;
+		return "폴더생성완료 폴더개수 : " + fileLength;
 	}
 
 	// 파일의 개수를 구하는 함수
@@ -110,16 +104,11 @@ public class FileUploadUtil {
     	if( file.exists() ){
     		if(file.delete()){
     			System.out.println("파일삭제 성공");
-    			//파일 rename하기
-    			int fileLength = 0;
-    			fileLength = countFile(path, houseNo);
-    			System.out.println("deleteFile " + houseNo +"폴더의 파일 개수 : " + fileLength );
+    			
     			
     		}else{
     			System.out.println("파일삭제 실패");
-    			int fileLength = 0;
-    			fileLength = countFile(path, houseNo);
-    			System.out.println("deleteFile " + houseNo +"폴더의 파일 개수 : " + fileLength );
+    			
     		}
     	}else{
     		System.out.println("파일이 존재하지 않습니다.");

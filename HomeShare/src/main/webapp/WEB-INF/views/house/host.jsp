@@ -104,10 +104,11 @@
 				console.log('imgsource : '+ imgSource);
 				
 				var imgSplit = imgSource.split(',');
+				imgSplit.splice(imgSplit.length-1,imgSplit.length-1); //마지막 요소 삭제
+				console.log(' imgSplit 개수 : ' + imgSplit.length);
 				
 				var list='';	
 				$.each(imgSplit, function(index2,element2){
-					if(index2 < imgSplit.length / 2 -1 ){
 						console.log('imgSplit[' +index2 + "] : " + element2);
 							if(index2==0){
 								list +=  '<div class="carousel-item active">'
@@ -120,7 +121,7 @@
 								+ index2
 								+ 'slide">'
 								+ '</div>';
-					}
+					
 				}); //end imgsplit each
 					$(element).find('#carousel-inner').append(list);
 				console.log(list);
@@ -147,7 +148,7 @@
 				var imgSplit = imgSource2.split(',');
 				var list='';
 				$.each(imgSplit,function(index2,element2){
-					if(index2 < imgSplit.length / 2 -1 ){
+					
 						console.log('imgSplit[' +index2 + "] : " + element2);
 						list += '<div class="imgItems">'
 							 +'<img class="img-fluid d-block w-100" src="/homeshare/house/display/'
@@ -159,7 +160,7 @@
 							 +element2.split('\\')[1]
 							 +'" class="btnDeleteItem btn btn-danger col-md-12">삭제하기</button>'
 							 + '</div>';
-					}
+
 				}); //end imgsplit each
 				imgFrm.children('.imgSplit').append(list);				
 			});
