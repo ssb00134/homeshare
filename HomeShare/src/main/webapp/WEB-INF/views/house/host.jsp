@@ -89,7 +89,10 @@
 		<!-- end cardgroup -->
 	</c:if>
 
-
+		<div>
+		<form id="deleteItems" style="display: none;">
+		</form>
+	</div>
 	<%@ include file="../footer.jspf"%>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -145,18 +148,19 @@
 				console.log('imgSource2 : ' + imgSource2);
 				var imgSplit = imgSource2.split(',');
 				$.each(imgSplit,function(index,element){
-					var elementsplit = element + '';
-					console.log('elementsplit[] : ' + elementsplit); 
 					if(index < imgSplit.length / 2 -1 ){
 						console.log('imgSplit[' +index + "] : " + element);
-						list += '<img class="img-fluid d-block w-100" src="/homeshare/house/display/'
+						list += '<div class="imgItems">'
+							 +'<img class="img-fluid d-block w-100" src="/homeshare/house/display/'
 							 + element 
 							 + '" alt="'
 							 + index
 							 +'slide">'
+							
 							 +'<button id="' 
-							 +element
-							 +'" class="btn btn-dnager col-md-12">삭제하기</button>';
+							 +element.split('\\')[1]
+							 +'" class="btnDeleteItem btn btn-dnager col-md-12">삭제하기</button>'
+							 + '</div>';
 					}
 				}); //end imgsplit each
 				imgFrm.children('.imgSplit').append(list);
@@ -175,8 +179,15 @@
 					frm.attr('method', 'post');
 					frm.submit();
 				}
-
 			}); 
+	 		
+	 		$('.btnDeleteItem').click(function(e){
+	 			alert('click');
+	 			e.preventDefault();
+	 			console.log('btnDeleteItem click' + $(this).html());
+	 		});//end click
+	 		
+	 		
 			
 
 		})//end document
