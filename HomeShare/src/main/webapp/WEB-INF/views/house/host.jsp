@@ -32,9 +32,7 @@
 						<div id="carouselExampleControls" class="carousel slide"
 							data-ride="carousel">
 							<div class="carousel-inner">
-								<div class="carousel-item active ">
-									
-								</div>
+								
 								
 								
 							</div>
@@ -94,15 +92,21 @@
 				$.each(imgSplit, function(index2,element2){
 					if(index2 < imgSplit.length / 2 -1 ){
 						console.log('imgSplit[' +index2 + "] : " + element2);
+							if(index2==0){
+								list +=  '<div class="carousel-item active">'
+							}else{
+								list +=  '<div class="carousel-item">'
+							}
 						list += '<img class="img-fluid d-block w-100"'
 							 	+ 'src="/homeshare/house/display/' + element2 + '"'
 								+ 'alt="'
 								+ index2
-								+ 'slide">';
+								+ 'slide">'
+								+ '</div>';
 					}
 				}); //end imgsource each
 				console.log(list);
-				$(element).find('.carousel-item').append(list);
+				$(element).find('.carousel-inner').append(list);
 			});
 			console.log('list : ' + list);
 			
