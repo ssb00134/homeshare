@@ -295,7 +295,7 @@
 				return arr; //마지막에 구분
 			};
 			// end getDaysArray 선택불가 영역을 리턴하는 함수
-
+			console.log('ui month : ' + $('#dateArea1').children('.ui-datepicker-month'));
 			
 			$('#myTab a').click(function(e) {
 				e.preventDefault();
@@ -313,15 +313,30 @@
 				minDate : new Date(),
 				beforeShowDay : disableAllTheseDays,
 			}); //end disableList
-
+			
+			var defaultDate = '';
+			if($('.ui-datepicker-month').val()*1+1 < 10){
+				defaultDate = $('.ui-datepicker-year').val() + '-0' + ($('.ui-datepicker-month').val()*1+1) + '-01';
+			}else{
+				defaultDate = $('.ui-datepicker-year').val() + '-' + ($('.ui-datepicker-month').val()*1+1) + '-01';
+			}
+			console.log('defaultDate : ' + defaultDate + 'defaultDate typeof : ' + typeof defaultDate);	
+			
+			
+			
 			$('#dateArea2').datepicker({
+				defaultDate :  defaultDate,
+				 //기본 시작값
 				dateFormat : "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
 				changeMonth : true,
 				changeYear : true,
 				nextText : '다음 달',
 				prevText : '이전 달',
+				showOtherMonths: true,
+
+	            selectOtherMonths: true,
 				minDate : new Date(),
-				//beforeShowDay : disableAllTheseDays,
+				beforeShowDay : disableAllTheseDays,
 			}); //end disableList
 			
 			
