@@ -18,8 +18,7 @@ public class FileUploadUtil {
 
 	private static final Logger logger = LoggerFactory.getLogger(FileUploadUtil.class);
 
-	public static String saveUploadedFile(String uploadPath, String NextHouseNo, String fileName, byte[] data)
-			throws IOException {
+	public static String saveUploadedFile(String uploadPath, String NextHouseNo, String fileName, byte[] data) throws IOException {
 
 		UUID uuid = UUID.randomUUID();
 
@@ -101,6 +100,22 @@ public class FileUploadUtil {
 			}
 			deleteFolder.delete();
 		}
+	}
+
+	public static void deleteFile(String item) {
+		System.out.println("삭제할 파일 이름 : " + item);
+		
+		File file = new File(item);
+        
+    	if( file.exists() ){
+    		if(file.delete()){
+    			System.out.println("파일삭제 성공");
+    		}else{
+    			System.out.println("파일삭제 실패");
+    		}
+    	}else{
+    		System.out.println("파일이 존재하지 않습니다.");
+    	}
 	}
 
 	public static String readDirectory(String path) {

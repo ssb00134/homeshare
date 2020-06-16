@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -262,42 +263,6 @@ public class HouseController {
 		}
 	}
 
-	/* 삭제 메핑 */
-	// TODO : 삭제시 해당 아이디의 모든 데이터가 삭제됨
-	@RequestMapping(value = "/house-delete", method = RequestMethod.POST)
-	public String delete(int houseNo, int memNo, HttpServletRequest req, HttpServletResponse res) throws IOException {
-		
-		logger.info("전송받은 houseNo : " + houseNo);
-	
-		
-		// 세션 설정
-		HttpSession session = req.getSession();
-		int sessionMemNo = (int) session.getAttribute("memNo"); // 세션에서 아이디 가져오기
-		logger.info("세션값 : " + sessionMemNo);
-
-
-		if (sessionMemNo == memNo) {// 전송받은 memno와 세션에서의 memno가 일치하면 delete를 실행한다. 
-			logger.info("세션 일치 삭제 실행");
-			int result = houseService.delete(houseNo);
-			if (result == 1) {
-				logger.info("삭제성공");
-				//TODO : 폴더 삭제
-				try {
-					String path = uploadPath + File.separator + "houseno" + houseNo;
-					FileUploadUtil.delete(path);					
-				} catch (Exception e) {
-					e.printStackTrace();
-					logger.info("mybatis 삭제 성공했으나, 폴더 삭제엔 실패하였습니다.");
-				}
-			} else {
-				logger.info("mybatis 삭제실패");
-			}
-			return "/";
-		} else {
-			logger.info("세션이 일치하지 않습니다.");
-			return "/";
-		}
-	}
 
 	
 	@RequestMapping(value = "/display/{houseno}/{fileno:.+}", method = RequestMethod.GET)
@@ -437,9 +402,49 @@ public class HouseController {
 		}else {
 			logger.info("정보 수정 실패");
 		}
-		
-		
+	}
 	
+	/* 삭제 메핑 */
+	// TODO : 삭제시 해당 아이디의 모든 데이터가 삭제됨
+	@RequestMapping(value = "/house-delete", method = RequestMethod.POST)
+	public String delete(int houseNo, int memNo, HttpServletRequest req, HttpServletResponse res) throws IOException {
+		
+		logger.info("전송받은 houseNo : " + houseNo);
+	
+		
+		// 세션 설정
+		HttpSession session = req.getSession();
+		int sessionMemNo = (int) session.getAttribute("memNo"); // 세션에서 아이디 가져오기
+		logger.info("세션값 : " + sessionMemNo);
+
+
+		if (sessionMemNo == memNo) {// 전송받은 memno와 세션에서의 memno가 일치하면 delete를 실행한다. 
+			logger.info("세션 일치 삭제 실행");
+			int result = houseService.delete(houseNo);
+			if (result == 1) {
+				logger.info("삭제성공");
+				//TODO : 폴더 삭제
+				try {
+					String path = uploadPath + File.separator + "houseno" + houseNo;
+					FileUploadUtil.delete(path);					
+				} catch (Exception e) {
+					e.printStackTrace();
+					logger.info("mybatis 삭제 성공했으나, 폴더 삭제엔 실패하였습니다.");
+				}
+			} else {
+				logger.info("mybatis 삭제실패");
+			}
+			return "/";
+		} else {
+			logger.info("세션이 일치하지 않습니다.");
+			return "/";
+		}
+	}
+	
+	@ResponseBody
+	public ResponseEntity<String> deleteAjax(){
+		String result = null;
+		return new ResponseEntity<String>(result, HttpStatus.OK);
 	}
 	
 	

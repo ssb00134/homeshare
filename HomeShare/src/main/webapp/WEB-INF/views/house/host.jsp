@@ -132,30 +132,40 @@
 				document.location.href='/homeshare/house/house-update?houseNo=' + houseNo;
 			});
 			
-			$('.btnImgUpdate').click(function(event){
+			//img update 첫번째로 실행했을때
+			$('.btnImgUpdate').one('click',function(){
 				console.log('update click' + event);
+				$(this).siblings('.imgFrm').show();
 				var list='';
 				
 				var imgFrm = $(this).siblings('.imgFrm');
-				imgFrm.show();
+				
 				
 				var imgSource2 = imgFrm.children('.imgSource2').val();
 				console.log('imgSource2 : ' + imgSource2);
 				var imgSplit = imgSource2.split(',');
 				$.each(imgSplit,function(index,element){
+					var elementsplit = element + '';
+					console.log('elementsplit[] : ' + elementsplit); 
 					if(index < imgSplit.length / 2 -1 ){
 						console.log('imgSplit[' +index + "] : " + element);
 						list += '<img class="img-fluid d-block w-100" src="/homeshare/house/display/'
 							 + element 
 							 + '" alt="'
 							 + index
-							 +'slide">';
+							 +'slide">'
+							 +'<button id="' 
+							 +element
+							 +'" class="btn btn-dnager col-md-12">삭제하기</button>';
 					}
 				}); //end imgsplit each
 				imgFrm.children('.imgSplit').append(list);
 				
 			});
-			
+			//그 이후 실행했을때
+			$('.btnImgUpdate').on('click',function(){
+				$(this).siblings('.imgFrm').toggle();
+			});
 			
 	 		$('.btnDelete').click(function(event){
 				if(confirm("정말 이 숙소를 삭제하시겠습니까??") == true){
