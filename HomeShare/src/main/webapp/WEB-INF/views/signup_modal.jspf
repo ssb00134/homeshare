@@ -7,7 +7,6 @@
 
 
 <form class="modal" id="SignUpModal"
-	action="/homeshare/member/sign-up-post" method="post"
 	data-backdrop="false">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -87,7 +86,7 @@
 						Use</a> &amp; <a href="#">Privacy Policy</a></label>
 			</div>
 			<div class="form-group">
-				<button type="submit" class="btn btn-primary btn-lg">Sign
+				<button type="button" id="btnSubmit" class="btn btn-primary btn-lg">Sign
 					Up</button>
 			</div>
 
@@ -158,18 +157,18 @@
 			        	$('#pwConstraint').val('fail');
 			        }else{			        
 			        $('#pwTest').html('<p>사용가능한 비밀번호 입니다.</p>');
-			        $('#pwConstraint').html('pass');
+			        $('#pwConstraint').val('pass');
 			        	
 			        }
 			});// end password1 click
 			
 			$('#password2').on('focus blur keyup',function(){
-				if($(this).val() ===$('#password1').val() &&
-						$('#pwConstraint').html() == 'pass'){
+				if($(this).val() === $('#password1').val() &&
+						$('#pwConstraint').val() == 'pass'){
 					 $('#pwChkTest').html('<p>사용가능한 비밀번호 입니다.</p>');
-					 $('#pwChkConstraint').html('pass');
+					 $('#pwChkConstraint').val('pass');
 				}else{
-					$('#pwTest').html('<p class="text-danger">비밀번호를 확인해 주세요</p>');
+					$('#pwChkTest').html('<p class="text-danger">비밀번호를 확인해 주세요</p>');
 		        	$('#pwChkConstraint').val('fail');
 				}
 				
@@ -181,18 +180,61 @@
 				
 				if( !chk.test($(this).val())) {
 			        $(this).val('');
-			        $('#phoneTest').html('<p class="text-danger">-를 제외한 11자리 번호를 입력해 주세요</p>');
+			        $('#phoneTest').html('<p class="text-danger">-를 제외한 10, 11자리 번호를 입력해 주세요</p>');
 		        	$('#phoneConstraint').val('fail');
 			        
 			    }else{
-					 $('#phoneTest').html('<p>사용가능한 전화번호 입니다.</p>');
-					 $('#phoneConstraint').html('pass');
+			    	if($(this).val().length < 10){
+			    		 $('#phoneTest').html('<p class="text-danger">-를 제외한 10, 11자리 번호를 입력해 주세요</p>');
+				        	$('#phoneConstraint').val('fail');
+			    	}else{
+						 $('#phoneTest').html('<p>사용가능한 전화번호 입니다.</p>');
+						 $('#phoneConstraint').val('pass');
+			    		
+			    	}
 			    	
 			    }
 				
 				
 				 
 			
+			}); //end phonechek
+			
+			//유효성검사폼
+			function checkForm() {
+				if($('#idConstraint').val() !== 'pass'){
+					alert('아이디를 확인해 주세요');
+					return false;
+				}else if($('#pwConstraint').val() !== 'pass'){
+					alert('비밀번호를 확인해 주세요');
+					return false;
+				}else if($('#pwChkConstraint').val() !== 'pass'){
+					alert('비밀번호를 확인해 주세요');
+					return false;
+				}else if($('#phoneConstraint').val() !== 'pass'){
+					alert('전화번호를 확인해 주세요');
+					return false;
+				}else{
+					return true;
+				}
+				
+			}
+			
+			
+			// 가입하기 버튼 클릭
+			$('#btnSubmit').click(function(){
+				console.log(frm);
+				checkForm();
+				var frm = $('#SignUpModal');
+				
+				if(checkForm()){
+					console.log('예약가능');
+					frm.attr('action','/homeshare/member/sign-up-post');
+					frm.attr('method', 'post');		
+					frm.submit();
+				}else{
+					return false;
+				}
 			});
 			
 			
