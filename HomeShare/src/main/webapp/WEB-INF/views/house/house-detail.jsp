@@ -86,7 +86,13 @@
 					<h4>요금을 확인하려면 날짜를 입력해 주세요</h4>
 					<button type="button" class="btn btn-default" data-toggle="modal" id="btnDate"
 						data-target="#DateModal">체크인/체크아웃 조회</button>
-
+					<div class="btn-group btn-group-justified" role="group" aria-label="...">
+  						<div class="btn-group" role="group">
+  							<button type="button" class="btn btn-default" id="checkInValue"></button>
+  							<button type="button" class="btn btn-default" id="checkOutValue"></button>
+							
+						</div>
+					</div>
 				</div>
 				
 				<div class="modal" id="DateModal" role="dialog"
@@ -272,6 +278,8 @@
 										console.log('체크인 값 : ' + $("#disableCheckIn").datepicker().val());
 										console.log('체크아웃 값 : ' + $("#disableCheckOut").datepicker().val());
 										$("#DateModal .close").click();
+										$('#checkInValue').html($("#disableCheckIn").datepicker().val());
+										$('#checkOutValue').html($("#disableCheckOut").datepicker().val());
 									}	
 								}
 								

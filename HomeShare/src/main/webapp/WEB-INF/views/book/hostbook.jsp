@@ -102,11 +102,13 @@
 						<thead class="text">
 							<tr class="text">
 								<td>예약번호</td>
+								<td>숙소번호</td>
 								<td>체크인</td>
 								<td>체크아웃</td>
 								<td>예약인원</td>
-								<td>총 가격</td>
-								<td>수락여부</td>
+								<td>예약기간</td>
+								<td>총금액</td>
+								<td>상태</td>
 		
 							</tr>
 						</thead>
@@ -206,7 +208,17 @@
 				console.log('url : ' + url);
 				$.getJSON(url, function(jsonData) {
 					if(jsonData.length > 0){
-						$('#waitingBook').append('<span class="badge badge-danger">' + jsonData.length +'</span>');
+						
+						var waitingBookCount=0;
+						$(jsonData).each(function(){
+							if(this.hostCheck == 0){
+								waitingBookCount++;
+							}
+						});
+						$('#waitingBook').append('<span class="badge badge-danger">' + waitingBookCount +'</span>');
+						
+						
+						
 						var list='';
 						$(jsonData).each(function() {
 							var dateDiffer = new Date(this.checkout.split(' ')[0]).getDate()
@@ -218,6 +230,25 @@
                         		+ '<td>'
                         		+ this.bookNo
                         		+ '</td>'
+                        		+ '<td>'
+                        		+ this.bookHouseNo
+                        		+ '</td>'
+                        		+ '<td>'
+                        		+ this.checkin.split(' ')[0]
+                        		+ '</td>'
+                        		+ '<td>'
+                        		+ this.checkout.split(' ')[0]
+                        		+ '</td>'
+                        		+ '<td>'
+                        		+ this.bookMem
+                        		+ '</td>'
+                        		+ '<td>'
+                        		+ dateDiffer
+                        		+ '</td>'
+                        		+ '<td>'
+                        		+ this.totalPrice
+                        		+ '</td>'
+                        		
                         		+'</tr>';
                         	}//end hostcheck 0 미수락 상태
                         	$('#waitBookAjax').html(list);
