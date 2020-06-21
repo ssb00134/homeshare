@@ -17,11 +17,14 @@ public interface BookDAO {
 	List<BookVO> selectByHostIdAcp(String hostId);
 	List<BookVO> selectByHostIdAcpLast(String hostId);
 	
-	//페이징
+	//페이징 호스트
 	List<BookVO> selectHostId(HashMap<String, Object> map );
-	
 	//아이디 최대개수 찾기
 	int getCountBookByHostId(String hostId);
 	
+	//게스트 페이징
+	List<BookVO> selectGuestId(HashMap<String, Object> map );
+	//아이디 최대개수 찾기
+		int getCountBookByGuestId(String guestId);
 
 }

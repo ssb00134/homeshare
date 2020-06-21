@@ -77,4 +77,15 @@ public class BookServiceImple implements BookService {
 		return BookDao.getCountBookByHostId(bookHostId);
 	}
 	
+	@Override
+	public int getCountByGuestId(String bookGuestId) {
+		return BookDao.getCountBookByGuestId(bookGuestId);
+	}
+	
+	@Override
+	public List<BookVO> readByGuestId(HashMap<String, Object> map) {
+		return BookDao.selectGuestId(map);
+	}
+	
+	
 }

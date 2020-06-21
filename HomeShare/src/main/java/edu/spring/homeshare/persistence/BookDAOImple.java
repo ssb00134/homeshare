@@ -69,4 +69,15 @@ public class BookDAOImple implements BookDAO {
 	public int getCountBookByHostId(String bookHostId) {
 		return sqlSession.selectOne(NAMESPACE + ".total_count_hostId", bookHostId);
 	}
+	
+	//게스트 메핑
+	
+	@Override
+	public int getCountBookByGuestId(String guestId) {
+		return sqlSession.selectOne(NAMESPACE + ".total_count_hostId", guestId);
+	}
+	@Override
+	public List<BookVO> selectGuestId(HashMap<String, Object> map) {
+		return sqlSession.selectList(NAMESPACE + ".paging_book_by_guestId", map);
+	}
 }

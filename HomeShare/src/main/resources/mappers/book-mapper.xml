@@ -63,16 +63,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		between #{start} and #{end}
 	</select>
 	
-	
-	
-	
-	
-	
-	
+
 	<select id="total_count_hostId" resultType="Integer">
 		select count(*) 
 		from ${book}
 		where ${bookHostId} = #{bookHostId}
+	</select>
+	
+	
+	<!-- 게스트메핑 -->
+	
+	<select id="paging_book_by_hostId" resultType="bookVO">
+		select
+		*
+		from (
+		select rownum rn,
+		a.*
+		from (
+		select * from ${book} 
+		where ${bookGuestId} = #{bookGuestId}
+		and ${hostCheck} = 1
+		order by
+		${checkin} desc
+		) a
+		) b
+		where rn
+		between #{start} and #{end}
+	</select>
+	
+	<select id="total_count_GuestId" resultType="Integer">
+		select count(*) 
+		from ${book}
+		where ${bookGuestId} = #{bookGuestId}
 	</select>
 
 
