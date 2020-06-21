@@ -266,6 +266,9 @@
 						var checkoutDate = new Date(checkout);
 						console.log('checkoutDate :' + checkoutDate);
 						
+						//$(this).children('.cancleAble').html('<button class="btnbookdelete btn">취소하기</button>');
+						//$(this).attr('class','active');
+						
 						disableStrings += getDaysArray(checkinDate,checkoutDate);	
 						
 					}

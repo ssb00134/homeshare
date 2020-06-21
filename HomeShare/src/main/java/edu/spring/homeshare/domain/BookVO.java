@@ -10,16 +10,16 @@ public class BookVO {
 	private int bookMem;
 	private int totalPrice;
 	private String bookHostId;
+	private String bookGuestId;
 	
 	public BookVO() {}
 	
 	
 
-	
 
 
 
-	public BookVO(int bookNo, int bookMemNo, int bookHouseNo, String checkin, String checkout, int hostCheck, int bookMem, int totalPrice, String bookHostId) {
+	public BookVO(int bookNo, int bookMemNo, int bookHouseNo, String checkin, String checkout, int hostCheck, int bookMem, int totalPrice, String bookHostId, String bookGuestId) {
 		super();
 		this.bookNo = bookNo;
 		this.bookMemNo = bookMemNo;
@@ -30,7 +30,16 @@ public class BookVO {
 		this.bookMem = bookMem;
 		this.totalPrice = totalPrice;
 		this.bookHostId = bookHostId;
+		this.bookGuestId = bookGuestId;
 	}
+
+
+
+
+
+
+
+
 
 
 
@@ -127,6 +136,24 @@ public class BookVO {
 	}
 
 
+	
+
+
+
+
+	public String getBookGuestId() {
+		return bookGuestId;
+	}
+
+
+
+
+
+
+	public void setBookGuestId(String bookGuestId) {
+		this.bookGuestId = bookGuestId;
+	}
+
 
 
 
@@ -134,8 +161,15 @@ public class BookVO {
 
 	@Override
 	public String toString() {
-		return "BookVO [bookNo=" + bookNo + ", bookMemNo=" + bookMemNo + ", bookHouseNo=" + bookHouseNo + ", checkin=" + checkin + ", checkout=" + checkout + ", hostCheck=" + hostCheck + ", bookMem=" + bookMem + ", totalPrice=" + totalPrice + ", bookHostId=" + bookHostId + "]";
+		return "BookVO [bookNo=" + bookNo + ", bookMemNo=" + bookMemNo + ", bookHouseNo=" + bookHouseNo + ", checkin=" + checkin + ", checkout=" + checkout + ", hostCheck=" + hostCheck + ", bookMem=" + bookMem + ", totalPrice=" + totalPrice + ", bookHostId=" + bookHostId + ", bookGuestId=" + bookGuestId + "]";
 	}
+
+
+
+
+
+
+	
 
 
 

@@ -89,7 +89,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<property name="bookMem" value="bookMem" />
 		<property name="totalPrice" value="totalPrice" />
 		<property name="bookHostId" value="bookHostId" />
-
+		<property name="bookGuestId" value="bookGuestId" />
 
 
 

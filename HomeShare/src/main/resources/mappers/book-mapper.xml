@@ -66,6 +66,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	
+	
+	
+	
 	<select id="total_count_hostId" resultType="Integer">
 		select count(*) 
 		from ${book}
@@ -99,7 +102,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(0,
 		#{bookMemNo},#{bookHouseNo}, #{checkin},
 		#{checkout} , #{hostCheck},
-		#{bookMem}, #{totalPrice}, #{bookHostId})
+		#{bookMem}, #{totalPrice}, #{bookHostId}, #{bookGuestId})
 	</insert>
 
 	<update id="update">
