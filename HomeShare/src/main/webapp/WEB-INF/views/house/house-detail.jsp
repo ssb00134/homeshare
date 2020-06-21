@@ -243,9 +243,10 @@
 	
 							
 							/* 모달 영역*/
-							$('#disableCheckOut').on('click focus blur',function() {
+							$('#disableCheckOut').find('a').on('click focus blur',function() {
 								if($("#disableCheckIn").datepicker().val()!== ""){
-									console.log('체크인 값 : ' + $("#disableCheckIn").datepicker().val().replace(/[/]/gi,'-'));
+									console.log($(this).val());
+									
 									console.log('체크아웃 값 : ' + $("#disableCheckOut").datepicker().val());
 									$("#DateModal .close").click();
 								}
@@ -634,7 +635,7 @@
 																				: new Date()),
 																		maxDate : bookableDateEnd,
 																		beforeShowDay : disableAllTheseDays,
-																	}); //end disableList datepicker
+																	}).val(''); //end disableList datepicker
 
 													$('#disableCheckOut')
 															.datepicker(
@@ -644,13 +645,11 @@
 																		changeYear : true,
 																		nextText : '다음 달',
 																		prevText : '이전 달',
-																		minDate : $(
-																				'#disableCheckIn')
-																				.datepicker()
-																				.val(),
+																		minDate : (new Date() < bookableDateBegin ? bookableDateBegin
+																				: new Date()),
 																		maxDate : bookableDateEnd,
 																		beforeShowDay : disableAllTheseDays,
-																	}); //end disableList datepicker
+																	}).val('').datepicker('setDate','+1m');; //end disableList datepicker
 
 													$('#disableCheckIn').on('click',function(index,element) {
 																		console.log('click');
