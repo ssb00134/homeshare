@@ -62,6 +62,11 @@ public class BookDAOImple implements BookDAO {
 	public List<BookVO> selectHostId(HashMap<String, Object> map) {
 		
 		return sqlSession.selectList(NAMESPACE + ".paging_book_by_hostId", map);
-
+	}
+	
+	//아이디 최대 개수 구하기
+	@Override
+	public int getCountBookByHostId(String bookHostId) {
+		return sqlSession.selectOne(NAMESPACE + ".total_count_hostId", bookHostId);
 	}
 }

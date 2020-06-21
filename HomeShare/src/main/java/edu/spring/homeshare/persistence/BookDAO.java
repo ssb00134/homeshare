@@ -19,4 +19,9 @@ public interface BookDAO {
 	
 	//페이징
 	List<BookVO> selectHostId(HashMap<String, Object> map );
+	
+	//아이디 최대개수 찾기
+	int getCountBookByHostId(String hostId);
+	
+
 }

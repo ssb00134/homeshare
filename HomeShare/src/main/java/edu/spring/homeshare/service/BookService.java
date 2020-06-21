@@ -21,4 +21,7 @@ public interface BookService {
 	
 	//페이징
 	List<BookVO> readByHostId(HashMap<String, Object> map);
+	
+	//최대개수구하기
+	int getCountByHostId(String bookhostId);
 }

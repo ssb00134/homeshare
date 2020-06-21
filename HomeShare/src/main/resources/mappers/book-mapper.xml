@@ -53,13 +53,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		a.*
 		from (
 		select * from ${book} 
-		where #{bookHostId} = #{bookHostId}
+		where ${bookHostId} = #{bookHostId}
+		and ${hostCheck} = 1
 		order by
 		${checkin} desc
 		) a
 		) b
 		where rn
 		between #{start} and #{end}
+	</select>
+	
+	
+	
+	
+	<select id="total_count_hostId" resultType="Integer">
+		select count(*) 
+		from ${book}
+		where ${bookHostId} = #{bookHostId}
 	</select>
 
 

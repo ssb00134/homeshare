@@ -70,4 +70,11 @@ public class BookServiceImple implements BookService {
 	public List<BookVO> readByHostId(HashMap<String, Object> map) {
 		return BookDao.selectHostId(map);
 	}
+	
+	//최대개수구하기
+	@Override
+	public int getCountByHostId(String bookHostId) {
+		return BookDao.getCountBookByHostId(bookHostId);
+	}
+	
 }

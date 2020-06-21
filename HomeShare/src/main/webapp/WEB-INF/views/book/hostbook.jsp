@@ -55,7 +55,7 @@
 	  <!-- Tab panes -->
 	  <div class="tab-content">
 	    <div role="tabpanel" class="tab-pane active" id="home">
-	    	<c:if test="${bookList ne null }">
+	    	<c:if test="${bookListPaging ne null }">
 				<div class="row">
 					<table class="table table-bordered table-hover text">
 						<thead class="text">
@@ -70,7 +70,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="vo" items="${bookList }">
+							<c:forEach var="vo" items="${bookListPaging }">
 								<tr class="bookItem text">
 									<td>${vo.bookNo}</td>
 									<td id="checkin">${vo.checkin.split(" ")[0]}</td>
@@ -370,6 +370,24 @@
 				console.log('index : ' + index + ' element : ' + element);
 				console.log('checkin : ' + element);
 			});
+			
+			
+			
+			
+			//페이징 처리
+			// 클릭한 a태그의 정보를 가져오는 코드
+							$('.pager li a').click(function() {
+								// .pager 클래스의 하위 li 요소의 하위 a 요소를 찾아감
+								event.preventDefault(); // a 태그의 기본 동작(페이지 이동)을 금지
+								var targetPage = $(this).attr('href'); // a 태그 href 속성의 값을 저장
+								console.log(targetPage);
+
+								var frm = $('#pagingForm'); // form의 정보를 frm에 저장
+								frm.find('[name="page"]').val(targetPage); // name="page"를 찾아서 value=targetPage를 저장
+								frm.attr('action', '/homeshare/book/hostbook'); // form에 action 속성 추가
+								frm.attr('method', 'get'); // form에 method 속성 추가
+								frm.submit(); // form 데이터 전송 
+							}); // end click()
 			
 		});//endscript
 	</script>

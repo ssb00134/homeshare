@@ -20,6 +20,7 @@ import edu.spring.homeshare.domain.HouseVO;
 import edu.spring.homeshare.service.BookService;
 import edu.spring.homeshare.service.HouseService;
 import edu.spring.homeshare.util.PageCriteria;
+import edu.spring.homeshare.util.PageMaker;
 
 @Controller
 @RequestMapping(value = "book")
@@ -85,24 +86,24 @@ public class BookController {
 		logger.info("maptostring : " + map.toString());
 		List<BookVO> bookListPaging = bookService.readByHostId(map);
 		logger.info("bookListPaging" + bookListPaging.toString());
-
+		model.addAttribute("bookListPaging",bookListPaging);
 		
 		
-		List<BookVO> bookList = bookService.readByHostIdAcp(hostId);
-		logger.info("booklist : " + bookList.toString());
-		model.addAttribute("bookList", bookList);
 		
-		List<BookVO> LastBookList = bookService.readByHostIdAcpLast(hostId);
-		logger.info("LastBookList : " + LastBookList.toString());
-		model.addAttribute("bookListLast", LastBookList);
+		PageMaker maker = new PageMaker();
+		maker.setCriteria(c);
+		maker.setTotalCount(bookService.getCountByHostId(hostId));
+		maker.setPageData();
+		model.addAttribute("pageMaker", maker);
 		
-		// 예약된 내용을 가져오고 해당 list의 housevo 정보 가져오기
-		List<HouseVO> houseList = new ArrayList<HouseVO>();
-		for (int i = 0; i < bookList.size(); i++) {
-			houseList.add(houseService.selectByHouseNo(bookList.get(i).getBookHouseNo()));
-			logger.info("houseList : " + houseList.get(i).toString());
-		}
-		model.addAttribute("houseList", houseList);
+		
+		
+		logger.info("전체 하우스 수 : " + maker.getTotalCount());
+		logger.info("현재 선택된 페이지 : " + c.getPage());
+		logger.info("한 페이지 당 게시글 수 : " + c.getNumsPerPage());
+		logger.info("시작 페이지 링크 번호(startPageNO) : " + maker.getStartPageNo());
+		logger.info("끝 페이지 링크 번호(endPageNo) : " + maker.getEndPageNo());
+		
 	}
 
 
