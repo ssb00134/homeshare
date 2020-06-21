@@ -46,8 +46,9 @@
 	  <!-- Nav tabs -->
 	  <ul class="nav nav-tabs" role="tablist">
 	    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-	    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
-	    <li role="presentation"><a class="btn">대기중인예약</a></li>
+	    <li role="presentation"><a href="#waitingBookArea" aria-controls="waitingBookArea" role="tab" data-toggle="tab"
+	    class="btn" id="waitingBook">대기중인예약</a></li>
+	    <li role="presentation"><a class="btn" id="waitingBook">sddd</a></li>
 	
 	  </ul>
 	
@@ -95,7 +96,34 @@
 			</c:if>
 	    
 	    </div>
-	    <div role="tabpanel" class="tab-pane" id="profile">...</div>
+	    <div role="tabpanel" class="tab-pane" id="waitingBookArea">
+	
+	    <table class="table table-bordered table-hover text">
+						<thead class="text">
+							<tr class="text">
+								<td>예약번호</td>
+								<td>체크인</td>
+								<td>체크아웃</td>
+								<td>예약인원</td>
+								<td>총 가격</td>
+								<td>수락여부</td>
+		
+							</tr>
+						</thead>
+						<tbody id="waitBookAjax">
+							
+								<tr class="bookItem text">
+									
+								</tr>
+						</tbody>
+					</table>
+	    
+	    
+	    
+	    
+	    
+	    
+	    </div>
 	   
 	  
 	  </div>
@@ -170,108 +198,38 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			
-			
 			getBookByHostId();
-
+			
 			function getBookByHostId() {
 				console.log('getAllBookByMemId 실행 ');
 				var url = '/homeshare/book/all/' + '${memId }';
 				console.log('url : ' + url);
 				$.getJSON(url, function(jsonData) {
-					if (jsonData.length > 0) {
-						console.log('jsonData 개수 : ' + jsonData.length);
+					if(jsonData.length > 0){
+						$('#waitingBook').append('<span class="badge badge-danger">' + jsonData.length +'</span>');
 						var list='';
-						var count =0;
 						$(jsonData).each(function() {
 							var dateDiffer = new Date(this.checkout.split(' ')[0]).getDate()
                         	- new Date(this.checkin.split(' ')[0] ).getDate();
                         	console.log('dateDiffer : ' +dateDiffer);
-                        	 //this.hostCheck 가 1일때만 실행함
                         	
                         	if(this.hostCheck == 0){ // checkin이 0일때  미수락상태일때 실행
-                        		count++;
-                        		list += '<div class="book_item">' 
-	                            + '<div class=" row">' 
-	                            + '<div id="bookNo" class=col-md-1>' + this.bookNo + '</div>' 
-	                            + '<div id="bookHouseNo" class=col-md-1>' + this.bookHouseNo + '</div>' 
-	                            + '<div class=col-md-2>' + this.checkin.split(' ')[0] + '</div>' 
-	                            + '<div class=col-md-2>' + this.checkout.split(' ')[0] + '</div>'
-	                            + '<div class=col-md-1>'+ this.bookMem + '</div>' 
-	                            + '<div class=col-md-1>' + dateDiffer + '</div>'
-	                            + '<div class=col-md-2>'+ this.totalPrice + '</div>'
-	                            + '<div class=col-md-1>' 
-	                            + '<input type="hidden" value="' + this.bookNo + '" >'
-	                            + '<button class="btn_bookUpdate btn btn-success" id ="btn_bookUpdate" type="text">O</button>' 
-	                            + '</div>' 
-	                            + '<div class=col-md-1>' 
-	                            + '<input type="hidden" value="' + this.bookNo + '" >'
-	                            + '<button class="btn_bookDelete btn btn-danger" type="text">X</button>' 
-	                            + '</div>' 
-	                            + '</div>' 
-	                            + '<hr>';
-                        	}
-                        	$('#hostbook').html(list);        
-            
-                            if(count>0){
-    							$('#bookcount').html('새로운 예약이 있습니다');
-    						}
-                            //book delete
-                            $('.btn_bookDelete').on('click',function(){
-                            	event.preventDefault();
-                            	 console.log('btn_bookDelete 클릭');
-                            	 //var hostCheck = $(this).prev().val() ; // 이전 선택자 
-                            	 var bookNo = $(this).prev().val();
-                            	 console.log('bookNo :' + bookNo);
-	                            $.ajax({
-	                                type: 'delete',
-	                                url: '/homeshare/book/' + bookNo,
-	                                headers: {
-	                                	'Content-Type' : 'application/json', 
-	                          	  	    'X-HTTP-Method-Override' : 'DELETE'
-	                                },
-	                               
-	                                success: function (result) {
-	                                    if (result == 'success') {
-	                                        alert('삭제 성공');
-	                                        getBookByHostId();//제귀가능 리프레쉬
-	                                    } // end if
-	                                } // end success
-	                            }); // end ajax
-                            });//end btn_bookdelete click
-                            
-                          //book update
-                            $('.btn_bookUpdate').on('click',function(){
-                            	event.preventDefault();
-                            	 console.log('btn_bookUpdate 클릭');
-                            	 //var hostCheck = $(this).prev().val() ; // 이전 선택자 
-                            	 var bookNo = $(this).prev().val();
-                            	 console.log('bookNo :' + bookNo);
-	                            $.ajax({
-	                                type: 'put',
-	                                url: '/homeshare/book/' + bookNo,
-	                                headers: {
-	                                	'Content-Type' : 'application/json', 
-	                          	  	    'X-HTTP-Method-Override' : 'PUT'
-	                                },
-	                                data: JSON.stringify(
-		                                    {'hostCheck': 1}
-		                                ),
-	                                success: function (result) {
-	                                    if (result == 'success') {
-	                                        alert('수락 성공');
-	                                        getBookByHostId();//제귀가능 리프레쉬
-	                                    } // end if
-	                                } // end success
-	                            }); // end ajax
-                            });//end btn_bookdelete click
-       
-                            
-						});//end each
-					}// end if
-					
-				}); //end getJSON
-			}
-			;// end ishost
+                        		list+= '<tr>'
+                        		+ '<td>'
+                        		+ this.bookNo
+                        		+ '</td>'
+                        		+'</tr>';
+                        	}//end hostcheck 0 미수락 상태
+                        	$('#waitBookAjax').html(list);
+                        	
+						});//end each;
+					}else{
+						$('#waitingBook').attr('class','disabled');
+					}
+				});//end getjson
+				
+			}//end getBookByHostId();
+		
 			
 			
 			
@@ -377,7 +335,7 @@
 			console.log('defaultDate : ' + defaultDate + 'defaultDate typeof : ' + typeof defaultDate);	
 			
 			
-			
+			$("#dateArea2").datepicker('setDate','+1m'); 
 			$('#dateArea2').datepicker({
 				defaultDate :  defaultDate,
 				 //기본 시작값
@@ -391,7 +349,8 @@
 	            selectOtherMonths: true,
 				minDate : new Date(),
 				beforeShowDay : disableAllTheseDays,
-			}); //end disableList
+			}).datepicker('setDate','+1m'); //end disableList
+			
 			
 			
 			
