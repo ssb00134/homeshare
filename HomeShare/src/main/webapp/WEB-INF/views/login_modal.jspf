@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <!-- 로그인 모달 폼 -->
 <form class="modal" id="LoginModal"
-	action="/homeshare/member/login-post" method="post">
+	action="/homeshare/member/login-post" method="post" data-backdrop="false">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<!-- modal head -->
