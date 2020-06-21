@@ -15,5 +15,7 @@ public interface MemberService {
 	int totalCount();
 	
 	int update(MemberVO vo);
+	
+	int idChk(MemberVO vo);
 
 }

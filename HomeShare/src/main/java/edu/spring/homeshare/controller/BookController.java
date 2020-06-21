@@ -44,7 +44,7 @@ public class BookController {
 
 		// 예약된 내용을 가져오고 해당 list의 housevo 정보 가져오기
 		List<HouseVO> houseList = new ArrayList<HouseVO>();
-		logger.info("첫번째 예약번호의 하우스번호 : " + bookList.get(0).getBookHouseNo());
+
 		for (int i = 0; i < bookList.size(); i++) {
 			houseList.add(houseService.selectByHouseNo(bookList.get(i).getBookHouseNo()));
 			logger.info("houseList : " + houseList.get(i).toString());
@@ -62,9 +62,13 @@ public class BookController {
 		String hostId = (String) session.getAttribute("memId");
 		logger.info("hostId 세션값 : " + hostId);
 
-		List<BookVO> bookList = bookService.readByHostId(hostId);
+		List<BookVO> bookList = bookService.readByHostIdAcp(hostId);
 		logger.info("booklist : " + bookList.toString());
 		model.addAttribute("bookList", bookList);
+		
+		List<BookVO> LastBookList = bookService.readByHostIdAcpLast(hostId);
+		logger.info("LastBookList : " + LastBookList.toString());
+		model.addAttribute("bookListLast", LastBookList);
 		
 		// 예약된 내용을 가져오고 해당 list의 housevo 정보 가져오기
 		List<HouseVO> houseList = new ArrayList<HouseVO>();

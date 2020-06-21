@@ -63,6 +63,8 @@ public class HouseController {
 		logger.info("house-list 호출");
 		/* 페이징 처리 */
 		PageCriteria c = new PageCriteria();
+		c.setNumsPerPage(9); //9개씩 출력
+		
 		logger.info("page : " + page);
 		if (page != null) {
 			c.setPage(page);
@@ -104,7 +106,7 @@ public class HouseController {
 		List<HouseVO> list = houseService.multySelect(map);
 		logger.info("list : " + list.toString());
 		//test
-		logger.info("list 1번재 값 : " + list.get(0).getHouseNo());
+
 		
 		for(int i=0; i<list.size(); i++) {
 			logger.info("list에서 받은 houseNo : " + list.get(i).getHouseNo());
@@ -146,7 +148,7 @@ public class HouseController {
 	}
 
 	/* 호스팅 메핑 */
-	@RequestMapping(value = "/host", method = RequestMethod.POST)
+	@RequestMapping(value = "/host")
 	public void Housting(Model model, HttpServletRequest req) {
 		logger.info("hosting 실행 ");
 

@@ -41,7 +41,7 @@ public class ReplyDAOImple implements ReplyDAO {
 		return sqlSession.delete(NAMESPACE + ".delete", rno);
 	}
 	@Override
-	public int selectAvgScore(int houseNo) {
+	public double selectAvgScore(int houseNo) {
 		return sqlSession.selectOne(NAMESPACE + ".select_avg_score", houseNo);
 	}
 	

@@ -1,5 +1,6 @@
 package edu.spring.homeshare.interceptor;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import edu.spring.homeshare.domain.BookVO;
@@ -26,28 +28,26 @@ public class BookInterceptor extends HandlerInterceptorAdapter{
 	@Autowired
 	private BookService bookService;
 	
-//	@Override
-//	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-//		boolean masterFlag = false;
-//		logger.info("book prehendler 호출");
-//		
-//		//세션에서 정보가져오기
-//		HttpSession session = request.getSession();
-//		String bookHostId = (String) session.getAttribute("memId");
-//		logger.info("bookHostId" + bookHostId);
-//		
-//		List<BookVO> bookvo =  bookService.readByHostId(bookHostId);
-//		
-//		if(bookvo.size() < 1) { // 예약이 없으면
-//			response.sendRedirect(request.getContextPath() + "/");
-//			logger.info("진행중인 예약이 없습니다. 메인페이지 가기"); //세션이 없습니다.
-//			masterFlag = false;
-//		}else {
-//			logger.info("예약이 있습니다. 메인페이지 가기"); //세션이 없습니다.
-//			masterFlag = true;
-//		}
-//		
-//		
-//		return masterFlag;
-//	}
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+		boolean masterFlag = true;
+		
+		HttpSession session = request.getSession();
+		String memId = (String) session.getAttribute("memId");
+
+		
+		if(memId == null) { //세션이 없음
+			masterFlag = false;
+			
+			PrintWriter out = response.getWriter();
+			logger.info("sessionId null");
+			out.print("<head>" + "<meta charset='UTF-8'>" + "</head>");
+			out.print("<script>alert('session null'); location.href='/homeshare/';</script>");
+			out.flush();
+			
+		}
+		
+		return masterFlag;
+	}
+	
 }

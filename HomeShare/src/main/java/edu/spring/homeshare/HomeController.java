@@ -73,9 +73,19 @@ public class HomeController {
 		return "redirect:/http://localhost:8081/homeshare/juso-test";
 		}
 	
-	@RequestMapping(value = "/juso-test", method = RequestMethod.GET)
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public void jusotest() {
-		logger.info(" jusotest " );
+		logger.info(" index " );
+		}
+	
+	@RequestMapping(value = "/index-2", method = RequestMethod.GET)
+	public void jusotest2() {
+		logger.info(" index " );
+		}
+	
+	@RequestMapping(value = "/about", method = RequestMethod.GET)
+	public void about() {
+		logger.info(" about " );
 		}
 
 	

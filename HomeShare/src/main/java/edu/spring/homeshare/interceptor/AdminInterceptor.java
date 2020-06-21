@@ -1,5 +1,7 @@
 package edu.spring.homeshare.interceptor;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -26,9 +28,17 @@ public class AdminInterceptor extends HandlerInterceptorAdapter {
 			masterFlag = true;
 
 		} else { // 세션 ID가 존재치 않거나, 등급이 3이 아니라면
-
+			PrintWriter out = response.getWriter();
+			out.print("<head>" + "<meta charset='UTF-8'>" + "</head>");
+			out.print("<script>alert('You do not have permission admin'); location.href='/homeshare/';</script>");
+			out.flush();
+			
 			System.out.println("admin 미인증!"); // admin 미인증
-			response.sendRedirect(request.getContextPath() + "/");
+			//response.sendRedirect(request.getContextPath() + "/");
+			
+			
+
+			
 			// 해당 페이지로 보내기
 			masterFlag = false;
 		}

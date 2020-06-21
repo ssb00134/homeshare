@@ -1,0 +1,92 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<nav class="navbar navbar-transparent navbar-fixed-top fixed-top"
+		role="navigation">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li><a class="info-text" href="/homeshare/about">Main</a></li>
+					
+					<li><a href="/homeshare/about#2">About</a></li>
+					
+					<li class="nav-item"><a class="info-text" data-toggle="modal"
+							data-target="#SignUpModal">SignUp</a></li>
+					<%@ include file="signup_modal.jspf"%>
+					<li class="dropdown">
+						<!-- 로그인 토글 --> <c:if test="${empty memId }">
+							<a class="info-text" data-toggle="modal"
+							data-target="#LoginModal">로그인</a>
+							<!-- 로그인모달 폼 -->
+							<%@ include file="login_modal.jspf"%>
+							
+						</c:if> 
+						<c:if test="${not empty memId}">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								MyPage <b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu">
+
+								
+
+								
+								<li><form action="/homeshare/member/account" method="post"><button type="submit" class="btn">Account</button>
+								</form></li>
+								
+								<li><form action="/homeshare/book/memberbook" method="post"><button type="submit" class="btn">MyBookList</button>
+								</form></li>
+								
+								
+								<c:if test="${HouseCount > 0}">
+								<li class="divider"></li>
+								<li><form action="/homeshare/house/host" method="post"><button type="submit" class="btn">MyHouse</button>
+								</form></li>
+								
+								<li><form action="/homeshare/book/hostbook" method="post"><button type="submit" class="btn">MyHosting</button>
+								</form></li>
+			
+								</c:if>
+								<c:if test="${memId eq 'admin' }">
+								<li class="divider"></li>
+								<li><a href="/homeshare/admin/main" class="btn">관리자페이지</a></li>
+								</c:if>
+									
+									
+									
+									<li class="divider"></li>
+								<li><form action="/homeshare/member/logout" method="post"><button type="submit" class="btn">logout</button>
+								</form></li>
+							</ul>
+						</c:if>
+					</li>
+
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#">
+							<i class="fa fa-facebook-square"></i> Share
+						</a></li>
+					<li><a href="#">
+							<i class="fa fa-twitter"></i> Tweet
+						</a></li>
+					<li><a href="#">
+							<i class="fa fa-envelope-o"></i> Email
+						</a></li>
+				</ul>
+
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container -->
+	</nav>

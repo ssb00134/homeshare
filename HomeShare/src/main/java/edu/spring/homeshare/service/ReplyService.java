@@ -10,7 +10,7 @@ public interface ReplyService {
 	int readCount();
 	int update(ReplyVO vo);
 	int delete(int rno);
-	int readAvgScore(int houseNo);
+	double readAvgScore(int houseNo);
 	
 	int readCountHouseNo(int houseNo);
 }

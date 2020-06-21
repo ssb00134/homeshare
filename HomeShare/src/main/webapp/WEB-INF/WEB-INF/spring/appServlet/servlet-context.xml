@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans
+	xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd
+		http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing 
+		infrastructure -->
+
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+	<!-- Annotation 기반의 AOP 기능 사용 -->
+	<aop:aspectj-autoproxy />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
+		up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+
+
+
+
+
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
+		in the /WEB-INF/views directory -->
+	<beans:bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+
+	<!-- @Controller 클래스 스캐닝 패키지 -->
+	<context:component-scan
+		base-package="edu.spring.homeshare" />
+
+	<!-- Interceptor 클래스의 인스턴스를 bean으로 관리 -->
+	<!-- 로그인 언터셉터 bean -->
+	<beans:bean id="loginInterceptor"
+		class="edu.spring.homeshare.interceptor.LoginInterceptor">
+	</beans:bean>
+
+	<!-- 아이디찾기 bean -->
+	<beans:bean id="FindIdInterceptor"
+		class="edu.spring.homeshare.interceptor.FindIdInterceptor">
+	</beans:bean>
+
+	<!-- 회원가입 bean -->
+	<beans:bean id="SignUpInterceptor"
+		class="edu.spring.homeshare.interceptor.SignUpInterceptor">
+	</beans:bean>
+	
+	<!-- house bean -->
+	<beans:bean id="HouseInterceptor"
+		class="edu.spring.homeshare.interceptor.HouseInterceptor">
+	</beans:bean>
+	
+	<!-- book bean -->
+	<beans:bean id="BookInterceptor"
+		class="edu.spring.homeshare.interceptor.BookInterceptor">
+	</beans:bean>
+
+
+
+
+	<!-- 관리자 페이지 bean -->
+	<beans:bean id="AdminInterceptor"
+		class="edu.spring.homeshare.interceptor.AdminInterceptor">
+	</beans:bean>
+	
+	
+		<!-- 로그아웃 인터셉터 -->
+	<beans:bean id="LogoutInterceptor"
+		class="edu.spring.homeshare.interceptor.LogoutInterceptor">
+	</beans:bean>
+
+
+
+
+	<!-- Interceptor가 가로챌 URL 매핑 설정 -->
+	<!-- 로그인 인터셉터 -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/member/login-post" />
+			<beans:ref bean="loginInterceptor" />
+		</interceptor>
+	</interceptors>
+
+	<!-- 아이디 찾기 인터셉터 -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/member/find-id-post" />
+			<beans:ref bean="FindIdInterceptor" />
+		</interceptor>
+	</interceptors>
+
+	<!-- 회원가입 인터셉터 -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/member/sign-up-post" />
+			<beans:ref bean="SignUpInterceptor" />
+		</interceptor>
+	</interceptors>
+
+
+
+
+	<!-- 관리자 페이지 인터셉터 -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/admin/**" />
+			<beans:ref bean="AdminInterceptor" />
+		</interceptor>
+	</interceptors>
+	
+	<!-- houseinterceptor -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/house/**" />
+			<beans:ref bean="HouseInterceptor" />
+		</interceptor>
+	</interceptors>
+	
+	
+		<!-- Bookterceptor -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/member/logout" />
+			<beans:ref bean="LogoutInterceptor" />
+		</interceptor>
+	</interceptors>
+	
+	
+		<!-- LogoutInterceptor -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/book/**" />
+			<beans:ref bean="BookInterceptor" />
+		</interceptor>
+	</interceptors>
+
+
+
+
+
+	<!-- 문자열 리소스를 bean으로 추가 -->
+	<!-- String uploadPath = new String("경로"); -->
+	<beans:bean id="uploadPath" class="java.lang.String">
+		<beans:constructor-arg
+			value="C:\\Study\\FileUploadTest">
+		</beans:constructor-arg>
+	</beans:bean>
+
+	<!-- String mockUploadPath = new String("경로"); -->
+	<beans:bean id="MockUploadPath" class="java.lang.String">
+		<beans:constructor-arg
+			value="C:\\study\\MockUploadPath">
+		</beans:constructor-arg>
+	</beans:bean>
+
+
+	<!-- DispatcherServlet이 MultipartResolver를 사용 : form 양식에서 multipart/form-data 
+		타입을 처리하기 위한 클래스 -->
+	<beans:bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 파일 업로드 최대 용량 설정 : 1024 X 1024 X 10 = 10MB -->
+		<beans:property name="maxUploadSize" value="10485760"></beans:property>
+	</beans:bean>
+
+	<!-- 웹소켓 추가 -->
+	<beans:bean id="echoHandler"
+		class="edu.spring.homeshare.websocket.EchoHandler" />
+
+	<websocket:handlers>
+		<websocket:mapping handler="echoHandler"
+			path="/echo" />
+		<websocket:sockjs />
+	</websocket:handlers>
+
+</beans:beans>
+

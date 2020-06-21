@@ -60,6 +60,9 @@ public class MemberServiceImple implements MemberDAO, MemberService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+	@Override
+	public int idChk(MemberVO vo) {
+		return memberDao.idChk(vo);
+	}
 
 }

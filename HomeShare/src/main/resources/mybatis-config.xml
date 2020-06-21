@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<property name="memName" value="memName" />
 		<property name="email" value="email" />
 		<property name="houseCount" value="houseCount" />
-		<property name="account" value="account" />
+		<property name="phone" value="phone" />
 		<property name="gender" value="gender" />
 		<property name="phoneReleaseToHost" value="phoneReleaseToHost" />
 		

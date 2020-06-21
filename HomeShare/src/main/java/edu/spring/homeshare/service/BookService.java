@@ -16,4 +16,6 @@ public interface BookService {
 	int delete(int bookNo);
 	List<BookVO> readOptionAndDate(HashMap<String, Object> map);
 	List<BookVO> readByHostId(String bookHostId);
+	List<BookVO> readByHostIdAcp(String bookHostId);
+	List<BookVO> readByHostIdAcpLast(String bookHostId);
 }

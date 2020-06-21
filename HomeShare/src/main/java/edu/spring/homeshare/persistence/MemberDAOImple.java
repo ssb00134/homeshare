@@ -58,4 +58,11 @@ public class MemberDAOImple implements MemberDAO {
 		logger.info(" update 실행");
 		return sqlSession.update(NAMESPACE + ".update", vo);
 	}
+	
+	//중복체크
+	@Override
+	public int idChk(MemberVO vo) {
+		logger.info(" idchk 실행");
+		return sqlSession.selectOne(NAMESPACE + ".idChk", vo);
+	}
 }

@@ -8,13 +8,13 @@ public class ReplyVO {
 	private String content;
 	private String memId;
 	private Date regdate;
-	private int replyScore;
+	private double replyScore;
 	private int cleanScore;
 	private int checkinScore;
 	
 	public ReplyVO() {}
 
-	public ReplyVO(int rno, int houseNo, String content, String memId, Date regdate, int replyScore, int cleanScore,
+	public ReplyVO(int rno, int houseNo, String content, String memId, Date regdate, double replyScore, int cleanScore,
 			int checkinScore) {
 		super();
 		this.rno = rno;
@@ -67,11 +67,11 @@ public class ReplyVO {
 		this.regdate = regdate;
 	}
 
-	public int getReplyScore() {
+	public double getReplyScore() {
 		return replyScore;
 	}
 
-	public void setReplyScore(int replyScore) {
+	public void setReplyScore(double replyScore) {
 		this.replyScore = replyScore;
 	}
 

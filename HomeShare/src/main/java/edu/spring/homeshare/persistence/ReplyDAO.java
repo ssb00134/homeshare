@@ -13,6 +13,6 @@ public interface ReplyDAO {
 	
 	int selectCountByHouseNo(int houseNo); //houseno를 기준으로 일치하는 갯수 리턴
 	
-	int selectAvgScore(int houseNo);
+	double selectAvgScore(int houseNo);
 	
 }

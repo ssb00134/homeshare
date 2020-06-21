@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		${memId} =#{memId},
 		${password} =#{password},
 		${houseCount}=#{houseCount},
-		${account}=#{account},
+		${phone}=#{phone},
 		${memName}=#{memName},
 		${email}=#{email},
 		${gender}=#{gender},
@@ -82,6 +82,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) total_cnt
 		from ${member}
 	</select>
+	
+	
+	<!-- 아이디 중복확인  -->
+	<select id="idChk" resultType="int">
+		SELECT COUNT(*) FROM ${member}
+		WHERE ${memId} = #{memId}
+</select>
 </mapper>
 
 

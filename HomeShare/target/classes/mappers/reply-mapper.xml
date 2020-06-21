@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<insert id="insert">
 		insert into ${reply}
-		values(0,#{houseNo},#{content},#{memId},null,0,#{cleanScore},#{checkinScore})
+		values(0,#{houseNo},#{content},#{memId},null,#{replyScore},#{cleanScore},#{checkinScore})
 		<!-- 0,하우스번호,content,memid,Score,cleaness,checkin -->
 	</insert>
 
@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="select_count" resultType="int">
-		select count(*) from ${reply};
+		select count(*) from ${reply}
 	</select>
 	
 	<select id="select_count_by_houseno" resultType="Integer">
@@ -46,8 +46,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	
 	<!-- 리플 후기 평균 구하기 -->
-	<select id="select_avg_score" resultType="Integer">
-		select TRUNC(avg(${replyScore}),2) from ${reply} where ${reply}.${houseNo} = #{houseNo}
+	<select id="select_avg_score" resultType="double">
+		<!-- select TRUNC(avg(${replyScore}),2) from ${reply} where ${reply}.${houseNo} = #{houseNo} -->
+		select trunc(avg(${replyScore}),2) from ${reply} where ${reply}.${houseNo} = #{houseNo}
 	</select>
 </mapper>
 

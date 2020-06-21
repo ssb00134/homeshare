@@ -30,6 +30,9 @@ public class BookServiceImple implements BookService {
 	public List<BookVO> selectHouseNo(int houseNo) {
 		return BookDao.selectHouseNo(houseNo);
 	}
+
+
+	
 	@Override
 	public List<BookVO> selectMemNo(int memNo) {
 		return BookDao.selectMemNo(memNo);
@@ -52,5 +55,14 @@ public class BookServiceImple implements BookService {
 	@Override
 	public List<BookVO> readByHostId(String bookHostId) {
 		return BookDao.selectByHostId(bookHostId);
+	}
+	
+	@Override
+	public List<BookVO> readByHostIdAcp(String bookHostId) {
+		return BookDao.selectByHostIdAcp(bookHostId);
+	}
+	@Override
+	public List<BookVO> readByHostIdAcpLast(String bookHostId) {
+		return BookDao.selectByHostIdAcpLast(bookHostId);
 	}
 }

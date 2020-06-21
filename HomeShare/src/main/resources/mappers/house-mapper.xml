@@ -96,23 +96,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from (
 		<!-- 다중검색 start -->
 		SELECT * FROM ${house} where ${houseNo} = ${houseNo}
-		<choose>
-			<when test="location != null &amp;&amp; ''.equals(location)">
-				and location like '%' || #{location} || '%'
-			</when>
-			<when test="bookableDateBegin != null &amp;&amp; ''.equals(bookableDateBegin)">
+		
+			<if test='location != null and location != ""'>
+			and location like '%' || #{location} || '%'
+			</if>
+			<if test='bookableDateBegin != null and bookableDateBegin != ""'>
 				AND ${bookableDateBegin} <![CDATA[>=]]>
 				#{bookableDateBegin}
-			</when>
-			<when test="bookableDateEnd != null &amp;&amp; ''.equals(bookableDateEnd)">
+			</if>
+			<if test='bookableDateEnd != null and bookableDateEnd != ""'>
+
 				AND ${bookableDateEnd} <![CDATA[<=]]>
 				#{bookableDateEnd}
-			</when>
-			<when test="maxCapacity != null &amp;&amp; ''.equals(maxCapacity)">
-				AND ${maxCapacity} <![CDATA[<=]]>
-				maxCapacity
-			</when>
-		</choose>
+			</if>
+			<if test='maxCapacity != null and maxCapacity != ""'>
+				AND ${maxCapacity} <![CDATA[>=]]>
+				#{maxCapacity}
+			</if>
+
 		<!-- 다중검색 end -->
 		) a
 		) b

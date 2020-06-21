@@ -1,6 +1,9 @@
 package edu.spring.homeshare.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -11,7 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.spring.homeshare.domain.MemberVO;
 import edu.spring.homeshare.service.MemberService;
@@ -45,23 +48,21 @@ public class MemberController {
 		// 아이디 비밀번호가 일치하지 않음 : result == null
 		logger.info("result : " + result);
 		model.addAttribute("login_result", result);
+		
 	}
 	
 	@RequestMapping(value="logout")
-	public String logout(   HttpServletRequest req) {
+	public void logout(HttpServletRequest req,HttpServletResponse response, Model model) throws IOException {
 		logger.info("logout 호출 ");
 		HttpSession session = req.getSession();
 		session.removeAttribute("memId");
 		session.invalidate();
 		
-		String referer = (String)req.getHeader("REFERER");
-		logger.info("referer : " + referer );
-		/* 예외처리 로그아웃*/
-		if(referer.equals("http://localhost:8081/homeshare/book/booking")) {
-			return "redirect:/" ;
-		}
 		
-		return "redirect:" + referer;
+		String referer = (String)req.getHeader("REFERER");
+		logger.info("이전 url : " + referer);
+		model.addAttribute("referer", referer);
+		response.sendRedirect(referer);
 	}
 	
 	
@@ -103,7 +104,7 @@ public class MemberController {
 	
 	
 	/* 계정 메핑*/
-	@RequestMapping(value="/account",method = RequestMethod.GET)
+	@RequestMapping(value="/account",method = RequestMethod.POST)
 	public void account(String url, Model model, HttpServletRequest req) {
 		logger.info("account 실행");
 		logger.info("url : " + url); // 이전경로(로그인을 위해 왔던)의 값 출력
@@ -117,6 +118,15 @@ public class MemberController {
 		MemberVO vo = memberService.select(memId);
 		logger.info(vo.toString());
 		session.setAttribute("vo", vo);
+	}
+	
+	
+	//중복확인
+	@ResponseBody
+	@RequestMapping(value="/idChk", method = RequestMethod.POST)
+	public int idChk(MemberVO vo) throws Exception {
+		int result = memberService.idChk(vo);
+		return result;
 	}
 }
 

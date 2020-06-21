@@ -39,17 +39,25 @@ public class ReplyRestContrller {
 
 		//리플작성시 자동으로 별점 업데이트
 		int houseNo = vo.getHouseNo(); // 등록할 하우스 번호
-
+		
+		//리플 개수
+		int replies = replyService.readCount();
+		logger.info("총 " + replies +"개의 후기가 있습니다");
+		
 		//리플 평균값
 		double avgScore = replyService.readAvgScore(houseNo);
-		logger.info("평균 : " + avgScore);
+		logger.info("reply 의 평균 : " + avgScore);
 
 		HouseVO housevo = houseservice.selectByHouseNo(houseNo); // housevo : 리플 houseno에 메핑된 housevo
+		
+		housevo.setReplies(replies);
 		housevo.setScore(avgScore); // housevo 에 score을 넣고 평균 계산
+		logger.info("별점 업데이트 전의 housevo : " + housevo.toString());
+		
+		
+		int updateHouseScore = houseservice.update(housevo);
 
-		int updateScore = houseservice.update(housevo);
-
-		if (updateScore == 1) {
+		if (updateHouseScore == 1) {
 			logger.info("별점 등록 성공");
 		} else {
 			logger.info("별점 등록 실패");
@@ -97,8 +105,13 @@ public class ReplyRestContrller {
 		return entity;
 	}
 
-	@RequestMapping(value = "/{rno}", method = RequestMethod.DELETE)
-	public ResponseEntity<String> deleteReply(@PathVariable("rno") int rno, ReplyVO vo) {
+	@RequestMapping(value = "/{rno}/{houseNo}", method = RequestMethod.DELETE)
+	public ResponseEntity<String> deleteReply(@PathVariable("rno") int rno,
+			@PathVariable("houseNo") int houseNo) {
+		
+		logger.info("reply delete 실행");
+		logger.info("rno : " + rno + " houseno : " + houseNo);
+		
 		int result = replyService.delete(rno);
 		ResponseEntity<String> entity = null;
 		if (result == 1) {
@@ -108,31 +121,43 @@ public class ReplyRestContrller {
 		}
 		
 		
-		//리플작성시 자동으로 별점 업데이트
-		int houseNo = vo.getHouseNo(); // 등록할 하우스 번호
+		//리플삭제시 자동으로 별점 업데이트
+				
+				int replyCount = replyService.readCount();
+				
+				HouseVO housevo = houseservice.selectByHouseNo(houseNo); // housevo : 리플 houseno에 메핑된 housevo
+				
+				//리플 개수
+				int replies = replyService.readCount();
+				logger.info("총 " + replies +"개의 후기가 있습니다");
+				
+				//리플 평균값
+				if(replyCount >0) {
+					double avgScore = replyService.readAvgScore(houseNo);
+					logger.info("reply 의 평균 : " + avgScore);					
+					housevo.setScore(avgScore); // housevo 에 score을 넣고 평균 계산
+				}
+				if(replyCount == 0) {
+					logger.info("개수가 없을경우 평균값 0 으로 조정");					
+					housevo.setScore(0); // housevo 에 score을 넣고 평균 계산
+				}
 
-		//리플 평균값
-		int avgScore = replyService.readAvgScore(houseNo);
-		logger.info("평균 : " + avgScore);
+				
+				
+				housevo.setReplies(replies);
+				
+				logger.info("별점 삭제 후 housevo : " + housevo.toString());
+				
+				
+				int updateHouseScore = houseservice.update(housevo);
+
+				if (updateHouseScore == 1) {
+					logger.info("별점 등록 성공");
+				} else {
+					logger.info("별점 등록 실패");
+				}
 		
-		int replyCount = replyService.readCount();
-		logger.info("리플 개수  : " + replyCount);
-		//삭제할 값
-		int thisScore = (vo.getCleanScore() + vo.getCheckinScore())/2 ;
 		
-		int deleteScore = (avgScore -thisScore) /  (replyCount - 1);
-
-		HouseVO housevo = houseservice.selectByHouseNo(houseNo); // housevo : 리플 houseno에 메핑된 housevo
-		housevo.setScore(deleteScore); // housevo 에 score을 넣고 평균 계산
-
-		int updateScore = houseservice.update(housevo);
-
-		if (updateScore == 1) {
-			logger.info("별점 등록 성공");
-		} else {
-			logger.info("별점 등록 실패");
-		}
-
 		return entity;
 	}
 }

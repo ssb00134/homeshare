@@ -15,6 +15,9 @@ public interface MemberDAO {
 	
 	//update
 	int update(MemberVO vo);
+	
+	//아이디 중복체크
+	int idChk(MemberVO vo);
 
 }
 
