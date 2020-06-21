@@ -84,7 +84,7 @@
 			<div class="container">
 				<div class="sidebar-nav">
 					<h4>요금을 확인하려면 날짜를 입력해 주세요</h4>
-					<button type="button" class="btn btn-default" data-toggle="modal"
+					<button type="button" class="btn btn-default" data-toggle="modal" id="btnDate"
 						data-target="#DateModal">체크인/체크아웃 조회</button>
 
 				</div>
@@ -102,7 +102,7 @@
 							<div class="container-fluid">
 								<div class="row">
 									<div class="col-md-6" id="disableCheckIn" data-toggle="toggle"></div>
-									<div class="col-md-6" id="disableCheckOut" data-toggle="toggle"></div>
+									<div class="col-md-6" id="disableCheckOut" class="datepicker" data-toggle="toggle"></div>
 								</div>
 							</div>
 						</div>
@@ -200,9 +200,8 @@
 								
 							}); //end each
 
-							//로딩시 모달 데이터 초기화 
-							$("#disableCheckIn").val('');
-							$("#disableCheckIn").val('');
+							
+							
 							
 							
 							for(var i=0; i<${houseVO.maxCapacity}; i++){
@@ -240,18 +239,49 @@
 
 							/* end map */
 							
-	
+				
 							
 							/* 모달 영역*/
-							$('#disableCheckOut').find('a').on('click focus blur',function() {
-								if($("#disableCheckIn").datepicker().val()!== ""){
-									console.log($(this).val());
-									
-									console.log('체크아웃 값 : ' + $("#disableCheckOut").datepicker().val());
-									$("#DateModal .close").click();
+							$('#disableCheckIn').on('click focus blur',function(event) {
+								if(event.target.nodeName =='a' || event.target.nodeName =='A'){
+									console.log('a click');
+									if($("#disableCheckIn").datepicker().val()!== ""
+											&& $("#disableCheckOut").datepicker().val()!== ""){
+										console.log('체크인 값 : ' + $("#disableCheckIn").datepicker().val());
+										console.log('체크아웃 값 : ' + $("#disableCheckOut").datepicker().val());
+										$("#DateModal .close").click();
+									}	
 								}
+								
 							}); //end disableCheckIn click
-
+							
+							
+							$('#btnDate').click(function(){
+								$("#disableCheckIn").datepicker().val('');
+								$("#disableCheckOut").datepicker().val('');
+							});//end dtae
+							
+							
+							
+							
+							$('#disableCheckOut').on('click focus blur',function(event) {
+								if(event.target.nodeName =='a' || event.target.nodeName =='A'){
+									console.log('a click');
+									if($("#disableCheckIn").datepicker().val()!== ""
+											&& $("#disableCheckOut").datepicker().val()!== ""){
+										console.log('체크인 값 : ' + $("#disableCheckIn").datepicker().val());
+										console.log('체크아웃 값 : ' + $("#disableCheckOut").datepicker().val());
+										$("#DateModal .close").click();
+									}	
+								}
+								
+							}); //end disableCheckIn click
+ 
+							
+										
+							
+							
+							
 							getAllBooks();
 
 							//세션체크
@@ -555,6 +585,9 @@
 
 																	}); // end each
 
+																	
+																	
+																	
 													// 특정일 선택막기
 													function disableAllTheseDays(
 															date) {
