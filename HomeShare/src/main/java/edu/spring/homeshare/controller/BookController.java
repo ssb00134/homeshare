@@ -32,18 +32,57 @@ public class BookController {
 	@Autowired
 	private HouseService houseService;
 
-	@RequestMapping(value = "/memberbook", method = RequestMethod.POST)
-	public void memberbook(Model model, HttpServletRequest request) {
+	@RequestMapping(value = "/memberbook")
+	public void memberbook(HttpServletRequest request, Model model, Integer page, Integer prePage) {
 
 		HttpSession session = request.getSession();
 
+		/* 페이징 처리 */
+		PageCriteria c = new PageCriteria();
+		logger.info("page : " + page);
+		if (page != null) {
+			c.setPage(page);
+		}
+		if (prePage != null) {
+			c.setNumsPerPage(prePage);
+		}
+		
+		
+		
 		// 세션 memno 가져오기
-		int bookMemNo = (int) session.getAttribute("memNo");
-		logger.info("memno 세션값 : " + bookMemNo);
+		String guestId = (String) session.getAttribute("memId");
+		logger.info("guestId 세션값 : " + guestId);
+		
+		
+		/* hash맵에 정보 넣기 */
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("bookGuestId", guestId);
+		map.put("start",c.getStart());
+		map.put("end",c.getEnd());
+		logger.info("map : " +map.toString() );
+		
+		
+		
+		List<BookVO> bookListPaging = bookService.readByGuestId(map);
+		logger.info("bookListPaging" + bookListPaging.toString());
+		model.addAttribute("bookListPaging",bookListPaging);
+		
+		
 
-		List<BookVO> bookList = bookService.selectMemNo(bookMemNo);
-		logger.info("list : " + bookList.toString());
-		model.addAttribute("bookList", bookList);
+		
+		PageMaker maker = new PageMaker();
+		maker.setCriteria(c);
+		maker.setTotalCount(bookService.getCountByGuestId(guestId));
+		maker.setPageData();
+		model.addAttribute("pageMaker", maker);
+		
+		
+		
+		logger.info("전체 예약 수 : " + maker.getTotalCount());
+		logger.info("현재 선택된 페이지 : " + c.getPage());
+		logger.info("한 페이지 당 게시글 수 : " + c.getNumsPerPage());
+		logger.info("시작 페이지 링크 번호(startPageNO) : " + maker.getStartPageNo());
+		logger.info("끝 페이지 링크 번호(endPageNo) : " + maker.getEndPageNo());
 
 		
 		

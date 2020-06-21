@@ -74,7 +74,7 @@ public class BookDAOImple implements BookDAO {
 	
 	@Override
 	public int getCountBookByGuestId(String guestId) {
-		return sqlSession.selectOne(NAMESPACE + ".total_count_hostId", guestId);
+		return sqlSession.selectOne(NAMESPACE + ".total_count_guestId", guestId);
 	}
 	@Override
 	public List<BookVO> selectGuestId(HashMap<String, Object> map) {

@@ -279,7 +279,7 @@
 				
 				console.log('bookitem each 이후 disableStrings : ' + disableStrings);
 				//선택불가 영역을 리턴하는 함수
-				var disableList = disableStrings.split(',');
+				var disableList = $.unique(disableStrings.split(','));
 				console.log('disableList : ' + disableList);
 				console.log('disableList length : ' + disableList.length);
 				

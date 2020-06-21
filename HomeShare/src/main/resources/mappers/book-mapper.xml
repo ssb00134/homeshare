@@ -73,7 +73,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 게스트메핑 -->
 	
-	<select id="paging_book_by_hostId" resultType="bookVO">
+	<select id="paging_book_by_guestId" resultType="bookVO">
 		select
 		*
 		from (
@@ -91,10 +91,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		between #{start} and #{end}
 	</select>
 	
-	<select id="total_count_GuestId" resultType="Integer">
+	<select id="total_count_guestId" resultType="Integer">
 		select count(*) 
 		from ${book}
-		where ${bookGuestId} = #{bookGuestId}
+		where bookGuestId = #{bookGuestId}
+	
 	</select>
 
 
