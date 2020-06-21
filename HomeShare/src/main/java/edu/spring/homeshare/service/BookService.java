@@ -18,4 +18,7 @@ public interface BookService {
 	List<BookVO> readByHostId(String bookHostId);
 	List<BookVO> readByHostIdAcp(String bookHostId);
 	List<BookVO> readByHostIdAcpLast(String bookHostId);
+	
+	//∆‰¿Ã¬°
+	List<BookVO> readByHostId(HashMap<String, Object> map);
 }

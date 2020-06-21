@@ -42,8 +42,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and ${checkin} <![CDATA[<]]> sysdate
 		order by ${checkin}
 	</select>
-
-
+	
+	<!-- hostId로 검색 페이징 -->
+	<!-- 페이징 처리 -->
+	<select id="paging_book_by_hostId" resultType="bookVO">
+		select
+		*
+		from (
+		select rownum rn,
+		a.*
+		from (
+		select * from ${book} 
+		where #{bookHostId} = #{bookHostId}
+		order by
+		${checkin} desc
+		) a
+		) b
+		where rn
+		between #{start} and #{end}
+	</select>
 
 
 

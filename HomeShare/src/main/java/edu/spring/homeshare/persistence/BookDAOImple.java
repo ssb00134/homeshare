@@ -56,4 +56,12 @@ public class BookDAOImple implements BookDAO {
 	public List<BookVO> selectByHostIdAcpLast(String hostId) {
 		return sqlSession.selectList(NAMESPACE +".select_all_by_hostId_hostChk_Last" , hostId);
 	}
+	
+	//∆‰¿Ã¬°
+	@Override
+	public List<BookVO> selectHostId(HashMap<String, Object> map) {
+		
+		return sqlSession.selectList(NAMESPACE + ".paging_book_by_hostId", map);
+
+	}
 }

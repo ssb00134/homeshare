@@ -88,10 +88,6 @@
 					
 				</div>
 		
-				<h1>대기중인예약</h1>
-				
-				<h1>지난 예약내역 보기</h1>
-		
 		
 			</c:if>
 	    
@@ -147,47 +143,27 @@
 	
 	
 	
-	<button type="button" class="btn btn-default" data-toggle="modal"
-		data-placement="left" title="Tooltip on left" id="bookcount"
-		data-toggle="modal" data-target="#hostbookModal"></button>
-	
-		<form class="modal fade" id="hostbookModal">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content">
-				<!-- modal head -->
-				<div class="modal-header">
-					<h5 class="modal-title">숙소현황</h5>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-				</div>
-				<!-- modal body -->
-				<div class="container-fluid">
-					<div class="row">
-					<!-- 1열 head -->
-						<div class=col-md-1>예약번호</div>
-						<div class="divider"></div>
-						<div class=col-md-1>숙소번호</div>
-						<div class="divider"></div>
-						<div class=col-md-2>체크인</div>
-						<div class="divider"></div>
-						<div class=col-md-2>체크아웃</div>
-						<div class="divider"></div>
-						<div class=col-md-1>인원수</div>
-						<div class=col-md-1>방문일수</div>
-						<div class=col-md-2>총 가격</div>
-						<div class=col-md-1>수락</div>
-						<div class="divider"></div>
-						<div class=col-md-1>거절</div>
-						<div class="divider"></div>
-						<hr>
-						</div>
-					</div>
-					<!-- 2열 contents -->
-					<div class="form-group">
-						<div id="hostbook"></div>
-					</div>
-				</div>
-			</div>
-	</form>
+	<div>
+		<ul class="pager">
+			<c:if test="${pageMaker.hasPrev }">
+				<li><a href="${pageMaker.startPageNo - 1}">이전</a></li>
+			</c:if>
+			<c:forEach begin="${pageMaker.startPageNo }"
+				end="${pageMaker.endPageNo }" var="num">
+				<li><a href="${num }">${num }</a></li>
+			</c:forEach>
+			<c:if test="${pageMaker.hasNext }">
+				<li><a href="${pageMaker.endPageNo + 1}">다음</a></li>
+			</c:if>
+		</ul>
+	</div>
+
+	<div>
+		<form id="pagingForm" style="display: none;">
+			<input type="text" name="page" value="${pageMaker.criteria.page }">
+			<input type="text" name="houseNo">
+		</form>
+	</div>
 	
 	
 	

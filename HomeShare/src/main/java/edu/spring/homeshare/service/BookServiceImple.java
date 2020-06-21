@@ -65,4 +65,9 @@ public class BookServiceImple implements BookService {
 	public List<BookVO> readByHostIdAcpLast(String bookHostId) {
 		return BookDao.selectByHostIdAcpLast(bookHostId);
 	}
+	//∆‰¿Ã¬°
+	@Override
+	public List<BookVO> readByHostId(HashMap<String, Object> map) {
+		return BookDao.selectHostId(map);
+	}
 }

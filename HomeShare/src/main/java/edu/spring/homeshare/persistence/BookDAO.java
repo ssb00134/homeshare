@@ -17,4 +17,6 @@ public interface BookDAO {
 	List<BookVO> selectByHostIdAcp(String hostId);
 	List<BookVO> selectByHostIdAcpLast(String hostId);
 	
+	//∆‰¿Ã¬°
+	List<BookVO> selectHostId(HashMap<String, Object> map );
 }
