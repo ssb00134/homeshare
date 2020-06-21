@@ -13,7 +13,8 @@
 
 </head>
 <body>
-
+	<input type="text" value="${memberVO.phoneReleaseToHost}" id="phoneReleaseToHost">
+	<input type="text" value="${memberVO.phone}" id="phone">
 	<!-- 헤더정보 가져오기 -->
 	<%@ include file="../navheader.jspf"%>
 
@@ -390,11 +391,18 @@
 												var bookHostId = $('#hostId')
 														.val();
 												var bookGuestId = '${memId}';
-
+												
+												var bookGuestPhone = '비공개';
+												if($('#phoneReleaseToHost').val() == 'yes'){
+													bookGuestPhone = $('#phone');
+													console.log('phoneReleaseToHost : yes');
+												}
+												
 												//제약조건 자기자신 예약 불가
 												if (bookHostId === '${memId}') {
 													alert('자신의 숙소는 예약할 수 없습니다.');
 													preventDefault();
+													return false;
 												}
 
 												//날짜차이
@@ -434,7 +442,9 @@
 													'bookMem' : bookMem,
 													'totalPrice' : totalprice,
 													'bookHostId' : bookHostId,
-													'bookGuestId' : bookGuestId
+													'bookGuestId' : bookGuestId,
+													'bookGuestPhone' : bookGuestPhone,
+													'bookHostPhone' : '비공개'
 
 												};
 												$.each(obj, function(index,
