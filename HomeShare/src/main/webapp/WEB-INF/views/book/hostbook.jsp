@@ -15,10 +15,107 @@
 .ui-datepicker select.ui-datepicker-year{ width:40%; font-size: 11px; }
 
 </style>
+
+
+
+
+
+
+
+<link href="/homeshare/resources/css/bootstrap.css" rel="stylesheet">
+<script src="/homeshare/resources/js/bootstrap.min.js"
+	type="text/javascript"></script>
+	
+	
+	
+	
 </head>
 <body>
 	<%@ include file="../navheader.jspf"%>
 	<h1>대기중인예약</h1>
+	
+
+	
+	<div class="row">
+	
+	
+	
+	
+	
+	<div role="tabpanel" class="col-md-8">
+	  <!-- Nav tabs -->
+	  <ul class="nav nav-tabs" role="tablist">
+	    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+	    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+	    <li role="presentation"><a class="btn">대기중인예약</a></li>
+	
+	  </ul>
+	
+	  <!-- Tab panes -->
+	  <div class="tab-content">
+	    <div role="tabpanel" class="tab-pane active" id="home">
+	    	<c:if test="${bookList ne null }">
+				<div class="row">
+					<table class="table table-bordered table-hover text">
+						<thead class="text">
+							<tr class="text">
+								<td>예약번호</td>
+								<td>체크인</td>
+								<td>체크아웃</td>
+								<td>예약인원</td>
+								<td>총 가격</td>
+								<td>수락여부</td>
+		
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="vo" items="${bookList }">
+								<tr class="bookItem text">
+									<td>${vo.bookNo}</td>
+									<td id="checkin">${vo.checkin.split(" ")[0]}</td>
+									<td id="checkout">${vo.checkout.split(" ")[0]}</td>
+									<td>${vo.bookMem}</td>
+									<td>${vo.totalPrice}</td>
+									<td>
+									<c:if test="${vo.hostCheck == 1}">수락</c:if>
+									<c:if test="${vo.hostCheck == 0}">거절</c:if>
+									</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+					
+				</div>
+		
+				<h1>대기중인예약</h1>
+				
+				<h1>지난 예약내역 보기</h1>
+		
+		
+			</c:if>
+	    
+	    </div>
+	    <div role="tabpanel" class="tab-pane" id="profile">...</div>
+	   
+	  
+	  </div>
+	
+	</div>
+	
+	
+	
+	
+	
+	<div class="col-md-4 border">
+				<div id="dateArea1"></div>
+				<div id="dateArea2"></div>
+	</div>
+	
+	
+	</div>
+	 
+	
+	
 	
 	<button type="button" class="btn btn-default" data-toggle="modal"
 		data-placement="left" title="Tooltip on left" id="bookcount"
@@ -67,51 +164,8 @@
 	
 	
 	
-	<h1>내가 수락한 예약</h1>
 	
-
-	<c:if test="${bookList ne null }">
-		<div class="row">
-			<table class="table table-bordered table-hover text col-md-8">
-				<thead class="text">
-					<tr class="text">
-						<td>예약번호</td>
-						<td>체크인</td>
-						<td>체크아웃</td>
-						<td>예약인원</td>
-						<td>총 가격</td>
-						<td>수락여부</td>
-
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="vo" items="${bookList }">
-						<tr class="bookItem text">
-							<td>${vo.bookNo}</td>
-							<td id="checkin">${vo.checkin.split(" ")[0]}</td>
-							<td id="checkout">${vo.checkout.split(" ")[0]}</td>
-							<td>${vo.bookMem}</td>
-							<td>${vo.totalPrice}</td>
-							<td>
-							<c:if test="${vo.hostCheck == 1}">수락</c:if>
-							<c:if test="${vo.hostCheck == 0}">거절</c:if>
-							</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-			<div class="col-md-4 border">
-				<div id="dateArea1"></div>
-				<div id="dateArea2"></div>
-			</div>
-		</div>
-
-		<h1>대기중인예약</h1>
-		
-		<h1>지난 예약내역 보기</h1>
-
-
-	</c:if>
+	
 
 	<script type="text/javascript">
 		$(document).ready(function() {

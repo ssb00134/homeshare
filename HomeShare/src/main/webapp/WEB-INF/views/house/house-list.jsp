@@ -7,9 +7,35 @@
 <head>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b76b064de112b5b283e72470515766f4"></script>
+
 <style type="text/css">
+img { max-width: 100%; height: auto; }
+
+
+.starR{
+  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
+  background-size: auto 100%;
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  text-indent: -9999px;
+  cursor: pointer;
+}
+.starR.on{background-position:0 0;}
+
+
+
+
+
 
 </style>
+
+
+
+
+
+
+
  <%@ include file="../cdn.jspf"%>
 
 <!-- bxslider -->
@@ -26,59 +52,56 @@
 	<%@ include file="../navheader.jspf"%>
 	<h1>검색결과</h1>
 	
-	
-	<div class="row">
-	<div id="leftSpace" class="col-md-1"></div>
-	<div id="house-lists" class="col-md-6 border">
-		<c:forEach var="vo" items="${houseList }" varStatus="status">
-			<div class="container-fluid">
-				<div class="house_list_item" >
-					<div class="row" >
-					<div class="house_list_item_click col-md-7 border"  id="${vo.houseNo }">
-						<div class="row col-md-12">${vo.title}
-						</div>
-						<div class="row border">
-						<div class="col-md-8">${vo.type } ${vo.scope }</div>
-						<div class="col-md-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>${vo.score}</div>
-						</div>
-						<div class="row col-md-12">${vo.location}</div>
-						<div class="row" >
-							<div class="col-md-2">인원 ${vo.maxCapacity }명 *</div>
-							<div class="col-md-2">침실 ${vo.bedroom }개 *</div>
-							<div class="col-md-2">침대 ${vo.bed }개 *</div>
-							<div class="col-md-2">화장실 ${vo.bathroom }개 </div>
-						</div>
-						<input type="hidden" id="utilities" value="${vo.utilities }">
-						<input type="text" id="wgsX" value="${vo.wgsX }">
-						<input type="text" id="wgsY" value="${vo.wgsY }">
-						<div id="utilDiv"></div>
-						</div>
+	<c:if test="${houseList ne null }">
+		<div class="row">
+			<c:forEach var="vo" items="${houseList }">
+				<!-- cardgrooup -->
 
-								<!-- 이미지슬라이더 -->
-					<div class="home__slider col-md-5 border">
-						<ul class="bxslider"></ul>
-					</div>	
+				<div class="hostItem card col-md-4">
+					<input type="hidden" id="imgSource" value="${vo.image }">
+					<input type="hidden" class="houseNo" value="${vo.houseNo }">
+					<div class="card-body" id="imgArea">
+						<div id="carouselExampleControls" class="carousel slide"
+							data-ride="carousel">
+							<div class="carousel-inner" id="carousel-inner" style="max-height:250px"></div>
+							<a class="carousel-control-prev" href="#carouselExampleControls"
+								role="button" data-slide="prev">
+								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								<span class="sr-only">Previous</span>
+							</a>
+							<a class="carousel-control-next" href="#carouselExampleControls"
+								role="button" data-slide="next">
+								<span class="carousel-control-next-icon" aria-hidden="true"></span>
+								<span class="sr-only">Next</span>
+							</a>
+						</div>
 					</div>
-					<div class="sessionchk">
-						<button type="submit" id="btn_update">수정</button>
-						<button type="submit" id="btn_delete">삭제</button>
+					<div>
+					 <span class="starR on"></span>
+						${vo.score }(${vo.replies })
 					</div>
-					<!-- 삭제시, 하우스번호, memid전송할것 -->
-					<div class="memNo" id="${vo.memNo }">${vo.memNo }</div>
-					<input class="imgSource" type="hidden" value="${vo.image }" />
-					<br>
+					<div >
+						${vo.type }
+						&middot; 
+						${vo.scope }
+						&middot; 
+					</div>
+					<div>
+						<h5 class="">${vo.location }</h5>
+					</div>
+					<div>
+						<h5 class="">${vo.title }</h5>
+					</div>
+					<div class="card-footer row">
+					
+						footer
+					</div>
 				</div>
-				<hr>
-			</div>
-		</c:forEach>
-	</div>
-	<div class="col-md-5 border">
-	<div id="map"></div>
-	</div>
-	</div>
-
+			</c:forEach>
+		</div>
+		<!-- end cardgroup -->
+	</c:if>
 	
-	<hr>
 	<div>
 		<ul class="pager">
 			<c:if test="${pageMaker.hasPrev }">
@@ -103,18 +126,52 @@
 
 	<%@ include file="../footer.jspf"%>
 	<script type="text/javascript">
-		$(document)
-				.ready(
-						function() {
+		$(document).ready(function() {
+							$('.hostItem').each(function(index, element){
+								console.log('index : ' + index + ' element : ' + element);
+								var imgSource = $(element).children('#imgSource').val();
+								console.log('imgsource : '+ imgSource);
+								
+								var imgSplit = imgSource.split(',');
+								imgSplit.splice(imgSplit.length-1,imgSplit.length-1); //마지막 요소 삭제
+								console.log(' imgSplit 개수 : ' + imgSplit.length);
+								
+								var list='';	
+								$.each(imgSplit, function(index2,element2){
+										console.log('imgSplit[' +index2 + "] : " + element2);
+											if(index2==0){
+												list +=  '<div class="carousel-item active">'
+											}else{
+												list +=  '<div class="carousel-item">'
+											}
+										list += '<img class="img-fluid d-block w-100"'
+											 	+ 'src="/homeshare/house/display/' + element2 + '"'
+												+ 'alt="'
+												+ index2
+												+ 'slide">'
+												+ '</div>';
+									
+								}); //end imgsplit each
+									$(element).find('#carousel-inner').append(list);
+								console.log(list);
+							});
 							
-							console.log('hello');
-							 // 유틸리티 영역
-	                        var utilities = $('#utilities').val();
-	                        $.each(utilities.split(','), function(index, element)
-	                        {
-	                        	console.log('util element ' + element);
-	                                $('#utilDiv').append('<div class ="row col-md-12 border">' + element + '</div>');
-	                        }); //end each
+							//카드 클릭시 디테일 
+							$('.hostItem').click(function(){
+								var houseNo = $(this).children('.houseNo').val();
+								console.log('houseNo : ' + houseNo);
+								var frm = $('#pagingForm');
+								frm.attr('action','/homeshare/house/house-detail');
+								frm.attr('method', 'get');
+								frm.find('[name="houseNo"]').val(houseNo);
+								frm.submit();
+								
+							});//
+							
+							
+							
+							
+						
 							
 							
 
@@ -150,115 +207,7 @@
 								 marker.setMap(map);
 							});
 							
-							
-							
-							console.log('home__slider col-md-5 : ' + $('.home__slider').width());
-							//업데이트시 동작설정
-							$('#btn_delete')
-									.click(
-											function() {
-												var frm = $('#pagingForm');
-												frm
-														.attr('action',
-																'/homeshare/house/house-delete');
-												frm.attr('method', 'post');
-												frm.submit();
-											});
-							
-							
-							
-						/* 	$('.house_list_item_click').each(function(index,element){
-								console.log('element : ' + element + 'index : ' + index);
-								$(this).append('<input type="text" id="wgsX' + + '" value= ');
-							});//end each */
-							
-							
-							//클릭시 detail로 전송
-							$('.house_list_item_click')
-									.click(
-											function() {
-												//event.preventDefault();
-												var houseNo = this.id;
-												console.log(houseNo);
-												var frm = $('#pagingForm');
-												frm
-														.attr('action',
-																'/homeshare/house/house-detail');
-												frm.attr('method', 'get');
-												frm.find('[name="houseNo"]')
-														.val(houseNo);
-												frm.submit();
-											}); // end click()
 
-							$('.house_list_item')
-									.each(
-											function(index, element) {
-												$(element).find('ul').attr(
-														'id', index);
-
-												//세션 일치하는지 확인해서 수정/삭제버튼 보이기
-												var sessionMemNo = '${memberVO.memNo}';
-												var itemsMemNo = $(element)
-														.find('.memNo').attr(
-																'id');
-												console.log('sessionmemNo : '
-														+ sessionMemNo);
-												console.log('items memNo : '
-														+ itemsMemNo);
-
-												if (itemsMemNo === sessionMemNo) {
-													console
-															.log('세션No itemsno 일치');
-													$('.sessionchk').show();
-												} else {
-													$('.sessionchk').hide();
-												}
-												//이미지 출력기능
-												var imgSource = $(this)
-														.children('input')
-														.val();
-												if(imgSource==='' ||imgSource===null){
-													console.log('imgSource is null ');
-													list += '<li><img width="100" height="100" src="/homeshare/house/display"></li>';
-												}else{
-
-												var imgsplit = imgSource
-														.split(',');
-												console.log('imgsplit  : ' +  imgsplit.value);
-												var list = '';
-												var width = $('.home__slider').width();
-												var height = $('.home__slider').height();
-												console.log('width : ' + width + ' height : ' + height);
-												imgsplit.forEach(function(index) {
-															if (imgsplit[imgsplit.length - 1] != index) {
-																console
-																		.log("index : "
-																				+ index);
-																list += '<li><img width="'
-																+	width
-																+'" height="'
-																+ height
-																+ '" src="/homeshare/house/display/'
-																		+ index
-																		+ '"></li>';
-															}
-														});
-												} //end else
-												console.log('list : ' + list);
-												$(element).find('ul').html(list);
-											});
-
-							//bxslider	
-							$('.bxslider').bxSlider({
-								auto : true,
-								speed : 5000,
-								pause : 4000,
-								mode : 'fade',
-								slideWidth  : $('.home__slider').width(),
-								slideHeight : $('.home__slider').height(),
-								autoControls : true,
-								pager : true,
-							});
 
 							// 클릭한 a태그의 정보를 가져오는 코드
 							$('.pager li a').click(function() {
