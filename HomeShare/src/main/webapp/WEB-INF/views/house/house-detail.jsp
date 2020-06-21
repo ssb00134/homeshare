@@ -389,6 +389,7 @@
 												var price = $('#price');
 												var bookHostId = $('#hostId')
 														.val();
+												var bookGuestId = '${memId}';
 
 												//제약조건 자기자신 예약 불가
 												if (bookHostId === '${memId}') {
@@ -432,7 +433,8 @@
 													'hostCheck' : hostCheck,
 													'bookMem' : bookMem,
 													'totalPrice' : totalprice,
-													'bookHostId' : bookHostId
+													'bookHostId' : bookHostId,
+													'bookGuestId' : bookGuestId
 
 												};
 												$.each(obj, function(index,
@@ -548,6 +550,11 @@
 																						+ checkoutdate);
 
 																		//선택불가 리스트를 리턴하는 함수
+																		var dateDiffer = Math.floor(new Date(this.checkin
+																				.split(' ')[0]).getTime() - new Date().getTime() ) / (1000*3600*24);
+																		
+																		if(dateDiffer > 0){
+																			
 																		var getDaysArray = function(
 																				start,
 																				end) {
@@ -565,7 +572,7 @@
 																			return arr;
 																		};
 
-																		;
+																		
 																		disabledDays
 																				.push(getDaysArray(
 																						new Date(
@@ -590,6 +597,10 @@
 																						+ split.length);
 																		console
 																				.log(split.length);
+																		
+																		
+																		
+																		}//end datediffer >v new date
 
 																	}); // end each
 
