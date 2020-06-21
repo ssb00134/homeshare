@@ -73,13 +73,11 @@
 							<c:forEach var="vo" items="${bookListPaging }">
 								<tr class="bookItem text">
 									<td>${vo.bookNo}</td>
-									<td id="checkin">${vo.checkin.split(" ")[0]}</td>
-									<td id="checkout">${vo.checkout.split(" ")[0]}</td>
+									<td class="checkin">${vo.checkin.split(" ")[0]}</td>
+									<td class="checkout">${vo.checkout.split(" ")[0]}</td>
 									<td>${vo.bookMem}</td>
 									<td>${vo.totalPrice}</td>
-									<td>
-									<c:if test="${vo.hostCheck == 1}">수락</c:if>
-									<c:if test="${vo.hostCheck == 0}">거절</c:if>
+									<td class="cancleAble">
 									</td>
 								</tr>
 							</c:forEach>
@@ -197,9 +195,7 @@
 						
 						var list='';
 						$(jsonData).each(function() {
-							var dateDiffer = new Date(this.checkout.split(' ')[0]).getDate()
-                        	- new Date(this.checkin.split(' ')[0] ).getDate();
-                        	console.log('dateDiffer : ' +dateDiffer);
+							
                         	
                         	if(this.hostCheck == 0){ // checkin이 0일때  미수락상태일때 실행
                         		list+= '<tr>'
@@ -243,8 +239,8 @@
 			
 			//TODO : 날짜 지나면 회색표시
 	/* 		$('#bookItem').each(function(){
-				var checkin = $(this).children('#checkin').html();
-				var checkout = $(this).children('#checkout').html();
+				var checkin = $(this).children('.checkin').html();
+				var checkout = $(this).children('.checkout').html();
 				
 				
 				console.log('checkout : ' + checkout);
@@ -256,15 +252,25 @@
 			function disableAllTheseDays(date) {
 				var disableStrings =''; //예약불가 날짜를 담을 배열 선언
 				
+				
+				
 				$('.bookItem').each(function(index,element){
 					console.log('index ' + index + ' element : ' + element);
-					var checkin = $(element).children('#checkin').html();
-					var checkout = $(element).children('#checkout').html();
-					var checkinDate = new Date(checkin);
-					var checkoutDate = new Date(checkout);
-					console.log('checkoutDate :' + checkoutDate);
+					var checkin = $(element).children('.checkin').html();
 					
-					disableStrings += getDaysArray(checkinDate,checkoutDate);
+					
+					var dateDiffer = Math.floor(new Date(checkin).getTime() - new Date().getTime() ) / (1000*3600*24);
+					if(dateDiffer>0){
+						var checkout = $(element).children('.checkout').html();
+						var checkinDate = new Date(checkin);
+						var checkoutDate = new Date(checkout);
+						console.log('checkoutDate :' + checkoutDate);
+						
+						disableStrings += getDaysArray(checkinDate,checkoutDate);	
+						
+					}
+					
+					
 					
 				});
 				
@@ -362,14 +368,33 @@
 			
 			
 			
-			var checkin1 =  $('#checkin');
+			var checkin1 =  $('.checkin');
 			console.log('checkin : ' + checkin1.html());
 			
 			$('.bookItem').each(function(index, element){
-				var checkin1 =  $('#checkin');
+				var checkin1 =  $('.checkin');
 				console.log('index : ' + index + ' element : ' + element);
 				console.log('checkin : ' + element);
 			});
+			
+			
+			//예약 disable 처리
+			$('.cancleAble').each(function(index, element){
+				var checkin = $(element).siblings('.checkin').html();
+				console.log(' cancleAble checkin : ' + checkin);
+				
+				
+			
+				
+				var dateDiffer = Math.floor(new Date(checkin).getTime() - new Date().getTime() ) / (1000*3600*24);
+				
+				
+            	console.log('dateDiffer : ' +dateDiffer);
+            	$(this).html(dateDiffer);
+            	
+			});//end cancleAble each
+			
+			
 			
 			
 			

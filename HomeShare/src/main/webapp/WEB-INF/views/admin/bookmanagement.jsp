@@ -11,23 +11,10 @@
 	<form class="form-inline form-fluid" id="multySearchForm"
 		target="iframe1" action="/homeshare/admin/bookmanagement_result">
 		<div class="form-group row">
-			<select class="form-control" id="option" name="option">
-				<option>선택하세요</option>
-				<option value="bookMemNo">회원번호</option>
-				<option value="bookHouseNo">숙소번호</option>
-			</select>
-			<input type="text" id="optionValue" name="optionValue">
+			<label for="hostId">호스트아이디</label>
+			<input type="text" id="hostId" name="hostId">
 		</div>
-		<div class="form-group">
-			<label for="bookableDateBegin">예약시작일</label>
-			<input type="date" class="form-control" id="checkIn"
-				name="checkIn">
-		</div>
-		<div class="form-group">
-			<label for="bookableDateEnd">예약종료일</label>
-			<input type="date" class="form-control" id="checkOut"
-				name="checkOut">
-		</div>
+		
 		<div class="form-group">
 			<select class="form-control" id="hostCheck" name="hostCheck">
 				<option>호스트승인여부</option>

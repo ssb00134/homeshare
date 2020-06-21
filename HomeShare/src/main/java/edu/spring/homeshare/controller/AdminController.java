@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -204,6 +205,14 @@ public class AdminController {
 			
 		}
 	}
+	
+	
+	
+	
+	
+	
+	
+	
 	//bookmanagement
 	/*------------------------------------------------------*/
 	@RequestMapping(value = "/bookmanagement")
@@ -212,56 +221,13 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "/bookmanagement_result")
-	public void bookManagementResult(Model model, Integer page, Integer prePage, HttpServletRequest req) {
-		logger.info("bookablemenagement Result 실행 " );
-		
-		/*페이징 처리*/
-		PageCriteria c = new PageCriteria();
-		logger.info("page : " + page);
+	public void bookManagementResult(HttpServletRequest request, Model model, Integer page, Integer prePage
+			,String hostId) {
+		HttpSession session = request.getSession();
 
-		if (page != null) {
-			c.setPage(page);
-		}
-		if (prePage != null) {
-			c.setNumsPerPage(prePage);
-		}
-		
-		/* 파라미터 지정*/
-		String option = req.getParameter("option");
-		String optionValue = req.getParameter("optionValue");
-		String checkIn = req.getParameter("checkIn");
-		String checkOut = req.getParameter("checkOut");
-		String hostCheck = req.getParameter("hostCheck");
-		logger.info("option"  + option);
-		logger.info("optionValue : " + optionValue );
-		logger.info("checkIn : " + checkIn );
-		logger.info("checkOut : " + checkOut );
-		/* hash맵에 정보 넣기 */
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("option", option);
-		map.put("optionValue", optionValue);
-		map.put("checkIn",checkIn);
-		map.put("checkOut", checkOut);
-		map.put("hostCheck", hostCheck);//승인여부
-		logger.info("map : " + map.toString());
-		
-		List<BookVO> list = bookService.readOptionAndDate(map);
-		logger.info("list 정보 : " + list);
-	}
-	//report 메핑
-	/*--------------------------------------------------------------*/
-	@RequestMapping(value="reportmanagement")
-	public void reportManage() {
-		logger.info("report 실행 " );
-	}
-	@RequestMapping(value="reportmanagement_result")
-	public void reportManageResult(Model model,Integer page, Integer prePage) {
-		logger.info("report result 실행 " );
-		
 		/* 페이징 처리 */
 		PageCriteria c = new PageCriteria();
 		logger.info("page : " + page);
-
 		if (page != null) {
 			c.setPage(page);
 		}
@@ -269,20 +235,39 @@ public class AdminController {
 			c.setNumsPerPage(prePage);
 		}
 		
-		List<ReportVO> reportList = reportService.read();
-		logger.info("reportList : " + reportList);
-		model.addAttribute("reportList", reportList);
+		
+		
+		// 세션 memno 가져오기
+		
+		logger.info("hostId 입력받음 : " + hostId);
+		
+		/* hash맵에 정보 넣기 */
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("bookHostId", hostId);
+		map.put("start",c.getStart());
+		map.put("end",c.getEnd());
+		
+		logger.info("maptostring : " + map.toString());
+		List<BookVO> bookListPaging = bookService.readByHostId(map);
+		logger.info("bookListPaging" + bookListPaging.toString());
+		model.addAttribute("bookListPaging",bookListPaging);
+		
+		
 		
 		PageMaker maker = new PageMaker();
 		maker.setCriteria(c);
-		maker.setTotalCount(houseService.getToTotalNumsOfRecords());
+		maker.setTotalCount(bookService.getCountByHostId(hostId));
 		maker.setPageData();
 		model.addAttribute("pageMaker", maker);
+		
+		
 		
 		logger.info("전체 하우스 수 : " + maker.getTotalCount());
 		logger.info("현재 선택된 페이지 : " + c.getPage());
 		logger.info("한 페이지 당 게시글 수 : " + c.getNumsPerPage());
 		logger.info("시작 페이지 링크 번호(startPageNO) : " + maker.getStartPageNo());
 		logger.info("끝 페이지 링크 번호(endPageNo) : " + maker.getEndPageNo());
+		
+	
 	}
 }
