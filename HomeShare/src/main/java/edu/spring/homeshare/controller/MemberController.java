@@ -9,13 +9,18 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
+import edu.spring.homeshare.domain.BookVO;
 import edu.spring.homeshare.domain.MemberVO;
 import edu.spring.homeshare.service.MemberService;
 
@@ -128,6 +133,21 @@ public class MemberController {
 	public int idChk(MemberVO vo) throws Exception {
 		int result = memberService.idChk(vo);
 		return result;
+	}
+	
+	@RequestMapping(value="/update",
+			method = RequestMethod.POST)
+	public void update(MemberVO vo, Model model) {
+		
+		logger.info("전송된 vo : " + vo);
+		int result = memberService.update(vo);
+		if(result==1) {
+			logger.info("업데이트성공");
+		}else {
+			logger.info("업데이트실패");
+		}
+		model.addAttribute("result", result);
+		
 	}
 }
 

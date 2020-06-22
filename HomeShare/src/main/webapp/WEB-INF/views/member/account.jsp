@@ -11,6 +11,10 @@
 <body>
 	<%@ include file="../navheader.jspf"%>
 	<form action="/homeshare/member/update" method="post">
+	<input type="hidden" name="memNo" value="${vo.memNo }">
+	<input type="hidden" name="houseCount" value="${vo.houseCount }">
+	<input type="hidden" name="password" value="${vo.password }">
+	
 	<h1>개인정보</h1>
 	<div class="form-group">
 		<label for="memId" class="col-md-2 control-label">Id</label>
@@ -18,6 +22,8 @@
 			value=${vo.memId }>
 		<input type="button" id="btnMemId" class="btn  btn-danger" value="아이디 변경하기">
 	</div>
+	
+	
 
 	<div class="form-group">
 		<label for="memName" class="col-md-2 control-label">Name</label>
@@ -40,10 +46,10 @@
 
 	<div class="form-group">
 				<div class="form-check form-check-inline">
-				  <input class="form-check-input" type="checkbox" id="gender" value="male" name="gender"
+				  <input class="form-check-input" type="radio" id="gender" value="male" name="gender"
 				  required="required">
 				  <label class="form-check-label" for="inlineCheckbox1">male</label>
-				  <input class="form-check-input" type="checkbox" id="gender" value="femail" name="gender"
+				  <input class="form-check-input" type="radio" id="gender" value="femail" name="gender"
 				  required="required">
 				  <label class="form-check-label" for="inlineCheckbox1">female</label>
 				</div>

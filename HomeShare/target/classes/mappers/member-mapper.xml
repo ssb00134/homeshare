@@ -28,8 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		${phone}=#{phone},
 		${memName}=#{memName},
 		${email}=#{email},
-		${gender}=#{gender},
-		${phoneReleaseToHost}=#{phoneReleaseToHost}
+		${gender}=#{gender}
 		where ${memNo} = #{memNo}
 	
 	</update>

@@ -67,6 +67,11 @@
 	<beans:bean id="BookInterceptor"
 		class="edu.spring.homeshare.interceptor.BookInterceptor">
 	</beans:bean>
+	
+		<!-- memberUpdate -->
+	<beans:bean id="MemberUpdateInterceptor"
+		class="edu.spring.homeshare.interceptor.MemberUpdateInterceptor">
+	</beans:bean>
 
 
 
@@ -131,6 +136,14 @@
 		<interceptor>
 			<mapping path="/book/**" />
 			<beans:ref bean="BookInterceptor" />
+		</interceptor>
+	</interceptors>
+	
+		<!-- memberUpdate -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/member/update" />
+			<beans:ref bean="MemberUpdateInterceptor" />
 		</interceptor>
 	</interceptors>
 
