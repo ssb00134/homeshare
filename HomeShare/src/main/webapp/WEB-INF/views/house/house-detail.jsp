@@ -407,7 +407,7 @@
 
 												//날짜차이
 												var datediffer = Math
-														.ceil((new Date(
+														.abs((new Date(
 																checkout)
 																.getTime() - new Date(
 																checkin)
@@ -432,7 +432,7 @@
 													preventDefault;
 												}
 												var obj = {
-													'houseNo' : '${houseVO.houseNo}',
+													
 													'bookNo' : bookNo,
 													'bookMemNo' : sessionMemNo,
 													'bookHouseNo' : bookHouseNo,
@@ -443,8 +443,7 @@
 													'totalPrice' : totalprice,
 													'bookHostId' : bookHostId,
 													'bookGuestId' : bookGuestId,
-													'bookGuestPhone' : bookGuestPhone,
-													'bookHostPhone' : '비공개'
+													
 
 												};
 												$.each(obj, function(index,

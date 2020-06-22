@@ -11,8 +11,7 @@ public class BookVO {
 	private int totalPrice;
 	private String bookHostId;
 	private String bookGuestId;
-	private String bookGuestPhone;
-	private String bookHostPhone;
+	
 	
 	public BookVO() {}
 	
@@ -29,7 +28,7 @@ public class BookVO {
 
 
 
-	public BookVO(int bookNo, int bookMemNo, int bookHouseNo, String checkin, String checkout, int hostCheck, int bookMem, int totalPrice, String bookHostId, String bookGuestId, String bookGuestPhone, String bookHostPhone) {
+	public BookVO(int bookNo, int bookMemNo, int bookHouseNo, String checkin, String checkout, int hostCheck, int bookMem, int totalPrice, String bookHostId, String bookGuestId) {
 		super();
 		this.bookNo = bookNo;
 		this.bookMemNo = bookMemNo;
@@ -41,8 +40,7 @@ public class BookVO {
 		this.totalPrice = totalPrice;
 		this.bookHostId = bookHostId;
 		this.bookGuestId = bookGuestId;
-		this.bookGuestPhone = bookGuestPhone;
-		this.bookHostPhone = bookHostPhone;
+		
 	}
 
 
@@ -165,59 +163,6 @@ public class BookVO {
 		this.bookGuestId = bookGuestId;
 	}
 
-	
-	
-	
-
-
-
-
-
-	public String getBookHostPhone() {
-		return bookHostPhone;
-	}
-
-
-
-
-	public void setBookHostPhone(String bookHostPhone) {
-		this.bookHostPhone = bookHostPhone;
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	public String getBookGuestPhone() {
-		return bookGuestPhone;
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	public void setBookGuestPhone(String bookGuestPhone) {
-		this.bookGuestPhone = bookGuestPhone;
-	}
-
 
 
 
@@ -233,8 +178,35 @@ public class BookVO {
 
 	@Override
 	public String toString() {
-		return "BookVO [bookNo=" + bookNo + ", bookMemNo=" + bookMemNo + ", bookHouseNo=" + bookHouseNo + ", checkin=" + checkin + ", checkout=" + checkout + ", hostCheck=" + hostCheck + ", bookMem=" + bookMem + ", totalPrice=" + totalPrice + ", bookHostId=" + bookHostId + ", bookGuestId=" + bookGuestId + ", bookGuestPhone=" + bookGuestPhone + ", bookHostPhone=" + bookHostPhone + "]";
+		return "BookVO [bookNo=" + bookNo + ", bookMemNo=" + bookMemNo + ", bookHouseNo=" + bookHouseNo + ", checkin=" + checkin + ", checkout=" + checkout + ", hostCheck=" + hostCheck + ", bookMem=" + bookMem + ", totalPrice=" + totalPrice + ", bookHostId=" + bookHostId + ", bookGuestId=" + bookGuestId + "]";
 	}
+
+	
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

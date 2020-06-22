@@ -18,9 +18,12 @@
 			<thead>
 				<tr>
 					<th>신고번호</th>
-					<th>신고된숙소번호</th>
 					<th>신고된회원번호</th>
+					<th>신고된숙소번호</th>
 					<th>신고내용</th>
+					<th>신고된호스트번호</th>
+					<th>신고된호스트아이디</th>
+					<td>상태</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -84,7 +87,10 @@
 	
 	<script type="text/javascript">
 		$(document).ready(function() {
+			
 			getReportByReportHostId();
+			
+			
 			
 			function getReportByReportHostId(){
 				var reportHostId = $('#reportHostId').val();
@@ -102,9 +108,36 @@
 						     + '<td>' + this.reportHouseNo + '</td>'
 						     + '<td>' + this.reason + '</td>'
 						     + '<td>' + this.reportedHostNo + '</td>'
-						     + '<td>' + this.reportHostId + '</td>';
+						     + '<td>' + this.reportHostId + '</td>'
+						     + '<td><button class="btnDelete btn">신고 삭제하기</button></td>'
 					});//end each
-					console.log(list);
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+				
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
 					$('#reportAjax').html(list);
 				});//end getjson
 			} // end getReportByReportHostId
@@ -114,17 +147,8 @@
 			
 			
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			$('.btnDelete').on('click',function(){
+				console.log('btnDelete click');
 				var frm = $('#frm');
 				var reportNo = $(this).parent().siblings('.reportNo').html();
 				console.log(reportNo);
@@ -154,6 +178,16 @@
 				frm.find('[name="reportNo"]').val(reportNo); // name="page"를 찾아서 value=targetPage를 저장
 				frm.submit(); // form 데이터 전송   */
 			});//end delete click
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			
