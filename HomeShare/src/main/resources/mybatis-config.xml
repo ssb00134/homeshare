@@ -90,7 +90,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<property name="totalPrice" value="totalPrice" />
 		<property name="bookHostId" value="bookHostId" />
 		<property name="bookGuestId" value="bookGuestId" />
-
+		<property name="bookHostPhone" value="bookHostPhone" />
+		<property name="bookGuestPhone" value="bookGuestPhone" />
 
 
 	</properties>

@@ -125,7 +125,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(0,
 		#{bookMemNo},#{bookHouseNo}, #{checkin},
 		#{checkout} , #{hostCheck},
-		#{bookMem}, #{totalPrice}, #{bookHostId}, #{bookGuestId})
+		#{bookMem}, #{totalPrice}, #{bookHostId}, #{bookGuestId}
+		#{bookGuestPhone},#{bookHostPhone} )
 	</insert>
 
 	<update id="update">

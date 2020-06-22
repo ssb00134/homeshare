@@ -14,6 +14,25 @@
 .ui-datepicker select.ui-datepicker-month{ width:30%; font-size: 11px; }
 .ui-datepicker select.ui-datepicker-year{ width:40%; font-size: 11px; }
 
+
+
+.starR{
+  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
+  background-size: auto 100%;
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  text-indent: -9999px;
+  cursor: pointer;
+}
+.starR.on{background-position:0 0;}
+
+
+
+
+
+
+
 </style>
 
 
@@ -173,6 +192,17 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
+			
+			
+			//리플 별점주기
+			$('.starRev span').click(function(){
+				  $(this).parent().children('span').removeClass('on');
+				  $(this).addClass('on').prevAll('span').addClass('on');
+				  return false;
+				});
+			
+			
+			
 			
 			getBookByHostId();
 			

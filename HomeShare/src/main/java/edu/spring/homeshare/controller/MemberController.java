@@ -104,7 +104,7 @@ public class MemberController {
 	
 	
 	/* 계정 메핑*/
-	//test
+	//testtest
 	@RequestMapping(value="/account")
 	public void account(String url, Model model, HttpServletRequest req) {
 		logger.info("account 실행");
