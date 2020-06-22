@@ -90,7 +90,7 @@
 		</div>
 </div>
 		<div class="col-md-4 border">
-			<div class="container">
+			<div class="container card">
 				<div class="sidebar-nav">
 					<h4>요금을 확인하려면 날짜를 입력해 주세요</h4>
 					<button type="button" class="btn btn-default" data-toggle="modal" id="btnDate"

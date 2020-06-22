@@ -216,7 +216,7 @@
 																	console
 																			.log(this.memId == '${memId}');
 																	
-																	list +='<div class="card col-md-6">'
+																	list +='<div class="reply_item card col-md-6">'
 																		
 																		+ '<input type="hidden" id="rno" readonly value="' + this.rno + '" />'
 																		+ '<input type="hidden" id="houseno" readonly value="${houseVO.houseNo}" />'
@@ -226,14 +226,37 @@
 																		+ '<p class="card-text"><small class="text-muted">' + date.getFullYear() + '년'
 																		+ date.getMonth()
 																		+ '월 </small></p>'
-																		+ '<div class="card-body">' 
+																		+ '<div class="row">'
+																		+ '<div class="content card-body col-md-6">' 
 																		+this.content
+																		+'</div>'
+																		+ '<textArea class="contentUpdate card-body col-md-6"  style=display:none>' 
+																		+ this.content
+																		+'</textArea>'
+																		+ '<div class="card-body col-md-6">' 
+																		
+																		+ '<div class="row">'
+																		+ '<label class="col-md-6">체크인만족도</label>'
+																		+ '<input class="col-md-6" type="text" name="checkinScore" value="' 
+																		+ +this.checkinScore
+																		+'" readonly>'
+																		+'</div>'
+																		+ '<div class="row">'
+																		+ '<label class="col-md-6">청결도</label>'
+																		+ '<input class="col-md-6" type="text" name="cleanScore" value="' 
+																		+ +this.cleanScore
+																		+'" readonly>'
+																		+'</div>'
+																		
+																		
+																		+'</div>'
+																		
 																		+'</div>';
 																		if (this.memId === '${memId}') {
 																			list += '<div class="reply_item card-footer btn-group">' 
-																		+ '<button class="btn_update" type="button">수정</button>'
+																		+ '<button class="btn_felxible  btn" type="button">수정</button>'
 																		+ '&nbsp;'
-																		+ '<button class="btn_delete" type="button">삭제</button>'
+																		+ '<button class="btn_delete btn" type="button">삭제</button>'
 																		+'</div>'
 																		+'</div>';
 																		}else{
@@ -243,8 +266,13 @@
 																		
 																});//end each
 												$('#replies').html(list);
-												$('#countReply').html(
-														replyCount);
+												$('#countReply').html(replyCount);
+												
+									
+												
+												
+												
+												
 												$('#showReply')
 														.click(
 																function() {
@@ -266,7 +294,24 @@
 											}//end callback
 									);// end getJSON
 						}//end getAllReplies
-
+						
+						
+						$('#replies').on('click','.reply_item .btn_felxible',function() {
+							console.log('filexible click');
+							$(this).parents('.reply_item').find('input').removeAttr("readonly");
+							$(this).parents('.reply_item').find('.content').hide();
+							$(this).parents('.reply_item').find('.contentUpdate').show();
+							
+						});//end click
+						
+						
+						
+						
+						
+						
+						
+						
+						
 						// 수정 버튼 클릭하면 선택된 댓글 수정
 						$('#replies').on('click','.reply_item .btn_update',function() { // click는 메소드 기능. function은 눌렀을 때 뭘 할것인가
 											// console.log(this);
