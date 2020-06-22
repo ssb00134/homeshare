@@ -11,6 +11,11 @@
 </head>
 <body>
 
+
+<div class="row">
+<div class="col-md-8">
+
+
 	<form id="adminCrmForm" target="iframe1"
 		action="/homeshare/admin/crm_result">
 
@@ -27,12 +32,6 @@
 						<input type="text" class="form-control" id="searchbyId" name="memId" value="">
 					</div>
 
-					<div class="form-group col-md-1 border">
-						<label for="searchbyMemNo">회원번호</label>
-					</div>
-					<div class="form-group col-md-2">
-						<input type="text" class="form-control" id="searchbyMemNo" name="memNo" value="">
-					</div>
 					
 					<div class="col-lg-3 col-md-3 col-sm-12 p-0">
 						<button type="submit" id="btnCrmSearch"
@@ -45,6 +44,10 @@
 		</div>
 	</form>
 	
+	</div>
+	
+	
+	<div class="col-md-4">
 	
 	
 	<form id="adminCrmForm" target="iframe1"
@@ -52,12 +55,23 @@
 	<input type="hidden" name="selectall" value="true">
 	<button type="submit" id="btnCrmSearchAll">전체검색</button>
 	</form>
+	
+	</div>
+
+
+
+</div>
+
 
 
 	<div class="embed-responsive embed-responsive-16by9">
 		<iframe class="embed-responsive-item" name="iframe1" id="iframe1"
 			src="/homeshare/admin/crm_result"></iframe>
 	</div>
+
+
+
+
 
 
 	<script type="text/javascript">

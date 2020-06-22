@@ -119,7 +119,7 @@
 	   	  var frm = $('#pagingForm'); // form의 정보를 frm에 저장
 	  	    frm.find('[name="page"]').val(targetPage); // name="page"를 찾아서 value=targetPage를 저장
 	  	    frm.find('#orderby').val($('#orderby'));// orderby에 crm orderby 추가
-	  	    frm.attr('action', 'crm_result'); // form에 action 속성 추가
+	  	    frm.attr('action', '/homeshare/admin/crm_result'); // form에 action 속성 추가
 	  	    frm.attr('method', 'get'); // form에 method 속성 추가
 	  	    frm.submit(); // form 데이터 전송 
 	    }); //end paging
