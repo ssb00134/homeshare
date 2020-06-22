@@ -104,7 +104,7 @@ public class MemberController {
 	
 	
 	/* 계정 메핑*/
-	@RequestMapping(value="/account",method = RequestMethod.POST)
+	@RequestMapping(value="/account")
 	public void account(String url, Model model, HttpServletRequest req) {
 		logger.info("account 실행");
 		logger.info("url : " + url); // 이전경로(로그인을 위해 왔던)의 값 출력

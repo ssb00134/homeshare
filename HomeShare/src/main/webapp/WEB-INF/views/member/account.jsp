@@ -10,62 +10,57 @@
 </head>
 <body>
 	<%@ include file="../navheader.jspf"%>
-	<form action="/homeshare/member/update" method="post"></form>
+	<form action="/homeshare/member/update" method="post">
 	<h1>개인정보</h1>
 	<div class="form-group">
 		<label for="memId" class="col-md-2 control-label">Id</label>
-		<input type="text" readonly="readonly" id="memId" name="memId"
+		<input type="text" readonly id="memId" name="memId"
 			value=${vo.memId }>
-		<input type="button" id="btnMemId" value="아이디 변경하기">
+		<input type="button" id="btnMemId" class="btn  btn-danger" value="아이디 변경하기">
 	</div>
 
 	<div class="form-group">
 		<label for="memName" class="col-md-2 control-label">Name</label>
-		<input type="text" readonly="readonly" id="memName" name="memName"
+		<input type="text" readonly id="memName" name="memName"
 			value=${vo.memName }>
-		<input type="button" id="btnMemName" value="이름 변경하기">
+		<input type="button" id="btnMemName" class="btn  btn-danger" value="이름 변경하기">
 	</div>
 	<div class="form-group">
-		<label for="account" class="col-md-2 control-label">account</label>
-		<input type="text" readonly="readonly" id="account" name="account"
-			value=${vo.memName }>
-		<input type="button" id="btnAccount" value="계좌번호 변경하기">
+		<label for="account" class="col-md-2 control-label">phone</label>
+		<input type="text" readonly id="phone" name="phone"
+			value=${vo.phone }>
+		<input type="button" id="btnAccount" class="btn btn-danger" value="전화번호 변경하기">
 	</div>
 	<div class="form-group">
 		<label for="email" class="col-md-2 control-label">email</label>
 		<input type="text" readonly="readonly" id="email" name="email"
 			value=${vo.memName }>
-		<input type="button" id="btnEmail" value="이메일 변경하기">
+		<input type="button" id="btnEmail" class="btn  btn-danger" value="이메일 변경하기">
 	</div>
 
 	<div class="form-group">
-		<label class="form-check-label" for="phoneReleaseToHost"> 내
-			전화번호를 호스트에게 공개하시겠습니까? </label>
-		<div class="form-check">
-			<input class="form-check-input" type="radio"
-				name="phoneReleaseToHost" id="phoneReleaseToHost" value="true"
-				<c:if test="${vo.phoneReleaseToHost eq 'yes'}">checked</c:if>>
->
-			<label class="form-check-label" for="exampleRadios1"> 동의함 </label>
+				<div class="form-check form-check-inline">
+				  <input class="form-check-input" type="checkbox" id="gender" value="male" name="gender"
+				  required="required">
+				  <label class="form-check-label" for="inlineCheckbox1">male</label>
+				  <input class="form-check-input" type="checkbox" id="gender" value="femail" name="gender"
+				  required="required">
+				  <label class="form-check-label" for="inlineCheckbox1">female</label>
+				</div>
 		</div>
-		<div class="form-check">
-			<input class="form-check-input" type="radio"
-				name="phoneReleaseToHost" id="phoneReleaseToHost" value="flase"
-				<c:if test="${vo.phoneReleaseToHost eq 'no'}">checked</c:if>>
-				>
-			<label class="form-check-label" for="exampleRadios1"> 동의하지 않음
-			</label>
-		</div>
-	</div>
-
-
+		<button class="btn" type="submit">정보 수정하기</button>
+</form>
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('#btnMemId').click(function() {
-				console.log('btnMemId 클릭');
-				$('#memId').removeAttr("readonly");
-			}); //end btnMemId click
+			
+			$('.btn-danger').click(function(){
+				console.log('btn click');
+				var input = $(this).siblings('input');
+				console.log(input);
+				input.attr('readonly',false);
+			});
+			
 		});//end document
 	</script>
 </body>

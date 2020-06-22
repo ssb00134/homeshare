@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<nav class="navbar navbar-transparent navbar-fixed-top fixed-top"
+<nav id="navbar" class="navbar navbar-transparent navbar-fixed-top fixed-top"
 		role="navigation">
 		<div class="container">
 			<!-- Brand and toggle get grouped for better mobile display -->
