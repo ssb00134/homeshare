@@ -33,7 +33,7 @@ public class ReportController {
 		logger.info("report-list 호출");
 		/* 페이징 처리 */
 		PageCriteria c = new PageCriteria();
-		c.setNumsPerPage(9); //9개씩 출력
+		
 		
 		logger.info("page : " + page);
 		if (page != null) {

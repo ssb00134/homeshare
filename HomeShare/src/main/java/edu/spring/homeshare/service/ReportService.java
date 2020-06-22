@@ -12,4 +12,7 @@ public interface ReportService {
 	List<ReportVO> read();
 	List<ReportVO> read(HashMap<String, Object> map);
 	int getCountByHouseNo(int houseNo);
+	
+	int getCountByHostId(String hostId);
+	List<ReportVO> readHostId(HashMap<String, Object> map);
 }

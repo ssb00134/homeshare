@@ -34,4 +34,14 @@ public class ReportServiceImple implements ReportService{
 	public int getCountByHouseNo(int houseNo) {
 		return reportDao.getCountByHouseNo(houseNo);
 	}
+	
+	@Override
+	public int getCountByHostId(String hostId) {
+		return reportDao.getCountByHostId(hostId);
+	}
+	
+	@Override
+	public List<ReportVO> readHostId(HashMap<String, Object> map) {
+		return reportDao.selectHostId(map);
+	}
 }

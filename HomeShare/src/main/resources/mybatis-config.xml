@@ -77,6 +77,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<property name="reportHouseNo" value="reportHouseNo" />
 		<property name="reason" value="reason" />
 		<property name="reportedHostNo" value="reportedHostNo" />
+		<property name="reportHostId" value="reportHostId" />
+		
 		
 		<!-- book 테이블 설정 -->
 		<property name="book" value="book" />

@@ -32,7 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		a.*
 		from (
 		select *
-		from ${reply} where ${reply}.${houseNo} = #{houseNo}
+		from ${reply} where ${reportHouseNo} = #{reportHouseNo}
 		) a
 		) b
 		where rn
@@ -44,8 +44,46 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT
 		COUNT(*)
 		FROM ${report}
-		where ${houseNo} = #{houseNo}
+		where ${reportHouseNo} = #{reportHouseNo}
 	</select>
+	
+	
+	
+	
+	<!-- hostid 페이징 -->
+	<select id="reportPagingHostId" resultType="reportVO">
+		select
+		*
+		from (
+		select rownum rn,
+		a.*
+		from (
+		select *
+		from ${report} 
+		where
+		 ${reportHostId} = #{reportHostId}
+	
+		) a
+		) b
+		where rn
+		between #{start} and #{end}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	<!-- select count report의 memno 구하기 -->
+	<select id="select_count_by_hostId" resultType="Integer">
+		SELECT
+		COUNT(*)
+		FROM ${report}
+		where ${reportHostId} = #{reportHostId}
+	</select>
+	
+	
 	
 	
 	

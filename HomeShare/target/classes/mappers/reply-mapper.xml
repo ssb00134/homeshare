@@ -64,6 +64,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	
+	
+	
+	
+	
+	
+	
 	<!-- 리플 후기 평균 구하기 -->
 	<select id="select_avg_score" resultType="double">
 		<!-- select TRUNC(avg(${replyScore}),2) from ${reply} where ${reply}.${houseNo} = #{houseNo} -->

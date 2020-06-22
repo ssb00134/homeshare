@@ -43,4 +43,14 @@ public class ReportDAOImple implements ReportDAO{
 		return sqlSession.selectOne(NAMESPACE +".select_count_by_houseNo", houseNo);
 
 	}
+	
+	@Override
+	public int getCountByHostId(String hostId) {
+		return sqlSession.selectOne(NAMESPACE + ".select_count_by_hostId", hostId);
+	}
+	@Override
+	public List<ReportVO> selectHostId(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(NAMESPACE +".reportPagingHostId", map);
+	}
 }

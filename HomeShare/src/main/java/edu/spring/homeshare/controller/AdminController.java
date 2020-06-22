@@ -402,7 +402,36 @@ logger.info("guestId 입력받음");
 			Model model, 
 			Integer page, 
 			Integer prePage,
-			HttpServletRequest req) {
-		logger.info("report 실행");
+			HttpServletRequest request,
+			ReportVO vo) {
+		
+		logger.info("reportresult 실행");
+		String reportHostId = vo.getReportHostId();
+		logger.info("reportHostId : " + reportHostId);
+		
+		/* 페이징 처리 */
+		PageCriteria c = new PageCriteria();
+		
+		
+		logger.info("page : " + page);
+		if (page != null) {
+			c.setPage(page);
+		}
+		if (prePage != null) {
+			c.setNumsPerPage(prePage);
+		}
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start",c.getStart());
+		map.put("end",c.getEnd());
+		map.put("reportHostId", reportHostId);
+		
+		List<ReportVO> reportList = reportService.readHostId(map);
+		logger.info("reportList : " + reportList.toString());
+		
+		
+		
+		
+		
 	}
 }

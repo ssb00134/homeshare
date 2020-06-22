@@ -179,7 +179,7 @@
 	<!-- Trigger/Open The Modal -->
 	<%@ include file="../report.jspf"%>
 
-	<div id="books"></div>
+	<div id="books" hidden="hidden"></div>
 
 	<%@ include file="../footer.jspf"%>
 	<script type="text/javascript">
