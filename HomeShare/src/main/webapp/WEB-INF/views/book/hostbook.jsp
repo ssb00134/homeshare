@@ -65,8 +65,9 @@
 	  <!-- Nav tabs -->
 	  <ul class="nav nav-tabs" role="tablist">
 	    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-	    <li role="presentation"><a href="#waitingBookArea" aria-controls="waitingBookArea" role="tab" data-toggle="tab"
-	    class="btn" id="waitingBook">대기중인예약</a></li>
+	    <li role="presentation">
+	    <a href="#waitingBookArea" aria-controls="waitingBookArea" role="tab" data-toggle="tab"
+	    class="btn" id="waitingBook"><small class="waitingBookCount badge badge-danger"></small>대기중인예약</a></li>
 	    <li role="presentation"><a class="btn" id="waitingBook">sddd</a></li>
 	
 	  </ul>
@@ -219,7 +220,7 @@
 								waitingBookCount++;
 							}
 						});
-						$('#waitingBook').append('<span class="badge badge-danger">' + waitingBookCount +'</span>');
+						$('.waitingBookCount').html(waitingBookCount);
 						
 						
 						
@@ -230,7 +231,7 @@
                         	
                         	if(this.hostCheck == 0){ // checkin이 0일때  미수락상태일때 실행
                         		list+= '<tr>'
-                        		+ '<td>'
+                        		+ '<td class="bookNo">'
                         		+ this.bookNo
                         		+ '</td>'
                         		+ '<td>'
@@ -251,10 +252,91 @@
                         		+ '<td>'
                         		+ this.totalPrice
                         		+ '</td>'
+                        		+ '<td class="btn-group">'
+                        		+ '<button class="btn_bookUpdate btn btn-success" id ="btn_bookUpdate" type="text">O</button>'
                         		
+                        		+ '<button class="btn_bookDelete btn btn-danger" type="text">X</button>'
+                        		+ '</td>'
                         		+'</tr>';
                         	}//end hostcheck 0 미수락 상태
                         	$('#waitBookAjax').html(list);
+                        	
+                        	
+                        	
+                        	
+                        	
+                        	
+                        	
+                        	
+                        	
+                        	
+                        	//book delete
+							$('.btn_bookDelete').on('click', function() {
+								event.preventDefault();
+								console.log('btn_bookDelete 클릭');
+								//var hostCheck = $(this).prev().val() ; // 이전 선택자 
+								var bookNo = $(this).parent().prevAll('.bookNo').html();
+								console.log('bookNo :'+ bookNo);
+								$.ajax({
+											type : 'delete',
+											url : '/homeshare/book/'
+													+ bookNo,
+											headers : {
+												'Content-Type' : 'application/json',
+												'X-HTTP-Method-Override' : 'DELETE'
+											},
+
+											success : function(
+													result) {
+												if (result == 'success') {
+													alert('삭제 성공');
+													getBookByHostId();//제귀가능 리프레쉬
+												} // end if
+											} // end success
+										}); // end ajax
+							});//end btn_bookdelete click
+                        	
+                        	
+							//book update
+							$('.btn_bookUpdate').on('click',function() {
+									event.preventDefault();
+									console.log('btn_bookUpdate 클릭');
+									//var hostCheck = $(this).prev().val() ; // 이전 선택자 
+									var bookNo = $(this).parent().prevAll('.bookNo').html();
+									console.log('bookNo :' + bookNo);
+									$.ajax({
+												type : 'put',
+												url : '/homeshare/book/'
+														+ bookNo,
+												headers : {
+													'Content-Type' : 'application/json',
+													'X-HTTP-Method-Override' : 'PUT'
+												},
+												data : JSON
+														.stringify({
+															'hostCheck' : 1
+														}),
+												success : function(
+														result) {
+													if (result == 'success') {
+														alert('수락 성공');
+														getBookByHostId();//제귀가능 리프레쉬
+													} // end if
+												} // end success
+											}); // end ajax
+								});//end btn_bookdelete click
+                        	
+                        	
+                        	
+                        	
+                        	
+                        	
+                        	
+                        	
+                        	
+                        	
+                        	
+                        	
                         	
 						});//end each;
 					}else{
