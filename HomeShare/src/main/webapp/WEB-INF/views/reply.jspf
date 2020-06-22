@@ -110,6 +110,8 @@
 	$(document)
 			.ready(
 					function() {
+						$('#showReply').toggle;
+						
 						
 						$('.starRev span').click(function(){
 							  $(this).parent().children('span').removeClass('on');
@@ -237,13 +239,13 @@
 																		
 																		+ '<div class="row">'
 																		+ '<label class="col-md-6">체크인만족도</label>'
-																		+ '<input class="col-md-6 checkinScore" type="text" name="checkinScore"  value="' 
+																		+ '<input class="col-md-6 btn checkinScore" type="text" name="checkinScore"  value="' 
 																		+ +this.checkinScore
 																		+'" readonly>'
 																		+'</div>'
 																		+ '<div class="row">'
 																		+ '<label class="col-md-6">청결도</label>'
-																		+ '<input class="col-md-6 cleanScore" type="text" name="cleanScore"  value="' 
+																		+ '<input class="col-md-6 btn cleanScore" type="text" name="cleanScore"  value="' 
 																		+ +this.cleanScore
 																		+'" readonly>'
 																		+'</div>'
@@ -258,7 +260,7 @@
 																		+ '&nbsp;'
 																		+ '<button class="btn_delete btn" type="button">삭제</button>'
 																		+'</div>'
-																		+'<div class="btnArea">'
+																		+'<div class="btnArea btn-group">'
 																		+'</div>'
 																		
 																		+'</div>';
@@ -304,10 +306,12 @@
 							$(this).parents('.reply_item').find('input').removeAttr("readonly");
 							$(this).parents('.reply_item').find('.content').hide();
 							$(this).parents('.reply_item').find('.contentUpdate').show();
-							$(this).parent().next('.btnArea').append(
-									'<div class="btn-group">'
-									+ '<button class="btn_update  btn" type="button">댓글수정하기'
-									+ '</button></div>');
+							$(this).parent().next('.btnArea').html(
+									
+									 '<button class="btn_update  btn" type="button">댓글수정하기'
+									+ '</button>'
+									+ '<button class="btn_cancel  btn" type="button">취소하기'
+									+ '</button>');
 						});//end click
 						
 						
@@ -363,9 +367,7 @@
 										}); // end btn_update.click()
 
 						// 삭제 버튼을 클릭하면 선택된 댓글 삭제
-						$('#replies')
-								.on(
-										'click',
+						$('#replies').on('click',
 										'.reply_item .btn_delete',
 										function() { // click는 메소드 기능. function은 눌렀을 때 뭘 할것인가
 											// console.log(this);
@@ -398,7 +400,18 @@
 
 													}); // end ajax()
 										}); // end btn_delte.click()
+										
+										
+										
+										
+							$('#replies').on('click','.reply_item .btn_cancel',function() {
+								 location.reload();
+							});//end click
 
+							
+							
+							
+							
 						//end 댓글모달 영역
 					});//end function
 </script>
