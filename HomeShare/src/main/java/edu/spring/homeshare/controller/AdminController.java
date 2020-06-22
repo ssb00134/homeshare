@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.spring.homeshare.HomeController;
@@ -428,10 +429,24 @@ logger.info("guestId 입력받음");
 		
 		List<ReportVO> reportList = reportService.readHostId(map);
 		logger.info("reportList : " + reportList.toString());
+		model.addAttribute("reportList",reportList);
+		
+		
+		PageMaker maker = new PageMaker();
+		maker.setCriteria(c);
+		maker.setTotalCount(bookService.getCountByGuestId(reportHostId));
+		maker.setPageData();
+		model.addAttribute("pageMaker", maker);
 		
 		
 		
-		
+		logger.info("전체 예약 수 : " + maker.getTotalCount());
+		logger.info("현재 선택된 페이지 : " + c.getPage());
+		logger.info("한 페이지 당 게시글 수 : " + c.getNumsPerPage());
+		logger.info("시작 페이지 링크 번호(startPageNO) : " + maker.getStartPageNo());
+		logger.info("끝 페이지 링크 번호(endPageNo) : " + maker.getEndPageNo());
 		
 	}
+	
+	
 }

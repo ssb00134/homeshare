@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -68,6 +69,25 @@ public class ReportRestController {
 		}
 		return new ResponseEntity<Integer>(result,HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "report/{reportNo}", method = RequestMethod.DELETE)
+	public ResponseEntity<String> deleteReport(@PathVariable("reportNo") int reportNo){
+		logger.info("report delete ½ÇÇà");
+		logger.info("reportno : " + reportNo);
+		
+		int result = reportService.delete(reportNo);
+		ResponseEntity<String> entity = null;
+		if (result == 1) {
+			entity = new ResponseEntity<String>("success", HttpStatus.OK);
+		} else {
+			entity = new ResponseEntity<String>("fail", HttpStatus.OK);
+		}
+		
+		return entity;
+	}
+			
+			
+	
 	
 	
 }

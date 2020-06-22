@@ -5,8 +5,6 @@
 <%@ include file="../head.jspf"%>
 <h1>예약 결과</h1>
 
-<input type="text" id="selected" value="${selected}">
-
 
 
 <c:if test="${bookListPaging ne null }">
@@ -60,10 +58,6 @@
 			</c:if>
 
 	<div>
-	
-	
-	
-	
 		<ul class="pager">
 			<c:if test="${pageMaker.hasPrev }">
 				<li><a href="${pageMaker.startPageNo - 1}">이전</a></li>
@@ -148,12 +142,12 @@
 				console.log(targetPage);
 				
 				var frm = $('#pagingForm'); // form의 정보를 frm에 저장
-				var selected = $('#selected').val();
-				var bookHostId = 
+				
+				
 				
 				frm.find('[name="page"]').val(targetPage); // name="page"를 찾아서 value=targetPage를 저장
 				frm.find('[name="selected"]').val(selected); // name="page"를 찾아서 value=targetPage를 저장
-				frm.find('[name="bookHostId"]').val(bookHostId); // name="page"를 찾아서 value=targetPage를 저장
+				//frm.find('[name="bookHostId"]').val(bookHostId); // name="page"를 찾아서 value=targetPage를 저장
 				
 				
 				frm.attr('action', '/homeshare/admin/bookmanagement_result'); // form에 action 속성 추가
@@ -162,4 +156,3 @@
 			}); // end click()
 		}) //end documnet
 	</script>
-		

@@ -53,4 +53,9 @@ public class ReportDAOImple implements ReportDAO{
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(NAMESPACE +".reportPagingHostId", map);
 	}
+	
+	@Override
+	public int delete(int reportNo) {
+		return sqlSession.delete(NAMESPACE +".delete", reportNo);
+	}
 }

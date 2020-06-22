@@ -72,7 +72,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		
 		<!-- report 테이블 파라미터 설정 -->
 		<property name="report" value="report" />
-		<property name="reprotNo" value="reprotNo" />
+		<property name="reportNo" value="reportNo" />
 		<property name="reportMemNo" value="reportMemNo" />
 		<property name="reportHouseNo" value="reportHouseNo" />
 		<property name="reason" value="reason" />

@@ -15,4 +15,6 @@ public interface ReportService {
 	
 	int getCountByHostId(String hostId);
 	List<ReportVO> readHostId(HashMap<String, Object> map);
+	
+	int delete(int reportNo);
 }

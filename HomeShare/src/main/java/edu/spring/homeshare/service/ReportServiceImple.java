@@ -44,4 +44,9 @@ public class ReportServiceImple implements ReportService{
 	public List<ReportVO> readHostId(HashMap<String, Object> map) {
 		return reportDao.selectHostId(map);
 	}
+	
+	@Override
+	public int delete(int reportNo) {
+		return reportDao.delete(reportNo);
+	}
 }

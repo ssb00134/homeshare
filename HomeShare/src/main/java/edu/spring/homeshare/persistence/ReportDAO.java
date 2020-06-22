@@ -15,4 +15,6 @@ public interface ReportDAO {
 	
 	List<ReportVO> selectHostId(HashMap<String, Object> map);
 	int getCountByHostId(String hostId);
+	
+	int delete(int reportNo);
 }
