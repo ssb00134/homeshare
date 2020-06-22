@@ -17,5 +17,6 @@ public interface MemberService {
 	int update(MemberVO vo);
 	
 	int idChk(MemberVO vo);
+	int delete(String memId);
 
 }

@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.sun.mail.imap.protocol.Namespaces.Namespace;
 
 import edu.spring.homeshare.domain.MemberVO;
 
@@ -64,5 +65,10 @@ public class MemberDAOImple implements MemberDAO {
 	public int idChk(MemberVO vo) {
 		logger.info(" idchk ½ÇÇà");
 		return sqlSession.selectOne(NAMESPACE + ".idChk", vo);
+	}
+	
+	@Override
+	public int delete(String memId) {
+		return sqlSession.delete(NAMESPACE + ".delete", memId);
 	}
 }

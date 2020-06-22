@@ -84,8 +84,28 @@
   
   $(document).ready(function(){
 	  $('.btndelete').click(function(){
-		  var memNo = $(this).parent().siblings('.memNo').html();
-		  console.log('memNo : ' + memNo);
+		  //var memNo = $(this).parent().siblings('.memNo').html();
+		  var memId = $(this).parent().siblings('.memId').html();
+		  console.log('memId : ' + memId);
+		  
+		  
+		  $.ajax({
+				type : 'delete',
+				url : '/homeshare/member/'
+						+ memId,
+				headers : {
+					'Content-Type' : 'application/json',
+					'X-HTTP-Method-Override' : 'DELETE'
+				},
+				success : function(
+						result) {
+					if (result == 'success') {
+						alert('댓글 삭제성공')
+						getAllReplies();
+					} // end if()
+				}// end success()
+
+			}); // end ajax()
 	  });
 	  
 	  

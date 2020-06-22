@@ -64,12 +64,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		a.*
 		from (
 		select * from member
-		<trim prefix="ORDER BY">
-			<if test="orderby == 'memId'"> memId </if>
-			<if test="orderby == 'memName'"> memName </if>
-			<if test="orderby == 'email'"> email </if>
-
-		</trim> desc
+		
 		) a
 		) b
 		where rn
@@ -88,6 +83,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT COUNT(*) FROM ${member}
 		WHERE ${memId} = #{memId}
 </select>
+
+
+<!-- 삭제메핑 -->
+<delete id="delete">
+delete from member where ${memId} = #{memId}
+</delete>
 </mapper>
 
 

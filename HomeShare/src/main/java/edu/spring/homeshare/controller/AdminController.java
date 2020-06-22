@@ -160,7 +160,7 @@ public class AdminController {
 	
 	@RequestMapping(value = "/crm_result")
 	public void adminCrmResult(Model model, Integer page, Integer prePage, HttpServletRequest req,
-			String memId, String guestId) {
+			String memId, String selectall) {
 		logger.info("admin crmResult 실행");
 		logger.info("memId : " + memId);
 		
@@ -171,7 +171,48 @@ public class AdminController {
 			logger.info("membervo : " + membervo);
 			model.addAttribute("membervo", membervo);
 		}
+		if(!(selectall==null)) {
+			logger.info("selectall 실행");
+			
+			/* 페이징 처리 */
+			PageCriteria c = new PageCriteria();
+			logger.info("page : " + page);
+			if (page != null) {
+				c.setPage(page);
+			}
+			if (prePage != null) {
+				c.setNumsPerPage(prePage);
+			}
+			
+		
+			
+			/* hash맵에 정보 넣기 */
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("start",c.getStart());
+			map.put("end",c.getEnd());
+			logger.info("map : " +map.toString() );
+			
+			List<MemberVO> memberList= memberSeervice.readAllMemberOrderby(map);
+			model.addAttribute("memberList",memberList);
+			
+			PageMaker maker = new PageMaker();
+			maker.setCriteria(c);
+			maker.setTotalCount(memberSeervice.totalCount());
+			maker.setPageData();
+			model.addAttribute("pageMaker", maker);
+			
+			
+			
+			logger.info("전체 예약 수 : " + maker.getTotalCount());
+			logger.info("현재 선택된 페이지 : " + c.getPage());
+			logger.info("한 페이지 당 게시글 수 : " + c.getNumsPerPage());
+			logger.info("시작 페이지 링크 번호(startPageNO) : " + maker.getStartPageNo());
+			logger.info("끝 페이지 링크 번호(endPageNo) : " + maker.getEndPageNo());
+
+		}
 	}
+	
+	
 	
 	
 	

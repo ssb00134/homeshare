@@ -64,5 +64,10 @@ public class MemberServiceImple implements MemberDAO, MemberService {
 	public int idChk(MemberVO vo) {
 		return memberDao.idChk(vo);
 	}
+	
+	@Override
+	public int delete(String memId) {
+		return memberDao.delete(memId);
+	}
 
 }

@@ -18,7 +18,8 @@ public interface MemberDAO {
 	
 	//아이디 중복체크
 	int idChk(MemberVO vo);
-
+	
+	int delete(String memId);
 }
 
 

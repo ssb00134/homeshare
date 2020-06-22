@@ -3,6 +3,7 @@ package edu.spring.homeshare.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,9 +23,11 @@ public class memberRestController {
 
 	
 	@RequestMapping(value = "/{memId}",method = RequestMethod.DELETE)
-	public ResponseEntity<String> deleteMember(@PathVariable("memId") int memId) {
+	public ResponseEntity<Integer> deleteMember(@PathVariable("memId") String memId) {
 		logger.info("member delete ½ÇÇà");
 		
-		int result = memberService.delete(hostId);
+		int result = memberService.delete(memId);
+		
+		return new ResponseEntity<Integer>(result,HttpStatus.OK);
 	}
 }
