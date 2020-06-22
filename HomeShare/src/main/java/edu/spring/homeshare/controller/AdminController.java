@@ -390,4 +390,19 @@ logger.info("guestId 입력받음");
 		
 	
 	}
+	
+	
+	/*------------------------------------report---------------------------------------------*/
+	@RequestMapping("/reportmanagement")
+	public void report() {
+		logger.info("report 실행");
+	}
+	@RequestMapping("/reportmanagement_result")
+	public void reportResult(
+			Model model, 
+			Integer page, 
+			Integer prePage,
+			HttpServletRequest req) {
+		logger.info("report 실행");
+	}
 }

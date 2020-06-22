@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>신고내역 관리하기</h1>
-	1. 숙소별 신고내역 조회하기 2. 신고횟수별 houseno 조회하기
+	1. 숙소별 신고내역 조회하기 
 	<form class="form-inline form-fluid" id="reportSearchAllForm"
 		target="iframe1" action="/homeshare/admin/reportmanagement_result">
 		<div class="form-group col-md-1 border">
