@@ -80,14 +80,10 @@
 		<div  id ="replies" class="row">
 		</div>
 </div>
-<hr>
-<div class="sessionchk">
-	<button type="submit" id="btn_update">수정</button>
-	<button type="submit" id="btn_delete">삭제</button>
-</div>
 
 
-</div>
+
+
 
 
 <script type="text/javascript">
