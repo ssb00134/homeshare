@@ -82,10 +82,7 @@ public class HouseInterceptor extends HandlerInterceptorAdapter {
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
 		String reqUrl = request.getRequestURL().toString(); //Àü¼Û¹Þ
 		if(reqUrl.contains("house-update")) {
-			HouseVO housevo = (HouseVO) modelAndView.getModel().get("housevo");
-			
-			String modelHostId = housevo.getHostId();
-			
+		
 			
 			
 			
@@ -94,15 +91,7 @@ public class HouseInterceptor extends HandlerInterceptorAdapter {
 			String sessionId = (String) session.getAttribute("memId");
 			
 			
-			logger.info("modelhostid : " + modelHostId + " sessionid : " + sessionId);
 			
-			if(modelHostId==null) {
-				PrintWriter out = response.getWriter();
-				logger.info("modelHostId null");
-				out.print("<head>" + "<meta charset='UTF-8'>" + "</head>");
-				out.print("<script>alert('not session'); location.href='/homeshare/';</script>");
-				out.flush();
-			}
 			if(sessionId==null) {
 				PrintWriter out = response.getWriter();
 				logger.info("sessionId null");
@@ -110,14 +99,7 @@ public class HouseInterceptor extends HandlerInterceptorAdapter {
 				out.print("<script>alert('not session'); location.href='/homeshare/';</script>");
 				out.flush();
 			}
-			if(!modelHostId.equals(sessionId)) {
-				PrintWriter out = response.getWriter();
-				logger.info("modelHostId  not equal sessionid");
-				
-				//out.print("<head>" + "<meta charset='UTF-8'>" + "</head>");
-				out.print("<script>alert('not session'); location.href='/homeshare/';</script>");
-				out.flush();
-			}
+			
 		
 			
 		}
