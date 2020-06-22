@@ -160,52 +160,16 @@ public class AdminController {
 	
 	@RequestMapping(value = "/crm_result")
 	public void adminCrmResult(Model model, Integer page, Integer prePage, HttpServletRequest req,
-			MemberVO vo) {
+			String memId, String guestId) {
 		logger.info("admin crmResult 실행");
-		logger.info(vo.toString());
-				
-		/*페이징처리*/
-		PageCriteria c = new PageCriteria();
-		logger.info("page : " + page);
-		
-		if(page != null) {
-			c.setPage(page);
-		}
-		if (prePage != null) {
-			c.setNumsPerPage(prePage);
-		}
-		
-		/*파라미터 지정*/
-		String orderby = req.getParameter("orderby");
-		if(orderby != null) { //orderby가 null이 아닐때 실행
-		model.addAttribute("orderby", orderby); //모달에 파라이터 저장
-		
-		/* map에 변수 넣기*/
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("start", c.getStart());
-		map.put("end", c.getEnd());
-		logger.info("end : " + c.getEnd());
-		map.put("orderby", orderby);
-		logger.info("map : " +map.toString());
+		logger.info("memId : " + memId);
 		
 		
-		/*mybatis 적용*/
-		List<MemberVO> memberList = memberSeervice.readAllMemberOrderby(map);
-		logger.info("memberList : " + memberList);
-		
-		
-		
-		model.addAttribute("memberList", memberList); //memberlist 보내기
-		
-		/* 페이징 처리 */
-		PageMaker maker = new PageMaker();
-		maker.setCriteria(c);
-		maker.setTotalCount(memberSeervice.totalCount());
-		maker.setPageData();
-		logger.info("maker : " + maker.toString());
-		model.addAttribute("pageMaker", maker);
-		}else {
-			
+		if(!(memId==null)) {
+			logger.info("memId selected");
+			MemberVO membervo = memberSeervice.select(memId);
+			logger.info("membervo : " + membervo);
+			model.addAttribute("membervo", membervo);
 		}
 	}
 	

@@ -40,8 +40,8 @@
 						</h4>
 					</div>
 					
-					<div class="row col-md-12 border-"></div>
-					<div class="row col-md-12 border-"></div>
+					<div class="row col-md-12 border-0"></div>
+					<div class="row col-md-12 border-0"></div>
 					
 					
 					<div class="row col-md-12 border-0">
@@ -90,15 +90,15 @@
 		</div>
 </div>
 		<div class="col-md-4 border">
-			<div class="container card">
+			<div class="container">
 				<div class="sidebar-nav">
 					<h4>요금을 확인하려면 날짜를 입력해 주세요</h4>
 					<button type="button" class="btn btn-default" data-toggle="modal" id="btnDate"
 						data-target="#DateModal">체크인/체크아웃 조회</button>
 					<div class="btn-group btn-group-justified" role="group" aria-label="...">
   						<div class="btn-group" role="group">
-  							<button type="button" class="btn btn-default" id="checkInValue"></button>
-  							<button type="button" class="btn btn-default" id="checkOutValue"></button>
+  							<button type="button" class="btn btn-default" id="checkInValue">2020-07-09</button>
+  							<button type="button" class="btn btn-default" id="checkOutValue">2020-07-11</button>
 							
 						</div>
 					</div>

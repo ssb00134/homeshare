@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +13,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	${orderby }
+	${membervo }
 	<h1>검색결과</h1>
 
 	
@@ -22,12 +24,27 @@
           <th>아이디</th>
           <th>이름</th>
           <th>이메일</th>
+          <th>전화번호</th>
           <th>성별</th>
           <th>수정</th>
           <th>삭제</th>
         </tr>
   	</thead>
   	<tbody>
+  	<c:if test="${membervo ne null }">
+  	<td class="memNo"><c:out value="${membervo.memNo}"/></td>
+  	<td class="memId"><c:out value="${membervo.memId}"/></td>
+  	<td class="memName"><c:out value="${membervo.memName}"/></td>
+  	<td class="email"><c:out value="${membervo.email}"/></td>
+  	<td class="phone"><c:out value="${membervo.phone}"/></td>
+  	<td class="gender"><c:out value="${membervo.gender}"/></td>
+  	<td ><button class="btnupdate btn">수정하기</button></td>
+  	<td ><button class="btndelete btn">삭제하기</button></td>
+  	
+  	</c:if>
+  	
+  	
+  	
   	<c:forEach var="vo" items="${memberList }">
   	<tr>
   	<td>${vo.memNo }</td>
@@ -66,6 +83,13 @@
   <script type="text/javascript">
   
   $(document).ready(function(){
+	  $('.btndelete').click(function(){
+		  var memNo = $(this).parent().siblings('.memNo').html();
+		  console.log('memNo : ' + memNo);
+	  });
+	  
+	  
+	  
 	  //페이징 처리
 	    $('.pagination li a').click(function() { 
 	    	 event.preventDefault(); 
