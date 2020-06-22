@@ -12,7 +12,7 @@ public interface ReportDAO {
 	List<ReportVO> select();
 	List<ReportVO> select(HashMap<String, Object> map);
 	int getCountByHouseNo(int houseNo);
-	
+	List<ReportVO> selectHostId(String reportHostId);
 	List<ReportVO> selectHostId(HashMap<String, Object> map);
 	int getCountByHostId(String hostId);
 	

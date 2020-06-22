@@ -1,5 +1,7 @@
 package edu.spring.homeshare.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.spring.homeshare.domain.HouseVO;
+import edu.spring.homeshare.domain.ReplyVO;
 import edu.spring.homeshare.domain.ReportVO;
 import edu.spring.homeshare.service.HouseService;
 import edu.spring.homeshare.service.ReportService;
@@ -31,13 +34,18 @@ public class ReportRestController {
 	private HouseService houseService;
 	
 	
-	@RequestMapping(value="/report", method = RequestMethod.GET)
-	public void reprotGet(ReportVO vo,
-			Model model,
-			RedirectAttributes reAttr) {
+	@RequestMapping(value="/report/all/{reportHostId}")
+	public ResponseEntity<List<ReportVO>> reprotGet(@PathVariable("reportHostId") String reportHostId) {
 		logger.info("reprot get ½ÇÇà " );
-		logger.info(vo.toString());
+		List<ReportVO> reportList = reportService.read(reportHostId);
+		logger.info("reportList : " + reportList);
+		
+		return new ResponseEntity<List<ReportVO>>(reportList, HttpStatus.OK);
 	}
+	
+	
+	
+	
 	
 	@RequestMapping(value="/report/insert", method = RequestMethod.POST)
 	public ResponseEntity<Integer> reprotPost(

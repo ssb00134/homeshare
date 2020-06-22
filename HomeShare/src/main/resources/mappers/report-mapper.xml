@@ -83,6 +83,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where ${reportHostId} = #{reportHostId}
 	</select>
 	
+	<select id="select_by_hostId" resultType="reportVO">
+		SELECT *
+		FROM report
+		where ${reportHostId} = #{reportHostId}
+	</select>
+	
 	
 	<delete id="delete">
 	delete from report

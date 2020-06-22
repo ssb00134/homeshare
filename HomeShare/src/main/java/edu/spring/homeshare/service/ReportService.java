@@ -17,4 +17,6 @@ public interface ReportService {
 	List<ReportVO> readHostId(HashMap<String, Object> map);
 	
 	int delete(int reportNo);
+	
+	List<ReportVO> read(String reportHostId);
 }

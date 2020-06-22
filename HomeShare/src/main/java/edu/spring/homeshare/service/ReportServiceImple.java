@@ -49,4 +49,9 @@ public class ReportServiceImple implements ReportService{
 	public int delete(int reportNo) {
 		return reportDao.delete(reportNo);
 	}
+	
+	@Override
+	public List<ReportVO> read(String reportHostId) {
+		return reportDao.selectHostId(reportHostId);
+	}
 }

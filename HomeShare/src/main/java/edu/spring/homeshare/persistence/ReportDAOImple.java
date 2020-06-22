@@ -58,4 +58,10 @@ public class ReportDAOImple implements ReportDAO{
 	public int delete(int reportNo) {
 		return sqlSession.delete(NAMESPACE +".delete", reportNo);
 	}
+	
+	@Override
+	public List<ReportVO> selectHostId(String reportHostId) {
+		return sqlSession.selectList(NAMESPACE + ".select_by_hostId", reportHostId);
+	}
+	
 }

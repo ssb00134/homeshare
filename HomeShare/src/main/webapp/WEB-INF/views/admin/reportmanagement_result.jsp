@@ -12,7 +12,7 @@
 </head>
 <body>
 	<h1>신고내역 결과</h1>
-
+	<input value="${reportHostId}" type="text" id="reportHostId">
 	<div class="table-responsive">
 		<table class="table table-bordered table-hover">
 			<thead>
@@ -24,15 +24,11 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="vo" items="${reportList }">
-					<tr>
-						<td class="reportNo">${vo.reportNo }</td>
-						<td>${vo.reportHouseNo }</td>
-						<td>${vo.reportedHostNo }</td>
-						<td>${vo.reason }</td>
-						<td><button class="btnDelete btn btn-default" >신고내역 삭제하기</button></td>
+				
+					<tr id="reportAjax">
+						
 					</tr>
-				</c:forEach>
+				
 			</tbody>
 		</table>
 	</div>
@@ -88,6 +84,46 @@
 	
 	<script type="text/javascript">
 		$(document).ready(function() {
+			getReportByReportHostId();
+			
+			function getReportByReportHostId(){
+				var reportHostId = $('#reportHostId').val();
+				console.log('reportHostId : '+ reportHostId);
+				var url = '/homeshare/report/all/' + reportHostId;
+				console.log('url : ' + url);
+				
+				$.getJSON(url,function(jsonData){
+					
+					var list='';
+					$(jsonData).each(function(){
+						console.log('jsoneach : ' + this);
+						list += '<td>' + this.reportNo + '</td>'
+						     + '<td>' + this.reportMemNo + '</td>'
+						     + '<td>' + this.reportHouseNo + '</td>'
+						     + '<td>' + this.reason + '</td>'
+						     + '<td>' + this.reportedHostNo + '</td>'
+						     + '<td>' + this.reportHostId + '</td>';
+					});//end each
+					console.log(list);
+					$('#reportAjax').html(list);
+				});//end getjson
+			} // end getReportByReportHostId
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			$('.btnDelete').on('click',function(){
 				var frm = $('#frm');
 				var reportNo = $(this).parent().siblings('.reportNo').html();
