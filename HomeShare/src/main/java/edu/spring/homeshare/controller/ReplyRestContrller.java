@@ -122,8 +122,8 @@ public class ReplyRestContrller {
 		
 		
 		//리플삭제시 자동으로 별점 업데이트
-				
-				int replyCount = replyService.readCount();
+				List<ReplyVO> replyList = replyService.read(houseNo);
+  				int replyCount = replyList.size();
 				
 				HouseVO housevo = houseservice.selectByHouseNo(houseNo); // housevo : 리플 houseno에 메핑된 housevo
 				
