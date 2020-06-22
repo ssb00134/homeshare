@@ -13,8 +13,7 @@
 
 </head>
 <body>
-	<input type="text" value="${memberVO.phoneReleaseToHost}" id="phoneReleaseToHost">
-	<input type="text" value="${memberVO.phone}" id="phone">
+	
 	<!-- 헤더정보 가져오기 -->
 	<%@ include file="../navheader.jspf"%>
 
@@ -29,7 +28,16 @@
 		${houseVO.score }
 	</div>
 	<input id="imgSource" type="hidden" value="${houseVO.image }" />
-	<div id="imgArea" class="row border"></div>
+	<div class="imgArea row border">
+	<div class="col-md-6 border">
+	</div>
+	<div class="row">
+	
+	
+	</div>
+	
+	</div>
+	
 	<div class="row">
 		<div class="col-md-8">
 			<div class="container-fluid">
@@ -761,9 +769,8 @@
 							var imgsplit = imgSource.split(',');
 							console.log(imgsplit);
 							var list = '';
-							imgsplit
-									.forEach(function(element, index) {
-										if (imgsplit.length / 2 - 1 > index) {
+							imgsplit.forEach(function(element, index) {
+										if(element != ''){
 											console.log(" bx index : " + index
 													+ " bx element : "
 													+ element);
@@ -772,7 +779,8 @@
 													+ '"class="col-md-5 img-responsive" size="100%"><br>';
 										}
 									});
-							$('#imgArea').html(list);
+							console.log(list);
+							$('.imgArea').html(list);
 							//end img 출력기능
 
 						}); //end document

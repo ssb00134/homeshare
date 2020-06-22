@@ -25,7 +25,7 @@
 			<c:forEach var="vo" items="${houseList }">
 				<!-- cardgrooup -->
 
-				<div class="hostItem card col-md-3">
+				<div class="hostItem card col-md-4">
 					<input type="hidden" id="imgSource" value="${vo.image }">
 					<input type="hidden" id="houseNo" value="${vo.houseNo }">
 					<div class="card-header">${vo.title }</div>
@@ -78,8 +78,7 @@
 						
 						<button class="btnUpdate btn col-md-4 border">숙소정보
 							수정하기</button>
-						<button class="btnImgUpdate btn col-md-4 border">이미지
-							수정하기</button>
+						
 						<button class="btnDelete btn btn-danger col-md-4 border">숙소
 							삭제하기</button>
 					</div>
@@ -131,7 +130,7 @@
 			$('.btnUpdate').click(function(event){
 				console.log('update click' + event);
 				//var imgSource = $(element).children('#imgSource').val();
-				var houseNo = $(this).siblings('#houseNo').val();
+				var houseNo = $(this).parents('.hostItem ').find('#houseNo').val();
 				console.log('houseNo : ' + houseNo);
 				document.location.href='/homeshare/house/house-update?houseNo=' + houseNo;
 			});
