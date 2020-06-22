@@ -39,9 +39,12 @@ public class ReplyRestContrller {
 
 		//리플작성시 자동으로 별점 업데이트
 		int houseNo = vo.getHouseNo(); // 등록할 하우스 번호
+		List<ReplyVO> replyList = replyService.read(houseNo);
+			
+		
 		
 		//리플 개수
-		int replies = replyService.readCount();
+		int replies = replyList.size();
 		logger.info("총 " + replies +"개의 후기가 있습니다");
 		
 		//리플 평균값
@@ -127,9 +130,8 @@ public class ReplyRestContrller {
 				
 				HouseVO housevo = houseservice.selectByHouseNo(houseNo); // housevo : 리플 houseno에 메핑된 housevo
 				
-				//리플 개수
-				int replies = replyService.readCount();
-				logger.info("총 " + replies +"개의 후기가 있습니다");
+				
+				logger.info("총 " + replyCount +"개의 후기가 있습니다");
 				
 				//리플 평균값
 				if(replyCount >0) {
@@ -144,7 +146,7 @@ public class ReplyRestContrller {
 
 				
 				
-				housevo.setReplies(replies);
+				housevo.setReplies(replyCount);
 				
 				logger.info("별점 삭제 후 housevo : " + housevo.toString());
 				
