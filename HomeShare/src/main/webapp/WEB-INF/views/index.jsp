@@ -33,10 +33,7 @@
 		</div>
 		<div class="footer">
 			<div class="container">
-			<a>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA>
-			
-			</a>
-			
+		
 			</div>
 		</div>
 	</div>
@@ -96,9 +93,6 @@
 		</div>
 		<div class="footer">
 			<div class="container">
-			<a>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA>
-			
-			</a>
 			
 			</div>
 		</div>

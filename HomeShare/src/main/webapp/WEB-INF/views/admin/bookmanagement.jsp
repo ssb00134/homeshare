@@ -8,23 +8,30 @@
 </head>
 <body>
 	<h4>예약 검색하기</h4>
-	<form class="form-inline form-fluid" id="multySearchForm"
-		target="iframe1" action="/homeshare/admin/bookmanagement_result">
-		<div class="form-group row">
-			<label for="hostId">호스트아이디</label>
-			<input type="text" id="hostId" name="hostId">
-		</div>
+
+	<form  id="multySearchForm"
+		target="iframe1" action="/homeshare/admin/bookmanagement_result" >
 		
-		<div class="form-group">
-			<select class="form-control" id="hostCheck" name="hostCheck">
-				<option>호스트승인여부</option>
-				<option value="1">승인</option>
-				<option value="0">미승인</option>
-			</select>
-		</div>
-		<div class="col-md-3">
-			<button type="submit" id="multySearch" class="btn btn-default">다중조건검색하기</button>
-		</div>
+		
+		<div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <label for="hostId">호스트아이디</label>
+							<input type="text" id="hostId" name="hostId">
+                        </div>
+                         <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <label for="hostId">게스트아이디</label>
+							<input type="text" id="guestId" name="guestId">
+                        </div>
+                         
+                       
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <button type="submit" id="btnAdminBooksearch" class="btn btn-danger wrn-btn">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 	</form>
 	<div class="embed-responsive embed-responsive-16by9">
 		<iframe class="embed-responsive-item" name="iframe1" id="iframe1"
@@ -33,8 +40,16 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#iframe1").hide();
+			
+			$('#hostId').on('click blur keyup', function(){
+				$('#guestId').val('');
+			});
+			$('#guestId').on('click blur keyup', function(){
+				$('#hostId').val('');
+			});
+			
 
-			$('#multySearch').click(function() {
+			$('#btnAdminBooksearch').click(function() {
 				$('#iframe1').load(function() {
 					console.log('iframe 로드 ');
 					$('#iframe1').show();

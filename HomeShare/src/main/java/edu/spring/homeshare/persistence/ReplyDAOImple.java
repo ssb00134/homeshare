@@ -1,12 +1,15 @@
 package edu.spring.homeshare.persistence;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import edu.spring.homeshare.domain.HouseVO;
 import edu.spring.homeshare.domain.ReplyVO;
+import edu.spring.homeshare.domain.ReportVO;
 
 
 @Repository
@@ -49,6 +52,8 @@ public class ReplyDAOImple implements ReplyDAO {
 	public int selectCountByHouseNo(int houseNo) {
 		return sqlSession.selectOne(NAMESPACE + ".select_count_by_houseno", houseNo);
 	}
+	
+	
 }
 
 

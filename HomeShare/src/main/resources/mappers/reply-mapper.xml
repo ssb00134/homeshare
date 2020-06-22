@@ -45,6 +45,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where ${rno} = #{rno}
 	</delete>
 	
+	
+	<!-- 숙소기준 페이징 -->
+	<select id="reportPaging" resultType="reportVO">
+		select
+		*
+		from (
+		select rownum rn,
+		a.*
+		from (
+		select *
+		from ${reply} where ${reply}.${houseNo} = #{houseNo}
+		) a
+		) b
+		where rn
+		between #{start} and #{end}
+	</select>
+	
+	
+	
 	<!-- 리플 후기 평균 구하기 -->
 	<select id="select_avg_score" resultType="double">
 		<!-- select TRUNC(avg(${replyScore}),2) from ${reply} where ${reply}.${houseNo} = #{houseNo} -->

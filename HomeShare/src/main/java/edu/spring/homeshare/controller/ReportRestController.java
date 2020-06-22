@@ -44,8 +44,7 @@ public class ReportRestController {
 			RedirectAttributes reAttr) {
 		logger.info("reprot post ½ÇÇà " );
 		logger.info(vo.toString());
-		
-		
+			
 		
 		int result = reportService.create(vo);
 		if(result==1) {
@@ -69,4 +68,6 @@ public class ReportRestController {
 		}
 		return new ResponseEntity<Integer>(result,HttpStatus.OK);
 	}
+	
+	
 }

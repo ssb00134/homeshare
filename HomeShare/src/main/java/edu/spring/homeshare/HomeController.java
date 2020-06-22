@@ -38,7 +38,7 @@ public class HomeController {
 	public String home(Locale locale, Model model) {
 		logger.info("home");
 		
-		return "home";
+		return "index";
 	}
 	@RequestMapping(value = "/house-insert-sample", method = RequestMethod.GET)
 	public void houseInsertTestsample() {

@@ -1,8 +1,11 @@
 package edu.spring.homeshare.persistence;
 
+import java.util.HashMap;
 import java.util.List;
 
+import edu.spring.homeshare.domain.HouseVO;
 import edu.spring.homeshare.domain.ReplyVO;
+import edu.spring.homeshare.domain.ReportVO;
 
 public interface ReplyDAO {
 	int insert(ReplyVO vo);
@@ -14,5 +17,6 @@ public interface ReplyDAO {
 	int selectCountByHouseNo(int houseNo); //houseno를 기준으로 일치하는 갯수 리턴
 	
 	double selectAvgScore(int houseNo);
+
 	
 }

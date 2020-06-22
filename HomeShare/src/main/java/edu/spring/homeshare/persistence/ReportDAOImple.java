@@ -1,5 +1,6 @@
 package edu.spring.homeshare.persistence;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -27,5 +28,19 @@ public class ReportDAOImple implements ReportDAO{
 	@Override
 	public List<ReportVO> select() {
 		return sqlSession.selectList(NAMESPACE + ".select_all");
+	}
+	
+	//∆‰¿Ã¬°
+	@Override
+	public List<ReportVO> select(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(NAMESPACE +".reportPaging", map);
+	}
+	
+	@Override
+	public int getCountByHouseNo(int houseNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(NAMESPACE +".select_count_by_houseNo", houseNo);
+
 	}
 }

@@ -1,5 +1,6 @@
 package edu.spring.homeshare.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +25,13 @@ public class ReportServiceImple implements ReportService{
 	@Override
 	public List<ReportVO> read() {
 		return reportDao.select();
+	}
+	@Override
+	public List<ReportVO> read(HashMap<String, Object> map) {
+		return reportDao.select(map);
+	}
+	@Override
+	public int getCountByHouseNo(int houseNo) {
+		return reportDao.getCountByHouseNo(houseNo);
 	}
 }

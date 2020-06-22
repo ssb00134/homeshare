@@ -13,4 +13,5 @@ public interface ReplyService {
 	double readAvgScore(int houseNo);
 	
 	int readCountHouseNo(int houseNo);
+	
 }

@@ -196,6 +196,7 @@
 						var list='';
 						$(jsonData).each(function() {
 							
+							var dateDiffer = Math.abs(new Date(this.checkin.split(' ')[0]).getTime() - new Date(this.checkout.split(' ')[0]).getTime() ) / (1000*3600*24);
                         	
                         	if(this.hostCheck == 0){ // checkin이 0일때  미수락상태일때 실행
                         		list+= '<tr>'

@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -157,9 +158,10 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "/crm_result")
-	public void adminCrmResult(Model model, Integer page, Integer prePage, HttpServletRequest req) {
+	public void adminCrmResult(Model model, Integer page, Integer prePage, HttpServletRequest req,
+			MemberVO vo) {
 		logger.info("admin crmResult 실행");
-		
+		logger.info(vo.toString());
 				
 		/*페이징처리*/
 		PageCriteria c = new PageCriteria();
@@ -222,9 +224,15 @@ public class AdminController {
 	
 	@RequestMapping(value = "/bookmanagement_result")
 	public void bookManagementResult(HttpServletRequest request, Model model, Integer page, Integer prePage
-			,String hostId) {
+			,String hostId, String guestId, String selected) {
 		HttpSession session = request.getSession();
-
+		
+		logger.info("bookmanagement_result 실행");
+		logger.info("selected : " + selected);
+		
+		
+		
+		
 		/* 페이징 처리 */
 		PageCriteria c = new PageCriteria();
 		logger.info("page : " + page);
@@ -235,38 +243,150 @@ public class AdminController {
 			c.setNumsPerPage(prePage);
 		}
 		
+		if(selected=="guestId") {
+logger.info("guestId 입력받음");
+			
+			model.addAttribute("selected","guestId");
+			model.addAttribute("selected","guestId");
+			
+			/* hash맵에 정보 넣기 */
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("bookGuestId", guestId);
+			map.put("start",c.getStart());
+			map.put("end",c.getEnd());
+			
+			logger.info("maptostring : " + map.toString());
+			List<BookVO> bookListPaging = bookService.readByGuestId(map);
+			logger.info("bookListPaging" + bookListPaging.toString());
+			model.addAttribute("bookListPaging",bookListPaging);
+			
+			
+			
+			PageMaker maker = new PageMaker();
+			maker.setCriteria(c);
+			maker.setTotalCount(bookService.getCountByGuestId(guestId));
+			maker.setPageData();
+			model.addAttribute("pageMaker", maker);
+			
+			
+			
+			logger.info("전체 하우스 수 : " + maker.getTotalCount());
+			logger.info("현재 선택된 페이지 : " + c.getPage());
+			logger.info("한 페이지 당 게시글 수 : " + c.getNumsPerPage());
+			logger.info("시작 페이지 링크 번호(startPageNO) : " + maker.getStartPageNo());
+			logger.info("끝 페이지 링크 번호(endPageNo) : " + maker.getEndPageNo());
+			
+			
+		}else {
+			logger.info("hostId 입력받음");
+			
+			model.addAttribute("selected","hostId");
+			
+			
+			/* hash맵에 정보 넣기 */
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("bookHostId", hostId);
+			map.put("start",c.getStart());
+			map.put("end",c.getEnd());
+			
+			logger.info("maptostring : " + map.toString());
+			List<BookVO> bookListPaging = bookService.readByHostId(map);
+			logger.info("bookListPaging" + bookListPaging.toString());
+			model.addAttribute("bookListPaging",bookListPaging);
+			
+			
+			
+			PageMaker maker = new PageMaker();
+			maker.setCriteria(c);
+			maker.setTotalCount(bookService.getCountByHostId(hostId));
+			maker.setPageData();
+			model.addAttribute("pageMaker", maker);
+			
+			
+			
+			logger.info("전체 하우스 수 : " + maker.getTotalCount());
+			logger.info("현재 선택된 페이지 : " + c.getPage());
+			logger.info("한 페이지 당 게시글 수 : " + c.getNumsPerPage());
+			logger.info("시작 페이지 링크 번호(startPageNO) : " + maker.getStartPageNo());
+			logger.info("끝 페이지 링크 번호(endPageNo) : " + maker.getEndPageNo());
+			
+			
+		}
+		
+		if(hostId == "" ) {
+			logger.info("guestId 입력받음");
+			
+			model.addAttribute("selected","guestId");
+			
+			/* hash맵에 정보 넣기 */
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("bookGuestId", guestId);
+			map.put("start",c.getStart());
+			map.put("end",c.getEnd());
+			
+			logger.info("maptostring : " + map.toString());
+			List<BookVO> bookListPaging = bookService.readByGuestId(map);
+			logger.info("bookListPaging" + bookListPaging.toString());
+			model.addAttribute("bookListPaging",bookListPaging);
+			
+			
+			
+			PageMaker maker = new PageMaker();
+			maker.setCriteria(c);
+			maker.setTotalCount(bookService.getCountByGuestId(guestId));
+			maker.setPageData();
+			model.addAttribute("pageMaker", maker);
+			
+			
+			
+			logger.info("전체 하우스 수 : " + maker.getTotalCount());
+			logger.info("현재 선택된 페이지 : " + c.getPage());
+			logger.info("한 페이지 당 게시글 수 : " + c.getNumsPerPage());
+			logger.info("시작 페이지 링크 번호(startPageNO) : " + maker.getStartPageNo());
+			logger.info("끝 페이지 링크 번호(endPageNo) : " + maker.getEndPageNo());
+			
+			
+			
+			
+			
+			
+			
+		}else if(guestId == "" || selected=="hostId"){
+			logger.info("hostId 입력받음");
+			
+			model.addAttribute("selected","hostId");
+			
+			
+			/* hash맵에 정보 넣기 */
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("bookHostId", hostId);
+			map.put("start",c.getStart());
+			map.put("end",c.getEnd());
+			
+			logger.info("maptostring : " + map.toString());
+			List<BookVO> bookListPaging = bookService.readByHostId(map);
+			logger.info("bookListPaging" + bookListPaging.toString());
+			model.addAttribute("bookListPaging",bookListPaging);
+			
+			
+			
+			PageMaker maker = new PageMaker();
+			maker.setCriteria(c);
+			maker.setTotalCount(bookService.getCountByHostId(hostId));
+			maker.setPageData();
+			model.addAttribute("pageMaker", maker);
+			
+			
+			
+			logger.info("전체 하우스 수 : " + maker.getTotalCount());
+			logger.info("현재 선택된 페이지 : " + c.getPage());
+			logger.info("한 페이지 당 게시글 수 : " + c.getNumsPerPage());
+			logger.info("시작 페이지 링크 번호(startPageNO) : " + maker.getStartPageNo());
+			logger.info("끝 페이지 링크 번호(endPageNo) : " + maker.getEndPageNo());
+		}
 		
 		
-		// 세션 memno 가져오기
 		
-		logger.info("hostId 입력받음 : " + hostId);
-		
-		/* hash맵에 정보 넣기 */
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("bookHostId", hostId);
-		map.put("start",c.getStart());
-		map.put("end",c.getEnd());
-		
-		logger.info("maptostring : " + map.toString());
-		List<BookVO> bookListPaging = bookService.readByHostId(map);
-		logger.info("bookListPaging" + bookListPaging.toString());
-		model.addAttribute("bookListPaging",bookListPaging);
-		
-		
-		
-		PageMaker maker = new PageMaker();
-		maker.setCriteria(c);
-		maker.setTotalCount(bookService.getCountByHostId(hostId));
-		maker.setPageData();
-		model.addAttribute("pageMaker", maker);
-		
-		
-		
-		logger.info("전체 하우스 수 : " + maker.getTotalCount());
-		logger.info("현재 선택된 페이지 : " + c.getPage());
-		logger.info("한 페이지 당 게시글 수 : " + c.getNumsPerPage());
-		logger.info("시작 페이지 링크 번호(startPageNO) : " + maker.getStartPageNo());
-		logger.info("끝 페이지 링크 번호(endPageNo) : " + maker.getEndPageNo());
 		
 	
 	}
