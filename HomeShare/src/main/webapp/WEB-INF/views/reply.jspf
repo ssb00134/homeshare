@@ -237,13 +237,13 @@
 																		
 																		+ '<div class="row">'
 																		+ '<label class="col-md-6">체크인만족도</label>'
-																		+ '<input class="col-md-6" type="text" name="checkinScore" value="' 
+																		+ '<input class="col-md-6 checkinScore" type="text" name="checkinScore"  value="' 
 																		+ +this.checkinScore
 																		+'" readonly>'
 																		+'</div>'
 																		+ '<div class="row">'
 																		+ '<label class="col-md-6">청결도</label>'
-																		+ '<input class="col-md-6" type="text" name="cleanScore" value="' 
+																		+ '<input class="col-md-6 cleanScore" type="text" name="cleanScore"  value="' 
 																		+ +this.cleanScore
 																		+'" readonly>'
 																		+'</div>'
@@ -258,6 +258,9 @@
 																		+ '&nbsp;'
 																		+ '<button class="btn_delete btn" type="button">삭제</button>'
 																		+'</div>'
+																		+'<div class="btnArea">'
+																		+'</div>'
+																		
 																		+'</div>';
 																		}else{
 																			list +='</div>'
@@ -301,7 +304,10 @@
 							$(this).parents('.reply_item').find('input').removeAttr("readonly");
 							$(this).parents('.reply_item').find('.content').hide();
 							$(this).parents('.reply_item').find('.contentUpdate').show();
-							
+							$(this).parent().next('.btnArea').append(
+									'<div class="btn-group">'
+									+ '<button class="btn_update  btn" type="button">댓글수정하기'
+									+ '</button></div>');
 						});//end click
 						
 						
@@ -317,25 +323,19 @@
 											// console.log(this);
 
 											// 선택된 댓글 pre영역의 rno, content 값을 읽음
-											var rno = $(this).prevAll('#rno')
-													.val(); // this에 update이전 것 중에 rno를 찾겠다
-											var content = $(this).prevAll(
-													'#reply_content').val();
+											var rno = $(this).parents('.reply_item').find('#rno ').val(); // this에 update이전 것 중에 rno를 찾겠다
+											
+											var content = $(this).parents('.reply_item').find('.contentUpdate ').val();
 											console.log("선택된 댓글 번호 : " + rno
 													+ ", 댓글 내용 : " + content);
-											var cleanScore = $(this).prevAll(
-													'#reply_cleanScore').val();
-											console.log('reply_cleanScore : '
-													+ cleanScore);
-											var checkinScore = $(this).prevAll(
-													'#reply_checkinScore')
-													.val();
-											console.log('reply_checkinScore : '
-													+ checkinScore);
-											var regdate = null;
+											
+											var cleanScore = $(this).parents('.reply_item').find('.cleanScore ').val();
+											console.log('cleanScore : '+ cleanScore);
+											var checkinScore = $(this).parents('.reply_item').find('.checkinScore ').val();
+											console.log('checkinScore : ' + checkinScore);
+											var regdate = 0;
 											// ajax 요청
-											$
-													.ajax({
+											$.ajax({
 														type : 'put',
 														url : '/homeshare/replies/'
 																+ rno,
