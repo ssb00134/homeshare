@@ -19,7 +19,7 @@
 	<!-- 헤더정보 가져오기 -->
 	<%@ include file="../navheader.jspf"%>
 	<h1>내 호스트 목록</h1>
-	반응형 list의 크기에 따라 card 갯수 조절가능 list의 개수는 최대 3개 제한
+	
 	<c:if test="${houseList ne null }">
 		<div class="card-group">
 			<c:forEach var="vo" items="${houseList }">
