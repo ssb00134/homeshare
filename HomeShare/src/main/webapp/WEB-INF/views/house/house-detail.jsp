@@ -39,11 +39,19 @@
 							<strong>${houseVO.hostId }</strong>님이호스팅 하는 <strong>${houseVO.type}</strong>
 						</h4>
 					</div>
-					<div class="row col-md-12 border">
+					
+					<div class="row col-md-12 border-"></div>
+					<div class="row col-md-12 border-"></div>
+					
+					
+					<div class="row col-md-12 border-0">
 						<div class="col-md-2">인원 ${houseVO.maxCapacity }명</div>
 						<div class="col-md-2">침실 ${houseVO.bedroom }개</div>
 						<div class="col-md-2">욕실${houseVO.bathroom }개</div>
 					</div>
+					
+					
+					<div class="row ">
 					<div class="row col-md-12 border">
 						<div class="col-md-4 border">예약가능기간</div>
 						<div class="col-md-4 border">${houseVO.bookableDateBegin }</div>
@@ -80,7 +88,7 @@
 				
 			</div>
 		</div>
-
+</div>
 		<div class="col-md-4 border">
 			<div class="container">
 				<div class="sidebar-nav">

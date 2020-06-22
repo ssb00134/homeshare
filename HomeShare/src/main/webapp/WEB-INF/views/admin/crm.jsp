@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-\
+
 
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -24,7 +24,7 @@
 						<label for="searchbyId">아이디</label>
 					</div>
 					<div class="form-group col-md-2">
-						<input type="text" class="form-control" id="searchbyId" name="memId" value=""\>
+						<input type="text" class="form-control" id="searchbyId" name="memId" value="">
 					</div>
 
 					<div class="form-group col-md-1 border">

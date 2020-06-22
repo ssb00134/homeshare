@@ -373,6 +373,8 @@
 					
 					
 					var dateDiffer = Math.floor(new Date(checkin).getTime() - new Date().getTime() ) / (1000*3600*24);
+					
+					
 					if(dateDiffer>0){
 						var checkout = $(element).children('.checkout').html();
 						var checkinDate = new Date(checkin);
@@ -504,9 +506,15 @@
 				
 				var dateDiffer = Math.floor(new Date(checkin).getTime() - new Date().getTime() ) / (1000*3600*24);
 				
-				
-            	console.log('dateDiffer : ' +dateDiffer);
-            	$(this).html(dateDiffer);
+				if(dateDiffer > 1){
+					//$(this).html('<btn class="btn" >취소가능');
+					$(this).html('미진행');
+					
+				}else{
+					$(this).html('진행');
+					$(this).parent().addClass('table-secondary');
+				}
+            	
             	
 			});//end cancleAble each
 			
