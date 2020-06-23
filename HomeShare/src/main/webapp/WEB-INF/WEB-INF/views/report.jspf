@@ -19,6 +19,7 @@
 			<input type="hidden" id="reportMemNo" value="${memberVO.memNo}">
 			<input type="hidden" id="reportHouseNo" value=" ${houseVO.houseNo}">
 			<input type="hidden" id="reportedHostNo" value=" ${houseVO.memNo}">
+			<input type="hidden" id="reportHostId" value=" ${houseVO.hostId}">
 			<div class="form-group">
 				<input type="radio" id="reason" name="reason"
 					value="부정확하거나 틀린 정보가 있어요">
@@ -52,14 +53,15 @@
 			var reportHouseNo = $('#reportHouseNo').val();
 			var reason = $('#reason').val();
 			var reportedHostNo = $('#reportedHostNo').val();
-			
+			var reportHostId = $('#reportHostId').val();
 
 			var obj = {
 				'reportNo' : reportNo,
 				'reportMemNo' : reportMemNo,
 				'reportHouseNo' : reportHouseNo,
 				'reason' : reason,
-				'reportedHostNo' : reportedHostNo
+				'reportedHostNo' : reportedHostNo,
+				'reportHostId' :  reportHostId
 			}; //end var obj
 			$.each(obj, function(index, element){
 				console.log(index +" : " + element);
